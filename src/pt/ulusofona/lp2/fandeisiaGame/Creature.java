@@ -7,7 +7,9 @@ public class Creature {
     int x;
     int y;
     int nrPontos;
+    int custo;
     String orientacao;
+    String descricao;
 
     public Creature(int id, String tipo, int idEquipa, int x, int y, String orientacao) {
         this.id = id;
@@ -21,6 +23,18 @@ public class Creature {
 
     public int getId() {
         return this.id;
+    }
+
+    public int getCusto() {
+        return this.custo;
+    }
+
+    public String getTipo() {
+        return this.tipo;
+    }
+
+    public String getDescricao() {
+        return this.descricao;
     }
 
     public String getImagePNG() {

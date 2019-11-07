@@ -4,11 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FandeisiaGameManager {
+    List<Creature> creatures;
+    List<Treasure> treasures;
+    int scoreLDR_0;
+    int score_RESISTENCIA_1;
+    int initialTeamId;
+    int currentTeamId;
+
 
     public String[][] getCreatureTypes() {
         /*Deve retornar os tipos de criatura que existem no jogo e que podem ser
         escolhidos para os exércitos dos dois jogadores.*/
-        return null;
+        String[][] creaturesString = new String[getNumberCreatures()][4];
+        int count = 0;
+        for (Creature c : creatures) {
+            creaturesString[count][0] = c.getTipo();
+            creaturesString[count][1] = c.getImagePNG();
+            creaturesString[count][2] = c.getDescricao();
+            creaturesString[count][3] = c.getDescricao();
+            count++;
+        }
+        return creaturesString;
+    }
+
+    public int getNumberCreatures() {
+        return creatures.size();
     }
 
     public void startGame(String[] content, int rows, int columns) {
@@ -16,7 +36,74 @@ public class FandeisiaGameManager {
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
        Os argumentos rows e columns vão-nos indicar as dimensões do tabuleiro.*/
+        ArrayList<String[]> creatureInfo = new ArrayList<>();
+        ArrayList<String[]> treasureInfo = new ArrayList<>();
+        String[] infoFinalCreature;
+        String[] infoFinalTreasure;
+        String[] split1;
+        String[] split2;
+        String[] split3;
+        int count = 0;
+        for (String s : content) {
+            split1 = s.split(",", 6);
+            infoFinalCreature = new String[6];
+            infoFinalTreasure = new String[4];
+            count = 0;
+            if (split1.length == 6) {
+                for (String s1 : split1) {
+                    split2 = s1.split(" ", 6);
+                    if (count == 0) {
+                        infoFinalCreature[count] = split2[1];
+                    } else {
+                        infoFinalCreature[count] = split2[2];
+                    }
+                    count++;
+                }
+                creatureInfo.add(infoFinalCreature);
+            }
+            if (split1.length == 4) {
+                for (String s1 : split1) {
+                    split3 = s1.split(" ", 4);
+                    if (count == 0) {
+                        infoFinalTreasure[count] = split3[1];
+                    } else {
+                        infoFinalTreasure[count] = split3[2];
+                    }
+                    count++;
+                }
+                treasureInfo.add(infoFinalTreasure);
+            }
+        }
+        for (String[] s1 : creatureInfo) {
+            int id = 0;
+            int teamId = 0;
+            int x = 0;
+            int y = 0;
+            try {
+                id = Integer.parseInt(s1[0]);
+            } catch (NumberFormatException e) {
+            }
+            String tipo = s1[1];
+            try {
+                teamId = Integer.parseInt(s1[2]);
+            } catch (NumberFormatException e) {
+            }
+            try {
+                x = Integer.parseInt(s1[3]);
+            } catch (NumberFormatException e) {
+            }
+            try {
+                y = Integer.parseInt(s1[4]);
+            } catch (NumberFormatException e) {
+            }
+            String orientation = s1[5];
+            addCreaure(id, tipo, teamId, x, y, orientation);
+        }
+    }
 
+    public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
+        Creature creature = new Creature(id, tipo, teamId, x, y, orientation);
+        creatures.add(creature);
     }
 
     public void setInitialTeam(int teamId) {
