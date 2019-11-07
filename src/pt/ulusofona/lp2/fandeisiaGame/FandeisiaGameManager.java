@@ -11,6 +11,8 @@ public class FandeisiaGameManager {
     int initialTeamId;
     int currentTeamId;
 
+    public FandeisiaGameManager() {
+    }
 
     public String[][] getCreatureTypes() {
         /*Deve retornar os tipos de criatura que existem no jogo e que podem ser
@@ -142,7 +144,36 @@ public class FandeisiaGameManager {
         /*Devolve uma lista de Strings que representem os resultados do jogo, conforme descrito na secção dos
           “Resultados da execução …”. Este método não pode devolver null. Caso não calculem a informação
            respectiva, devem devolver uma lista vazia.*/
-        return null;
+        ArrayList<String> results = new ArrayList<>();
+        if (scoreLDR_0 == score_RESISTENCIA_1) {
+            /* eventualmente ia acrescentar \n a estas strings... */
+            String welcome = "Welcome to FANDEISIA";
+            String res = "EMPATE";
+            String ldrPontos = "LDR: " + scoreLDR_0;
+            String resPontos = "RESISTENCIA: " + score_RESISTENCIA_1;
+            String turnos = "Nr. de Turnos jogados: ";
+            String hifen = "-----";
+        }
+
+        if (scoreLDR_0 > score_RESISTENCIA_1) {
+            String welcome = "Welcome to FANDEISIA";
+            String res = "Vitória da equipa LDR";
+            String ldrPontos = "LDR: " + scoreLDR_0;
+            String resPontos = "RESISTENCIA: " + score_RESISTENCIA_1;
+            String turnos = "Nr. de Turnos jogados: " ;
+            String hifen = "-----";
+        }
+
+        if (scoreLDR_0 < score_RESISTENCIA_1) {
+            String vitoriaLDR = "Welcome to FANDEISIA\n" +
+                    "Vitória da equipa RESISTENCIA\n" +
+                    "LDR: " + scoreLDR_0 + "\n" +
+                    "RESISTENCIA: " + score_RESISTENCIA_1 + "\n" +
+                    "Nr. de Turnos jogados: \n" +
+                    "-----\n";
+            /*falta merdas pq acho que ainda faltam algumas variáveis. Compara com os de cima e diz qual é que te agrada mais (aposto que é este para não tar a repetir código que é horrível)*/
+        }
+        return results;
     }
 
     public int getElementId(int x, int y) {
@@ -153,7 +184,7 @@ public class FandeisiaGameManager {
 
     public int getCurrentTeamId() {
         /*Deve devolver o ID da equipa que está activa no turno actual.*/
-        return 0;
+        return currentTeamId;
     }
 
     public int getCurrentScore(int teamId) {
@@ -162,3 +193,4 @@ public class FandeisiaGameManager {
     }
 
 }
+
