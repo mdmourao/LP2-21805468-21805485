@@ -10,20 +10,29 @@ public class FandeisiaGameManager {
     int score_RESISTENCIA_1;
     int initialTeamId;
     int currentTeamId;
+    int rows;
+    int columns;
+    int treasuresFound;
+    int plays;
 
+    public FandeisiaGameManager() {
+        creatures = new ArrayList<>();
+        treasures = new ArrayList<>();
+        scoreLDR_0 = 0;
+        score_RESISTENCIA_1 = 0;
+        treasuresFound = 0;
+        plays = 0;
+
+    }
 
     public String[][] getCreatureTypes() {
         /*Deve retornar os tipos de criatura que existem no jogo e que podem ser
         escolhidos para os exércitos dos dois jogadores.*/
-        String[][] creaturesString = new String[getNumberCreatures()][4];
-        int count = 0;
-        for (Creature c : creatures) {
-            creaturesString[count][0] = c.getTipo();
-            creaturesString[count][1] = c.getImagePNG();
-            creaturesString[count][2] = c.getDescricao();
-            creaturesString[count][3] = c.getDescricao();
-            count++;
-        }
+        String[][] creaturesString = new String[1][4];
+        creaturesString[0][0] = "Circulo Estranho";
+        creaturesString[0][1] = "crazy_emoji_black.png";
+        creaturesString[0][2] = "Circulo MUITO PERIGOSO capaz de andar e comer tesouros AHHHHH";
+        creaturesString[0][3] = "7";
         return creaturesString;
     }
 
@@ -32,6 +41,9 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
+        for(String a: content){
+            System.out.println(a);
+        }
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -97,8 +109,34 @@ public class FandeisiaGameManager {
             } catch (NumberFormatException e) {
             }
             String orientation = s1[5];
+            System.out.print(x + " ");
+            System.out.print(y);
+            System.out.println("Criei uma critaura");
             addCreaure(id, tipo, teamId, x, y, orientation);
         }
+        for (String[] s2 : treasureInfo) {
+            int id = 0;
+            int x = 0;
+            int y = 0;
+            try {
+                id = Integer.parseInt(s2[0]);
+            } catch (NumberFormatException e) {
+            }
+            try {
+                id = Integer.parseInt(s2[2]);
+            } catch (NumberFormatException e) {
+            }
+            try {
+                id = Integer.parseInt(s2[3]);
+            } catch (NumberFormatException e) {
+            }
+            addTreasure(id, x, y);
+            System.out.print(x + " ");
+            System.out.print(y);
+            System.out.println("criei um tesouro");
+        }
+        this.rows = rows;
+        this.columns = columns;
     }
 
     public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
@@ -106,23 +144,100 @@ public class FandeisiaGameManager {
         creatures.add(creature);
     }
 
+    public void addTreasure(int id, int x, int y) {
+        Treasure treasure = new Treasure(id, x, y);
+        treasures.add(treasure);
+    }
+
     public void setInitialTeam(int teamId) {
         /*Indica qual das equipas vai jogar no primeiro turno do jogo.*/
-
+        this.initialTeamId = teamId;
     }
 
     public void processTurn() {
+        System.out.println("Estou a processar uma jogada");
         /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
+        plays++;
+        for (Creature c : creatures) {
+            if (c.getIdEquipa() == getCurrentTeamId()) {
+                String orientacao = c.getOrientacao();
+                System.out.println("Estou assim:");
+                System.out.println(c);
+                switch (orientacao) {
+                    case "E":
+                        if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) == 0)) {
+                            c.moveX(1);
+                        } else {
+                            c.setOrientacao("S");
+                        }
+                        break;
+                    case "O":
+                        if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) == 0)) {
+                            c.moveX(-1);
+                        } else {
+                            c.setOrientacao("N");
+                        }
+                        break;
+                    case "N":
+                        if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) == 0)) {
+                            c.moveY(1);
+                        } else {
+                            c.setOrientacao("E");
+                        }
+                        break;
+                    case "S":
+                        if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) == 0)) {
+                            c.moveY(-1);
+                        } else {
+                            c.setOrientacao("O");
+                        }
+                        break;
+                }
+                System.out.println("Fiquei assim");
+                System.out.println(c);
+                for (Treasure t : treasures) {
+                    if (t.getId() == getElementId(c.getX(), c.getY())) {
+                        c.addNrPontos(1);
+                        addScore(getCurrentTeamId(), 1);
+                        treasuresFound++;
+                        treasures.remove(t);
+                        break;
+                    }
+                }
+            }
+        }
 
+        int currentTeamID = getCurrentTeamId();
+        if (currentTeamID == 0) {
+            setCurrentTeamId(1);
+        } else {
+            setCurrentTeamId(0);
+        }
     }
 
     public List<Creature> getCreatures() {
         /*Devolve uma lista com todos os objectos Creature que existem no jogo.*/
-        return null;
+        return creatures;
     }
 
     public boolean gameIsOver() {
         /*Deve devolver true caso já tenha sido alcançada uma das condições de paragem do jogo e false em caso contrário.*/
+        if (treasures.size() == 0) {
+            return true;
+        }
+        if (plays == 15 && treasuresFound == 0) {
+            return true;
+        }
+        int treasuresInGame = 0;
+        for (Treasure t : treasures) {
+            treasuresInGame++;
+        }
+        if (scoreLDR_0 + treasuresInGame < score_RESISTENCIA_1) {
+            return true;
+        }
+        if (score_RESISTENCIA_1 + treasuresInGame < scoreLDR_0) {
+            return true;
+        }
         return false;
     }
 
@@ -156,9 +271,23 @@ public class FandeisiaGameManager {
         return 0;
     }
 
+    public void setCurrentTeamId(int id) {
+        /*Deve devolver o ID da equipa que está activa no turno actual.*/
+
+    }
+
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
         return 0;
+    }
+
+    public void addScore(int teamId, int valor) {
+        if (teamId == 1) {
+            score_RESISTENCIA_1 += valor;
+        }
+        if (teamId == 0) {
+            scoreLDR_0 += valor;
+        }
     }
 
 }

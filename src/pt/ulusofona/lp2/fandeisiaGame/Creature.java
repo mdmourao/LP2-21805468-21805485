@@ -21,8 +21,32 @@ public class Creature {
         nrPontos = 0;
     }
 
+    public String toString() {
+        return id + " | " + tipo + " | " + idEquipa + " | " + nrPontos + " (" + x + ", " + y + ")" + orientacao;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void moveX(int step) {
+        this.x += step;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void moveY(int step) {
+        this.y += step;
+    }
+
     public int getId() {
         return this.id;
+    }
+
+    public String getOrientacao() {
+        return this.orientacao;
     }
 
     public int getCusto() {
@@ -41,13 +65,22 @@ public class Creature {
         return null;
     }
 
-    public String toString() {
-        return id + " | " + tipo + " | " + idEquipa + " | " + nrPontos + " (" + x + ", "+ y + ")" + orientacao;
-    }
-
-    public void addNrPontos(int pontosAdicionar){
+    public void addNrPontos(int pontosAdicionar) {
         //numero de pontos corresponde a quantidade de tesouros encontrados pela criatura
         this.nrPontos += pontosAdicionar;
+    }
+
+    public boolean setOrientacao(String orientacao){
+        if(orientacao.equals("N") || orientacao.equals("S") || orientacao.equals("E") || orientacao.equals("O")){
+            this.orientacao = orientacao;
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public int getIdEquipa(){
+        return idEquipa;
     }
 
 }
