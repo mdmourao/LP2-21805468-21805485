@@ -41,7 +41,7 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
-        for(String a: content){
+        for (String a : content) {
             System.out.println(a);
         }
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
@@ -273,7 +273,7 @@ public class FandeisiaGameManager {
             String res = "Vitória da equipa LDR";
             String ldrPontos = "LDR: " + scoreLDR_0;
             String resPontos = "RESISTENCIA: " + score_RESISTENCIA_1;
-            String turnos = "Nr. de Turnos jogados: " ;
+            String turnos = "Nr. de Turnos jogados: ";
             String hifen = "-----";
         }
 
@@ -318,4 +318,5 @@ public class FandeisiaGameManager {
             scoreLDR_0 += valor;
         }
     }
+}
 
