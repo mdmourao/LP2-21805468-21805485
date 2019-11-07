@@ -12,6 +12,12 @@ public class FandeisiaGameManager {
     int currentTeamId;
 
     public FandeisiaGameManager() {
+        creatures = new ArrayList<>();
+        treasures = new ArrayList<>();
+        scoreLDR_0 = 0;
+        score_RESISTENCIA_1 = 0;
+        treasuresFound = 0;
+        plays = 0;
     }
 
     public String[][] getCreatureTypes() {
