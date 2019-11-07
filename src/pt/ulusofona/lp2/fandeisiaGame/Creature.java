@@ -42,6 +42,7 @@ public class Creature {
     }
 
     public int getId() {
+
         return this.id;
     }
 
@@ -50,6 +51,7 @@ public class Creature {
     }
 
     public int getCusto() {
+
         return this.custo;
     }
 
