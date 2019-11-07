@@ -42,7 +42,7 @@ public class FandeisiaGameManager {
     public List<String> getAuthors() {
         /*Devolve uma lista de Strings com os nomes dos autores do projecto.*/
         List<String> authors = new ArrayList<>();
-        String evora = ">Gonçalo Evora 21805468 Aka:ROKT";
+        String evora = ">Gonçalo Evora 21805468 Aka:RØKT";
         String martim = ">Martim Mourão 21805485 Aka:Mike";
         String deisi = "LP2 Enunciado By: Bruno Cipriano, Rodrigo Correia, Pedro Alves";
         authors.add(evora);
