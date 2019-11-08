@@ -63,6 +63,34 @@ public class Creature {
     }
 
     public String getImagePNG() {
+        if(getIdEquipa() == 0){
+            if(getOrientacao().equals("N")){
+                return "crazy_emoji_black_UP.png";
+            }
+            if(getOrientacao().equals("E")){
+                return "crazy_emoji_black_RIGHT.png";
+            }
+            if(getOrientacao().equals("S")){
+                return "crazy_emoji_black_DOWN.png";
+            }
+            if(getOrientacao().equals("O")){
+                return "crazy_emoji_black_LEFT.png";
+            }
+        }
+        if(getIdEquipa() == 1){
+            if(getOrientacao().equals("N")){
+                return "crazy_emoji_white_UP.png";
+            }
+            if(getOrientacao().equals("E")){
+                return "crazy_emoji_white_RIGHT.png";
+            }
+            if(getOrientacao().equals("S")){
+                return "crazy_emoji_white_DOWN.png";
+            }
+            if(getOrientacao().equals("O")){
+                return "crazy_emoji_white_LEFT.png";
+            }
+        }
         return null;
     }
 

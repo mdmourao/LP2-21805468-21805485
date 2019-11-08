@@ -41,6 +41,8 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
+        System.out.println(rows);
+        System.out.println(columns);
         for (String a : content) {
             System.out.println(a);
         }
@@ -74,6 +76,7 @@ public class FandeisiaGameManager {
                 creatureInfo.add(infoFinalCreature);
             }
             if (split1.length == 4) {
+
                 for (String s1 : split1) {
                     split3 = s1.split(" ", 4);
                     if (count == 0) {
@@ -123,11 +126,11 @@ public class FandeisiaGameManager {
             } catch (NumberFormatException e) {
             }
             try {
-                id = Integer.parseInt(s2[2]);
+                x = Integer.parseInt(s2[2]);
             } catch (NumberFormatException e) {
             }
             try {
-                id = Integer.parseInt(s2[3]);
+                y = Integer.parseInt(s2[3]);
             } catch (NumberFormatException e) {
             }
             addTreasure(id, x, y);
@@ -165,7 +168,7 @@ public class FandeisiaGameManager {
                 System.out.println(c);
                 switch (orientacao) {
                     case "E":
-                        if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) == 0)) {
+                        if (c.getX() + 1 < rows -1 && (getElementId(c.getX() + 1, c.getY()) == 0)) {
                             c.moveX(1);
                         } else {
                             c.setOrientacao("S");
@@ -179,15 +182,15 @@ public class FandeisiaGameManager {
                         }
                         break;
                     case "N":
-                        if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) == 0)) {
-                            c.moveY(1);
+                        if (c.getY() - 1 >= 0   && (getElementId(c.getX(), c.getY() - 1) == 0)) {
+                            c.moveY(-1);
                         } else {
                             c.setOrientacao("E");
                         }
                         break;
                     case "S":
-                        if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) == 0)) {
-                            c.moveY(-1);
+                        if (c.getY() + 1 < columns -1 && (getElementId(c.getX(), c.getY() + 1) == 0)) {
+                            c.moveY(1);
                         } else {
                             c.setOrientacao("O");
                         }

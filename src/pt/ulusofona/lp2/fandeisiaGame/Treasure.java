@@ -12,6 +12,10 @@ public class Treasure {
         this.y = y;
     }
 
+    public String getImagePNG(){
+        return "box-mud.png";
+    }
+
     public int getId(){
         return id;
     }
