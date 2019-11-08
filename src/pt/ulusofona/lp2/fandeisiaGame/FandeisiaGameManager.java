@@ -258,33 +258,41 @@ public class FandeisiaGameManager {
           “Resultados da execução …”. Este método não pode devolver null. Caso não calculem a informação
            respectiva, devem devolver uma lista vazia.*/
         ArrayList<String> results = new ArrayList<>();
+        String welcome = "Welcome to FANDEISIA\n";
+        String res = "";
+        String ldrPontos = "LDR: " + scoreLDR_0 + "\n";
+        String resiPontos = "RESISTENCIA: " + score_RESISTENCIA_1 +"\n";
+        String turnos = "Nr. de Turnos jogados: " + plays + "\n";
+        String hifen = hifen = "-----\n";
         if (scoreLDR_0 == score_RESISTENCIA_1) {
-            /* eventualmente ia acrescentar \n a estas strings... */
-            String welcome = "Welcome to FANDEISIA";
-            String res = "EMPATE";
-            String ldrPontos = "LDR: " + scoreLDR_0;
-            String resPontos = "RESISTENCIA: " + score_RESISTENCIA_1;
-            String turnos = "Nr. de Turnos jogados: ";
-            String hifen = "-----";
+
+            res = "EMPATE\n";
+            results.add(welcome);
+            results.add(res);
+            results.add(ldrPontos);
+            results.add(resiPontos);
+            results.add(turnos);
+            results.add(hifen);
         }
 
         if (scoreLDR_0 > score_RESISTENCIA_1) {
-            String welcome = "Welcome to FANDEISIA";
-            String res = "Vitória da equipa LDR";
-            String ldrPontos = "LDR: " + scoreLDR_0;
-            String resPontos = "RESISTENCIA: " + score_RESISTENCIA_1;
-            String turnos = "Nr. de Turnos jogados: ";
-            String hifen = "-----";
+            res = "Vitória da equipa LDR"+"\n";
+            results.add(welcome);
+            results.add(res);
+            results.add(ldrPontos);
+            results.add(resiPontos);
+            results.add(turnos);
+            results.add(hifen);
         }
 
         if (scoreLDR_0 < score_RESISTENCIA_1) {
-            String vitoriaLDR = "Welcome to FANDEISIA\n" +
-                    "Vitória da equipa RESISTENCIA\n" +
-                    "LDR: " + scoreLDR_0 + "\n" +
-                    "RESISTENCIA: " + score_RESISTENCIA_1 + "\n" +
-                    "Nr. de Turnos jogados: \n" +
-                    "-----\n";
-            /*falta merdas pq acho que ainda faltam algumas variáveis. Compara com os de cima e diz qual é que te agrada mais (aposto que é este para não tar a repetir código que é horrível)*/
+            res = "Vitória da equipa RESISTENCIA" + "\n";
+            results.add(welcome);
+            results.add(res);
+            results.add(ldrPontos);
+            results.add(resiPontos);
+            results.add(turnos);
+            results.add(hifen);
         }
         return results;
     }
@@ -292,6 +300,11 @@ public class FandeisiaGameManager {
     public int getElementId(int x, int y) {
         /*Deve devolver o ID do objecto/elemento que se encontra na posição indicada pelas coordenadas (x,y) passadas por
           argumento.*/
+        for(int i = 0; i<creatures.size(); i++){
+            if(creatures.get(i).getX() == x && creatures.get(i).getY() == y){
+                return creatures.get(i).getId();
+            }
+        }
         return 0;
     }
 
@@ -302,11 +315,17 @@ public class FandeisiaGameManager {
 
     public void setCurrentTeamId(int id) {
         /*Deve devolver o ID da equipa que está activa no turno actual.*/
-
+            this.currentTeamId = id;
     }
 
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
+        if(teamId == 0){
+            return scoreLDR_0;
+        }
+        if(teamId == 1){
+            return score_RESISTENCIA_1;
+        }
         return 0;
     }
 

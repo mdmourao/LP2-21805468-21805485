@@ -51,7 +51,6 @@ public class Creature {
     }
 
     public int getCusto() {
-
         return this.custo;
     }
 
