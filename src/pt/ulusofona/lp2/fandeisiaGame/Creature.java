@@ -63,7 +63,8 @@ public class Creature {
     }
 
     public String getImagePNG() {
-        if(getIdEquipa() == 0){
+        //pode ser necessario colocar as imagens a variar consoante o tipo da creatura
+        if(getIdEquipa() == 0 ){
             if(getOrientacao().equals("N")){
                 return "crazy_emoji_black_UP.png";
             }

@@ -41,8 +41,9 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
-        System.out.println(rows);
-        System.out.println(columns);
+        System.out.println("Rows:" + rows);
+        System.out.println("Columns:" + columns);
+        System.out.println("String que os prof passam para a função:");
         for (String a : content) {
             System.out.println(a);
         }
@@ -89,6 +90,7 @@ public class FandeisiaGameManager {
                 treasureInfo.add(infoFinalTreasure);
             }
         }
+
         for (String[] s1 : creatureInfo) {
             int id = 0;
             int teamId = 0;
@@ -112,9 +114,9 @@ public class FandeisiaGameManager {
             } catch (NumberFormatException e) {
             }
             String orientation = s1[5];
-            System.out.print(x + " ");
-            System.out.print(y);
-            System.out.println("Criei uma critaura");
+            System.out.print("Criatura Criada:");
+            System.out.print("(" + x + "," + y + ")" + orientation);
+            System.out.println();
             addCreaure(id, tipo, teamId, x, y, orientation);
         }
         for (String[] s2 : treasureInfo) {
@@ -134,9 +136,10 @@ public class FandeisiaGameManager {
             } catch (NumberFormatException e) {
             }
             addTreasure(id, x, y);
-            System.out.print(x + " ");
-            System.out.print(y);
-            System.out.println("criei um tesouro");
+            System.out.print("Tesouro Criado:");
+            System.out.print("(" + x + "," + y + ")");
+            System.out.println();
+
         }
         this.rows = rows;
         this.columns = columns;
@@ -168,7 +171,7 @@ public class FandeisiaGameManager {
                 System.out.println(c);
                 switch (orientacao) {
                     case "E":
-                        if (c.getX() + 1 < rows -1 && (getElementId(c.getX() + 1, c.getY()) == 0)) {
+                        if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) == 0)) {
                             c.moveX(1);
                         } else {
                             c.setOrientacao("S");
@@ -182,14 +185,14 @@ public class FandeisiaGameManager {
                         }
                         break;
                     case "N":
-                        if (c.getY() - 1 >= 0   && (getElementId(c.getX(), c.getY() - 1) == 0)) {
+                        if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) == 0)) {
                             c.moveY(-1);
                         } else {
                             c.setOrientacao("E");
                         }
                         break;
                     case "S":
-                        if (c.getY() + 1 < columns -1 && (getElementId(c.getX(), c.getY() + 1) == 0)) {
+                        if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) == 0)) {
                             c.moveY(1);
                         } else {
                             c.setOrientacao("O");
@@ -264,7 +267,7 @@ public class FandeisiaGameManager {
         String welcome = "Welcome to FANDEISIA\n";
         String res = "";
         String ldrPontos = "LDR: " + scoreLDR_0 + "\n";
-        String resiPontos = "RESISTENCIA: " + score_RESISTENCIA_1 +"\n";
+        String resiPontos = "RESISTENCIA: " + score_RESISTENCIA_1 + "\n";
         String turnos = "Nr. de Turnos jogados: " + plays + "\n";
         String hifen = hifen = "-----\n";
         if (scoreLDR_0 == score_RESISTENCIA_1) {
@@ -279,7 +282,7 @@ public class FandeisiaGameManager {
         }
 
         if (scoreLDR_0 > score_RESISTENCIA_1) {
-            res = "Vitória da equipa LDR"+"\n";
+            res = "Vitória da equipa LDR" + "\n";
             results.add(welcome);
             results.add(res);
             results.add(ldrPontos);
@@ -303,8 +306,8 @@ public class FandeisiaGameManager {
     public int getElementId(int x, int y) {
         /*Deve devolver o ID do objecto/elemento que se encontra na posição indicada pelas coordenadas (x,y) passadas por
           argumento.*/
-        for(int i = 0; i<creatures.size(); i++){
-            if(creatures.get(i).getX() == x && creatures.get(i).getY() == y){
+        for (int i = 0; i < creatures.size(); i++) {
+            if (creatures.get(i).getX() == x && creatures.get(i).getY() == y) {
                 return creatures.get(i).getId();
             }
         }
@@ -318,15 +321,15 @@ public class FandeisiaGameManager {
 
     public void setCurrentTeamId(int id) {
         /*Deve devolver o ID da equipa que está activa no turno actual.*/
-            this.currentTeamId = id;
+        this.currentTeamId = id;
     }
 
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
-        if(teamId == 0){
+        if (teamId == 0) {
             return scoreLDR_0;
         }
-        if(teamId == 1){
+        if (teamId == 1) {
             return score_RESISTENCIA_1;
         }
         return 0;
