@@ -22,7 +22,8 @@ public class Creature {
     }
 
     public String toString() {
-        return id + " | " + tipo + " | " + idEquipa + " | " + nrPontos + " (" + x + ", " + y + ")" + orientacao;
+        /* “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>” */
+        return id + " | " + tipo + " | " + idEquipa + " | " + nrPontos + " @ (" + x + ", " + y + ") " + orientacao;
     }
 
     public int getX() {

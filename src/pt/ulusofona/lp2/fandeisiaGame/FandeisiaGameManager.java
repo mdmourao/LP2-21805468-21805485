@@ -114,9 +114,6 @@ public class FandeisiaGameManager {
             } catch (NumberFormatException e) {
             }
             String orientation = s1[5];
-            System.out.print("Criatura Criada:");
-            System.out.print("(" + x + "," + y + ")" + orientation);
-            System.out.println();
             addCreaure(id, tipo, teamId, x, y, orientation);
         }
         for (String[] s2 : treasureInfo) {
@@ -136,13 +133,10 @@ public class FandeisiaGameManager {
             } catch (NumberFormatException e) {
             }
             addTreasure(id, x, y);
-            System.out.print("Tesouro Criado:");
-            System.out.print("(" + x + "," + y + ")");
-            System.out.println();
-
         }
         this.rows = rows;
         this.columns = columns;
+        ordenarCreaturesById(this.creatures);
     }
 
     public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
@@ -161,6 +155,9 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn() {
+        for(Creature c:creatures){
+            System.out.println(c);
+        }
         System.out.println("Estou a processar uma jogada");
         /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
         plays++;
@@ -311,6 +308,11 @@ public class FandeisiaGameManager {
                 return creatures.get(i).getId();
             }
         }
+        for (int i = 0; i < treasures.size(); i++) {
+            if (treasures.get(i).getX() == x && treasures.get(i).getY() == y) {
+                return treasures.get(i).getId();
+            }
+        }
         return 0;
     }
 
@@ -344,8 +346,12 @@ public class FandeisiaGameManager {
         }
     }
 
-    public void ordenarCreaturesById(){
-
+    private void ordenarCreaturesById(List<Creature> creatures) {
+        Creature[] ordenado = Ordenacao.ordenarCreatureById(creatures.toArray(new Creature[0]));
+        this.creatures = new ArrayList<>();
+        for (Creature c : ordenado) {
+            this.creatures.add(c);
+        }
     }
 }
 

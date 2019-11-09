@@ -1,7 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 public class Ordenacao {
-    private int partition(Creature[] creatures, int left, int right) {
+    static private int partition(Creature[] creatures, int left, int right) {
         // vamos escolher o pivot como sendo o elemento mais à direita
         Creature pivot = creatures[right];
         int leftIdx = left;
@@ -28,7 +28,7 @@ public class Ordenacao {
         return leftIdx;
     }
 
-    private Creature[] ordenar(Creature[] creatures, int left, int right){
+    static private Creature[] ordenar(Creature[] creatures, int left, int right){
         if(left < right){
             int posicaoPivot = partition(creatures,left,right-1);
 
@@ -38,7 +38,7 @@ public class Ordenacao {
         return creatures;
     }
 
-    public Creature[] ordenarCreatureById(Creature[] creatures){
+    static public Creature[] ordenarCreatureById(Creature[] creatures){
         return ordenar(creatures,0, creatures.length);
     }
 }
