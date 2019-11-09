@@ -343,5 +343,9 @@ public class FandeisiaGameManager {
             scoreLDR_0 += valor;
         }
     }
+
+    public void ordenarCreaturesById(){
+
+    }
 }
 
