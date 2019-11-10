@@ -66,30 +66,30 @@ public class Creature {
     public String getImagePNG() {
         //pode ser necessario colocar as imagens a variar consoante o tipo da creatura
         if(getIdEquipa() == 0 ){
-            if(getOrientacao().equals("N")){
+            if(getOrientacao().equals("Norte")){
                 return "crazy_emoji_black_UP.png";
             }
-            if(getOrientacao().equals("E")){
+            if(getOrientacao().equals("Este")){
                 return "crazy_emoji_black_RIGHT.png";
             }
-            if(getOrientacao().equals("S")){
+            if(getOrientacao().equals("Sul")){
                 return "crazy_emoji_black_DOWN.png";
             }
-            if(getOrientacao().equals("O")){
+            if(getOrientacao().equals("Oeste")){
                 return "crazy_emoji_black_LEFT.png";
             }
         }
         if(getIdEquipa() == 1){
-            if(getOrientacao().equals("N")){
+            if(getOrientacao().equals("Norte")){
                 return "crazy_emoji_white_UP.png";
             }
-            if(getOrientacao().equals("E")){
+            if(getOrientacao().equals("Este")){
                 return "crazy_emoji_white_RIGHT.png";
             }
-            if(getOrientacao().equals("S")){
+            if(getOrientacao().equals("Sul")){
                 return "crazy_emoji_white_DOWN.png";
             }
-            if(getOrientacao().equals("O")){
+            if(getOrientacao().equals("Oeste")){
                 return "crazy_emoji_white_LEFT.png";
             }
         }
@@ -102,7 +102,7 @@ public class Creature {
     }
 
     public boolean setOrientacao(String orientacao){
-        if(orientacao.equals("N") || orientacao.equals("S") || orientacao.equals("E") || orientacao.equals("O")){
+        if(orientacao.equals("Norte") || orientacao.equals("Sul") || orientacao.equals("Este") || orientacao.equals("Oeste")){
             this.orientacao = orientacao;
             return true;
         }else {

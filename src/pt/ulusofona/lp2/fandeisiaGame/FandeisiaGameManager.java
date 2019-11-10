@@ -167,32 +167,32 @@ public class FandeisiaGameManager {
                 System.out.println("Estou assim:");
                 System.out.println(c);
                 switch (orientacao) {
-                    case "E":
-                        if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) == 0)) {
+                    case "Este":
+                        if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) == 0 || getElementId(c.getX() + 1, c.getY()) == -1)) {
                             c.moveX(1);
                         } else {
-                            c.setOrientacao("S");
+                            c.setOrientacao("Sul");
                         }
                         break;
-                    case "O":
-                        if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) == 0)) {
+                    case "Oeste":
+                        if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) == 0 || getElementId(c.getX() - 1, c.getY()) == -1 )) {
                             c.moveX(-1);
                         } else {
-                            c.setOrientacao("N");
+                            c.setOrientacao("Norte");
                         }
                         break;
-                    case "N":
-                        if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) == 0)) {
+                    case "Norte":
+                        if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) == 0 || getElementId(c.getX(), c.getY() - 1) == -1)) {
                             c.moveY(-1);
                         } else {
-                            c.setOrientacao("E");
+                            c.setOrientacao("Este");
                         }
                         break;
-                    case "S":
-                        if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) == 0)) {
+                    case "Sul":
+                        if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) == 0 || getElementId(c.getX(), c.getY() + 1) == -1)) {
                             c.moveY(1);
                         } else {
-                            c.setOrientacao("O");
+                            c.setOrientacao("Oeste");
                         }
                         break;
                 }
@@ -204,7 +204,6 @@ public class FandeisiaGameManager {
                         addScore(getCurrentTeamId(), 1);
                         treasuresFound++;
                         treasures.remove(t);
-                        break;
                     }
                 }
             }
