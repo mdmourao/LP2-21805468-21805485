@@ -41,12 +41,7 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
-        System.out.println("Rows:" + rows);
-        System.out.println("Columns:" + columns);
-        System.out.println("String que os prof passam para a função:");
-        for (String a : content) {
-            System.out.println(a);
-        }
+
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -155,60 +150,60 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn() {
-        for (Creature c : creatures) {
-            System.out.println(c);
-        }
         System.out.println("Estou a processar uma jogada");
         /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
         plays++;
+        ArrayList<Treasure> treasuresRemove = new ArrayList<>();
         for (Creature c : creatures) {
             if (c.getIdEquipa() == getCurrentTeamId()) {
                 String orientacao = c.getOrientacao();
-                System.out.println("Estou assim:");
-                System.out.println(c);
                 switch (orientacao) {
                     case "Este":
-                        if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) == 0 || getElementId(c.getX() + 1, c.getY()) == -1)) {
+                        if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) <= 0)) {
                             c.moveX(1);
                         } else {
                             c.setOrientacao("Sul");
                         }
                         break;
                     case "Oeste":
-                        if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) == 0 || getElementId(c.getX() - 1, c.getY()) == -1)) {
+                        if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) <= 0)) {
                             c.moveX(-1);
                         } else {
                             c.setOrientacao("Norte");
                         }
                         break;
                     case "Norte":
-                        if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) == 0 || getElementId(c.getX(), c.getY() - 1) == -1)) {
+                        if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) <= 0)) {
                             c.moveY(-1);
                         } else {
                             c.setOrientacao("Este");
                         }
                         break;
                     case "Sul":
-                        if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) == 0 || getElementId(c.getX(), c.getY() + 1) == -1)) {
+                        if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) <= 0)) {
                             c.moveY(1);
                         } else {
                             c.setOrientacao("Oeste");
                         }
                         break;
                 }
-                System.out.println("Fiquei assim");
-                System.out.println(c);
+            }
+        }
+        for (Creature c : creatures) {
+            if (c.getIdEquipa() == getCurrentTeamId()) {
                 for (Treasure t : treasures) {
-                    if (t.getId() == getElementId(c.getX(), c.getY())) {
+                    if (c.getX() == t.getX() && c.getY() == t.getY()) {
                         c.addNrPontos(1);
                         addScore(getCurrentTeamId(), 1);
                         treasuresFound++;
-                        treasures.remove(t);
+                        treasuresRemove.add(t);
                     }
                 }
             }
         }
-
+        for(Treasure t : treasuresRemove){
+            treasures.remove(t);
+        }
         int currentTeamID = getCurrentTeamId();
         if (currentTeamID == 0) {
             setCurrentTeamId(1);

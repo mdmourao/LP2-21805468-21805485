@@ -43,7 +43,6 @@ public class Creature {
     }
 
     public int getId() {
-
         return this.id;
     }
 
@@ -100,6 +99,11 @@ public class Creature {
         //numero de pontos corresponde a quantidade de tesouros encontrados pela criatura
         this.nrPontos += pontosAdicionar;
     }
+
+    public int getNrPontos(){
+        return nrPontos;
+    }
+
 
     public boolean setOrientacao(String orientacao){
         if(orientacao.equals("Norte") || orientacao.equals("Sul") || orientacao.equals("Este") || orientacao.equals("Oeste")){
