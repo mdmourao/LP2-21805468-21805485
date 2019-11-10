@@ -6,8 +6,8 @@ import java.util.List;
 public class FandeisiaGameManager {
     List<Creature> creatures;
     List<Treasure> treasures;
-    int scoreLdr_0;
-    int score_Resistencia_1;
+    int scoreLdr0;
+    int scoreResistencia1;
     int initialTeamId;
     int currentTeamId;
     int rows;
@@ -18,8 +18,8 @@ public class FandeisiaGameManager {
     public FandeisiaGameManager() {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
-        scoreLdr_0 = 0;
-        score_Resistencia_1 = 0;
+        scoreLdr0 = 0;
+        scoreResistencia1 = 0;
         treasuresFound = 0;
         plays = 0;
 
@@ -232,10 +232,10 @@ public class FandeisiaGameManager {
         for (Treasure t : treasures) {
             treasuresInGame++;
         }
-        if (scoreLdr_0 + treasuresInGame < score_Resistencia_1) {
+        if (scoreLdr0 + treasuresInGame < scoreResistencia1) {
             return true;
         }
-        if (score_Resistencia_1 + treasuresInGame < scoreLdr_0) {
+        if (scoreResistencia1 + treasuresInGame < scoreLdr0) {
             return true;
         }
         return false;
@@ -260,8 +260,8 @@ public class FandeisiaGameManager {
         ArrayList<String> results = new ArrayList<>();
         String welcome = "Welcome to FANDEISIA";
         String res = "";
-        String ldrPontos = "LDR: " + scoreLdr_0;
-        String resiPontos = "RESISTENCIA: " + score_Resistencia_1 ;
+        String ldrPontos = "LDR: " + scoreLdr0;
+        String resiPontos = "RESISTENCIA: " + scoreResistencia1;
         String turnos = "Nr. de Turnos jogados: " + plays;
         String hifen = "-----";
         String[] creAll = new String[creatures.size()];
@@ -270,7 +270,7 @@ public class FandeisiaGameManager {
             creAll[count] = c.getId() + " : " + c.getTipo() + " : " + c.getNrPontos();
             count++;
         }
-        if (scoreLdr_0 == score_Resistencia_1) {
+        if (scoreLdr0 == scoreResistencia1) {
             res = "EMPATE";
             results.add(welcome);
             results.add(res);
@@ -283,7 +283,7 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (scoreLdr_0 > score_Resistencia_1) {
+        if (scoreLdr0 > scoreResistencia1) {
             res = "Vitória da equipa LDR";
             results.add(welcome);
             results.add(res);
@@ -296,7 +296,7 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (scoreLdr_0 < score_Resistencia_1) {
+        if (scoreLdr0 < scoreResistencia1) {
             res = "Vitória da equipa RESISTENCIA";
             results.add(welcome);
             results.add(res);
@@ -340,20 +340,20 @@ public class FandeisiaGameManager {
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
         if (teamId == 0) {
-            return scoreLdr_0;
+            return scoreLdr0;
         }
         if (teamId == 1) {
-            return score_Resistencia_1;
+            return scoreResistencia1;
         }
         return 0;
     }
 
     public void addScore(int teamId, int valor) {
         if (teamId == 1) {
-            score_Resistencia_1 += valor;
+            scoreResistencia1 += valor;
         }
         if (teamId == 0) {
-            scoreLdr_0 += valor;
+            scoreLdr0 += valor;
         }
     }
 
