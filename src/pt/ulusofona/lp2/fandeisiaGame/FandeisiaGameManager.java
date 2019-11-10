@@ -28,11 +28,15 @@ public class FandeisiaGameManager {
     public String[][] getCreatureTypes() {
         /*Deve retornar os tipos de criatura que existem no jogo e que podem ser
         escolhidos para os exércitos dos dois jogadores.*/
-        String[][] creaturesString = new String[1][4];
+        String[][] creaturesString = new String[2][4];
         creaturesString[0][0] = "Circulo Estranho";
         creaturesString[0][1] = "crazy_emoji_black.png";
         creaturesString[0][2] = "Circulo MUITO PERIGOSO capaz de andar e comer tesouros AHHHHH";
         creaturesString[0][3] = "7";
+        creaturesString[1][0] = "Outro";
+        creaturesString[1][1] = "bird.png";
+        creaturesString[1][2] = "AHHHHH";
+        creaturesString[1][3] = "7";
         return creaturesString;
     }
 
@@ -41,7 +45,6 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
-
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -255,41 +258,55 @@ public class FandeisiaGameManager {
           “Resultados da execução …”. Este método não pode devolver null. Caso não calculem a informação
            respectiva, devem devolver uma lista vazia.*/
         ArrayList<String> results = new ArrayList<>();
-        String welcome = "Welcome to FANDEISIA\n";
+        String welcome = "Welcome to FANDEISIA";
         String res = "";
-        String ldrPontos = "LDR: " + scoreLdr_0 + "\n";
-        String resiPontos = "RESISTENCIA: " + score_Resistencia_1 + "\n";
-        String turnos = "Nr. de Turnos jogados: " + plays + "\n";
-        String hifen = hifen = "-----\n";
+        String ldrPontos = "LDR: " + scoreLdr_0;
+        String resiPontos = "RESISTENCIA: " + score_Resistencia_1 ;
+        String turnos = "Nr. de Turnos jogados: " + plays;
+        String hifen = "-----";
+        String[] creAll = new String[creatures.size()];
+        int count = 0;
+        for(Creature c : creatures){
+            creAll[count] = c.getId() + " : " + c.getTipo() + " : " + c.getNrPontos();
+            count++;
+        }
         if (scoreLdr_0 == score_Resistencia_1) {
-
-            res = "EMPATE\n";
+            res = "EMPATE";
             results.add(welcome);
             results.add(res);
             results.add(ldrPontos);
             results.add(resiPontos);
             results.add(turnos);
             results.add(hifen);
+            for(String s: creAll){
+                results.add(s);
+            }
         }
 
         if (scoreLdr_0 > score_Resistencia_1) {
-            res = "Vitória da equipa LDR" + "\n";
+            res = "Vitória da equipa LDR";
             results.add(welcome);
             results.add(res);
             results.add(ldrPontos);
             results.add(resiPontos);
             results.add(turnos);
             results.add(hifen);
+            for(String s: creAll){
+                results.add(s);
+            }
         }
 
         if (scoreLdr_0 < score_Resistencia_1) {
-            res = "Vitória da equipa RESISTENCIA" + "\n";
+            res = "Vitória da equipa RESISTENCIA";
             results.add(welcome);
             results.add(res);
-            results.add(ldrPontos);
             results.add(resiPontos);
+            results.add(ldrPontos);
             results.add(turnos);
             results.add(hifen);
+            for(String s: creAll){
+                results.add(s);
+            }
         }
         return results;
     }
