@@ -28,17 +28,17 @@ public class Ordenacao {
         return leftIdx;
     }
 
-    static private Creature[] ordenar(Creature[] creatures, int left, int right){
-        if(left < right){
-            int posicaoPivot = partition(creatures,left,right-1);
+    static private Creature[] ordenar(Creature[] creatures, int left, int right) {
+        if (left < right) {
+            int posicaoPivot = partition(creatures, left, right - 1);
 
-            creatures = ordenar(creatures,left,posicaoPivot);
-            creatures = ordenar(creatures,posicaoPivot + 1,right);
+            creatures = ordenar(creatures, left, posicaoPivot);
+            creatures = ordenar(creatures, posicaoPivot + 1, right);
         }
         return creatures;
     }
 
-    static public Creature[] ordenarCreatureById(Creature[] creatures){
-        return ordenar(creatures,0, creatures.length);
+    static public Creature[] ordenarCreatureById(Creature[] creatures) {
+        return ordenar(creatures, 0, creatures.length);
     }
 }

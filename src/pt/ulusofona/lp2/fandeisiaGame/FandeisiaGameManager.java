@@ -6,8 +6,8 @@ import java.util.List;
 public class FandeisiaGameManager {
     List<Creature> creatures;
     List<Treasure> treasures;
-    int scoreLDR_0;
-    int score_RESISTENCIA_1;
+    int scoreLdr_0;
+    int score_Resistencia_1;
     int initialTeamId;
     int currentTeamId;
     int rows;
@@ -18,8 +18,8 @@ public class FandeisiaGameManager {
     public FandeisiaGameManager() {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
-        scoreLDR_0 = 0;
-        score_RESISTENCIA_1 = 0;
+        scoreLdr_0 = 0;
+        score_Resistencia_1 = 0;
         treasuresFound = 0;
         plays = 0;
 
@@ -155,7 +155,7 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn() {
-        for(Creature c:creatures){
+        for (Creature c : creatures) {
             System.out.println(c);
         }
         System.out.println("Estou a processar uma jogada");
@@ -175,7 +175,7 @@ public class FandeisiaGameManager {
                         }
                         break;
                     case "Oeste":
-                        if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) == 0 || getElementId(c.getX() - 1, c.getY()) == -1 )) {
+                        if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) == 0 || getElementId(c.getX() - 1, c.getY()) == -1)) {
                             c.moveX(-1);
                         } else {
                             c.setOrientacao("Norte");
@@ -234,10 +234,10 @@ public class FandeisiaGameManager {
         for (Treasure t : treasures) {
             treasuresInGame++;
         }
-        if (scoreLDR_0 + treasuresInGame < score_RESISTENCIA_1) {
+        if (scoreLdr_0 + treasuresInGame < score_Resistencia_1) {
             return true;
         }
-        if (score_RESISTENCIA_1 + treasuresInGame < scoreLDR_0) {
+        if (score_Resistencia_1 + treasuresInGame < scoreLdr_0) {
             return true;
         }
         return false;
@@ -262,11 +262,11 @@ public class FandeisiaGameManager {
         ArrayList<String> results = new ArrayList<>();
         String welcome = "Welcome to FANDEISIA\n";
         String res = "";
-        String ldrPontos = "LDR: " + scoreLDR_0 + "\n";
-        String resiPontos = "RESISTENCIA: " + score_RESISTENCIA_1 + "\n";
+        String ldrPontos = "LDR: " + scoreLdr_0 + "\n";
+        String resiPontos = "RESISTENCIA: " + score_Resistencia_1 + "\n";
         String turnos = "Nr. de Turnos jogados: " + plays + "\n";
         String hifen = hifen = "-----\n";
-        if (scoreLDR_0 == score_RESISTENCIA_1) {
+        if (scoreLdr_0 == score_Resistencia_1) {
 
             res = "EMPATE\n";
             results.add(welcome);
@@ -277,7 +277,7 @@ public class FandeisiaGameManager {
             results.add(hifen);
         }
 
-        if (scoreLDR_0 > score_RESISTENCIA_1) {
+        if (scoreLdr_0 > score_Resistencia_1) {
             res = "Vitória da equipa LDR" + "\n";
             results.add(welcome);
             results.add(res);
@@ -287,7 +287,7 @@ public class FandeisiaGameManager {
             results.add(hifen);
         }
 
-        if (scoreLDR_0 < score_RESISTENCIA_1) {
+        if (scoreLdr_0 < score_Resistencia_1) {
             res = "Vitória da equipa RESISTENCIA" + "\n";
             results.add(welcome);
             results.add(res);
@@ -328,20 +328,20 @@ public class FandeisiaGameManager {
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
         if (teamId == 0) {
-            return scoreLDR_0;
+            return scoreLdr_0;
         }
         if (teamId == 1) {
-            return score_RESISTENCIA_1;
+            return score_Resistencia_1;
         }
         return 0;
     }
 
     public void addScore(int teamId, int valor) {
         if (teamId == 1) {
-            score_RESISTENCIA_1 += valor;
+            score_Resistencia_1 += valor;
         }
         if (teamId == 0) {
-            scoreLDR_0 += valor;
+            scoreLdr_0 += valor;
         }
     }
 
