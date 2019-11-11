@@ -23,6 +23,7 @@ public class Creature {
 
     public String toString() {
         /* “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>” */
+
         return id + " | " + tipo + " | " + idEquipa + " | " + nrPontos + " @ (" + x + ", " + y + ") " + orientacao;
     }
 

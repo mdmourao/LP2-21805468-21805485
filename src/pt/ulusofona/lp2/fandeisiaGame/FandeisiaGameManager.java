@@ -171,7 +171,8 @@ public class FandeisiaGameManager {
         /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
         plays++;
         for (Creature c : creatures) {
-            if (c.getIdEquipa() == getCurrentTeamId()) {
+            //if (c.getIdEquipa() == getCurrentTeamId()) {
+                System.out.println(c);
                 String orientacao = c.getOrientacao();
                 switch (orientacao) {
                     case "Este":
@@ -202,7 +203,7 @@ public class FandeisiaGameManager {
                             c.setOrientacao("Oeste");
                         }
                         break;
-                }
+                //}
             }
         }
         for (Creature c : creatures) {
@@ -226,6 +227,7 @@ public class FandeisiaGameManager {
         } else {
             setCurrentTeamId(0);
         }
+
     }
 
     public List<Creature> getCreatures() {
