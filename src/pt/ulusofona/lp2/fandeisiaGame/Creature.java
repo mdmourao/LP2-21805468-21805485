@@ -105,7 +105,6 @@ public class Creature {
         return nrPontos;
     }
 
-
     public boolean setOrientacao(String orientacao){
         if(orientacao.equals("Norte") || orientacao.equals("Sul") || orientacao.equals("Este") || orientacao.equals("Oeste")){
             this.orientacao = orientacao;
