@@ -157,6 +157,7 @@ public class FandeisiaGameManager {
         /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
         plays++;
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
+        ArrayList<Creature> creaturesAddPoints = new ArrayList<>();
         for (Creature c : creatures) {
             if (c.getIdEquipa() == getCurrentTeamId()) {
                 String orientacao = c.getOrientacao();
@@ -200,12 +201,16 @@ public class FandeisiaGameManager {
                         addScore(getCurrentTeamId(), 1);
                         treasuresFound++;
                         treasuresRemove.add(t);
+                        creaturesAddPoints.add(c);
                     }
                 }
             }
         }
         for(Treasure t : treasuresRemove){
             treasures.remove(t);
+        }
+        for(Creature c: creaturesAddPoints){
+            c.addNrPontos(1);
         }
         int currentTeamID = getCurrentTeamId();
         if (currentTeamID == 0) {
