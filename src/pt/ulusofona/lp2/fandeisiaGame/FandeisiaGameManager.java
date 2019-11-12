@@ -45,6 +45,9 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
+        for (String c : content) {
+            System.out.println(c);
+        }
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -113,6 +116,7 @@ public class FandeisiaGameManager {
             }
             String orientation = s1[5];
             addCreaure(id, tipo, teamId, x, y, orientation);
+
         }
         for (String[] s2 : treasureInfo) {
             int id = 0;
@@ -155,7 +159,46 @@ public class FandeisiaGameManager {
     public void processTurn() {
         System.out.println("Estou a processar uma jogada");
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
+        /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
+        plays++;
         for (Creature c : creatures) {
+            //if (c.getIdEquipa() == getCurrentTeamId()) {
+
+            String orientacao = c.getOrientacao();
+            switch (orientacao) {
+                case "Este":
+                    if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) <= 0)) {
+                        c.moveX(1);
+                    } else {
+                        c.setOrientacao("Sul");
+                    }
+                    break;
+                case "Oeste":
+                    if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) <= 0)) {
+                        c.moveX(-1);
+                    } else {
+                        c.setOrientacao("Norte");
+                    }
+                    break;
+                case "Norte":
+                    if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) <= 0)) {
+                        c.moveY(-1);
+                    } else {
+                        c.setOrientacao("Este");
+                    }
+                    break;
+                case "Sul":
+                    if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) <= 0)) {
+                        c.moveY(1);
+                    } else {
+                        c.setOrientacao("Oeste");
+                    }
+                    break;
+            }
+            //  }
+        }
+        for (Creature c : creatures) {
+            //if (c.getIdEquipa() == getCurrentTeamId()) {
             for (Treasure t : treasures) {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
                     addScore(getCurrentTeamId(), 1);
@@ -164,69 +207,17 @@ public class FandeisiaGameManager {
                     c.addNrPontos(1);
                 }
             }
+            // }
         }
         for (Treasure t : treasuresRemove) {
             treasures.remove(t);
         }
-        /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
-        plays++;
-        for (Creature c : creatures) {
-            if (c.getIdEquipa() == getCurrentTeamId()) {
-
-                String orientacao = c.getOrientacao();
-                switch (orientacao) {
-                    case "Este":
-                        if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) <= 0)) {
-                            c.moveX(1);
-                        } else {
-                            c.setOrientacao("Sul");
-                        }
-                        break;
-                    case "Oeste":
-                        if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) <= 0)) {
-                            c.moveX(-1);
-                        } else {
-                            c.setOrientacao("Norte");
-                        }
-                        break;
-                    case "Norte":
-                        if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) <= 0)) {
-                            c.moveY(-1);
-                        } else {
-                            c.setOrientacao("Este");
-                        }
-                        break;
-                    case "Sul":
-                        if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) <= 0)) {
-                            c.moveY(1);
-                        } else {
-                            c.setOrientacao("Oeste");
-                        }
-                        break;
-                }
-            }
-        }
-        for (Creature c : creatures) {
-            if (c.getIdEquipa() == getCurrentTeamId()) {
-                for (Treasure t : treasures) {
-                    if (c.getX() == t.getX() && c.getY() == t.getY()) {
-                        addScore(getCurrentTeamId(), 1);
-                        treasuresFound++;
-                        treasuresRemove.add(t);
-                        c.addNrPontos(1);
-                    }
-                }
-            }
-        }
-        for (Treasure t : treasuresRemove) {
-            treasures.remove(t);
-        }
-        int currentTeamID = getCurrentTeamId();
-        if (currentTeamID == 0) {
-            setCurrentTeamId(1);
-        } else {
-            setCurrentTeamId(0);
-        }
+//        int currentTeamID = getCurrentTeamId();
+//        if (currentTeamID == 0) {
+//            setCurrentTeamId(1);
+//        } else {
+//            setCurrentTeamId(0);
+//        }
 
     }
 
