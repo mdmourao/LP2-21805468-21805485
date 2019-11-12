@@ -212,12 +212,12 @@ public class FandeisiaGameManager {
         for (Treasure t : treasuresRemove) {
             treasures.remove(t);
         }
-//        int currentTeamID = getCurrentTeamId();
-//        if (currentTeamID == 0) {
-//            setCurrentTeamId(1);
-//        } else {
-//            setCurrentTeamId(0);
-//        }
+        int currentTeamID = getCurrentTeamId();
+        if (currentTeamID == 0) {
+            setCurrentTeamId(1);
+        } else {
+            setCurrentTeamId(0);
+        }
 
     }
 
