@@ -156,7 +156,7 @@ public class FandeisiaGameManager {
         this.initialTeamId = teamId;
     }
 
-    public void processTurn() {
+    public void processTurn()   {
         System.out.println("Estou a processar uma jogada");
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
         /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
@@ -201,7 +201,7 @@ public class FandeisiaGameManager {
             //if (c.getIdEquipa() == getCurrentTeamId()) {
             for (Treasure t : treasures) {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
-                    addScore(getCurrentTeamId(), 1);
+                    addScore(c.getIdEquipa(), 1);
                     treasuresFound++;
                     treasuresRemove.add(t);
                     c.addNrPontos(1);
