@@ -264,20 +264,20 @@ public class FandeisiaGameManager {
           “Resultados da execução …”. Este método não pode devolver null. Caso não calculem a informação
            respectiva, devem devolver uma lista vazia.*/
         ArrayList<String> results = new ArrayList<>();
-        String welcome = "Welcome to FANDEISIA\n";
+        String welcome = "Welcome to FANDEISIA";
         String res = "";
-        String ldrPontos = "LDR: " + scoreLdr0 +"\n";
-        String resiPontos = "RESISTENCIA: " + scoreResistencia1 + "\n";
-        String turnos = "Nr. de Turnos jogados: " + plays+ "\n";
-        String hifen = "-----\n";
+        String ldrPontos = "LDR: " + scoreLdr0;
+        String resiPontos = "RESISTENCIA: " + scoreResistencia1 ;
+        String turnos = "Nr. de Turnos jogados: " + plays;
+        String hifen = "-----";
         String[] creAll = new String[creatures.size()];
         int count = 0;
         for (Creature c : creatures) {
-            creAll[count] = c.getId() + " : " + c.getTipo() + " : " + c.getNrPontos() + "\n";
+            creAll[count] = c.getId() + " : " + c.getTipo() + " : " + c.getNrPontos();
             count++;
         }
         if (scoreLdr0 == scoreResistencia1) {
-            res = "EMPATE\n";
+            res = "Resultado: EMPATE";
             results.add(welcome);
             results.add(res);
             results.add(ldrPontos);
@@ -285,12 +285,12 @@ public class FandeisiaGameManager {
             results.add(turnos);
             results.add(hifen);
             for (String s : creAll) {
-                results.add(s + "\n");
+                results.add(s);
             }
         }
 
         if (scoreLdr0 > scoreResistencia1) {
-            res = "Vitória da equipa LDR\n";
+            res = "Resultado: Vitória da equipa LDR";
             results.add(welcome);
             results.add(res);
             results.add(ldrPontos);
@@ -298,12 +298,12 @@ public class FandeisiaGameManager {
             results.add(turnos);
             results.add(hifen);
             for (String s : creAll) {
-                results.add(s + "\n");
+                results.add(s);
             }
         }
 
         if (scoreLdr0 < scoreResistencia1) {
-            res = "Vitória da equipa RESISTENCIA\n";
+            res = "Resultado: Vitória da equipa RESISTENCIA";
             results.add(welcome);
             results.add(res);
             results.add(resiPontos);
@@ -311,7 +311,7 @@ public class FandeisiaGameManager {
             results.add(turnos);
             results.add(hifen);
             for (String s : creAll) {
-                results.add(s + "\n");
+                results.add(s);
             }
         }
         return results;
