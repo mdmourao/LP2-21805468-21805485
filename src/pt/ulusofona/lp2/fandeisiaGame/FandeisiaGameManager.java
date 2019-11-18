@@ -264,20 +264,20 @@ public class FandeisiaGameManager {
           “Resultados da execução …”. Este método não pode devolver null. Caso não calculem a informação
            respectiva, devem devolver uma lista vazia.*/
         ArrayList<String> results = new ArrayList<>();
-        String welcome = "Welcome to FANDEISIA";
+        String welcome = "Welcome to FANDEISIA\n";
         String res = "";
-        String ldrPontos = "LDR: " + scoreLdr0;
-        String resiPontos = "RESISTENCIA: " + scoreResistencia1;
-        String turnos = "Nr. de Turnos jogados: " + plays;
-        String hifen = "-----";
+        String ldrPontos = "LDR: " + scoreLdr0 +"\n";
+        String resiPontos = "RESISTENCIA: " + scoreResistencia1 + "\n";
+        String turnos = "Nr. de Turnos jogados: " + plays+ "\n";
+        String hifen = "-----\n";
         String[] creAll = new String[creatures.size()];
         int count = 0;
         for (Creature c : creatures) {
-            creAll[count] = c.getId() + " : " + c.getTipo() + " : " + c.getNrPontos();
+            creAll[count] = c.getId() + " : " + c.getTipo() + " : " + c.getNrPontos() + "\n";
             count++;
         }
         if (scoreLdr0 == scoreResistencia1) {
-            res = "EMPATE";
+            res = "EMPATE\n";
             results.add(welcome);
             results.add(res);
             results.add(ldrPontos);
@@ -285,12 +285,12 @@ public class FandeisiaGameManager {
             results.add(turnos);
             results.add(hifen);
             for (String s : creAll) {
-                results.add(s);
+                results.add(s + "\n");
             }
         }
 
         if (scoreLdr0 > scoreResistencia1) {
-            res = "Vitória da equipa LDR";
+            res = "Vitória da equipa LDR\n";
             results.add(welcome);
             results.add(res);
             results.add(ldrPontos);
@@ -298,12 +298,12 @@ public class FandeisiaGameManager {
             results.add(turnos);
             results.add(hifen);
             for (String s : creAll) {
-                results.add(s);
+                results.add(s + "\n");
             }
         }
 
         if (scoreLdr0 < scoreResistencia1) {
-            res = "Vitória da equipa RESISTENCIA";
+            res = "Vitória da equipa RESISTENCIA\n";
             results.add(welcome);
             results.add(res);
             results.add(resiPontos);
@@ -311,7 +311,7 @@ public class FandeisiaGameManager {
             results.add(turnos);
             results.add(hifen);
             for (String s : creAll) {
-                results.add(s);
+                results.add(s + "\n");
             }
         }
         return results;
@@ -320,14 +320,14 @@ public class FandeisiaGameManager {
     public int getElementId(int x, int y) {
         /*Deve devolver o ID do objecto/elemento que se encontra na posição indicada pelas coordenadas (x,y) passadas por
           argumento.*/
-        for (int i = 0; i < creatures.size(); i++) {
-            if (creatures.get(i).getX() == x && creatures.get(i).getY() == y) {
-                return creatures.get(i).getId();
+        for (Creature creature : creatures) {
+            if (creature.getX() == x && creature.getY() == y) {
+                return creature.getId();
             }
         }
-        for (int i = 0; i < treasures.size(); i++) {
-            if (treasures.get(i).getX() == x && treasures.get(i).getY() == y) {
-                return treasures.get(i).getId();
+        for (Treasure treasure : treasures) {
+            if (treasure.getX() == x && treasure.getY() == y) {
+                return treasure.getId();
             }
         }
         return 0;
