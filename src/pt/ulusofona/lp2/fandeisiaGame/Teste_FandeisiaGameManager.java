@@ -93,13 +93,13 @@ public class Teste_FandeisiaGameManager {
         String[] content = new String[2];
         content[0] = "id: 1, type: Circulo Estranho, teamId: 0, x: 1, y: 3, orientation: Sul";
         content[1] = "id: 2, type: Circulo Estranho, teamId: 1, x: 1, y: 4, orientation: Sul";
-        test1.startGame(content,6,8);
-        test1.processTurn();
-        assertEquals("1 | Circulo | 0 | 0 @ (1, 3) Oeste",test1.creatures.get(0).toString());
-        assertEquals("2 | Circulo | 1 | 0 @ (1, 4) Sul",test1.creatures.get(1).toString());
+        test1.startGame(content,7,8);
         test1.processTurn();
         assertEquals("1 | Circulo | 0 | 0 @ (1, 3) Oeste",test1.creatures.get(0).toString());
         assertEquals("2 | Circulo | 1 | 0 @ (1, 5) Sul",test1.creatures.get(1).toString());
+        test1.processTurn();
+        assertEquals("1 | Circulo | 0 | 0 @ (0, 3) Oeste",test1.creatures.get(0).toString());
+        assertEquals("2 | Circulo | 1 | 0 @ (1, 6) Sul",test1.creatures.get(1).toString());
     }
 
     @Test
