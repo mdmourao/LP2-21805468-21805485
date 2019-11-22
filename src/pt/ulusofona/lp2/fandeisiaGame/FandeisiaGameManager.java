@@ -28,15 +28,11 @@ public class FandeisiaGameManager {
     public String[][] getCreatureTypes() {
         /*Deve retornar os tipos de criatura que existem no jogo e que podem ser
         escolhidos para os exércitos dos dois jogadores.*/
-        String[][] creaturesString = new String[2][4];
+        String[][] creaturesString = new String[1][4];
         creaturesString[0][0] = "Circulo Estranho";
         creaturesString[0][1] = "crazy_emoji_black.png";
         creaturesString[0][2] = "Circulo MUITO PERIGOSO capaz de andar e comer tesouros AHHHHH";
         creaturesString[0][3] = "7";
-        creaturesString[1][0] = "Outro";
-        creaturesString[1][1] = "bird.png";
-        creaturesString[1][2] = "AHHHHH";
-        creaturesString[1][3] = "7";
         return creaturesString;
     }
 
@@ -45,9 +41,6 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
-        for (String c : content) {
-            System.out.println(c);
-        }
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
