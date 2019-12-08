@@ -135,7 +135,7 @@ public class FandeisiaGameManager {
     }
 
     public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
-        Creature creature = new Creature(id, tipo, teamId, x, y, orientation);
+        Creature creature = new Humano(id, tipo, teamId, x, y, orientation);
         creatures.add(creature);
     }
 
@@ -149,49 +149,97 @@ public class FandeisiaGameManager {
         this.initialTeamId = teamId;
     }
 
-    public void processTurn()   {
+    public boolean checkSaltarPorCima(Creature c, int xInicial, int yInicial){
+        int stepFinal = c.getStepSize();
+        if(getType(xInicial,yInicial) == null){
+            return true;
+        }
+        int xStep = xInicial, yStep = yInicial, stepX = 0, stepY = 0;
+        while (xStep +stepX < xInicial + stepFinal && yStep +stepY < yInicial + stepFinal){
+
+        }
+        for(Creature c1: creatures){
+
+        }
+        for(Treasure t1: treasures){
+
+        }
+        /*
+        * for(Hole h1: holes){
+        * bla bla bla
+        * }*/
+        return false;
+    }
+
+
+    public void processTurn() {
         System.out.println("Estou a processar uma jogada");
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
-        /*Deve processar um turno do jogo considerando a equipa actual. Inclui o movimento das criaturas.*/
         plays++;
+        int step;
         for (Creature c : creatures) {
-            //if (c.getIdEquipa() == getCurrentTeamId()) {
-
             String orientacao = c.getOrientacao();
+            step = c.getStepSize();
             switch (orientacao) {
                 case "Este":
-                    if (c.getX() + 1 < columns && (getElementId(c.getX() + 1, c.getY()) <= 0)) {
-                        c.moveX(1);
+                    if (c.getX() + step < columns && (getElementId(c.getX() + step, c.getY()) <= 0)) {
+                        c.move();
                     } else {
-                        c.setOrientacao("Sul");
+                        c.gira();
                     }
                     break;
                 case "Oeste":
-                    if (c.getX() - 1 >= 0 && (getElementId(c.getX() - 1, c.getY()) <= 0)) {
-                        c.moveX(-1);
+                    if (c.getX() - step >= 0 && (getElementId(c.getX() - step, c.getY()) <= 0)) {
+                        c.move();
                     } else {
-                        c.setOrientacao("Norte");
+                        c.gira();
                     }
                     break;
                 case "Norte":
-                    if (c.getY() - 1 >= 0 && (getElementId(c.getX(), c.getY() - 1) <= 0)) {
-                        c.moveY(-1);
+                    if (c.getY() - step >= 0 && (getElementId(c.getX(), c.getY() - step) <= 0)) {
+                        c.move();
                     } else {
-                        c.setOrientacao("Este");
+                        c.gira();
                     }
                     break;
                 case "Sul":
-                    if (c.getY() + 1 < rows && (getElementId(c.getX(), c.getY() + 1) <= 0)) {
-                        c.moveY(1);
+                    if (c.getY() + step < rows && (getElementId(c.getX(), c.getY() + step) <= 0)) {
+                        c.move();
                     } else {
-                        c.setOrientacao("Oeste");
+                        c.gira();
+                    }
+                    break;
+                case "Nordeste":
+                    if ((c.getX() + step < columns && c.getY() - step >= 0) && (getElementId(c.getX() + step, c.getY() - step) <= 0)) {
+                        c.move();
+                    } else {
+                        c.gira();
+                    }
+                    break;
+                case "Sudeste":
+                    if ((c.getX() + step < columns && c.getY() + step < rows) && (getElementId(c.getX() + step, c.getY() + step) <= 0)) {
+                        c.move();
+                    } else {
+                        c.gira();
+                    }
+                    break;
+                case "Sudoeste":
+                    if ((c.getX() - step >= 0 && c.getY() + step < columns) && (getElementId(c.getX() - step, c.getY() + step) <= 0)) {
+                        c.move();
+                    } else {
+                        c.gira();
+                    }
+                    break;
+                case "Noroeste":
+                    if ((c.getX() - step >= 0 && c.getY() - step >= 0) && (getElementId(c.getX() - step, c.getY() - step) <= 0)) {
+                        c.move();
+                    } else {
+                        c.gira();
                     }
                     break;
             }
-            //  }
         }
         for (Creature c : creatures) {
-            //if (c.getIdEquipa() == getCurrentTeamId()) {
             for (Treasure t : treasures) {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
                     addScore(c.getIdEquipa(), 1);
@@ -200,7 +248,6 @@ public class FandeisiaGameManager {
                     c.addNrPontos(1);
                 }
             }
-            // }
         }
         for (Treasure t : treasuresRemove) {
             treasures.remove(t);
@@ -260,13 +307,13 @@ public class FandeisiaGameManager {
         String welcome = "Welcome to FANDEISIA";
         String res = "";
         String ldrPontos = "LDR: " + scoreLdr0;
-        String resiPontos = "RESISTENCIA: " + scoreResistencia1 ;
+        String resiPontos = "RESISTENCIA: " + scoreResistencia1;
         String turnos = "Nr. de Turnos jogados: " + plays;
         String hifen = "-----";
         String[] creAll = new String[creatures.size()];
         int count = 0;
         for (Creature c : creatures) {
-            creAll[count] = c.getId() + " : " + c.getTipo() + " : " + c.getNrPontos();
+            creAll[count] = c.getId() + " : " + c.getType() + " : " + c.getNrPontos();
             count++;
         }
         if (scoreLdr0 == scoreResistencia1) {
@@ -324,6 +371,24 @@ public class FandeisiaGameManager {
             }
         }
         return 0;
+    }
+
+    public String getType(int x, int y) {
+        /*Deve devolver o ID do objecto/elemento que se encontra na posição indicada pelas coordenadas (x,y) passadas por
+          argumento.*/
+        for (Creature creature : creatures) {
+            if (creature.getX() == x && creature.getY() == y) {
+                return creature.getType();
+            }
+        }
+        for (Treasure treasure : treasures) {
+            if (treasure.getX() == x && treasure.getY() == y) {
+                return treasure.getType();
+            }
+        }
+        /**
+         * hole*/
+        return null;
     }
 
     public int getCurrentTeamId() {

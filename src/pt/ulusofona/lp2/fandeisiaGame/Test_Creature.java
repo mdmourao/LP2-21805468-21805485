@@ -90,7 +90,7 @@ public class Test_Creature {
     public void test_11_getTipo() {
         Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
         String expected = "Criatura";
-        assertEquals(expected, creature.getTipo());
+        assertEquals(expected, creature.getType());
     }
 
     @Test

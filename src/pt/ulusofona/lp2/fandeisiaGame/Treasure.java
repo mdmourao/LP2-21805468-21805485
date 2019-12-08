@@ -28,4 +28,7 @@ public class Treasure {
         return y;
     }
 
+    public String getType() {
+        return type;
+    }
 }
