@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.fandeisiaGame;
 
 public class Treasure {
     int id;
-    final String type = "treasure";
+    static final String type = "treasure";
     int x;
     int y;
 

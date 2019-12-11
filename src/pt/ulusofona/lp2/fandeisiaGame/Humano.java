@@ -11,5 +11,11 @@ public class Humano extends CreatureGira90 {
         return null;
     }
 
+    public boolean possoSaltarPorcima(int numberCreatures, int numberHoles) {
+        if (numberCreatures > 0 || numberHoles > 0) {
+            return false;
+        }
+        return true;
+    }
 
 }

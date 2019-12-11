@@ -1,11 +1,14 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FandeisiaGameManager {
     List<Creature> creatures;
     List<Treasure> treasures;
+    List<Hole> holes;
     int scoreLdr0;
     int scoreResistencia1;
     int initialTeamId;
@@ -18,6 +21,7 @@ public class FandeisiaGameManager {
     public FandeisiaGameManager() {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
+        holes = new ArrayList<>();
         scoreLdr0 = 0;
         scoreResistencia1 = 0;
         treasuresFound = 0;
@@ -58,12 +62,52 @@ public class FandeisiaGameManager {
         return creaturesString;
     }
 
+    //TODO
+    public String[][] getSpellTypes() {
+        return null;
+    }
+
+    //TODO
+    public Map<String, Integer> createComputerArmy() {
+        return null;
+    }
+
+    //TODO
+    public boolean enchant(int x, int y, String spellName){
+        return false;
+    }
+
+    //TODO
+    public String getSpell(int x, int y){
+        return "";
+    }
+
+    //TODO
+    public int getCoinTotal(int teamID){
+        return 0;
+    }
+
+    //TODO
+    public boolean saveGame(File fich){
+        return false;
+    }
+
+    //TODO
+    public boolean loadGame(File fich){
+        return false;
+    }
+
+    //TODO
+    public String whoIsLordEder(){
+        return "";
+    }
+
     public int getNumberCreatures() {
         return creatures.size();
     }
 
     public void startGame(String[] content, int rows, int columns) {
-        for(String c: content){
+        for (String c : content) {
             System.out.println(c);
         }
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
@@ -174,7 +218,10 @@ public class FandeisiaGameManager {
         this.initialTeamId = teamId;
     }
 
-    public boolean checkSaltarPorCima(Creature c, int xInicial, int yInicial){
+    public boolean checkSaltarPorCima(Creature c) {
+        if (c.getStepSize() == 1) {
+            return true;
+        }
         int x = c.getX();
         int y = c.getY();
         int step = 0;
@@ -212,7 +259,7 @@ public class FandeisiaGameManager {
                 yFinal -= stepTotal;
                 break;
         }
-        while(x < xFinal && y < yFinal) {
+        while (x != xFinal && y != yFinal) {
             switch (c.getOrientacao()) {
                 case "Este":
                     x += step;
@@ -242,20 +289,25 @@ public class FandeisiaGameManager {
                     y -= step;
                     break;
             }
-            if(getType(x,y) != null){
-                if(getType(x,y).equals("hole")){
+            if (getType(x, y) != null) {
+                if (getType(x, y).equals("hole")) {
                     buracosPasseiPorCima++;
-                }else {
+                } else {
+                    // caso mt especifico que nao sei se deve ficar aqui.....
+                    if (c.getType().equals("Gigante") && getType(x, y).equals("Gigante")) {
+                        return false;
+                    }
                     creaturesPasseiPorCima++;
                 }
             }
+            step++;
         }
-        /*
-        * c.PossoPassarPorCimaDisto(buracosPasseiPorCima,creaturesPasseiPorCima) == true
-        * return true*/
-        return false;
+        if (c.possoSaltarPorcima(creaturesPasseiPorCima, buracosPasseiPorCima)) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
 
     public void processTurn() {
         System.out.println("Estou a processar uma jogada");
@@ -267,56 +319,56 @@ public class FandeisiaGameManager {
             step = c.getStepSize();
             switch (orientacao) {
                 case "Este":
-                    if (c.getX() + step < columns && (getElementId(c.getX() + step, c.getY()) <= 0)) {
+                    if (c.getX() + step < columns && (getType(c.getX() + step, c.getY()) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
                     }
                     break;
                 case "Oeste":
-                    if (c.getX() - step >= 0 && (getElementId(c.getX() - step, c.getY()) <= 0)) {
+                    if (c.getX() - step >= 0 && (getType(c.getX() - step, c.getY()) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
                     }
                     break;
                 case "Norte":
-                    if (c.getY() - step >= 0 && (getElementId(c.getX(), c.getY() - step) <= 0)) {
+                    if (c.getY() - step >= 0 && (getType(c.getX(), c.getY() - step) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
                     }
                     break;
                 case "Sul":
-                    if (c.getY() + step < rows && (getElementId(c.getX(), c.getY() + step) <= 0)) {
+                    if (c.getY() + step < rows && (getType(c.getX(), c.getY() + step) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
                     }
                     break;
                 case "Nordeste":
-                    if ((c.getX() + step < columns && c.getY() - step >= 0) && (getElementId(c.getX() + step, c.getY() - step) <= 0)) {
+                    if ((c.getX() + step < columns && c.getY() - step >= 0) && (getType(c.getX() + step, c.getY() - step) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
                     }
                     break;
                 case "Sudeste":
-                    if ((c.getX() + step < columns && c.getY() + step < rows) && (getElementId(c.getX() + step, c.getY() + step) <= 0)) {
+                    if ((c.getX() + step < columns && c.getY() + step < rows) && (getType(c.getX() + step, c.getY() + step) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
                     }
                     break;
                 case "Sudoeste":
-                    if ((c.getX() - step >= 0 && c.getY() + step < columns) && (getElementId(c.getX() - step, c.getY() + step) <= 0)) {
+                    if ((c.getX() - step >= 0 && c.getY() + step < columns) && (getType(c.getX() - step, c.getY() + step) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
                     }
                     break;
                 case "Noroeste":
-                    if ((c.getX() - step >= 0 && c.getY() - step >= 0) && (getElementId(c.getX() - step, c.getY() - step) <= 0)) {
+                    if ((c.getX() - step >= 0 && c.getY() - step >= 0) && (getType(c.getX() - step, c.getY() - step) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
@@ -466,13 +518,11 @@ public class FandeisiaGameManager {
                 return creature.getType();
             }
         }
-        for (Treasure treasure : treasures) {
-            if (treasure.getX() == x && treasure.getY() == y) {
-                return treasure.getType();
+        for (Hole hole : holes) {
+            if (hole.getX() == x && hole.getY() == y) {
+                return hole.getType();
             }
         }
-        /**
-         * hole*/
         return null;
     }
 

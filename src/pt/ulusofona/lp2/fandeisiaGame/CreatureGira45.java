@@ -3,12 +3,12 @@ package pt.ulusofona.lp2.fandeisiaGame;
 abstract public class CreatureGira45 extends Creature {
 
     public CreatureGira45(int id, String tipo, int idEquipa, int x, int y, String orientacao, int stepSize) {
-        super(id, tipo, idEquipa, x, y, orientacao,stepSize);
+        super(id, tipo, idEquipa, x, y, orientacao, stepSize);
     }
 
     abstract public String getImagePNG();
 
-    public void move(){
+    public void move() {
         switch (orientacao) {
             case "Este":
                 x += stepSize;
@@ -70,4 +70,5 @@ abstract public class CreatureGira45 extends Creature {
         }
     }
 
+    abstract public boolean possoSaltarPorcima(int numberCreatures, int numberHoles);
 }

@@ -35,7 +35,9 @@ abstract public class Creature {
 
     abstract public void move();
 
-    public int getStepSize(){
+    abstract public boolean possoSaltarPorcima(int numberCreatures, int numberHoles);
+
+    public int getStepSize() {
         return stepSize;
     }
 
@@ -67,17 +69,16 @@ abstract public class Creature {
         return this.descricao;
     }
 
-
     public void addNrPontos(int pontosAdicionar) {
         //numero de pontos corresponde a quantidade de tesouros encontrados pela criatura
         this.nrPontos += pontosAdicionar;
     }
 
-    public int getNrPontos(){
+    public int getNrPontos() {
         return nrPontos;
     }
 
-    public int getIdEquipa(){
+    public int getIdEquipa() {
         return idEquipa;
     }
 
