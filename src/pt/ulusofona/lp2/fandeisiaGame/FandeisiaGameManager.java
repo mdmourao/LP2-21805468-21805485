@@ -63,6 +63,9 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
+        for(String c: content){
+            System.out.println(c);
+        }
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -172,24 +175,84 @@ public class FandeisiaGameManager {
     }
 
     public boolean checkSaltarPorCima(Creature c, int xInicial, int yInicial){
-        int stepFinal = c.getStepSize();
-        if(getType(xInicial,yInicial) == null){
-            return true;
+        int x = c.getX();
+        int y = c.getY();
+        int step = 0;
+        int xFinal = c.getX();
+        int yFinal = c.getY();
+        int stepTotal = c.getStepSize();
+        int buracosPasseiPorCima = 0;
+        int creaturesPasseiPorCima = 0;
+        switch (c.getOrientacao()) {
+            case "Este":
+                xFinal += stepTotal;
+                break;
+            case "Oeste":
+                xFinal -= stepTotal;
+                break;
+            case "Norte":
+                yFinal -= stepTotal;
+                break;
+            case "Sul":
+                yFinal += stepTotal;
+            case "Nordeste":
+                xFinal += stepTotal;
+                yFinal -= stepTotal;
+                break;
+            case "Sudeste":
+                xFinal += stepTotal;
+                yFinal += stepTotal;
+                break;
+            case "Sudoeste":
+                xFinal -= stepTotal;
+                yFinal += stepTotal;
+                break;
+            case "Noroeste":
+                xFinal -= stepTotal;
+                yFinal -= stepTotal;
+                break;
         }
-        int xStep = xInicial, yStep = yInicial, stepX = 0, stepY = 0;
-        while (xStep +stepX < xInicial + stepFinal && yStep +stepY < yInicial + stepFinal){
-
-        }
-        for(Creature c1: creatures){
-
-        }
-        for(Treasure t1: treasures){
-
+        while(x < xFinal && y < yFinal) {
+            switch (c.getOrientacao()) {
+                case "Este":
+                    x += step;
+                    break;
+                case "Oeste":
+                    x -= step;
+                    break;
+                case "Norte":
+                    y -= step;
+                    break;
+                case "Sul":
+                    y += step;
+                case "Nordeste":
+                    x += step;
+                    y -= step;
+                    break;
+                case "Sudeste":
+                    x += step;
+                    y += step;
+                    break;
+                case "Sudoeste":
+                    x -= step;
+                    y += step;
+                    break;
+                case "Noroeste":
+                    x -= step;
+                    y -= step;
+                    break;
+            }
+            if(getType(x,y) != null){
+                if(getType(x,y).equals("hole")){
+                    buracosPasseiPorCima++;
+                }else {
+                    creaturesPasseiPorCima++;
+                }
+            }
         }
         /*
-        * for(Hole h1: holes){
-        * bla bla bla
-        * }*/
+        * c.PossoPassarPorCimaDisto(buracosPasseiPorCima,creaturesPasseiPorCima) == true
+        * return true*/
         return false;
     }
 
@@ -396,7 +459,7 @@ public class FandeisiaGameManager {
     }
 
     public String getType(int x, int y) {
-        /*Deve devolver o ID do objecto/elemento que se encontra na posição indicada pelas coordenadas (x,y) passadas por
+        /*Deve devolver o type do objecto/elemento que se encontra na posição indicada pelas coordenadas (x,y) passadas por
           argumento.*/
         for (Creature creature : creatures) {
             if (creature.getX() == x && creature.getY() == y) {

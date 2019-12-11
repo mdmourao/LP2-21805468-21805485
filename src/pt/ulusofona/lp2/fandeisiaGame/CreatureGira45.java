@@ -67,7 +67,6 @@ abstract public class CreatureGira45 extends Creature {
             case "Noroeste":
                 orientacao = "Norte";
                 break;
-
         }
     }
 
