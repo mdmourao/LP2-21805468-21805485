@@ -2,6 +2,7 @@ package pt.ulusofona.lp2.fandeisiaGame;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,8 @@ public class FandeisiaGameManager {
     List<Creature> creatures;
     List<Treasure> treasures;
     List<Hole> holes;
-    int scoreLdr0;
-    int scoreResistencia1;
+    Team ldr_0 = new LDR_0();
+    Team resistencia_1 = new Resistencia_1();
     int initialTeamId;
     int currentTeamId;
     int rows;
@@ -22,8 +23,6 @@ public class FandeisiaGameManager {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
         holes = new ArrayList<>();
-        scoreLdr0 = 0;
-        scoreResistencia1 = 0;
         treasuresFound = 0;
         plays = 0;
 
@@ -33,12 +32,12 @@ public class FandeisiaGameManager {
         /*Deve retornar os tipos de criatura que existem no jogo e que podem ser
         escolhidos para os exércitos dos dois jogadores.*/
         String[][] creaturesString = new String[5][4];
-        creaturesString[0][0] = "Anão";
+        creaturesString[0][0] = "Anao";
         creaturesString[0][1] = "crazy_emoji_black.png";
         creaturesString[0][2] = "1 casa (posição) de cada vez | 90º";
         creaturesString[0][3] = "1";
 
-        creaturesString[1][0] = "Dragão";
+        creaturesString[1][0] = "Dragao";
         creaturesString[1][1] = "crazy_emoji_black.png";
         creaturesString[1][2] = "3 casas (posições) de cada vez\n ○ Pode-se mover na horizontal, na vertical e também nas diagonais";
         creaturesString[1][3] = "9";
@@ -109,8 +108,13 @@ public class FandeisiaGameManager {
 
     //TODO
     public Map<String, Integer> createComputerArmy() {
-        /*Deve devolver o exército escolhido pelo computador.*/
-        return null;
+        Map<String, Integer> army = new HashMap<>();
+        army.put("Dragao", 1);
+//        army.put("Anao", 1);
+//        army.put("Elfo", 1);
+//        army.put("Gigante", 1);
+//        army.put("Humano", 1);
+        return army;
     }
 
     //TODO
@@ -159,11 +163,12 @@ public class FandeisiaGameManager {
         return creatures.size();
     }
 
-    public void startGame(String[] content, int rows, int columns) {
-        /*Deve inicializar as estruturas de dados relevantes para processar um jogo*/
+    public int startGame(String[] content, int rows, int columns) {
+        System.out.println("Recebemos esta String");
         for (String c : content) {
             System.out.println(c);
         }
+        System.out.println("FIM");
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -196,7 +201,7 @@ public class FandeisiaGameManager {
                 }
                 creatureInfo.add(infoFinalCreature);
             }
-            if (split1.length == 4 && content[2].equals("Tesouro")) {
+            if (split1.length == 4 && (split1[1].equals(" type: bronze") || split1[1].equals(" type: gold") || split1[1].equals(" type: silver"))) {
 
                 for (String s1 : split1) {
                     split3 = s1.split(" ", 4);
@@ -210,7 +215,7 @@ public class FandeisiaGameManager {
                 treasureInfo.add(infoFinalTreasure);
             }
 
-            if (split1.length == 4 && content[2].equals("Buraco")) {
+            if (split1.length == 4 && split1[1].equals(" type: hole")) {
 
                 for (String s1 : split1) {
                     split3 = s1.split(" ", 4);
@@ -259,6 +264,7 @@ public class FandeisiaGameManager {
                 id = Integer.parseInt(s2[0]);
             } catch (NumberFormatException e) {
             }
+            String type = s2[1];
             try {
                 x = Integer.parseInt(s2[2]);
             } catch (NumberFormatException e) {
@@ -267,7 +273,7 @@ public class FandeisiaGameManager {
                 y = Integer.parseInt(s2[3]);
             } catch (NumberFormatException e) {
             }
-            addTreasure(id, x, y);
+            addTreasure(id, type, x, y);
         }
 
         for (String[] s3 : holeInfo) {
@@ -292,41 +298,60 @@ public class FandeisiaGameManager {
         this.rows = rows;
         this.columns = columns;
         ordenarCreaturesById(this.creatures);
+        return 0;
     }
 
     public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
         Creature creature = null;
-        if(tipo.equals("Anao")){
-            creature = new Anao(id,tipo,teamId,x,y,orientation);
+        if (tipo.equals("Dragao")) {
+            creature = new Dragao(id, tipo, teamId, x, y, orientation);
+            System.out.println(creatures.size() + "  Adicionei um Dragao");
         }
-        if(tipo.equals("Dragao")){
-            creature = new Dragao(id,tipo,teamId,x,y,orientation);
+        if (tipo.equals("Elfo")) {
+            creature = new Elfo(id, tipo, teamId, x, y, orientation);
+            System.out.println(creatures.size() + "  Adicionei um Elfo");
         }
-        if(tipo.equals("Elfo")){
-            creature = new Elfo(id,tipo,teamId,x,y,orientation);
+        if (tipo.equals("Gigante")) {
+            creature = new Gigante(id, tipo, teamId, x, y, orientation);
+            System.out.println(creatures.size() + "  Adicionei um Gigante");
         }
-        if(tipo.equals("Gigante")){
-            creature = new Gigante(id,tipo,teamId,x,y,orientation);
+        if (tipo.equals("Humano")) {
+            creature = new Humano(id, tipo, teamId, x, y, orientation);
+            System.out.println(creatures.size() + "  Adicionei um Humano");
         }
-        if(tipo.equals("Humano")){
-            creature = new Humano(id,tipo,teamId,x,y,orientation);
+        if (tipo.equals("Anao")) {
+            creature = new Anao(id, tipo, teamId, x, y, orientation);
+            System.out.println(creatures.size() + "  Adicionei um Anao");
         }
-        if(tipo.equals("Anao")){
-            creature = new Anao(id,tipo,teamId,x,y,orientation);
-        }
-        if(creature == null){
+        if (creature == null) {
             return;
         }
         creatures.add(creature);
     }
 
-    public void addTreasure(int id, int x, int y) {
-        Treasure treasure = new Treasure(id, x, y);
+    public void addTreasure(int id, String type, int x, int y) {
+        Treasure treasure = null;
+        if (type.equals("silver")) {
+            treasure = new TreasureSilver(id,x,y);
+            System.out.println(treasures.size() + "  Adicionei um tesouro silver");
+        }
+        if (type.equals("bronze")) {
+            treasure = new TreasureBronze(id,x,y);
+            System.out.println(treasures.size() + "  Adicionei um tesouro bronze");
+        }
+        if (type.equals("gold")){
+            treasure = new TreasureGold(id,x,y);
+            System.out.println(treasures.size() + "  Adicionei um tesouro gold");
+        }
+        if(treasure == null){
+            return;
+        }
         treasures.add(treasure);
     }
 
     public void addHole(int id, int x, int y) {
         Hole hole = new Hole(id, x, y);
+        System.out.println(holes.size() + "  Adicionei um buraco");
         holes.add(hole);
     }
 
@@ -532,10 +557,10 @@ public class FandeisiaGameManager {
         for (Treasure t : treasures) {
             treasuresInGame++;
         }
-        if (scoreLdr0 + treasuresInGame < scoreResistencia1) {
+        if (ldr_0.getScore() + treasuresInGame < resistencia_1.getScore()) {
             return true;
         }
-        if (scoreResistencia1 + treasuresInGame < scoreLdr0) {
+        if (resistencia_1.getScore() + treasuresInGame < ldr_0.getScore()) {
             return true;
         }
         return false;
@@ -560,8 +585,8 @@ public class FandeisiaGameManager {
         ArrayList<String> results = new ArrayList<>();
         String welcome = "Welcome to FANDEISIA";
         String res = "";
-        String ldrPontos = "LDR: " + scoreLdr0;
-        String resiPontos = "RESISTENCIA: " + scoreResistencia1;
+        String ldrPontos = "LDR: " + ldr_0.getScore();
+        String resiPontos = "RESISTENCIA: " + resistencia_1.getScore();
         String turnos = "Nr. de Turnos jogados: " + plays;
         String hifen = "-----";
         String[] creAll = new String[creatures.size()];
@@ -570,7 +595,7 @@ public class FandeisiaGameManager {
             creAll[count] = c.getId() + " : " + c.getType() + " : " + c.getNrPontos();
             count++;
         }
-        if (scoreLdr0 == scoreResistencia1) {
+        if (ldr_0.getScore() == resistencia_1.getScore()) {
             res = "Resultado: EMPATE";
             results.add(welcome);
             results.add(res);
@@ -583,7 +608,7 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (scoreLdr0 > scoreResistencia1) {
+        if (ldr_0.getScore() > resistencia_1.getScore()) {
             res = "Resultado: Vitória da equipa LDR";
             results.add(welcome);
             results.add(res);
@@ -596,7 +621,7 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (scoreLdr0 < scoreResistencia1) {
+        if (ldr_0.getScore() < resistencia_1.getScore()) {
             res = "Resultado: Vitória da equipa RESISTENCIA";
             results.add(welcome);
             results.add(res);
@@ -656,20 +681,20 @@ public class FandeisiaGameManager {
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
         if (teamId == 0) {
-            return scoreLdr0;
+            return ldr_0.getScore();
         }
         if (teamId == 1) {
-            return scoreResistencia1;
+            return resistencia_1.getScore();
         }
         return 0;
     }
 
     public void addScore(int teamId, int valor) {
         if (teamId == 1) {
-            scoreResistencia1 += valor;
+            resistencia_1.addScore(valor);
         }
         if (teamId == 0) {
-            scoreLdr0 += valor;
+            ldr_0.addScore(valor);
         }
     }
 

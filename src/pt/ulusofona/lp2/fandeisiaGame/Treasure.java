@@ -1,8 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-public class Treasure {
+abstract public class Treasure {
     int id;
-    static final String type = "treasure";
     int x;
     int y;
 
@@ -12,9 +11,7 @@ public class Treasure {
         this.y = y;
     }
 
-    public String getImagePNG() {
-        return "box-mud.png";
-    }
+    abstract public String getImagePNG();
 
     public int getId() {
         return id;
@@ -28,7 +25,4 @@ public class Treasure {
         return y;
     }
 
-    public String getType() {
-        return type;
-    }
 }
