@@ -106,14 +106,14 @@ public class FandeisiaGameManager {
         return spellsString;
     }
 
-    //TODO
+    //TODO (colocar mais inteligente)
     public Map<String, Integer> createComputerArmy() {
         Map<String, Integer> army = new HashMap<>();
         army.put("Dragao", 1);
-//        army.put("Anao", 1);
-//        army.put("Elfo", 1);
-//        army.put("Gigante", 1);
-//        army.put("Humano", 1);
+        army.put("Anao", 1);
+        army.put("Elfo", 1);
+        army.put("Gigante", 1);
+        army.put("Humano", 1);
         return army;
     }
 
@@ -163,6 +163,7 @@ public class FandeisiaGameManager {
         return creatures.size();
     }
 
+    //TODO aplicar os checks do plafond
     public int startGame(String[] content, int rows, int columns) {
         System.out.println("Recebemos esta String");
         for (String c : content) {
