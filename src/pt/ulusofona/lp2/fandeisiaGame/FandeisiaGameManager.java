@@ -62,43 +62,96 @@ public class FandeisiaGameManager {
         return creaturesString;
     }
 
-    //TODO
     public String[][] getSpellTypes() {
-        return null;
+        /*Deve retornar os tipos de feitiço que
+        existem no jogo e que podem ser escolhidos
+        por cada uma das equipas no decorrer do mesmo*/
+
+        String[][] spellsString = new String[9][3];
+        spellsString[0][0] = "EmpurraParaNorte";
+        spellsString[0][1] = "Move a criatura 1 unidade para Norte.";
+        spellsString[0][2] = "1";
+
+        spellsString[1][0] = "EmpurraParaEste";
+        spellsString[1][1] = "Move a criatura 1 unidade para Este.";
+        spellsString[1][2] = "1";
+
+        spellsString[2][0] = "EmpurraParaSul";
+        spellsString[2][1] = "Move a criatura 1 unidade para Sul.";
+        spellsString[2][2] = "1";
+
+        spellsString[3][0] = "EmpurraParaOeste";
+        spellsString[3][1] = "Move a criatura 1 unidade para Oeste.";
+        spellsString[3][2] = "1";
+
+        spellsString[4][0] = "ReduzAlcance";
+        spellsString[4][1] = "Reduz o alcance da criatura: MIN (alcance original, 1)";
+        spellsString[4][2] = "2";
+
+        spellsString[5][0] = "DuplicaAlcance";
+        spellsString[5][1] = "Aumenta o alcance da criatura para o dobro.";
+        spellsString[5][2] = "3";
+
+        spellsString[6][0] = "Congela";
+        spellsString[6][1] = "A criatura alvo não se move neste turno.";
+        spellsString[6][2] = "3";
+
+        spellsString[7][0] = "Congela4Ever"; // AI
+        spellsString[7][1] = "A criatura alvo não se move mais até ao final do jogo.";
+        spellsString[7][2] = "10";
+
+        spellsString[8][0] = "Descongela";
+        spellsString[8][1] = "Inverte a aplicação de um Feitiço Congela4Ever.";
+        spellsString[8][2] = "8";
+
+        return spellsString;
     }
 
     //TODO
     public Map<String, Integer> createComputerArmy() {
+        /*Deve devolver o exército escolhido pelo computador.*/
         return null;
     }
 
     //TODO
-    public boolean enchant(int x, int y, String spellName){
+    public boolean enchant(int x, int y, String spellName) {
+        /*Aplica o feitiço indicado à criatura que
+        estiver nas coordenadas indicadas.
+        Caso não seja possível aplicar o feitiço (por exemplo, nessas coordenadas não está uma criatura,
+        ou esse feitiço iria levar a criatura para um buraco) deve retornar false.*/
         return false;
     }
 
     //TODO
-    public String getSpell(int x, int y){
+    public String getSpell(int x, int y) {
+        /*Retorna null ou o nome do feitiço está a ser aplicado à criatura na posição x,y*/
         return "";
     }
 
     //TODO
-    public int getCoinTotal(int teamID){
+    public int getCoinTotal(int teamID) {
+        /*Deve devolver o número total de moedas
+        fantásticas da equipa que tem o ID teamID.*/
         return 0;
     }
 
     //TODO
-    public boolean saveGame(File fich){
+    public boolean saveGame(File fich) {
+        /*Deve gravar o jogo actual para o ficheiro
+        indicado no argumento.*/
         return false;
     }
 
     //TODO
-    public boolean loadGame(File fich){
+    public boolean loadGame(File fich) {
+        /*Deve começar um jogo a partir do ficheiro
+        indicado no argumento.*/
         return false;
     }
 
     //TODO
-    public String whoIsLordEder(){
+    public String whoIsLordEder() {
+        /*Deve devolver o nome completo do ​Lord Éder.*/
         return "";
     }
 
@@ -107,6 +160,7 @@ public class FandeisiaGameManager {
     }
 
     public void startGame(String[] content, int rows, int columns) {
+        /*Deve inicializar as estruturas de dados relevantes para processar um jogo*/
         for (String c : content) {
             System.out.println(c);
         }
@@ -116,16 +170,19 @@ public class FandeisiaGameManager {
        Os argumentos rows e columns vão-nos indicar as dimensões do tabuleiro.*/
         ArrayList<String[]> creatureInfo = new ArrayList<>();
         ArrayList<String[]> treasureInfo = new ArrayList<>();
+        ArrayList<String[]> holeInfo = new ArrayList<>();
         String[] infoFinalCreature;
         String[] infoFinalTreasure;
+        String[] infoFinalHole;
         String[] split1;
         String[] split2;
         String[] split3;
-        int count = 0;
+        int count;
         for (String s : content) {
             split1 = s.split(",", 6);
             infoFinalCreature = new String[6];
             infoFinalTreasure = new String[4];
+            infoFinalHole = new String[4];
             count = 0;
             if (split1.length == 6) {
                 for (String s1 : split1) {
@@ -139,7 +196,7 @@ public class FandeisiaGameManager {
                 }
                 creatureInfo.add(infoFinalCreature);
             }
-            if (split1.length == 4) {
+            if (split1.length == 4 && content[2].equals("Tesouro")) {
 
                 for (String s1 : split1) {
                     split3 = s1.split(" ", 4);
@@ -151,6 +208,20 @@ public class FandeisiaGameManager {
                     count++;
                 }
                 treasureInfo.add(infoFinalTreasure);
+            }
+
+            if (split1.length == 4 && content[2].equals("Buraco")) {
+
+                for (String s1 : split1) {
+                    split3 = s1.split(" ", 4);
+                    if (count == 0) {
+                        infoFinalHole[count] = split3[1];
+                    } else {
+                        infoFinalHole[count] = split3[2];
+                    }
+                    count++;
+                }
+                holeInfo.add(infoFinalHole);
             }
         }
 
@@ -198,19 +269,65 @@ public class FandeisiaGameManager {
             }
             addTreasure(id, x, y);
         }
+
+        for (String[] s3 : holeInfo) {
+            int id = 0;
+            int x = 0;
+            int y = 0;
+            try {
+                id = Integer.parseInt(s3[0]);
+            } catch (NumberFormatException e) {
+            }
+            try {
+                x = Integer.parseInt(s3[2]);
+            } catch (NumberFormatException e) {
+            }
+            try {
+                y = Integer.parseInt(s3[3]);
+            } catch (NumberFormatException e) {
+            }
+            addHole(id, x, y);
+        }
+
         this.rows = rows;
         this.columns = columns;
         ordenarCreaturesById(this.creatures);
     }
 
     public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
-        Creature creature = new Humano(id, tipo, teamId, x, y, orientation);
+        Creature creature = null;
+        if(tipo.equals("Anao")){
+            creature = new Anao(id,tipo,teamId,x,y,orientation);
+        }
+        if(tipo.equals("Dragao")){
+            creature = new Dragao(id,tipo,teamId,x,y,orientation);
+        }
+        if(tipo.equals("Elfo")){
+            creature = new Elfo(id,tipo,teamId,x,y,orientation);
+        }
+        if(tipo.equals("Gigante")){
+            creature = new Gigante(id,tipo,teamId,x,y,orientation);
+        }
+        if(tipo.equals("Humano")){
+            creature = new Humano(id,tipo,teamId,x,y,orientation);
+        }
+        if(tipo.equals("Anao")){
+            creature = new Anao(id,tipo,teamId,x,y,orientation);
+        }
+        if(creature == null){
+            return;
+        }
         creatures.add(creature);
     }
 
     public void addTreasure(int id, int x, int y) {
         Treasure treasure = new Treasure(id, x, y);
         treasures.add(treasure);
+    }
+
+    public void addHole(int id, int x, int y) {
+        Hole hole = new Hole(id, x, y);
+        holes.add(hole);
     }
 
     public void setInitialTeam(int teamId) {
