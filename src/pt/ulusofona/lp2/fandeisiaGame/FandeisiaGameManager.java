@@ -25,7 +25,8 @@ public class FandeisiaGameManager {
         holes = new ArrayList<>();
         treasuresFound = 0;
         plays = 0;
-
+        initialTeamId = 10;
+        currentTeamId = 10;
     }
 
     public String[][] getCreatureTypes() {
@@ -299,6 +300,7 @@ public class FandeisiaGameManager {
         this.rows = rows;
         this.columns = columns;
         ordenarCreaturesById(this.creatures);
+        System.out.println("Acabei o startGame");
         return 0;
     }
 
@@ -358,7 +360,7 @@ public class FandeisiaGameManager {
 
     public void setInitialTeam(int teamId) {
         /*Indica qual das equipas vai jogar no primeiro turno do jogo.*/
-        this.initialTeamId = teamId;
+        this.initialTeamId = 10;
     }
 
     public boolean checkSaltarPorCima(Creature c) {
@@ -533,10 +535,10 @@ public class FandeisiaGameManager {
             treasures.remove(t);
         }
         int currentTeamID = getCurrentTeamId();
-        if (currentTeamID == 0) {
-            setCurrentTeamId(1);
+        if (currentTeamID == 10) {
+            setCurrentTeamId(20);
         } else {
-            setCurrentTeamId(0);
+            setCurrentTeamId(10);
         }
 
     }
