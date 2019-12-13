@@ -21,7 +21,7 @@ abstract public class CreatureGira45 extends Creature {
                 break;
             case "Sul":
                 y += stepSize;
-
+                break;
             case "Nordeste":
                 x += stepSize;
                 y -= stepSize;

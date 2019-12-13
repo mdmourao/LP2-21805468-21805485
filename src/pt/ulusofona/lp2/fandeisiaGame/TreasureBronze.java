@@ -8,4 +8,9 @@ public class TreasureBronze extends Treasure {
     public String getImagePNG(){
         return "box-mud.png";
     }
+
+    @Override
+    public String toString() {
+        return id +" | " + "bronze" + " @ (" + x + ", " + y + ")";
+    }
 }

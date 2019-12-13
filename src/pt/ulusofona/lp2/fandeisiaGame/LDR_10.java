@@ -1,8 +1,10 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-public class Resistencia_1 extends Team {
+public class LDR_10 extends Team{
 
-    Resistencia_1(){
+    LDR_10(){
+        id = 10;
         score = 0;
     }
+
 }

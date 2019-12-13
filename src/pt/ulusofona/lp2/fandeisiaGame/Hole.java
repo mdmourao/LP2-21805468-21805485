@@ -27,4 +27,9 @@ public class Hole {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return id +" | " + type + " @ (" + x + ", " + y + ")";
+    }
 }

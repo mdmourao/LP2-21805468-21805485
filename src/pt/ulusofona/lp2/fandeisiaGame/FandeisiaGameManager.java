@@ -7,17 +7,16 @@ import java.util.List;
 import java.util.Map;
 
 public class FandeisiaGameManager {
-    List<Creature> creatures;
-    List<Treasure> treasures;
-    List<Hole> holes;
-    Team ldr_0 = new LDR_0();
-    Team resistencia_1 = new Resistencia_1();
-    int initialTeamId;
-    int currentTeamId;
-    int rows;
-    int columns;
-    int treasuresFound;
-    int plays;
+    private List<Creature> creatures;
+    private List<Treasure> treasures;
+    private List<Hole> holes;
+    private Team ldr_10 = new LDR_10();
+    private Team resistencia_20 = new Resistencia_20();
+    private int currentTeamId;
+    private int rows;
+    private int columns;
+    private int treasuresFound;
+    private int plays;
 
     public FandeisiaGameManager() {
         creatures = new ArrayList<>();
@@ -25,7 +24,6 @@ public class FandeisiaGameManager {
         holes = new ArrayList<>();
         treasuresFound = 0;
         plays = 0;
-        initialTeamId = 10;
         currentTeamId = 10;
     }
 
@@ -162,6 +160,14 @@ public class FandeisiaGameManager {
 
     public int getNumberCreatures() {
         return creatures.size();
+    }
+
+    public int getNumberTreasures() {
+        return treasures.size();
+    }
+
+    public int getNumberHoles() {
+        return holes.size();
     }
 
     //TODO aplicar os checks do plafond
@@ -335,18 +341,18 @@ public class FandeisiaGameManager {
     public void addTreasure(int id, String type, int x, int y) {
         Treasure treasure = null;
         if (type.equals("silver")) {
-            treasure = new TreasureSilver(id,x,y);
+            treasure = new TreasureSilver(id, x, y);
             System.out.println(treasures.size() + "  Adicionei um tesouro silver");
         }
         if (type.equals("bronze")) {
-            treasure = new TreasureBronze(id,x,y);
+            treasure = new TreasureBronze(id, x, y);
             System.out.println(treasures.size() + "  Adicionei um tesouro bronze");
         }
-        if (type.equals("gold")){
-            treasure = new TreasureGold(id,x,y);
+        if (type.equals("gold")) {
+            treasure = new TreasureGold(id, x, y);
             System.out.println(treasures.size() + "  Adicionei um tesouro gold");
         }
-        if(treasure == null){
+        if (treasure == null) {
             return;
         }
         treasures.add(treasure);
@@ -360,9 +366,10 @@ public class FandeisiaGameManager {
 
     public void setInitialTeam(int teamId) {
         /*Indica qual das equipas vai jogar no primeiro turno do jogo.*/
-        this.initialTeamId = 10;
+        this.currentTeamId = teamId;
     }
 
+    //TODO função com bug, o while esta a dar loop infinito
     public boolean checkSaltarPorCima(Creature c) {
         if (c.getStepSize() == 1) {
             return true;
@@ -387,6 +394,7 @@ public class FandeisiaGameManager {
                 break;
             case "Sul":
                 yFinal += stepTotal;
+                break;
             case "Nordeste":
                 xFinal += stepTotal;
                 yFinal -= stepTotal;
@@ -417,6 +425,7 @@ public class FandeisiaGameManager {
                     break;
                 case "Sul":
                     y += step;
+                    break;
                 case "Nordeste":
                     x += step;
                     y -= step;
@@ -456,6 +465,11 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
         System.out.println("Estou a processar uma jogada");
+        System.out.println("Entrei Assim");
+        for (Creature c : creatures) {
+            System.out.println(c);
+        }
+        System.out.println("1");
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
         plays++;
         int step;
@@ -485,7 +499,7 @@ public class FandeisiaGameManager {
                     }
                     break;
                 case "Sul":
-                    if (c.getY() + step < rows && (getType(c.getX(), c.getY() + step) == null) && checkSaltarPorCima(c)) {
+                    if ((c.getY() + step < rows) && (getType(c.getX(), c.getY() + step) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
@@ -540,12 +554,25 @@ public class FandeisiaGameManager {
         } else {
             setCurrentTeamId(10);
         }
-
+        System.out.println("Sai Assim");
+        for (Creature c : creatures) {
+            System.out.println(c);
+        }
     }
 
     public List<Creature> getCreatures() {
         /*Devolve uma lista com todos os objectos Creature que existem no jogo.*/
         return creatures;
+    }
+
+    public List<Treasure> getTreausres() {
+        /*Devolve uma lista com todos os objectos Creature que existem no jogo.*/
+        return treasures;
+    }
+
+    public List<Hole> getHoles() {
+        /*Devolve uma lista com todos os objectos Creature que existem no jogo.*/
+        return holes;
     }
 
     public boolean gameIsOver() {
@@ -560,10 +587,10 @@ public class FandeisiaGameManager {
         for (Treasure t : treasures) {
             treasuresInGame++;
         }
-        if (ldr_0.getScore() + treasuresInGame < resistencia_1.getScore()) {
+        if (ldr_10.getScore() + treasuresInGame < resistencia_20.getScore()) {
             return true;
         }
-        if (resistencia_1.getScore() + treasuresInGame < ldr_0.getScore()) {
+        if (resistencia_20.getScore() + treasuresInGame < ldr_10.getScore()) {
             return true;
         }
         return false;
@@ -588,8 +615,8 @@ public class FandeisiaGameManager {
         ArrayList<String> results = new ArrayList<>();
         String welcome = "Welcome to FANDEISIA";
         String res = "";
-        String ldrPontos = "LDR: " + ldr_0.getScore();
-        String resiPontos = "RESISTENCIA: " + resistencia_1.getScore();
+        String ldrPontos = "LDR: " + ldr_10.getScore();
+        String resiPontos = "RESISTENCIA: " + resistencia_20.getScore();
         String turnos = "Nr. de Turnos jogados: " + plays;
         String hifen = "-----";
         String[] creAll = new String[creatures.size()];
@@ -598,7 +625,7 @@ public class FandeisiaGameManager {
             creAll[count] = c.getId() + " : " + c.getType() + " : " + c.getNrPontos();
             count++;
         }
-        if (ldr_0.getScore() == resistencia_1.getScore()) {
+        if (ldr_10.getScore() == resistencia_20.getScore()) {
             res = "Resultado: EMPATE";
             results.add(welcome);
             results.add(res);
@@ -611,7 +638,7 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (ldr_0.getScore() > resistencia_1.getScore()) {
+        if (ldr_10.getScore() > resistencia_20.getScore()) {
             res = "Resultado: Vitória da equipa LDR";
             results.add(welcome);
             results.add(res);
@@ -624,7 +651,7 @@ public class FandeisiaGameManager {
             }
         }
 
-        if (ldr_0.getScore() < resistencia_1.getScore()) {
+        if (ldr_10.getScore() < resistencia_20.getScore()) {
             res = "Resultado: Vitória da equipa RESISTENCIA";
             results.add(welcome);
             results.add(res);
@@ -684,20 +711,20 @@ public class FandeisiaGameManager {
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
         if (teamId == 0) {
-            return ldr_0.getScore();
+            return ldr_10.getScore();
         }
         if (teamId == 1) {
-            return resistencia_1.getScore();
+            return resistencia_20.getScore();
         }
         return 0;
     }
 
     public void addScore(int teamId, int valor) {
         if (teamId == 1) {
-            resistencia_1.addScore(valor);
+            resistencia_20.addScore(valor);
         }
         if (teamId == 0) {
-            ldr_0.addScore(valor);
+            ldr_10.addScore(valor);
         }
     }
 
