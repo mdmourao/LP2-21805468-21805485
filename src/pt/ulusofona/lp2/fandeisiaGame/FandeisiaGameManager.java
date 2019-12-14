@@ -369,7 +369,7 @@ public class FandeisiaGameManager {
         this.currentTeamId = teamId;
     }
 
-    //TODO função com bug, o while esta a dar loop infinito
+    //TODO
     public boolean checkSaltarPorCima(Creature c) {
         if (c.getStepSize() == 1) {
             return true;
@@ -415,32 +415,32 @@ public class FandeisiaGameManager {
         while (x != xFinal && y != yFinal) {
             switch (c.getOrientacao()) {
                 case "Este":
-                    x += step;
+                    x += 1;
                     break;
                 case "Oeste":
-                    x -= step;
+                    x -= 1;
                     break;
                 case "Norte":
-                    y -= step;
+                    y -= 1;
                     break;
                 case "Sul":
-                    y += step;
+                    y += 1;
                     break;
                 case "Nordeste":
-                    x += step;
-                    y -= step;
+                    x += 1;
+                    y -= 1;
                     break;
                 case "Sudeste":
-                    x += step;
-                    y += step;
+                    x += 1;
+                    y += 1;
                     break;
                 case "Sudoeste":
-                    x -= step;
-                    y += step;
+                    x -= 1;
+                    y += 1;
                     break;
                 case "Noroeste":
-                    x -= step;
-                    y -= step;
+                    x -= 1;
+                    y -= 1;
                     break;
             }
             if (getType(x, y) != null) {
@@ -454,7 +454,6 @@ public class FandeisiaGameManager {
                     creaturesPasseiPorCima++;
                 }
             }
-            step++;
         }
         if (c.possoSaltarPorcima(creaturesPasseiPorCima, buracosPasseiPorCima)) {
             return true;
