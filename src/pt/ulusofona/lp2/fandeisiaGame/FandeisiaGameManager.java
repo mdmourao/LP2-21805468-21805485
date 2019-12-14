@@ -155,7 +155,7 @@ public class FandeisiaGameManager {
     //TODO
     public String whoIsLordEder() {
         /*Deve devolver o nome completo do ​Lord Éder.*/
-        return "";
+        return "Éderzito António Macedo Lopes";
     }
 
     public int getNumberCreatures() {
