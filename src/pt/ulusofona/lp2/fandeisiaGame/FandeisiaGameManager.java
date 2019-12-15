@@ -16,14 +16,14 @@ public class FandeisiaGameManager {
     private int rows;
     private int columns;
     private int treasuresFound;
-    private int plays;
+    private int numeroJogadas;
 
     public FandeisiaGameManager() {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
         holes = new ArrayList<>();
         treasuresFound = 0;
-        plays = 0;
+        numeroJogadas = 0;
         currentTeamId = 10;
     }
 
@@ -138,6 +138,19 @@ public class FandeisiaGameManager {
         return 0;
     }
 
+    public int getCustoTotalCreaures(int teamID) {
+        /*Deve devolver o número total de moedas
+        fantásticas da equipa que tem o ID teamID.*/
+        int coinTotal = 0;
+        for(Creature c: creatures){
+            if(c.getIdEquipa() == teamID){
+                coinTotal += c.getCusto();
+            }
+        }
+        return coinTotal;
+
+    }
+
     //TODO
     public boolean saveGame(File fich) {
         /*Deve gravar o jogo actual para o ficheiro
@@ -170,13 +183,7 @@ public class FandeisiaGameManager {
         return holes.size();
     }
 
-    //TODO aplicar os checks do plafond
     public int startGame(String[] content, int rows, int columns) {
-        System.out.println("Recebemos esta String");
-        for (String c : content) {
-            System.out.println(c);
-        }
-        System.out.println("FIM");
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -302,11 +309,21 @@ public class FandeisiaGameManager {
             }
             addHole(id, x, y);
         }
-
         this.rows = rows;
         this.columns = columns;
         ordenarCreaturesById(this.creatures);
-        System.out.println("Acabei o startGame");
+        if(getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20)> 50){
+            clearAllData();
+            return 1;
+        }
+        if(getCustoTotalCreaures(10) > 50){
+            clearAllData();
+            return 2;
+        }
+        if(getCustoTotalCreaures(20)> 50){
+            clearAllData();
+            return 3;
+        }
         return 0;
     }
 
@@ -412,7 +429,7 @@ public class FandeisiaGameManager {
                 yFinal -= stepTotal;
                 break;
         }
-        while (x != xFinal && y != yFinal) {
+        while (x != xFinal || y != yFinal) {
             switch (c.getOrientacao()) {
                 case "Este":
                     x += 1;
@@ -470,7 +487,7 @@ public class FandeisiaGameManager {
         }
         System.out.println("1");
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
-        plays++;
+        numeroJogadas++;
         int step;
         for (Creature c : creatures) {
             String orientacao = c.getOrientacao();
@@ -579,7 +596,7 @@ public class FandeisiaGameManager {
         if (treasures.size() == 0) {
             return true;
         }
-        if (plays == 15 && treasuresFound == 0) {
+        if (numeroJogadas == 15 && treasuresFound == 0) {
             return true;
         }
         int treasuresInGame = 0;
@@ -616,7 +633,7 @@ public class FandeisiaGameManager {
         String res = "";
         String ldrPontos = "LDR: " + ldr_10.getScore();
         String resiPontos = "RESISTENCIA: " + resistencia_20.getScore();
-        String turnos = "Nr. de Turnos jogados: " + plays;
+        String turnos = "Nr. de Turnos jogados: " + numeroJogadas;
         String hifen = "-----";
         String[] creAll = new String[creatures.size()];
         int count = 0;
@@ -733,6 +750,12 @@ public class FandeisiaGameManager {
         for (Creature c : ordenado) {
             this.creatures.add(c);
         }
+    }
+
+    private void clearAllData(){
+        creatures = new ArrayList<>();
+        treasures = new ArrayList<>();
+        holes = new ArrayList<>();
     }
 }
 

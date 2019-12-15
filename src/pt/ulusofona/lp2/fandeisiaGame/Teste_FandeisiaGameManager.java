@@ -162,4 +162,379 @@ public class Teste_FandeisiaGameManager {
 
     }
 
+    @Test
+    public void test_Movimento45_Creature45() {
+        //Caso Normal
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[8];
+
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 10, x: 2, y: 1, orientation: Oeste";
+        content[2] = "id: 3, type: Elfo, teamId: 20, x: 5, y: 0, orientation: Sul";
+        content[3] = "id: 4, type: Elfo, teamId: 20, x: 6, y: 2, orientation: Norte";
+
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 2, y: 4, orientation: Nordeste";
+        content[5] = "id: 6, type: Elfo, teamId: 10, x: 2, y: 5, orientation: Sudeste";
+        content[6] = "id: 7, type: Elfo, teamId: 10, x: 4, y: 5, orientation: Sudoeste";
+        content[7] = "id: 8, type: Elfo, teamId: 10, x: 6, y: 5, orientation: Noroeste";
+
+
+        tester.startGame(content, 8, 8);
+        tester.processTurn();
+        List<Creature> creatures = tester.getCreatures();
+
+        assertEquals("Caso Normal Norte", "4 | Elfo | 20 | 0 @ (6, 0) Norte", creatures.get(3).toString());
+        assertEquals("Caso Normal Sul", "3 | Elfo | 20 | 0 @ (5, 2) Sul", creatures.get(2).toString());
+        assertEquals("Caso Normal Este", "1 | Elfo | 10 | 0 @ (2, 0) Este", creatures.get(0).toString());
+        assertEquals("Caso Normal Oeste", "2 | Elfo | 10 | 0 @ (0, 1) Oeste", creatures.get(1).toString());
+        assertEquals("Caso Normal Nordeste", "5 | Elfo | 10 | 0 @ (4, 2) Nordeste", creatures.get(4).toString());
+        assertEquals("Caso Normal Sudeste", "6 | Elfo | 10 | 0 @ (4, 7) Sudeste", creatures.get(5).toString());
+        assertEquals("Caso Normal Sudoeste", "7 | Elfo | 10 | 0 @ (2, 7) Sudoeste", creatures.get(6).toString());
+        assertEquals("Caso Normal Noroeste", "8 | Elfo | 10 | 0 @ (4, 3) Noroeste", creatures.get(7).toString());
+
+        tester = new FandeisiaGameManager();
+        content = new String[8];
+
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 7, y: 1, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 10, x: 0, y: 4, orientation: Oeste";
+        content[2] = "id: 3, type: Elfo, teamId: 10, x: 0, y: 7, orientation: Sul";
+        content[3] = "id: 4, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Norte";
+
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 7, y: 0, orientation: Nordeste";
+        content[5] = "id: 6, type: Elfo, teamId: 10, x: 7, y: 7, orientation: Sudeste";
+        content[6] = "id: 7, type: Elfo, teamId: 10, x: 1, y: 7, orientation: Sudoeste";
+        content[7] = "id: 8, type: Elfo, teamId: 10, x: 1, y: 0, orientation: Noroeste";
+
+
+        tester.startGame(content, 8, 8);
+        tester.processTurn();
+        creatures = tester.getCreatures();
+
+        assertEquals("Caso Margem Norte", "4 | Elfo | 10 | 0 @ (0, 0) Nordeste", creatures.get(3).toString());
+        assertEquals("Caso Margem Sul", "3 | Elfo | 10 | 0 @ (0, 7) Sudoeste", creatures.get(2).toString());
+        assertEquals("Caso Margem Este", "1 | Elfo | 10 | 0 @ (7, 1) Sudeste", creatures.get(0).toString());
+        assertEquals("Caso Margem Oeste", "2 | Elfo | 10 | 0 @ (0, 4) Noroeste", creatures.get(1).toString());
+        assertEquals("Caso Margem Nordeste", "5 | Elfo | 10 | 0 @ (7, 0) Este", creatures.get(4).toString());
+        assertEquals("Caso Margem Sudeste", "6 | Elfo | 10 | 0 @ (7, 7) Sul", creatures.get(5).toString());
+        assertEquals("Caso Margem Sudoeste", "7 | Elfo | 10 | 0 @ (1, 7) Oeste", creatures.get(6).toString());
+        assertEquals("Caso Margem Noroeste", "8 | Elfo | 10 | 0 @ (1, 0) Norte", creatures.get(7).toString());
+
+        tester = new FandeisiaGameManager();
+        content = new String[8];
+
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 10, x: 2, y: 0, orientation: Sul";
+        content[2] = "id: 3, type: Elfo, teamId: 10, x: 2, y: 2, orientation: Oeste";
+        content[3] = "id: 4, type: Elfo, teamId: 10, x: 0, y: 2, orientation: Norte";
+
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 5, y: 6, orientation: Nordeste";
+        content[5] = "id: 6, type: Elfo, teamId: 10, x: 7, y: 4, orientation: Sudoeste";
+        content[6] = "id: 7, type: Elfo, teamId: 10, x: 5, y: 4, orientation: Sudeste";
+        content[7] = "id: 8, type: Elfo, teamId: 10, x: 7, y: 6, orientation: Noroeste";
+
+
+        tester.startGame(content, 8, 8);
+        tester.processTurn();
+        creatures = tester.getCreatures();
+
+        assertEquals("Caso Rotacao Este (obstaculo: Creature)", "1 | Elfo | 10 | 0 @ (0, 0) Sudeste", creatures.get(0).toString());
+        assertEquals("Caso Rotacao Sul (obstaculo: Creature)", "2 | Elfo | 10 | 0 @ (2, 0) Sudoeste", creatures.get(1).toString());
+        assertEquals("Caso Rotacao Oeste (obstaculo: Creature)", "3 | Elfo | 10 | 0 @ (2, 2) Noroeste", creatures.get(2).toString());
+        assertEquals("Caso Rotacao Norte (obstaculo: Creature)", "4 | Elfo | 10 | 0 @ (0, 2) Nordeste", creatures.get(3).toString());
+
+        assertEquals("Caso Rotacao Nordeste (obstaculo: Creature)", "5 | Elfo | 10 | 0 @ (5, 6) Este", creatures.get(4).toString());
+        assertEquals("Caso Rotacao Sudoeste (obstaculo: Creature)", "6 | Elfo | 10 | 0 @ (7, 4) Oeste", creatures.get(5).toString());
+        assertEquals("Caso Rotacao Sudeste (obstaculo: Creature)", "7 | Elfo | 10 | 0 @ (5, 4) Sul", creatures.get(6).toString());
+        assertEquals("Caso Rotacao Noroeste (obstaculo: Creature)", "8 | Elfo | 10 | 0 @ (7, 6) Norte", creatures.get(7).toString());
+
+        tester = new FandeisiaGameManager();
+        content = new String[16];
+
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 10, x: 0, y: 2, orientation: Sul";
+        content[2] = "id: 3, type: Elfo, teamId: 10, x: 2, y: 1, orientation: Oeste";
+        content[3] = "id: 4, type: Elfo, teamId: 10, x: 2, y: 4, orientation: Norte";
+
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 3, y: 2, orientation: Nordeste";
+        content[5] = "id: 6, type: Elfo, teamId: 10, x: 6, y: 4, orientation: Sudoeste";
+        content[6] = "id: 7, type: Elfo, teamId: 10, x: 3, y: 0, orientation: Sudeste";
+        content[7] = "id: 8, type: Elfo, teamId: 10, x: 6, y: 6, orientation: Noroeste";
+
+        content[8] = "id: -100, type: hole, x: 2, y: 0";
+        content[9] = "id: -101, type: hole, x: 0, y: 4";
+        content[10] = "id: -102, type: hole, x: 0, y: 1";
+        content[11] = "id: -103, type: hole, x: 2, y: 2";
+        content[12] = "id: -104, type: hole, x: 5, y: 0";
+        content[13] = "id: -105, type: hole, x: 4, y: 6";
+        content[14] = "id: -106, type: hole, x: 5, y: 2";
+        content[15] = "id: -107, type: hole, x: 4, y: 4";
+
+        tester.startGame(content, 8, 8);
+        tester.processTurn();
+        creatures = tester.getCreatures();
+
+        assertEquals("Caso Rotacao Este (obstaculo: Hole)", "1 | Elfo | 10 | 0 @ (0, 0) Sudeste", creatures.get(0).toString());
+        assertEquals("Caso Rotacao Sul (obstaculo: Hole)", "2 | Elfo | 10 | 0 @ (0, 2) Sudoeste", creatures.get(1).toString());
+        assertEquals("Caso Rotacao Oeste (obstaculo: Hole)", "3 | Elfo | 10 | 0 @ (2, 1) Noroeste", creatures.get(2).toString());
+        assertEquals("Caso Rotacao Norte (obstaculo: Hole)", "4 | Elfo | 10 | 0 @ (2, 4) Nordeste", creatures.get(3).toString());
+
+        assertEquals("Caso Rotacao Nordeste (obstaculo: Hole)", "5 | Elfo | 10 | 0 @ (3, 2) Este", creatures.get(4).toString());
+        assertEquals("Caso Rotacao Sudoeste (obstaculo: Hole)", "6 | Elfo | 10 | 0 @ (6, 4) Oeste", creatures.get(5).toString());
+        assertEquals("Caso Rotacao Sudeste (obstaculo: Hole)", "7 | Elfo | 10 | 0 @ (3, 0) Sul", creatures.get(6).toString());
+        assertEquals("Caso Rotacao Noroeste (obstaculo: Hole)", "8 | Elfo | 10 | 0 @ (6, 6) Norte", creatures.get(7).toString());
+
+
+    }
+
+    @Test
+    public void test_plafondCreatures() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[11];
+        content[0] = "id: 1, type: Anao, teamId: 10, x: 0, y: 0, orientation: Este"; //1
+        content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 1, orientation: Este"; //3
+        content[2] = "id: 3, type: Dragao, teamId: 10, x: 0, y: 2, orientation: Este"; //9
+        content[3] = "id: 4, type: Gigante, teamId: 10, x: 0, y: 3, orientation: Este"; //5
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 0, y: 4, orientation: Este"; //5
+
+        content[5] = "id: 1, type: Anao, teamId: 20, x: 0, y: 0, orientation: Este"; //1
+        content[6] = "id: 2, type: Humano, teamId: 20, x: 0, y: 1, orientation: Este"; //3
+        content[7] = "id: 3, type: Dragao, teamId: 20, x: 0, y: 2, orientation: Este"; //9
+        content[8] = "id: 4, type: Gigante, teamId: 20, x: 0, y: 3, orientation: Este"; //5
+        content[9] = "id: 5, type: Elfo, teamId: 20, x: 0, y: 4, orientation: Este"; //5
+        content[10] = "id: 5, type: Anao, teamId: 20, x: 0, y: 6, orientation: Este"; //1
+
+        assertEquals("Return Start Game, caso normal", 0, tester.startGame(content, 6, 6));
+
+        assertEquals("Custo creatures Respeitado, normal (id:10)", 23, tester.getCustoTotalCreaures(10));
+        assertEquals("Custo creatures Respeitado, normal (id: 20)", 24, tester.getCustoTotalCreaures(20));
+
+        tester = new FandeisiaGameManager();
+        content = new String[23];
+
+        content[0] = "id: 1, type: Anao, teamId: 10, x: 0, y: 0, orientation: Este"; //1
+        content[1] = "id: 2, type: Anao, teamId: 10, x: 0, y: 1, orientation: Este"; //1
+        content[2] = "id: 3, type: Anao, teamId: 10, x: 0, y: 2, orientation: Este"; //1
+        content[3] = "id: 4, type: Anao, teamId: 10, x: 0, y: 3, orientation: Este"; //1
+        content[4] = "id: 5, type: Humano, teamId: 10, x: 0, y: 4, orientation: Este"; //3
+        content[5] = "id: 6, type: Humano, teamId: 10, x: 0, y: 5, orientation: Este"; //3
+        content[6] = "id: 7, type: Dragao, teamId: 10, x: 1, y: 0, orientation: Este"; //9
+        content[7] = "id: 8, type: Dragao, teamId: 10, x: 1, y: 1, orientation: Este"; //9
+        content[8] = "id: 9, type: Dragao, teamId: 10, x: 1, y: 2, orientation: Este"; //9
+        content[9] = "id: 10, type: Gigante, teamId: 10, x: 1, y: 3, orientation: Este"; //5
+        content[10] = "id: 11, type: Elfo, teamId: 10, x: 1, y: 4, orientation: Este"; //5
+        content[11] = "id: 12, type: Elfo, teamId: 10, x: 1, y: 5, orientation: Este"; //5
+
+        content[12] = "id: 13, type: Anao, teamId: 20, x: 2, y: 0, orientation: Este"; //1
+        content[13] = "id: 14, type: Humano, teamId: 20, x: 2, y: 1, orientation: Este"; //3
+        content[14] = "id: 15, type: Dragao, teamId: 20, x: 2, y: 2, orientation: Este"; //9
+        content[15] = "id: 16, type: Gigante, teamId: 20, x: 2, y: 3, orientation: Este"; //5
+        content[16] = "id: 17, type: Elfo, teamId: 20, x: 2, y: 4, orientation: Este"; //5
+        content[17] = "id: 18, type: Anao, teamId: 20, x: 2, y: 5, orientation: Este"; //1
+        content[18] = "id: 19, type: Dragao, teamId: 20, x: 3, y: 1, orientation: Este"; //9
+        content[19] = "id: 20, type: Dragao, teamId: 20, x: 3, y: 2, orientation: Este"; //9
+        content[20] = "id: 21, type: Gigante, teamId: 20, x: 3, y: 3, orientation: Este"; //5
+        content[21] = "id: 22, type: Gigante, teamId: 20, x: 3, y: 4, orientation: Este"; //5
+        content[22] = "id: 23, type: Gigante, teamId: 20, x: 3, y: 5, orientation: Este"; //5
+
+
+        assertEquals("Return Start Game, caso nenhum respeita", 1, tester.startGame(content, 6, 6));
+
+        tester = new FandeisiaGameManager();
+        content = new String[17];
+
+        content[0] = "id: 1, type: Anao, teamId: 10, x: 0, y: 0, orientation: Este"; //1
+        content[1] = "id: 2, type: Anao, teamId: 10, x: 0, y: 1, orientation: Este"; //1
+        content[2] = "id: 3, type: Anao, teamId: 10, x: 0, y: 2, orientation: Este"; //1
+        content[3] = "id: 4, type: Anao, teamId: 10, x: 0, y: 3, orientation: Este"; //1
+        content[4] = "id: 5, type: Humano, teamId: 10, x: 0, y: 4, orientation: Este"; //3
+        content[5] = "id: 6, type: Humano, teamId: 10, x: 0, y: 5, orientation: Este"; //3
+        content[6] = "id: 7, type: Dragao, teamId: 10, x: 1, y: 0, orientation: Este"; //9
+        content[7] = "id: 8, type: Dragao, teamId: 10, x: 1, y: 1, orientation: Este"; //9
+        content[8] = "id: 9, type: Dragao, teamId: 10, x: 1, y: 2, orientation: Este"; //9
+        content[9] = "id: 10, type: Gigante, teamId: 10, x: 1, y: 3, orientation: Este"; //5
+        content[10] = "id: 11, type: Elfo, teamId: 10, x: 1, y: 4, orientation: Este"; //5
+        content[11] = "id: 12, type: Elfo, teamId: 10, x: 1, y: 5, orientation: Este"; //5
+
+        content[12] = "id: 13, type: Anao, teamId: 20, x: 2, y: 0, orientation: Este"; //1
+        content[13] = "id: 14, type: Humano, teamId: 20, x: 2, y: 1, orientation: Este"; //3
+        content[14] = "id: 15, type: Dragao, teamId: 20, x: 2, y: 2, orientation: Este"; //9
+        content[15] = "id: 16, type: Gigante, teamId: 20, x: 2, y: 3, orientation: Este"; //5
+        content[16] = "id: 17, type: Elfo, teamId: 20, x: 2, y: 4, orientation: Este"; //5
+
+
+        assertEquals("Return Start Game, caso id 10 não respeita", 2, tester.startGame(content, 6, 6));
+
+        tester = new FandeisiaGameManager();
+        content = new String[18];
+
+        content[0] = "id: 1, type: Anao, teamId: 10, x: 0, y: 0, orientation: Este"; //1
+        content[1] = "id: 2, type: Anao, teamId: 10, x: 0, y: 1, orientation: Este"; //1
+        content[2] = "id: 3, type: Anao, teamId: 10, x: 0, y: 2, orientation: Este"; //1
+        content[3] = "id: 4, type: Anao, teamId: 10, x: 0, y: 3, orientation: Este"; //1
+        content[4] = "id: 5, type: Humano, teamId: 10, x: 0, y: 4, orientation: Este"; //3
+        content[5] = "id: 6, type: Humano, teamId: 10, x: 0, y: 5, orientation: Este"; //3
+        content[6] = "id: 7, type: Dragao, teamId: 10, x: 1, y: 0, orientation: Este"; //9
+
+        content[7] = "id: 13, type: Anao, teamId: 20, x: 2, y: 0, orientation: Este"; //1
+        content[8] = "id: 14, type: Humano, teamId: 20, x: 2, y: 1, orientation: Este"; //3
+        content[9] = "id: 15, type: Dragao, teamId: 20, x: 2, y: 2, orientation: Este"; //9
+        content[10] = "id: 16, type: Gigante, teamId: 20, x: 2, y: 3, orientation: Este"; //5
+        content[11] = "id: 17, type: Elfo, teamId: 20, x: 2, y: 4, orientation: Este"; //5
+        content[12] = "id: 18, type: Anao, teamId: 20, x: 2, y: 5, orientation: Este"; //1
+        content[13] = "id: 19, type: Dragao, teamId: 20, x: 3, y: 1, orientation: Este"; //9
+        content[14] = "id: 20, type: Dragao, teamId: 20, x: 3, y: 2, orientation: Este"; //9
+        content[15] = "id: 21, type: Gigante, teamId: 20, x: 3, y: 3, orientation: Este"; //5
+        content[16] = "id: 22, type: Gigante, teamId: 20, x: 3, y: 4, orientation: Este"; //5
+        content[17] = "id: 23, type: Gigante, teamId: 20, x: 3, y: 5, orientation: Este"; //5
+
+        assertEquals("Return Start Game, caso id 20 não respeita", 3, tester.startGame(content, 6, 6));
+
+    }
+
+    @Test
+    public void test_checkSaltarPorCimaGigante() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[1];
+        content[0] = "id: 1, type: Gigante, teamId: 10, x: 2, y: 3, orientation: Este";
+
+        tester.startGame(content, 8, 8);
+        List<Creature> c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima normal", true, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[3];
+        content[0] = "id: 1, type: Gigante, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: -100, type: hole, x: 3, y: 3";
+        content[2] = "id: -101, type: hole, x: 4, y: 3";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima com 2 holes", true, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[3];
+        content[0] = "id: 1, type: Gigante, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: 2, type: Humano, teamId: 20, x: 3, y: 3, orientation: Sul";
+        content[2] = "id: 3, type: Elfo, teamId: 20, x: 4, y: 3, orientation: Sul";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima com 2 creatures", true, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[3];
+        content[0] = "id: 1, type: Gigante, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: 2, type: Gigante, teamId: 20, x: 3, y: 3, orientation: Sul";
+        content[2] = "id: 3, type: Elfo, teamId: 20, x: 4, y: 3, orientation: Sul";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima tem um gigante", false, tester.checkSaltarPorCima(c.get(0)));
+
+
+    }
+
+    @Test
+    public void test_checkSaltarPorCimaHumano() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[1];
+        content[0] = "id: 1, type: Humano, teamId: 10, x: 2, y: 3, orientation: Este";
+
+        tester.startGame(content, 8, 8);
+        List<Creature> c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima normal", true, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[2];
+        content[0] = "id: 1, type: Humano, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: -100, type: hole, x: 3, y: 3";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima com 1 hole", false, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[2];
+        content[0] = "id: 1, type: Humano, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 20, x: 3, y: 3, orientation: Sul";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima com 1 creature", false, tester.checkSaltarPorCima(c.get(0)));
+
+    }
+
+    @Test
+    public void test_checkSaltarPorCimaAnao() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[1];
+        content[0] = "id: 1, type: Anao, teamId: 10, x: 2, y: 3, orientation: Este";
+
+        tester.startGame(content, 8, 8);
+        List<Creature> c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima normal", true, tester.checkSaltarPorCima(c.get(0)));
+    }
+
+    @Test
+    public void test_checkSaltarPorCimaElfo() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[1];
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 2, y: 3, orientation: Este";
+
+        tester.startGame(content, 8, 8);
+        List<Creature> c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima normal", true, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[2];
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: -100, type: hole, x: 3, y: 3";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima 1 hole", true, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[2];
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: 2, type: Humano, teamId: 20, x: 3, y: 3, orientation: Sul";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima com 1 creature", false, tester.checkSaltarPorCima(c.get(0)));
+    }
+
+    @Test
+    public void test_checkSaltarPorCimaDragao() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[1];
+        content[0] = "id: 1, type: Dragao, teamId: 10, x: 2, y: 3, orientation: Este";
+
+        tester.startGame(content, 8, 8);
+        List<Creature> c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima normal", true, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[3];
+        content[0] = "id: 1, type: Dragao, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: -100, type: hole, x: 3, y: 3";
+        content[2] = "id: -101, type: hole, x: 4, y: 3";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima com 2 holes", true, tester.checkSaltarPorCima(c.get(0)));
+
+        tester = new FandeisiaGameManager();
+        content = new String[3];
+        content[0] = "id: 1, type: Dragao, teamId: 10, x: 2, y: 3, orientation: Este";
+        content[1] = "id: 2, type: Humano, teamId: 20, x: 3, y: 3, orientation: Sul";
+        content[2] = "id: 3, type: Elfo, teamId: 20, x: 4, y: 3, orientation: Sul";
+
+        tester.startGame(content, 8, 8);
+        c = tester.getCreatures();
+        assertEquals("test_checkSaltarPorCima com 2 creatures", true, tester.checkSaltarPorCima(c.get(0)));
+
+    }
+
+
 }
