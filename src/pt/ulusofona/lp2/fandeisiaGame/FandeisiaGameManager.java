@@ -386,7 +386,6 @@ public class FandeisiaGameManager {
         this.currentTeamId = teamId;
     }
 
-    //TODO
     public boolean checkSaltarPorCima(Creature c) {
         if (c.getStepSize() == 1) {
             return true;
