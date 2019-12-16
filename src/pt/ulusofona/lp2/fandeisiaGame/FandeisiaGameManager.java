@@ -105,8 +105,8 @@ public class FandeisiaGameManager {
     //TODO (colocar mais inteligente)
     public Map<String, Integer> createComputerArmy() {
         Map<String, Integer> army = new HashMap<>();
-        army.put("Dragao", 1);
-        army.put("Anao", 1);
+        army.put("Dragão", 1);
+        army.put("Anão", 1);
         army.put("Elfo", 1);
         army.put("Gigante", 1);
         army.put("Humano", 1);
@@ -181,6 +181,7 @@ public class FandeisiaGameManager {
 
     //TODO
     public boolean loadGame(File fich) {
+        clearAllData();
         Scanner scanner;
         try {
             scanner = new Scanner(fich);
@@ -218,6 +219,7 @@ public class FandeisiaGameManager {
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
        Os argumentos rows e columns vão-nos indicar as dimensões do tabuleiro.*/
+       clearAllData();
         ArrayList<String[]> creatureInfo = new ArrayList<>();
         ArrayList<String[]> treasureInfo = new ArrayList<>();
         ArrayList<String[]> holeInfo = new ArrayList<>();
@@ -777,6 +779,11 @@ public class FandeisiaGameManager {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
         holes = new ArrayList<>();
+        ldr_10 = new LDR_10();
+        resistencia_20 = new Resistencia_20();
+        numeroJogadas = 0;
+        treasuresFound = 0;
+        currentTeamId = 10;
     }
 }
 
