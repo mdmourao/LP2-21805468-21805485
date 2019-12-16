@@ -130,9 +130,11 @@ public class FandeisiaGameManager {
 
     //TODO
     public int getCoinTotal(int teamID) {
-        /*Deve devolver o número total de moedas
-        fantásticas da equipa que tem o ID teamID.*/
-        return 0;
+        if(teamID == 10){
+            return ldr_10.getMoedas();
+        }else{
+            return resistencia_20.getMoedas();
+        }
     }
 
     public int getCustoTotalCreaures(int teamID) {
@@ -179,7 +181,6 @@ public class FandeisiaGameManager {
         return true;
     }
 
-    //TODO
     public boolean loadGame(File fich) {
         clearAllData();
         Scanner scanner;
@@ -224,7 +225,7 @@ public class FandeisiaGameManager {
                 } catch (NumberFormatException e) {
                     return false;
                 }
-                addCreaure(id,tipo,idEquipa,x,y,rdv,pontos);
+                addCreaure(id, tipo, idEquipa, x, y, rdv, pontos);
             }
             if (splitConteudo1.length == 6) {
                 String x1 = "" + splitConteudo1[4].charAt(1);
@@ -237,10 +238,10 @@ public class FandeisiaGameManager {
                 } catch (NumberFormatException e) {
                     return false;
                 }
-                if(tipo.equals("hole")){
-                    addHole(id,x,y);
-                }else{
-                    addTreasure(id,tipo,x,y);
+                if (tipo.equals("hole")) {
+                    addHole(id, x, y);
+                } else {
+                    addTreasure(id, tipo, x, y);
                 }
             }
             if (splitConteudo1.length == 2) {
@@ -282,7 +283,6 @@ public class FandeisiaGameManager {
         return true;
     }
 
-    //TODO
     public String whoIsLordEder() {
         /*Deve devolver o nome completo do ​Lord Éder.*/
         return "Éderzito António Macedo Lopes";
@@ -441,6 +441,9 @@ public class FandeisiaGameManager {
         if (getCustoTotalCreaures(20) > 50) {
             return 3;
         }
+        //TODO implementar isto melhor
+        ldr_10.setMoedas(50 - getCustoTotalCreaures(10));
+        resistencia_20.setMoedas(50 - getCustoTotalCreaures(20));
         return 0;
     }
 
@@ -830,8 +833,8 @@ public class FandeisiaGameManager {
                 return treasure.getId();
             }
         }
-        for(Hole h: holes){
-            if(h.getX() == x && h.getY() == y){
+        for (Hole h : holes) {
+            if (h.getX() == x && h.getY() == y) {
                 return h.getId();
             }
         }
