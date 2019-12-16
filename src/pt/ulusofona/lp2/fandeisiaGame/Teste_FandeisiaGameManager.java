@@ -13,7 +13,7 @@ public class Teste_FandeisiaGameManager {
     @Test
     public void test_CriacaoDosObjetosContent() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
-        String[] content = new String[20];
+        String[] content = new String[21];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
         content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 1, orientation: Este";
         content[2] = "id: 3, type: Dragão, teamId: 10, x: 0, y: 2, orientation: Este";
@@ -34,15 +34,16 @@ public class Teste_FandeisiaGameManager {
         content[15] = "id: -2, type: bronze, x: 2, y: 2";
         content[16] = "id: -3, type: gold, x: 2, y: 3";
 
-        content[17] = "id: -102, type: hole, x: 3, y: 1";
-        content[18] = "id: -103, type: hole, x: 3, y: 2";
-        content[19] = "id: -101, type: hole, x: 3, y: 3";
+        content[17] = "id: -100, type: hole, x: 3, y: 1";
+        content[18] = "id: -101, type: hole, x: 3, y: 2";
+        content[19] = "id: -102, type: hole, x: 3, y: 3";
+        content[20] = "id: -103, type: hole, x: 3, y: 4";
 
         tester.startGame(content, 6, 6);
 
         assertEquals("Tamanho Creatures", 14, tester.getNumberCreatures());
         assertEquals("Tamanho Treasures", 3, tester.getNumberTreasures());
-        assertEquals("Tamanho Holes", 3, tester.getNumberHoles());
+        assertEquals("Tamanho Holes", 4, tester.getNumberHoles());
 
         List<Creature> creatures = tester.getCreatures();
         assertEquals("1 | Anão | 10 | 0 @ (0, 0) Este", creatures.get(0).toString());
@@ -66,9 +67,10 @@ public class Teste_FandeisiaGameManager {
         assertEquals("-3 | gold @ (2, 3)", treasures.get(2).toString());
 
         List<Hole> holes = tester.getHoles();
-        assertEquals("-102 | hole @ (3, 1)", holes.get(0).toString());
-        assertEquals("-103 | hole @ (3, 2)", holes.get(1).toString());
-        assertEquals("-101 | hole @ (3, 3)", holes.get(2).toString());
+        assertEquals("-100 | hole @ (3, 1)", holes.get(0).toString());
+        assertEquals("-101 | hole @ (3, 2)", holes.get(1).toString());
+        assertEquals("-102 | hole @ (3, 3)", holes.get(2).toString());
+        assertEquals("-103 | hole @ (3, 4)", holes.get(3).toString());
 
 
     }

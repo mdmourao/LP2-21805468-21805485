@@ -305,7 +305,6 @@ public class FandeisiaGameManager {
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
        Os argumentos rows e columns vão-nos indicar as dimensões do tabuleiro.*/
-        clearAllData();
         ArrayList<String[]> creatureInfo = new ArrayList<>();
         ArrayList<String[]> treasureInfo = new ArrayList<>();
         ArrayList<String[]> holeInfo = new ArrayList<>();
