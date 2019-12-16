@@ -3,9 +3,9 @@ package pt.ulusofona.lp2.fandeisiaGame;
 import java.util.List;
 
 abstract public class Team {
-    int id;
-    int score;
-    int moedas;
+    protected int id;
+    protected int score;
+    protected int moedas;
 
     Team() {
         moedas = 50;
@@ -26,6 +26,8 @@ abstract public class Team {
     public void addScore(int valorAdicionar) {
         score += valorAdicionar;
     }
+
+
 
 }
 

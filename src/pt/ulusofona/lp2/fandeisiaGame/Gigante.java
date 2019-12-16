@@ -6,6 +6,12 @@ public class Gigante extends CreatureGira90 {
         custo = 5;
     }
 
+    public Gigante(int id, String tipo, int idEquipa, int x, int y, String orientacao, int nrPontos) {
+        super(id, tipo, idEquipa, x, y, orientacao, 3);
+        custo = 5;
+        this.nrPontos = nrPontos;
+    }
+
     public String getImagePNG() {
         return null;
     }

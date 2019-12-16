@@ -1,10 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class FandeisiaGameManager {
     private List<Creature> creatures;
@@ -151,18 +148,48 @@ public class FandeisiaGameManager {
 
     }
 
-    //TODO
-    public boolean saveGame(File fich) {
+    public boolean saveGame(File fich) throws IOException {
         /*Deve gravar o jogo actual para o ficheiro
         indicado no argumento.*/
-        return false;
+        //Write Content
+        FileWriter writer = new FileWriter(fich);
+        for(Creature c: creatures){
+            writer.write(c.toString() + "\n");
+        }
+        for(Treasure t : treasures){
+            writer.write(t.toString() + "\n");
+        }
+        for(Hole h: holes){
+            writer.write(h.toString() + "\n");
+        }
+        writer.write("\n");
+        writer.write("Pontos 10 " + ldr_10.getScore()+ "\n");
+        writer.write("Pontos 20 " + resistencia_20.getScore()+ "\n");
+        writer.write("treasuresFound " + treasuresFound+ "\n");
+        writer.write("numeroJogadas " + numeroJogadas+ "\n");
+        writer.write("rows " +rows+ "\n");
+        writer.write("columns "+columns+ "\n");
+        writer.write("Moedas 10 " + ldr_10.getMoedas()+ "\n");
+        writer.write("Moedas 20 " + resistencia_20.getMoedas()+ "\n");
+        writer.write("currentTeamId " + currentTeamId+ "\n");
+        writer.close();
+        return true;
     }
 
     //TODO
     public boolean loadGame(File fich) {
-        /*Deve começar um jogo a partir do ficheiro
-        indicado no argumento.*/
-        return false;
+        Scanner scanner;
+        try{
+            scanner = new Scanner(fich);
+            while(scanner.hasNextLine()){
+                System.out.println(scanner.nextLine());
+            }
+            scanner.close();
+
+        }catch (FileNotFoundException e){
+            return false;
+        }
+        return true;
     }
 
     //TODO
