@@ -163,14 +163,14 @@ public class FandeisiaGameManager {
                 writer.write(h.toString() + "\n");
             }
             writer.write("\n");
-            writer.write("Pontos 10 " + ldr_10.getScore() + "\n");
-            writer.write("Pontos 20 " + resistencia_20.getScore() + "\n");
+            writer.write("Pontos10 " + ldr_10.getScore() + "\n");
+            writer.write("Pontos20 " + resistencia_20.getScore() + "\n");
             writer.write("treasuresFound " + treasuresFound + "\n");
             writer.write("numeroJogadas " + numeroJogadas + "\n");
             writer.write("rows " + rows + "\n");
             writer.write("columns " + columns + "\n");
-            writer.write("Moedas 10 " + ldr_10.getMoedas() + "\n");
-            writer.write("Moedas 20 " + resistencia_20.getMoedas() + "\n");
+            writer.write("Moedas10 " + ldr_10.getMoedas() + "\n");
+            writer.write("Moedas20 " + resistencia_20.getMoedas() + "\n");
             writer.write("currentTeamId " + currentTeamId + "\n");
             writer.close();
         } catch (IOException e) {
@@ -183,15 +183,101 @@ public class FandeisiaGameManager {
     public boolean loadGame(File fich) {
         clearAllData();
         Scanner scanner;
+        ArrayList<String> conteudo = new ArrayList<>();
+        String[] splitConteudo1;
+        String[] splitConteudo2;
+        String[] splitConteudo1a;
+        String[] splitConteudo2a;
+        int id;
+        String tipo;
+        int idEquipa;
+        int pontos;
+        int x;
+        int y;
+        String rdv;
         try {
             scanner = new Scanner(fich);
             while (scanner.hasNextLine()) {
-                System.out.println(scanner.nextLine());
+                conteudo.add(scanner.nextLine());
             }
             scanner.close();
 
         } catch (FileNotFoundException e) {
             return false;
+        }
+        for (String s : conteudo) {
+            System.out.println(s);
+            splitConteudo1 = s.split(" ", 7);
+            if (splitConteudo1.length == 7) {
+                splitConteudo2 = splitConteudo1[6].split(" ", 6);
+                String x1 = "" + splitConteudo2[2].charAt(1);
+                String y1 = "" + splitConteudo2[3].charAt(0);
+
+                try {
+                    id = Integer.parseInt(splitConteudo1[0]);
+                    tipo = splitConteudo1[2];
+                    idEquipa = Integer.parseInt(splitConteudo1[4]);
+                    pontos = Integer.parseInt(splitConteudo2[0]);
+                    x = Integer.parseInt(x1);
+                    y = Integer.parseInt(y1);
+                    rdv = splitConteudo2[4];
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+                addCreaure(id,tipo,idEquipa,x,y,rdv,pontos);
+            }
+            if (splitConteudo1.length == 6) {
+                String x1 = "" + splitConteudo1[4].charAt(1);
+                String y1 = "" + splitConteudo1[5].charAt(0);
+                try {
+                    id = Integer.parseInt(splitConteudo1[0]);
+                    tipo = splitConteudo1[2];
+                    x = Integer.parseInt(x1);
+                    y = Integer.parseInt(y1);
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+                if(tipo.equals("hole")){
+                    addHole(id,x,y);
+                }else{
+                    addTreasure(id,tipo,x,y);
+                }
+            }
+            if (splitConteudo1.length == 2) {
+                try {
+                    switch (splitConteudo1[0]) {
+                        case "Pontos10":
+                            ldr_10.setScore(Integer.parseInt(splitConteudo1[1]));
+                            break;
+                        case "Pontos20":
+                            resistencia_20.setScore(Integer.parseInt(splitConteudo1[1]));
+                            break;
+                        case "treasuresFound":
+                            treasuresFound = Integer.parseInt(splitConteudo1[1]);
+                            break;
+                        case "numeroJogadas":
+                            numeroJogadas = Integer.parseInt(splitConteudo1[1]);
+                            break;
+                        case "rows":
+                            rows = Integer.parseInt(splitConteudo1[1]);
+                            break;
+                        case "columns":
+                            columns = Integer.parseInt(splitConteudo1[1]);
+                            break;
+                        case "Moedas10":
+                            ldr_10.setMoedas(Integer.parseInt(splitConteudo1[1]));
+                            break;
+                        case "Moedas20":
+                            resistencia_20.setMoedas(Integer.parseInt(splitConteudo1[1]));
+                            break;
+                        case "currentTeamId":
+                            currentTeamId = Integer.parseInt(splitConteudo1[1]);
+                            break;
+                    }
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            }
         }
         return true;
     }
@@ -378,6 +464,34 @@ public class FandeisiaGameManager {
         }
         if (tipo.equals("Anão")) {
             creature = new Anao(id, tipo, teamId, x, y, orientation);
+            System.out.println(creatures.size() + "  Adicionei um Anao");
+        }
+        if (creature == null) {
+            return;
+        }
+        creatures.add(creature);
+    }
+
+    public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation, int nrPontos) {
+        Creature creature = null;
+        if (tipo.equals("Dragão")) {
+            creature = new Dragao(id, tipo, teamId, x, y, orientation, nrPontos);
+            System.out.println(creatures.size() + "  Adicionei um Dragao");
+        }
+        if (tipo.equals("Elfo")) {
+            creature = new Elfo(id, tipo, teamId, x, y, orientation, nrPontos);
+            System.out.println(creatures.size() + "  Adicionei um Elfo");
+        }
+        if (tipo.equals("Gigante")) {
+            creature = new Gigante(id, tipo, teamId, x, y, orientation, nrPontos);
+            System.out.println(creatures.size() + "  Adicionei um Gigante");
+        }
+        if (tipo.equals("Humano")) {
+            creature = new Humano(id, tipo, teamId, x, y, orientation, nrPontos);
+            System.out.println(creatures.size() + "  Adicionei um Humano");
+        }
+        if (tipo.equals("Anão")) {
+            creature = new Anao(id, tipo, teamId, x, y, orientation, nrPontos);
             System.out.println(creatures.size() + "  Adicionei um Anao");
         }
         if (creature == null) {

@@ -11,6 +11,18 @@ abstract public class Team {
         moedas = 50;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setMoedas(int moedas) {
+        this.moedas = moedas;
+    }
+
     public int getScore() {
         return score;
     }
