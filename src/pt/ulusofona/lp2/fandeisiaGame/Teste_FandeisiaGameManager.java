@@ -13,7 +13,7 @@ public class Teste_FandeisiaGameManager {
     @Test
     public void test_CriacaoDosObjetosContent() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
-        String[] content = new String[19];
+        String[] content = new String[20];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
         content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 1, orientation: Este";
         content[2] = "id: 3, type: Dragão, teamId: 10, x: 0, y: 2, orientation: Este";
@@ -36,12 +36,13 @@ public class Teste_FandeisiaGameManager {
 
         content[17] = "id: -102, type: hole, x: 3, y: 1";
         content[18] = "id: -103, type: hole, x: 3, y: 2";
+        content[19] = "id: -101, type: hole, x: 3, y: 3";
 
         tester.startGame(content, 6, 6);
 
         assertEquals("Tamanho Creatures", 14, tester.getNumberCreatures());
         assertEquals("Tamanho Treasures", 3, tester.getNumberTreasures());
-        assertEquals("Tamanho Holes", 2, tester.getNumberHoles());
+        assertEquals("Tamanho Holes", 3, tester.getNumberHoles());
 
         List<Creature> creatures = tester.getCreatures();
         assertEquals("1 | Anão | 10 | 0 @ (0, 0) Este", creatures.get(0).toString());
@@ -67,6 +68,7 @@ public class Teste_FandeisiaGameManager {
         List<Hole> holes = tester.getHoles();
         assertEquals("-102 | hole @ (3, 1)", holes.get(0).toString());
         assertEquals("-103 | hole @ (3, 2)", holes.get(1).toString());
+        assertEquals("-101 | hole @ (3, 3)", holes.get(2).toString());
 
 
     }

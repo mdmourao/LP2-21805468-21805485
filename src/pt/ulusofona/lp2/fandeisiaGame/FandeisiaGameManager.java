@@ -219,7 +219,7 @@ public class FandeisiaGameManager {
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
        Os argumentos rows e columns vão-nos indicar as dimensões do tabuleiro.*/
-       clearAllData();
+        clearAllData();
         ArrayList<String[]> creatureInfo = new ArrayList<>();
         ArrayList<String[]> treasureInfo = new ArrayList<>();
         ArrayList<String[]> holeInfo = new ArrayList<>();
@@ -324,12 +324,13 @@ public class FandeisiaGameManager {
         }
 
         for (String[] s3 : holeInfo) {
-            int id = 0;
+            int id = 1;
             int x = 0;
             int y = 0;
             try {
                 id = Integer.parseInt(s3[0]);
             } catch (NumberFormatException e) {
+                id = 2;
             }
             try {
                 x = Integer.parseInt(s3[2]);
