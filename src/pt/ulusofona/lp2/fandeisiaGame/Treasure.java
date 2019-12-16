@@ -4,6 +4,7 @@ abstract public class Treasure {
     protected int id;
     protected int x;
     protected int y;
+    protected int pontos;
 
     public Treasure(int id, int x, int y) {
         this.id = id;
@@ -23,6 +24,10 @@ abstract public class Treasure {
 
     public int getY() {
         return y;
+    }
+
+    public int getPontos() {
+        return pontos;
     }
 
 }

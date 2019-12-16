@@ -139,8 +139,8 @@ public class FandeisiaGameManager {
         /*Deve devolver o número total de moedas
         fantásticas da equipa que tem o ID teamID.*/
         int coinTotal = 0;
-        for(Creature c: creatures){
-            if(c.getIdEquipa() == teamID){
+        for (Creature c : creatures) {
+            if (c.getIdEquipa() == teamID) {
                 coinTotal += c.getCusto();
             }
         }
@@ -148,45 +148,48 @@ public class FandeisiaGameManager {
 
     }
 
-    public boolean saveGame(File fich) throws IOException {
+    public boolean saveGame(File fich) {
         /*Deve gravar o jogo actual para o ficheiro
         indicado no argumento.*/
-        //Write Content
-        FileWriter writer = new FileWriter(fich);
-        for(Creature c: creatures){
-            writer.write(c.toString() + "\n");
+        try {
+            FileWriter writer = new FileWriter(fich);
+            for (Creature c : creatures) {
+                writer.write(c.toString() + "\n");
+            }
+            for (Treasure t : treasures) {
+                writer.write(t.toString() + "\n");
+            }
+            for (Hole h : holes) {
+                writer.write(h.toString() + "\n");
+            }
+            writer.write("\n");
+            writer.write("Pontos 10 " + ldr_10.getScore() + "\n");
+            writer.write("Pontos 20 " + resistencia_20.getScore() + "\n");
+            writer.write("treasuresFound " + treasuresFound + "\n");
+            writer.write("numeroJogadas " + numeroJogadas + "\n");
+            writer.write("rows " + rows + "\n");
+            writer.write("columns " + columns + "\n");
+            writer.write("Moedas 10 " + ldr_10.getMoedas() + "\n");
+            writer.write("Moedas 20 " + resistencia_20.getMoedas() + "\n");
+            writer.write("currentTeamId " + currentTeamId + "\n");
+            writer.close();
+        } catch (IOException e) {
+            return false;
         }
-        for(Treasure t : treasures){
-            writer.write(t.toString() + "\n");
-        }
-        for(Hole h: holes){
-            writer.write(h.toString() + "\n");
-        }
-        writer.write("\n");
-        writer.write("Pontos 10 " + ldr_10.getScore()+ "\n");
-        writer.write("Pontos 20 " + resistencia_20.getScore()+ "\n");
-        writer.write("treasuresFound " + treasuresFound+ "\n");
-        writer.write("numeroJogadas " + numeroJogadas+ "\n");
-        writer.write("rows " +rows+ "\n");
-        writer.write("columns "+columns+ "\n");
-        writer.write("Moedas 10 " + ldr_10.getMoedas()+ "\n");
-        writer.write("Moedas 20 " + resistencia_20.getMoedas()+ "\n");
-        writer.write("currentTeamId " + currentTeamId+ "\n");
-        writer.close();
         return true;
     }
 
     //TODO
     public boolean loadGame(File fich) {
         Scanner scanner;
-        try{
+        try {
             scanner = new Scanner(fich);
-            while(scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 System.out.println(scanner.nextLine());
             }
             scanner.close();
 
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             return false;
         }
         return true;
@@ -339,15 +342,15 @@ public class FandeisiaGameManager {
         this.rows = rows;
         this.columns = columns;
         ordenarCreaturesById(this.creatures);
-        if(getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20)> 50){
+        if (getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20) > 50) {
             clearAllData();
             return 1;
         }
-        if(getCustoTotalCreaures(10) > 50){
+        if (getCustoTotalCreaures(10) > 50) {
             clearAllData();
             return 2;
         }
-        if(getCustoTotalCreaures(20)> 50){
+        if (getCustoTotalCreaures(20) > 50) {
             clearAllData();
             return 3;
         }
@@ -778,7 +781,7 @@ public class FandeisiaGameManager {
         }
     }
 
-    private void clearAllData(){
+    private void clearAllData() {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
         holes = new ArrayList<>();
