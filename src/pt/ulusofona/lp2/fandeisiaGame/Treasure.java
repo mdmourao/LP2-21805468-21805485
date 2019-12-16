@@ -14,6 +14,7 @@ abstract public class Treasure {
 
     abstract public String getImagePNG();
 
+
     public int getId() {
         return id;
     }

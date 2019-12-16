@@ -28,6 +28,10 @@ public class Hole {
         return y;
     }
 
+    public String getImagePNG(){
+        return "black-box.png";
+    }
+
     @Override
     public String toString() {
         return id +" | " + type + " @ (" + x + ", " + y + ")";

@@ -301,6 +301,7 @@ public class FandeisiaGameManager {
     }
 
     public int startGame(String[] content, int rows, int columns) {
+        clearAllData();
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -827,6 +828,11 @@ public class FandeisiaGameManager {
         for (Treasure treasure : treasures) {
             if (treasure.getX() == x && treasure.getY() == y) {
                 return treasure.getId();
+            }
+        }
+        for(Hole h: holes){
+            if(h.getX() == x && h.getY() == y){
+                return h.getId();
             }
         }
         return 0;
