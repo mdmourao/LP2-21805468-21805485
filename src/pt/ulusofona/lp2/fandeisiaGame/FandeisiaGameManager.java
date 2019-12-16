@@ -410,13 +410,12 @@ public class FandeisiaGameManager {
         }
 
         for (String[] s3 : holeInfo) {
-            int id = 1;
+            int id = 0;
             int x = 0;
             int y = 0;
             try {
                 id = Integer.parseInt(s3[0]);
             } catch (NumberFormatException e) {
-                id = 2;
             }
             try {
                 x = Integer.parseInt(s3[2]);

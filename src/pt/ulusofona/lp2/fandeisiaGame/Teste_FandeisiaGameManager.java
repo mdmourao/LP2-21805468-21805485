@@ -69,7 +69,7 @@ public class Teste_FandeisiaGameManager {
         assertEquals("-102 | hole @ (3, 1)", holes.get(0).toString());
         assertEquals("-103 | hole @ (3, 2)", holes.get(1).toString());
         assertEquals("-101 | hole @ (3, 3)", holes.get(2).toString());
-
+        assertEquals(-101,holes.get(2).getId());
 
     }
 
