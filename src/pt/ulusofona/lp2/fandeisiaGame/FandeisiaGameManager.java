@@ -342,6 +342,7 @@ public class FandeisiaGameManager {
         this.rows = rows;
         this.columns = columns;
         ordenarCreaturesById(this.creatures);
+
         if (getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20) > 50) {
             clearAllData();
             return 1;
@@ -510,11 +511,6 @@ public class FandeisiaGameManager {
 
     public void processTurn() {
         System.out.println("Estou a processar uma jogada");
-        System.out.println("Entrei Assim");
-        for (Creature c : creatures) {
-            System.out.println(c);
-        }
-        System.out.println("1");
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
         numeroJogadas++;
         int step;
@@ -583,10 +579,10 @@ public class FandeisiaGameManager {
         for (Creature c : creatures) {
             for (Treasure t : treasures) {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
-                    addScore(c.getIdEquipa(), 1);
+                    addScore(c.getIdEquipa(), t.getPontos());
                     treasuresFound++;
                     treasuresRemove.add(t);
-                    c.addNrPontos(1);
+                    c.addNrPontos(t.getPontos());
                 }
             }
         }
@@ -598,10 +594,6 @@ public class FandeisiaGameManager {
             setCurrentTeamId(20);
         } else {
             setCurrentTeamId(10);
-        }
-        System.out.println("Sai Assim");
-        for (Creature c : creatures) {
-            System.out.println(c);
         }
     }
 
