@@ -6,9 +6,8 @@ public class TreasureBronze extends Treasure {
         this.pontos = 2;
     }
 
-    @Override
     public String getImagePNG(){
-        return "bronze-box.png";
+        return "box-mud.png";
     }
 
     @Override

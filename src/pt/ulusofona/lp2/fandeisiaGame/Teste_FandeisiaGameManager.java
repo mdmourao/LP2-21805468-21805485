@@ -69,7 +69,7 @@ public class Teste_FandeisiaGameManager {
         assertEquals("-102 | hole @ (3, 1)", holes.get(0).toString());
         assertEquals("-103 | hole @ (3, 2)", holes.get(1).toString());
         assertEquals("-101 | hole @ (3, 3)", holes.get(2).toString());
-        assertEquals(-101,holes.get(2).getId());
+
 
     }
 
@@ -542,7 +542,7 @@ public class Teste_FandeisiaGameManager {
 
     @Test
     public void test_saveGameANDLoadGame() throws IOException {
-        File file = new File("C:\\Users\\marti\\IdeaProjects\\LP2-21805468-21805485\\Files\\fandeisia.txt");
+        File file = new File("D:\\PROGRAMAÇÃO\\progs lp2\\LP2-21805468-21805485\\Files\\ola1.txt");
 
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[19];
@@ -571,6 +571,7 @@ public class Teste_FandeisiaGameManager {
         tester.startGame(content,8,8);
         tester.processTurn();
         tester.saveGame(file);
+        System.out.println("File:");
         tester.loadGame(file);
     }
 

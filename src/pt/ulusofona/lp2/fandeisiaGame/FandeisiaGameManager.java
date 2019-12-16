@@ -148,38 +148,9 @@ public class FandeisiaGameManager {
 
     }
 
-    public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation, int nrPontos) {
-        Creature creature = null;
-        if (tipo.equals("Dragão")) {
-            creature = new Dragao(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Dragao");
-        }
-        if (tipo.equals("Elfo")) {
-            creature = new Elfo(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Elfo");
-        }
-        if (tipo.equals("Gigante")) {
-            creature = new Gigante(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Gigante");
-        }
-        if (tipo.equals("Humano")) {
-            creature = new Humano(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Humano");
-        }
-        if (tipo.equals("Anão")) {
-            creature = new Anao(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Anao");
-        }
-        if (creature == null) {
-            return;
-        }
-        creatures.add(creature);
-    }
-
     public boolean saveGame(File fich) {
         /*Deve gravar o jogo actual para o ficheiro
         indicado no argumento.*/
-
         try {
             FileWriter writer = new FileWriter(fich);
             for (Creature c : creatures) {
@@ -208,6 +179,7 @@ public class FandeisiaGameManager {
         return true;
     }
 
+    //TODO
     public boolean loadGame(File fich) {
         clearAllData();
         Scanner scanner;
@@ -226,7 +198,6 @@ public class FandeisiaGameManager {
         try {
             scanner = new Scanner(fich);
             while (scanner.hasNextLine()) {
-                System.out.println(scanner.nextLine());
                 conteudo.add(scanner.nextLine());
             }
             scanner.close();
@@ -310,7 +281,8 @@ public class FandeisiaGameManager {
         }
         return true;
     }
-    //TODO?
+
+    //TODO
     public String whoIsLordEder() {
         /*Deve devolver o nome completo do ​Lord Éder.*/
         return "Éderzito António Macedo Lopes";
@@ -329,7 +301,6 @@ public class FandeisiaGameManager {
     }
 
     public int startGame(String[] content, int rows, int columns) {
-
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -439,12 +410,13 @@ public class FandeisiaGameManager {
         }
 
         for (String[] s3 : holeInfo) {
-            int id = 0;
+            int id = 1;
             int x = 0;
             int y = 0;
             try {
                 id = Integer.parseInt(s3[0]);
             } catch (NumberFormatException e) {
+                id = 2;
             }
             try {
                 x = Integer.parseInt(s3[2]);
@@ -459,6 +431,7 @@ public class FandeisiaGameManager {
         this.rows = rows;
         this.columns = columns;
         ordenarCreaturesById(this.creatures);
+
         if (getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20) > 50) {
             return 1;
         }
@@ -491,6 +464,34 @@ public class FandeisiaGameManager {
         }
         if (tipo.equals("Anão")) {
             creature = new Anao(id, tipo, teamId, x, y, orientation);
+            System.out.println(creatures.size() + "  Adicionei um Anao");
+        }
+        if (creature == null) {
+            return;
+        }
+        creatures.add(creature);
+    }
+
+    public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation, int nrPontos) {
+        Creature creature = null;
+        if (tipo.equals("Dragão")) {
+            creature = new Dragao(id, tipo, teamId, x, y, orientation, nrPontos);
+            System.out.println(creatures.size() + "  Adicionei um Dragao");
+        }
+        if (tipo.equals("Elfo")) {
+            creature = new Elfo(id, tipo, teamId, x, y, orientation, nrPontos);
+            System.out.println(creatures.size() + "  Adicionei um Elfo");
+        }
+        if (tipo.equals("Gigante")) {
+            creature = new Gigante(id, tipo, teamId, x, y, orientation, nrPontos);
+            System.out.println(creatures.size() + "  Adicionei um Gigante");
+        }
+        if (tipo.equals("Humano")) {
+            creature = new Humano(id, tipo, teamId, x, y, orientation, nrPontos);
+            System.out.println(creatures.size() + "  Adicionei um Humano");
+        }
+        if (tipo.equals("Anão")) {
+            creature = new Anao(id, tipo, teamId, x, y, orientation, nrPontos);
             System.out.println(creatures.size() + "  Adicionei um Anao");
         }
         if (creature == null) {
