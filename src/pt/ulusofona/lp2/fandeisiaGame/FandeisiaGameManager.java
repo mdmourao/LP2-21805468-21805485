@@ -347,15 +347,12 @@ public class FandeisiaGameManager {
         ordenarCreaturesById(this.creatures);
 
         if (getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20) > 50) {
-            clearAllData();
             return 1;
         }
         if (getCustoTotalCreaures(10) > 50) {
-            clearAllData();
             return 2;
         }
         if (getCustoTotalCreaures(20) > 50) {
-            clearAllData();
             return 3;
         }
         return 0;
