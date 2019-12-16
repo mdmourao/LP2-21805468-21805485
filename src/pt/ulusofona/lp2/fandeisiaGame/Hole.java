@@ -1,10 +1,10 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 public class Hole {
-    int id;
-    static final String type = "hole";
-    int x;
-    int y;
+    protected int id;
+    protected static final String type = "hole";
+    protected int x;
+    protected int y;
 
     Hole(int id, int x, int y) {
         this.id = id;

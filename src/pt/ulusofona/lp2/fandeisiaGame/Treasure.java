@@ -1,9 +1,9 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 abstract public class Treasure {
-    int id;
-    int x;
-    int y;
+    protected int id;
+    protected int x;
+    protected int y;
 
     public Treasure(int id, int x, int y) {
         this.id = id;

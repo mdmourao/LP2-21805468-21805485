@@ -1,16 +1,16 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 abstract public class Creature {
-    int id;
-    String type;
-    int idEquipa;
-    int x;
-    int y;
-    int nrPontos;
-    int custo;
-    String orientacao;
-    String descricao;
-    int stepSize;
+    protected int id;
+    protected String type;
+    protected int idEquipa;
+    protected int x;
+    protected int y;
+    protected int nrPontos;
+    protected int custo;
+    protected  String orientacao;
+    protected String descricao;
+    protected int stepSize;
 
     public Creature(int id, String type, int idEquipa, int x, int y, String orientacao, int stepSize) {
         this.id = id;
