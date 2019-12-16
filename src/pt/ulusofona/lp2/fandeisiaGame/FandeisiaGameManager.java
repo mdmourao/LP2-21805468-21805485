@@ -182,6 +182,8 @@ public class FandeisiaGameManager {
     //TODO
     public boolean loadGame(File fich) {
         clearAllData();
+        ArrayList<String> content = new ArrayList<>();
+        String test;
         Scanner scanner;
         ArrayList<String> conteudo = new ArrayList<>();
         String[] splitConteudo1;
@@ -224,7 +226,8 @@ public class FandeisiaGameManager {
                 } catch (NumberFormatException e) {
                     return false;
                 }
-                addCreaure(id,tipo,idEquipa,x,y,rdv,pontos);
+                content.add(creaureString(id,tipo,idEquipa,x,y,rdv));
+
             }
             if (splitConteudo1.length == 6) {
                 String x1 = "" + splitConteudo1[4].charAt(1);
@@ -237,10 +240,10 @@ public class FandeisiaGameManager {
                 } catch (NumberFormatException e) {
                     return false;
                 }
-                if(tipo.equals("hole")){
-                    addHole(id,x,y);
-                }else{
-                    addTreasure(id,tipo,x,y);
+                if (tipo.equals("hole")) {
+                    content.add(holeString(id, x, y));
+                } else {
+                    content.add(treasureString(id, tipo, x, y));
                 }
             }
             if (splitConteudo1.length == 2) {
@@ -279,6 +282,8 @@ public class FandeisiaGameManager {
                 }
             }
         }
+        String[] cont = content.toArray(new String[0]);
+        startGame(cont,rows,columns);
         return true;
     }
 
@@ -301,6 +306,9 @@ public class FandeisiaGameManager {
     }
 
     public int startGame(String[] content, int rows, int columns) {
+        for(String c: content){
+            System.out.println(c);
+        }
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
        tesouros), tendo para isso várias Strings. Cada String vai representar um objecto do mundo.
@@ -430,7 +438,15 @@ public class FandeisiaGameManager {
         this.rows = rows;
         this.columns = columns;
         ordenarCreaturesById(this.creatures);
-
+        for(Creature c: creatures){
+            System.out.println(c);
+        }
+        for(Treasure t: treasures){
+            System.out.println(t);
+        }
+        for(Hole h: holes){
+            System.out.println(h);
+        }
         if (getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20) > 50) {
             return 1;
         }
@@ -471,32 +487,16 @@ public class FandeisiaGameManager {
         creatures.add(creature);
     }
 
-    public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation, int nrPontos) {
-        Creature creature = null;
-        if (tipo.equals("Dragão")) {
-            creature = new Dragao(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Dragao");
-        }
-        if (tipo.equals("Elfo")) {
-            creature = new Elfo(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Elfo");
-        }
-        if (tipo.equals("Gigante")) {
-            creature = new Gigante(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Gigante");
-        }
-        if (tipo.equals("Humano")) {
-            creature = new Humano(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Humano");
-        }
-        if (tipo.equals("Anão")) {
-            creature = new Anao(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Anao");
-        }
-        if (creature == null) {
-            return;
-        }
-        creatures.add(creature);
+    public String creaureString(int id, String tipo, int teamId, int x, int y, String orientation) {
+        return "id: " + id + ", type: " + tipo + ", teamId: " + teamId + ", x: " + x + ", y: " + y + ", orientation: " + orientation;
+    }
+
+    public String treasureString(int id, String tipo, int x, int y) {
+        return "id: " + id + ", type: " + tipo + ", x: " + x + ", y: " + y;
+    }
+
+    public String holeString(int id,  int x, int y) {
+        return  "id: " + id + ", type: " + "hole" + ", x: " + x + ", y: " + y;
     }
 
     public void addTreasure(int id, String type, int x, int y) {

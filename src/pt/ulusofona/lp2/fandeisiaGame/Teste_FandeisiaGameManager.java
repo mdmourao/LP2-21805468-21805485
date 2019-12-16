@@ -542,7 +542,7 @@ public class Teste_FandeisiaGameManager {
 
     @Test
     public void test_saveGameANDLoadGame() throws IOException {
-        File file = new File("D:\\PROGRAMAÇÃO\\progs lp2\\LP2-21805468-21805485\\Files\\ola1.txt");
+        File file = new File("C:\\Users\\marti\\IdeaProjects\\LP2-21805468-21805485\\Files\\fandeisia.txt");
 
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[19];
