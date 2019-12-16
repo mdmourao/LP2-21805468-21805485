@@ -329,7 +329,7 @@ public class FandeisiaGameManager {
 
     public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
         Creature creature = null;
-        if (tipo.equals("Dragao")) {
+        if (tipo.equals("Dragão")) {
             creature = new Dragao(id, tipo, teamId, x, y, orientation);
             System.out.println(creatures.size() + "  Adicionei um Dragao");
         }
@@ -345,7 +345,7 @@ public class FandeisiaGameManager {
             creature = new Humano(id, tipo, teamId, x, y, orientation);
             System.out.println(creatures.size() + "  Adicionei um Humano");
         }
-        if (tipo.equals("Anao")) {
+        if (tipo.equals("Anão")) {
             creature = new Anao(id, tipo, teamId, x, y, orientation);
             System.out.println(creatures.size() + "  Adicionei um Anao");
         }
