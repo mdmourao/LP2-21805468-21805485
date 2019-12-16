@@ -328,7 +328,7 @@ public class FandeisiaGameManager {
             int x = 0;
             int y = 0;
             try {
-                id = 3;
+                id = Integer.parseInt(s3[0]);
             } catch (NumberFormatException e) {
                 id = 2;
             }
