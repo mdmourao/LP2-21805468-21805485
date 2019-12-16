@@ -571,7 +571,6 @@ public class Teste_FandeisiaGameManager {
         tester.startGame(content,8,8);
         tester.processTurn();
         tester.saveGame(file);
-        System.out.println("File:");
         tester.loadGame(file);
     }
 
