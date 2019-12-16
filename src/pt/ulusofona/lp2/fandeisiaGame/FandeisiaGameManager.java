@@ -31,12 +31,12 @@ public class FandeisiaGameManager {
         /*Deve retornar os tipos de criatura que existem no jogo e que podem ser
         escolhidos para os exércitos dos dois jogadores.*/
         String[][] creaturesString = new String[5][4];
-        creaturesString[0][0] = "Anao";
+        creaturesString[0][0] = "Anão";
         creaturesString[0][1] = "crazy_emoji_black.png";
         creaturesString[0][2] = "1 casa (posição) de cada vez | 90º";
         creaturesString[0][3] = "1";
 
-        creaturesString[1][0] = "Dragao";
+        creaturesString[1][0] = "Dragão";
         creaturesString[1][1] = "crazy_emoji_black.png";
         creaturesString[1][2] = "3 casas (posições) de cada vez\n ○ Pode-se mover na horizontal, na vertical e também nas diagonais";
         creaturesString[1][3] = "9";
