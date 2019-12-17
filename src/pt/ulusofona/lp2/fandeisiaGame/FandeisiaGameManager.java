@@ -130,9 +130,9 @@ public class FandeisiaGameManager {
 
     //TODO
     public int getCoinTotal(int teamID) {
-        if(teamID == 10){
+        if (teamID == 10) {
             return ldr_10.getMoedas();
-        }else{
+        } else {
             return resistencia_20.getMoedas();
         }
     }
@@ -696,7 +696,7 @@ public class FandeisiaGameManager {
         for (Creature c : creatures) {
             for (Treasure t : treasures) {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
-                    addScore(c.getIdEquipa(), t.getPontos());
+                    addScore(currentTeamId, t.getPontos());
                     treasuresFound++;
                     treasuresRemove.add(t);
                     c.addNrPontos(t.getPontos());
@@ -879,10 +879,10 @@ public class FandeisiaGameManager {
     }
 
     public void addScore(int teamId, int valor) {
-        if (teamId == 1) {
+        if (teamId == 20) {
             resistencia_20.addScore(valor);
         }
-        if (teamId == 0) {
+        if (teamId == 10) {
             ldr_10.addScore(valor);
         }
     }

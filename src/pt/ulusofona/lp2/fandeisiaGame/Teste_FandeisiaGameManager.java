@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import org.junit.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -544,12 +543,12 @@ public class Teste_FandeisiaGameManager {
 
     @Test
     public void test_saveGameANDLoadGame() throws IOException {
-        File file = new File("D:\\PROGRAMAÇÃO\\progs lp2\\LP2-21805468-21805485\\Files\\ola1.txt");
+        File file = new File("C:\\Users\\marti\\IdeaProjects\\LP2-21805468-21805485\\File\\test.txt");
 
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[19];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
-        content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 5, orientation: Este";
         content[2] = "id: 3, type: Dragão, teamId: 10, x: 0, y: 2, orientation: Este";
         content[3] = "id: 4, type: Gigante, teamId: 10, x: 0, y: 3, orientation: Este";
         content[4] = "id: 5, type: Elfo, teamId: 10, x: 0, y: 4, orientation: Este";
@@ -564,13 +563,14 @@ public class Teste_FandeisiaGameManager {
         content[12] = "id: 13, type: Elfo, teamId: 20, x: 4, y: 3, orientation: Sudeste";
         content[13] = "id: 14, type: Elfo, teamId: 20, x: 4, y: 4, orientation: Sudoeste";
 
-        content[14] = "id: -1, type: silver, x: 2, y: 1";
+        content[14] = "id: -1, type: gold, x: 1, y: 0";
         content[15] = "id: -2, type: bronze, x: 2, y: 2";
         content[16] = "id: -3, type: gold, x: 2, y: 3";
 
         content[17] = "id: -102, type: hole, x: 3, y: 1";
         content[18] = "id: -103, type: hole, x: 3, y: 2";
         tester.startGame(content,8,8);
+        tester.processTurn();
         tester.processTurn();
         tester.saveGame(file);
         System.out.println("File:");
