@@ -696,7 +696,7 @@ public class FandeisiaGameManager {
         for (Creature c : creatures) {
             for (Treasure t : treasures) {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
-                    addScore(currentTeamId, t.getPontos());
+                    addScore(c.getIdEquipa(), t.getPontos());
                     treasuresFound++;
                     treasuresRemove.add(t);
                     c.addNrPontos(t.getPontos());
