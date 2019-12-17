@@ -14,6 +14,24 @@ public class Dragao extends CreatureGira45 {
     }
 
     public String getImagePNG() {
+        switch (orientacao) {
+            case "Este":
+              return "dragon-este.png";
+            case "Oeste":
+                return "dragon-oeste.png";
+            case "Norte":
+                return "dragon-norte.png";
+            case "Sul":
+                return "dragon-sul.png";
+            case "Nordeste":
+                return "dragon-ne.png";
+            case "Sudeste":
+                return "dragon-se.png";
+            case "Sudoeste":
+                return "dragon-so.png";
+            case "Noroeste":
+                return "dragon-no.png";
+        }
         return "dragon.png";
     }
 

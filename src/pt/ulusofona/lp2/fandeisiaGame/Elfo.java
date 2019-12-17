@@ -14,6 +14,24 @@ public class Elfo extends CreatureGira45 {
 
 
     public String getImagePNG() {
+        switch (orientacao) {
+            case "Este":
+                return "elf-este.png";
+            case "Oeste":
+                return "elf-oeste.png";
+            case "Norte":
+                return "elf-norte.png";
+            case "Sul":
+                return "elf-sul.png";
+            case "Nordeste":
+                return "elf-ne.png";
+            case "Sudeste":
+                return "elf-se.png";
+            case "Sudoeste":
+                return "elf-so.png";
+            case "Noroeste":
+                return "elf-no.png";
+        }
         return "elf.png";
     }
 

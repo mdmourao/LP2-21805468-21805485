@@ -16,6 +16,16 @@ public class Humano extends CreatureGira90 {
 
 
     public String getImagePNG(){
+        switch (orientacao) {
+            case "Este":
+                return "human-este.png";
+            case "Oeste":
+                return "human-oeste.png";
+            case "Norte":
+                return "human-norte.png";
+            case "Sul":
+                return "human-sul.png";
+        }
         return "human.png";
     }
 

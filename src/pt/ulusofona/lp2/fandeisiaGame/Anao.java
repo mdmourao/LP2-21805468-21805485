@@ -13,6 +13,16 @@ public class Anao extends CreatureGira90 {
     }
 
     public String getImagePNG() {
+        switch (orientacao){
+            case "Este":
+                return "anao-este.png";
+            case "Oeste":
+                return "anao-oeste.png";
+            case "Norte":
+               return "anao-norte.png";
+            case "Sul":
+                return "anao-sul.png";
+        }
         return "anao.png";
     }
 

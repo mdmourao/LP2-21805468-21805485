@@ -517,15 +517,12 @@ public class FandeisiaGameManager {
         Treasure treasure = null;
         if (type.equals("silver")) {
             treasure = new TreasureSilver(id, x, y);
-            System.out.println(treasures.size() + "  Adicionei um tesouro silver");
         }
         if (type.equals("bronze")) {
             treasure = new TreasureBronze(id, x, y);
-            System.out.println(treasures.size() + "  Adicionei um tesouro bronze");
         }
         if (type.equals("gold")) {
             treasure = new TreasureGold(id, x, y);
-            System.out.println(treasures.size() + "  Adicionei um tesouro gold");
         }
         if (treasure == null) {
             return;
@@ -638,6 +635,9 @@ public class FandeisiaGameManager {
     //TODO adicionar moedas no final do turno
     public void processTurn() {
         System.out.println("Estou a processar uma jogada");
+        for(Creature c: creatures){
+            System.out.println(c);
+        }
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
         numeroJogadas++;
         int step;
@@ -688,7 +688,7 @@ public class FandeisiaGameManager {
                     }
                     break;
                 case "Sudoeste":
-                    if ((c.getX() - step >= 0 && c.getY() + step < columns) && (getType(c.getX() - step, c.getY() + step) == null) && checkSaltarPorCima(c)) {
+                    if ((c.getX() - step >= 0 && c.getY() + step < rows) && (getType(c.getX() - step, c.getY() + step) == null) && checkSaltarPorCima(c)) {
                         c.move();
                     } else {
                         c.gira();
@@ -721,6 +721,10 @@ public class FandeisiaGameManager {
             setCurrentTeamId(20);
         } else {
             setCurrentTeamId(10);
+        }
+        System.out.println("Sai assim");
+        for(Creature c: creatures){
+            System.out.println(c);
         }
     }
 

@@ -13,6 +13,16 @@ public class Gigante extends CreatureGira90 {
     }
 
     public String getImagePNG() {
+        switch (orientacao) {
+            case "Este":
+                return "giant-este.png";
+            case "Oeste":
+                return "giant-oeste.png";
+            case "Norte":
+                return "giant-norte.png";
+            case "Sul":
+                return "giant-sul.png";
+        }
         return "giant.png";
     }
 
