@@ -145,4 +145,10 @@ public class Test_Creature {
     public void test_checkSaltarPorCima(){
 
     }
+
+    //TODO
+    @Test
+    public void test_imagens(){
+
+    }
 }
