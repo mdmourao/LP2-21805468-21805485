@@ -547,7 +547,7 @@ public class Teste_FandeisiaGameManager {
 
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[19];
-        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 11, orientation: Este";
         content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 5, orientation: Este";
         content[2] = "id: 3, type: Dragão, teamId: 10, x: 0, y: 2, orientation: Este";
         content[3] = "id: 4, type: Gigante, teamId: 10, x: 0, y: 3, orientation: Este";
@@ -569,9 +569,7 @@ public class Teste_FandeisiaGameManager {
 
         content[17] = "id: -102, type: hole, x: 3, y: 1";
         content[18] = "id: -103, type: hole, x: 3, y: 2";
-        tester.startGame(content,8,8);
-        tester.processTurn();
-        tester.processTurn();
+        tester.startGame(content,12,12);
         tester.saveGame(file);
         System.out.println("File:");
         tester.loadGame(file);

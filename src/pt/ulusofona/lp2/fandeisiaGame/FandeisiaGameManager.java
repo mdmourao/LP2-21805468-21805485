@@ -187,8 +187,8 @@ public class FandeisiaGameManager {
         ArrayList<String> conteudo = new ArrayList<>();
         String[] splitConteudo1;
         String[] splitConteudo2;
-        String[] splitConteudo1a;
-        String[] splitConteudo2a;
+        String x1;
+        String y1;
         int id;
         String tipo;
         int idEquipa;
@@ -211,9 +211,16 @@ public class FandeisiaGameManager {
             splitConteudo1 = s.split(" ", 7);
             if (splitConteudo1.length == 7) {
                 splitConteudo2 = splitConteudo1[6].split(" ", 6);
-                String x1 = "" + splitConteudo2[2].charAt(1);
-                String y1 = "" + splitConteudo2[3].charAt(0);
-
+                if( splitConteudo2[2].length() == 3){
+                     x1 = "" + splitConteudo2[2].charAt(1);
+                }else{
+                     x1 = "" + splitConteudo2[2].charAt(1) + splitConteudo2[2].charAt(2);
+                }
+                if( splitConteudo2[3].length() == 2){
+                     y1 = "" + splitConteudo2[3].charAt(0);
+                }else{
+                     y1 = "" + splitConteudo2[3].charAt(0) + splitConteudo2[3].charAt(1);
+                }
                 try {
                     id = Integer.parseInt(splitConteudo1[0]);
                     tipo = splitConteudo1[2];
@@ -228,8 +235,16 @@ public class FandeisiaGameManager {
                 addCreaure(id, tipo, idEquipa, x, y, rdv, pontos);
             }
             if (splitConteudo1.length == 6) {
-                String x1 = "" + splitConteudo1[4].charAt(1);
-                String y1 = "" + splitConteudo1[5].charAt(0);
+                if(splitConteudo1[4].length() == 3){
+                     x1 = "" + splitConteudo1[4].charAt(1);
+                }else{
+                     x1 = "" + splitConteudo1[4].charAt(1) + splitConteudo1[4].charAt(2);
+                }
+                if(splitConteudo1[5].length() == 2){
+                     y1 = "" + splitConteudo1[5].charAt(0);
+                }else{
+                     y1 = "" + splitConteudo1[5].charAt(0) +splitConteudo1[5].charAt(1);
+                }
                 try {
                     id = Integer.parseInt(splitConteudo1[0]);
                     tipo = splitConteudo1[2];
@@ -626,6 +641,7 @@ public class FandeisiaGameManager {
         }
     }
 
+    //TODO adicionar moedas no final do turno
     public void processTurn() {
         System.out.println("Estou a processar uma jogada");
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
