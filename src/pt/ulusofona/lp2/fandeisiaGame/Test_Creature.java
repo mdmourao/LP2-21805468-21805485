@@ -1,168 +1,148 @@
-//package pt.ulusofona.lp2.fandeisiaGame;
-//
-//import org.junit.Test;
-//
-//import static junit.framework.TestCase.assertEquals;
-//
-//public class Test_Creature {
-//
-//    @Test
-//    public void test_01_toString() {
-//        Creature creature = new Humano(1, "Criatura", 0, 1, 2, "Norte");
-//        String toStringExpected = "1 | Criatura | 0 | 0 @ (1, 2) Norte";
-//        assertEquals(toStringExpected, creature.toString());
-//    }
-//
-//    @Test
-//    public void test_02_getX() {
-//        Creature creature = new Humano(1, "Criatura", 0, 1, 2, "Norte");
-//        int expected = 1;
-//        assertEquals(expected, creature.getX());
-//    }
-//
-//    @Test
-//    public void test_03_moveX_Este() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        creature.moveX(1);
-//        int expected = 2;
-//        assertEquals(expected, creature.getX());
-//    }
-//
-//    @Test
-//    public void test_04_moveX_Oeste() {
-//        Creature creature = new Humano(1, "Criatura", 0, 1, 2, "Norte");
-//        creature.moveX(-1);
-//        int expected = 0;
-//        assertEquals(expected, creature.getX());
-//    }
-//
-//    @Test
-//    public void test_05_moveY_Norte() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        creature.moveY(-1);
-//        int expected = 1;
-//        assertEquals(expected, creature.getY());
-//    }
-//
-//    @Test
-//    public void test_06_moveY_Sul() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        creature.moveY(1);
-//        int expected = 3;
-//        assertEquals(expected, creature.getY());
-//    }
-//
-//    @Test
-//    public void test_07_getY() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        int expected = 2;
-//        assertEquals(expected, creature.getY());
-//    }
-//
-//    @Test
-//    public void test_08_moveX_moveY_getX_getY() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        creature.moveX(2);
-//        creature.moveY(3);
-//        creature.moveX(-1);
-//        creature.moveY(-1);
-//        int expectedX = 2;
-//        int expectedY = 4;
-//        assertEquals(expectedX, creature.getX());
-//        assertEquals(expectedY, creature.getY());
-//    }
-//
-//    @Test
-//    public void test_09_getId() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        int expected = 1;
-//        assertEquals(expected, creature.getId());
-//    }
-//
-//    @Test
-//    public void test_10_getOrientacao() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        String expected = "Norte";
-//        assertEquals(expected, creature.getOrientacao());
-//    }
-//
-//    @Test
-//    public void test_11_getTipo() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        String expected = "Criatura";
-//        assertEquals(expected, creature.getType());
-//    }
-//
-//    @Test
-//    public void test_12_getImagePNG() {
-//        Creature creature = new Creature(1, "Criatura", 1, 1, 2, "Norte");
-//        String expectedN = "crazy_emoji_white_UP.png";
-//        assertEquals(expectedN, creature.getImagePNG());
-//        creature = new Creature(1, "Criatura", 1, 1, 2, "Sul");
-//        String expectedS = "crazy_emoji_white_DOWN.png";
-//        assertEquals(expectedS, creature.getImagePNG());
-//        creature = new Creature(1, "Criatura", 1, 1, 2, "Este");
-//        String expectedE = "crazy_emoji_white_RIGHT.png";
-//        assertEquals(expectedE, creature.getImagePNG());
-//        creature = new Creature(1, "Criatura", 1, 1, 2, "Oeste");
-//        String expectedO = "crazy_emoji_white_LEFT.png";
-//        assertEquals(expectedO, creature.getImagePNG());
-//
-//        creature = new Creature(0, "Criatura", 0, 1, 2, "Norte");
-//        String expectedN0 = "crazy_emoji_black_UP.png";
-//        assertEquals(expectedN0, creature.getImagePNG());
-//        creature = new Creature(0, "Criatura", 0, 1, 2, "Sul");
-//        String expectedS0 = "crazy_emoji_black_DOWN.png";
-//        assertEquals(expectedS0, creature.getImagePNG());
-//        creature = new Creature(0, "Criatura", 0, 1, 2, "Este");
-//        String expectedE0 = "crazy_emoji_black_RIGHT.png";
-//        assertEquals(expectedE0, creature.getImagePNG());
-//        creature = new Creature(0, "Criatura", 0, 1, 2, "Oeste");
-//        String expectedO0 = "crazy_emoji_black_LEFT.png";
-//        assertEquals(expectedO0, creature.getImagePNG());
-//
-//    }
-//
-//    @Test
-//    public void test_13_addNrPontos() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        creature.addNrPontos(2);
-//        creature.addNrPontos(1);
-//        creature.addNrPontos(1);
-//        int expected = 4;
-//        assertEquals(expected, creature.getNrPontos());
-//    }
-//
-//    @Test
-//    public void test_14_setOrientacao() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        creature.setOrientacao("N");
-//        creature.setOrientacao("Sul");
-//        String expected = "Sul";
-//        assertEquals(expected, creature.getOrientacao());
-//
-//        creature.setOrientacao("O");
-//        creature.setOrientacao("Oeste");
-//        expected = "Oeste";
-//        assertEquals(expected, creature.getOrientacao());
-//
-//        creature.setOrientacao("Sul");
-//        expected = "Sul";
-//        assertEquals(expected, creature.getOrientacao());
-//
-//        creature.setOrientacao("Norte");
-//        expected = "Norte";
-//        assertEquals(expected, creature.getOrientacao());
-//
-//    }
-//
-//    @Test
-//    public void test_15_getIdEquipa() {
-//        Creature creature = new Creature(1, "Criatura", 0, 1, 2, "Norte");
-//        int expected = 0;
-//        assertEquals(expected, creature.getIdEquipa());
-//        Creature creature2 = new Creature(1, "Criatura", 1, 1, 2, "Norte");
-//        int expected2 = 0;
-//        assertEquals(expected2, creature.getIdEquipa());
-//    }
-//}
+package pt.ulusofona.lp2.fandeisiaGame;
+
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertEquals;
+
+public class Test_Creature {
+    @Test
+    public void test_Getters(){
+        Creature test = new Anao(1,"Anão",10,2,3,"Norte");
+        assertEquals(1,test.getId());
+        assertEquals(2,test.getX());
+        assertEquals(3,test.getY());
+        assertEquals("Norte",test.getOrientacao());
+        assertEquals(1,test.getStepSize());
+        assertEquals("Anão",test.getType());
+        assertEquals(0,test.getNrPontos());
+        assertEquals(10,test.getIdEquipa());
+        assertEquals(1,test.getCusto());
+        assertEquals("1 | Anão | 10 | 0 @ (2, 3) Norte",test.toString());
+
+        test = new Elfo(2,"Elfo",20,1,4,"Este");
+        assertEquals(2,test.getId());
+        assertEquals(1,test.getX());
+        assertEquals(4,test.getY());
+        assertEquals("Este",test.getOrientacao());
+        assertEquals(2,test.getStepSize());
+        assertEquals("Elfo",test.getType());
+        assertEquals(0,test.getNrPontos());
+        assertEquals(20,test.getIdEquipa());
+        assertEquals(5,test.getCusto());
+        assertEquals("2 | Elfo | 20 | 0 @ (1, 4) Este",test.toString());
+
+        test = new Gigante(3,"Gigante",10,2,5,"Sul");
+        assertEquals(3,test.getId());
+        assertEquals(2,test.getX());
+        assertEquals(5,test.getY());
+        assertEquals("Sul",test.getOrientacao());
+        assertEquals(3,test.getStepSize());
+        assertEquals("Gigante",test.getType());
+        assertEquals(0,test.getNrPontos());
+        assertEquals(10,test.getIdEquipa());
+        assertEquals(5,test.getCusto());
+        assertEquals("3 | Gigante | 10 | 0 @ (2, 5) Sul",test.toString());
+
+
+        test = new Humano(4,"Humano",20,3,7,"Oeste");
+        assertEquals(4,test.getId());
+        assertEquals(3,test.getX());
+        assertEquals(7,test.getY());
+        assertEquals("Oeste",test.getOrientacao());
+        assertEquals(2,test.getStepSize());
+        assertEquals("Humano",test.getType());
+        assertEquals(0,test.getNrPontos());
+        assertEquals(20,test.getIdEquipa());
+        assertEquals(3,test.getCusto());
+        assertEquals("4 | Humano | 20 | 0 @ (3, 7) Oeste",test.toString());
+
+        test = new Dragao(5,"Dragão",10,4,8,"Norte");
+        assertEquals(5,test.getId());
+        assertEquals(4,test.getX());
+        assertEquals(8,test.getY());
+        assertEquals("Norte",test.getOrientacao());
+        assertEquals(3,test.getStepSize());
+        assertEquals("Dragão",test.getType());
+        assertEquals(0,test.getNrPontos());
+        assertEquals(10,test.getIdEquipa());
+        assertEquals(9,test.getCusto());
+        assertEquals("5 | Dragão | 10 | 0 @ (4, 8) Norte",test.toString());
+    }
+
+    @Test
+    public void test_move_45(){
+        Creature test = new Elfo(1,"Elfo",10,0,0,"Sul");
+        test.move();
+        assertEquals(0,test.getX());
+        assertEquals(2,test.getY());
+        test = new Elfo(1,"Elfo",10,0,2,"Norte");
+        test.move();
+        assertEquals(0,test.getX());
+        assertEquals(0,test.getY());
+        test = new Elfo(1,"Elfo",10,0,0,"Este");
+        test.move();
+        assertEquals(2,test.getX());
+        assertEquals(0,test.getY());
+        test = new Elfo(1,"Elfo",10,2,0,"Oeste");
+        test.move();
+        assertEquals(0,test.getX());
+        assertEquals(0,test.getY());
+        test = new Elfo(1,"Elfo",10,2,2,"Nordeste");
+        test.move();
+        assertEquals(4,test.getX());
+        assertEquals(0,test.getY());
+
+        test = new Elfo(1,"Elfo",10,2,0,"Sudeste");
+        test.move();
+        assertEquals(4,test.getX());
+        assertEquals(2,test.getY());
+
+        test = new Elfo(1,"Elfo",10,2,0,"Sudoeste");
+        test.move();
+        assertEquals(0,test.getX());
+        assertEquals(2,test.getY());
+
+        test = new Elfo(1,"Elfo",10,2,2,"Noroeste");
+        test.move();
+        assertEquals(0,test.getX());
+        assertEquals(0,test.getY());
+    }
+
+    @Test
+    public void test_move_90(){
+        Creature test = new Humano(1,"Humano",10,0,0,"Sul");
+        test.move();
+        assertEquals(0,test.getX());
+        assertEquals(2,test.getY());
+        test = new Humano(1,"Humano",10,0,2,"Norte");
+        test.move();
+        assertEquals(0,test.getX());
+        assertEquals(0,test.getY());
+        test = new Humano(1,"Humano",10,0,0,"Este");
+        test.move();
+        assertEquals(2,test.getX());
+        assertEquals(0,test.getY());
+        test = new Humano(1,"Humano",10,2,0,"Oeste");
+        test.move();
+        assertEquals(0,test.getX());
+        assertEquals(0,test.getY());
+    }
+
+    //TODO
+    @Test
+    public void test_gira_45(){
+
+    }
+
+    //TODO
+    @Test
+    public void test_gira_90(){
+
+    }
+
+    //TODO
+    @Test
+    public void test_checkSaltarPorCima(){
+
+    }
+}

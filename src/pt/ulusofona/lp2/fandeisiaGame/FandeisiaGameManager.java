@@ -211,15 +211,15 @@ public class FandeisiaGameManager {
             splitConteudo1 = s.split(" ", 7);
             if (splitConteudo1.length == 7) {
                 splitConteudo2 = splitConteudo1[6].split(" ", 6);
-                if( splitConteudo2[2].length() == 3){
-                     x1 = "" + splitConteudo2[2].charAt(1);
-                }else{
-                     x1 = "" + splitConteudo2[2].charAt(1) + splitConteudo2[2].charAt(2);
+                if (splitConteudo2[2].length() == 3) {
+                    x1 = "" + splitConteudo2[2].charAt(1);
+                } else {
+                    x1 = "" + splitConteudo2[2].charAt(1) + splitConteudo2[2].charAt(2);
                 }
-                if( splitConteudo2[3].length() == 2){
-                     y1 = "" + splitConteudo2[3].charAt(0);
-                }else{
-                     y1 = "" + splitConteudo2[3].charAt(0) + splitConteudo2[3].charAt(1);
+                if (splitConteudo2[3].length() == 2) {
+                    y1 = "" + splitConteudo2[3].charAt(0);
+                } else {
+                    y1 = "" + splitConteudo2[3].charAt(0) + splitConteudo2[3].charAt(1);
                 }
                 try {
                     id = Integer.parseInt(splitConteudo1[0]);
@@ -235,15 +235,15 @@ public class FandeisiaGameManager {
                 addCreaure(id, tipo, idEquipa, x, y, rdv, pontos);
             }
             if (splitConteudo1.length == 6) {
-                if(splitConteudo1[4].length() == 3){
-                     x1 = "" + splitConteudo1[4].charAt(1);
-                }else{
-                     x1 = "" + splitConteudo1[4].charAt(1) + splitConteudo1[4].charAt(2);
+                if (splitConteudo1[4].length() == 3) {
+                    x1 = "" + splitConteudo1[4].charAt(1);
+                } else {
+                    x1 = "" + splitConteudo1[4].charAt(1) + splitConteudo1[4].charAt(2);
                 }
-                if(splitConteudo1[5].length() == 2){
-                     y1 = "" + splitConteudo1[5].charAt(0);
-                }else{
-                     y1 = "" + splitConteudo1[5].charAt(0) +splitConteudo1[5].charAt(1);
+                if (splitConteudo1[5].length() == 2) {
+                    y1 = "" + splitConteudo1[5].charAt(0);
+                } else {
+                    y1 = "" + splitConteudo1[5].charAt(0) + splitConteudo1[5].charAt(1);
                 }
                 try {
                     id = Integer.parseInt(splitConteudo1[0]);
@@ -466,23 +466,18 @@ public class FandeisiaGameManager {
         Creature creature = null;
         if (tipo.equals("Dragão")) {
             creature = new Dragao(id, tipo, teamId, x, y, orientation);
-            System.out.println(creatures.size() + "  Adicionei um Dragao");
         }
         if (tipo.equals("Elfo")) {
             creature = new Elfo(id, tipo, teamId, x, y, orientation);
-            System.out.println(creatures.size() + "  Adicionei um Elfo");
         }
         if (tipo.equals("Gigante")) {
             creature = new Gigante(id, tipo, teamId, x, y, orientation);
-            System.out.println(creatures.size() + "  Adicionei um Gigante");
         }
         if (tipo.equals("Humano")) {
             creature = new Humano(id, tipo, teamId, x, y, orientation);
-            System.out.println(creatures.size() + "  Adicionei um Humano");
         }
         if (tipo.equals("Anão")) {
             creature = new Anao(id, tipo, teamId, x, y, orientation);
-            System.out.println(creatures.size() + "  Adicionei um Anao");
         }
         if (creature == null) {
             return;
@@ -494,23 +489,23 @@ public class FandeisiaGameManager {
         Creature creature = null;
         if (tipo.equals("Dragão")) {
             creature = new Dragao(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Dragao");
+
         }
         if (tipo.equals("Elfo")) {
             creature = new Elfo(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Elfo");
+
         }
         if (tipo.equals("Gigante")) {
             creature = new Gigante(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Gigante");
+
         }
         if (tipo.equals("Humano")) {
             creature = new Humano(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Humano");
+
         }
         if (tipo.equals("Anão")) {
             creature = new Anao(id, tipo, teamId, x, y, orientation, nrPontos);
-            System.out.println(creatures.size() + "  Adicionei um Anao");
+
         }
         if (creature == null) {
             return;
@@ -540,7 +535,6 @@ public class FandeisiaGameManager {
 
     public void addHole(int id, int x, int y) {
         Hole hole = new Hole(id, x, y);
-        System.out.println(holes.size() + "  Adicionei um buraco");
         holes.add(hole);
     }
 
