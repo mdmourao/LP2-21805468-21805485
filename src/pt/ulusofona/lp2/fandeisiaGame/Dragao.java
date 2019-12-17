@@ -14,7 +14,7 @@ public class Dragao extends CreatureGira45 {
     }
 
     public String getImagePNG() {
-        return null;
+        return "dragon.png";
     }
 
     public boolean possoSaltarPorcima(int numberCreatures, int numberHoles) {

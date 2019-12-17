@@ -14,7 +14,7 @@ public class Elfo extends CreatureGira45 {
 
 
     public String getImagePNG() {
-        return null;
+        return "elf.png";
     }
 
     public boolean possoSaltarPorcima(int numberCreatures, int numberHoles) {

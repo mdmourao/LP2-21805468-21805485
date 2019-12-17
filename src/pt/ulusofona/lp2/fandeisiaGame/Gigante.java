@@ -13,7 +13,7 @@ public class Gigante extends CreatureGira90 {
     }
 
     public String getImagePNG() {
-        return null;
+        return "giant.png";
     }
 
     public boolean possoSaltarPorcima(int numberCreatures, int numberHoles) {

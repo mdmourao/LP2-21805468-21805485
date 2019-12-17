@@ -13,7 +13,7 @@ public class Anao extends CreatureGira90 {
     }
 
     public String getImagePNG() {
-        return null;
+        return "anao.png";
     }
 
     public boolean possoSaltarPorcima(int numberCreatures, int numberHoles) {

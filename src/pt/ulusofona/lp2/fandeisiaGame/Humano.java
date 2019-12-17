@@ -16,7 +16,7 @@ public class Humano extends CreatureGira90 {
 
 
     public String getImagePNG(){
-        return null;
+        return "human.png";
     }
 
     public boolean possoSaltarPorcima(int numberCreatures, int numberHoles) {

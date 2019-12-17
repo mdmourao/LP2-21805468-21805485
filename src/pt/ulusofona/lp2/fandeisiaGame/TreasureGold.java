@@ -7,7 +7,7 @@ public class TreasureGold extends Treasure {
     }
 
     public String getImagePNG(){
-        return "box-mud.png";
+        return "gold-box.png";
     }
 
     @Override
