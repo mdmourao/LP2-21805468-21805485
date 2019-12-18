@@ -456,9 +456,8 @@ public class FandeisiaGameManager {
         if (getCustoTotalCreaures(20) > 50) {
             return 3;
         }
-        //TODO implementar isto melhor
-        ldr_10.setMoedas(50 - getCustoTotalCreaures(10));
-        resistencia_20.setMoedas(50 - getCustoTotalCreaures(20));
+        ldr_10.removeMoedas(getCustoTotalCreaures(10));
+        resistencia_20.removeMoedas(getCustoTotalCreaures(20));
         return 0;
     }
 
@@ -634,6 +633,7 @@ public class FandeisiaGameManager {
 
     //TODO adicionar moedas no final do turno
     public void processTurn() {
+        int teamAtualApanhouTreasure = 0;
         System.out.println("Estou a processar uma jogada");
         for (Creature c : creatures) {
             System.out.println(c);
@@ -710,8 +710,23 @@ public class FandeisiaGameManager {
                     treasuresFound++;
                     treasuresRemove.add(t);
                     c.addNrPontos(t.getPontos());
+                    if (c.getIdEquipa() == getCurrentTeamId()) {
+                        teamAtualApanhouTreasure++;
+                    }
                 }
             }
+        }
+        if (teamAtualApanhouTreasure > 0) {
+            if (getCurrentTeamId() == 10) {
+                ldr_10.addMoedas(2);
+                resistencia_20.addMoedas(1);
+            } else {
+                resistencia_20.addMoedas(2);
+                ldr_10.addMoedas(1);
+            }
+        } else {
+            resistencia_20.addMoedas(1);
+            ldr_10.addMoedas(1);
         }
         for (Treasure t : treasuresRemove) {
             treasures.remove(t);
