@@ -19,7 +19,6 @@ abstract public class Creature {
         this.x = x;
         this.y = y;
         this.orientacao = orientacao;
-        nrPontos = 0;
         this.stepSize = stepSize;
     }
 
