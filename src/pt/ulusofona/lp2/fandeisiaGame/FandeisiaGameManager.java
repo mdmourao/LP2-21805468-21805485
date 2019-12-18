@@ -29,27 +29,27 @@ public class FandeisiaGameManager {
         escolhidos para os exércitos dos dois jogadores.*/
         String[][] creaturesString = new String[5][4];
         creaturesString[0][0] = "Anão";
-        creaturesString[0][1] = "crazy_emoji_black.png";
+        creaturesString[0][1] = "anao.png";
         creaturesString[0][2] = "1 casa (posição) de cada vez | 90º";
         creaturesString[0][3] = "1";
 
         creaturesString[1][0] = "Dragão";
-        creaturesString[1][1] = "crazy_emoji_black.png";
+        creaturesString[1][1] = "dragon.png";
         creaturesString[1][2] = "3 casas (posições) de cada vez\n ○ Pode-se mover na horizontal, na vertical e também nas diagonais";
         creaturesString[1][3] = "9";
 
         creaturesString[2][0] = "Elfo";
-        creaturesString[2][1] = "crazy_emoji_black.png";
+        creaturesString[2][1] = "elf.png";
         creaturesString[2][2] = "2 casas (posições) de cada vez\n Pode-se mover na horizontal, na vertical e nas diagonais";
         creaturesString[2][3] = "5";
 
         creaturesString[3][0] = "Gigante";
-        creaturesString[3][1] = "crazy_emoji_black.png";
+        creaturesString[3][1] = "giant.png";
         creaturesString[3][2] = "3 casas (posições) de cada vez\n Pode mover na horizontal e na vertical";
         creaturesString[3][3] = "5";
 
         creaturesString[4][0] = "Humano";
-        creaturesString[4][1] = "crazy_emoji_black.png";
+        creaturesString[4][1] = "human.png";
         creaturesString[4][2] = "2 casas de cada vez\n Pode-se mover na horizontal e na vertical";
         creaturesString[4][3] = "3";
 
@@ -635,7 +635,7 @@ public class FandeisiaGameManager {
     //TODO adicionar moedas no final do turno
     public void processTurn() {
         System.out.println("Estou a processar uma jogada");
-        for(Creature c: creatures){
+        for (Creature c : creatures) {
             System.out.println(c);
         }
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
@@ -723,7 +723,7 @@ public class FandeisiaGameManager {
             setCurrentTeamId(10);
         }
         System.out.println("Sai assim");
-        for(Creature c: creatures){
+        for (Creature c : creatures) {
             System.out.println(c);
         }
     }
