@@ -9,7 +9,6 @@ abstract public class Creature {
     protected int nrPontos;
     protected int custo;
     protected  String orientacao;
-    protected String descricao;
     protected int stepSize;
 
     public Creature(int id, String type, int idEquipa, int x, int y, String orientacao, int stepSize) {
@@ -64,9 +63,6 @@ abstract public class Creature {
         return this.type;
     }
 
-    public String getDescricao() {
-        return this.descricao;
-    }
 
     public void addNrPontos(int pontosAdicionar) {
         //numero de pontos corresponde a quantidade de tesouros encontrados pela criatura

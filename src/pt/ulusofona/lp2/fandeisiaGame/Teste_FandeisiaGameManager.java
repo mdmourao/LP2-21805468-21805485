@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -569,7 +570,7 @@ public class Teste_FandeisiaGameManager {
 
         content[17] = "id: -102, type: hole, x: 3, y: 1";
         content[18] = "id: -103, type: hole, x: 3, y: 2";
-        tester.startGame(content,12,12);
+        tester.startGame(content, 12, 12);
         tester.processTurn();
         tester.saveGame(file);
         System.out.println("File:");
