@@ -709,7 +709,6 @@ public class FandeisiaGameManager {
                     addScore(c.getIdEquipa(), t.getPontos());
                     treasuresFound++;
                     treasuresRemove.add(t);
-                    c.addNrPontos(t.getPontos());
                     if (c.getIdEquipa() == getCurrentTeamId()) {
                         teamAtualApanhouTreasure++;
                     }
