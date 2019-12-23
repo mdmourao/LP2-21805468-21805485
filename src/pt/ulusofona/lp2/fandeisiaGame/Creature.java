@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import java.util.ArrayList;
+
 abstract public class Creature {
     protected int id;
     protected String type;
@@ -7,6 +9,7 @@ abstract public class Creature {
     protected int x;
     protected int y;
     protected int nrPontos;
+    protected ArrayList<Treasure> treasures;
     protected int custo;
     protected  String orientacao;
     protected String descricao;
@@ -20,6 +23,7 @@ abstract public class Creature {
         this.y = y;
         this.orientacao = orientacao;
         this.stepSize = stepSize;
+        treasures = new ArrayList<>();
     }
 
     public String toString() {
@@ -80,6 +84,11 @@ abstract public class Creature {
     public int getIdEquipa() {
         return idEquipa;
     }
+
+    public void addTreasure(Treasure t){
+        treasures.add(t);
+    }
+
 
 }
 

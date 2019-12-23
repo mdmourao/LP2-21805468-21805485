@@ -128,7 +128,6 @@ public class FandeisiaGameManager {
         return "";
     }
 
-    //TODO
     public int getCoinTotal(int teamID) {
         if (teamID == 10) {
             return ldr_10.getMoedas();
@@ -300,7 +299,7 @@ public class FandeisiaGameManager {
 
     public String whoIsLordEder() {
         /*Deve devolver o nome completo do ​Lord Éder.*/
-        return "Éderzito António Macedo Lopes";
+        return "Ederzito Antonio Macedo Lopes";
     }
 
     public int getNumberCreatures() {
@@ -709,7 +708,8 @@ public class FandeisiaGameManager {
                     addScore(c.getIdEquipa(), t.getPontos());
                     treasuresFound++;
                     treasuresRemove.add(t);
-                    c.addNrPontos(t.getPontos());
+                    c.addNrPontos(1);
+                    c.addTreasure(t);
                 }
             }
         }
