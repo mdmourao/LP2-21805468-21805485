@@ -19,6 +19,14 @@ abstract public class Team {
         this.score = score;
     }
 
+    public void addMoedas(int moedas) {
+        this.moedas += moedas;
+    }
+
+    public void removeMoedas(int moedas) {
+        this.moedas -= moedas;
+    }
+
     public void setMoedas(int moedas) {
         this.moedas = moedas;
     }
@@ -38,7 +46,6 @@ abstract public class Team {
     public void addScore(int valorAdicionar) {
         score += valorAdicionar;
     }
-
 
 
 }
