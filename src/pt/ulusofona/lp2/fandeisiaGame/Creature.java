@@ -8,7 +8,7 @@ abstract public class Creature {
     protected int idEquipa;
     protected int x;
     protected int y;
-    protected int nrPontos;
+    protected int tesourosEncontrados;
     protected ArrayList<Treasure> treasures;
     protected int custo;
     protected  String orientacao;
@@ -28,7 +28,7 @@ abstract public class Creature {
     public String toString() {
         /* “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>” */
 
-        return id + " | " + type + " | " + idEquipa + " | " + nrPontos + " @ (" + x + ", " + y + ") " + orientacao;
+        return id + " | " + type + " | " + idEquipa + " | " + tesourosEncontrados + " @ (" + x + ", " + y + ") " + orientacao;
     }
 
     abstract public String getImagePNG();
@@ -68,13 +68,13 @@ abstract public class Creature {
     }
 
 
-    public void addNrPontos(int pontosAdicionar) {
+    public void addTesourosEncontrados(int pontosAdicionar) {
         //numero de pontos corresponde a quantidade de tesouros encontrados pela criatura
-        this.nrPontos += pontosAdicionar;
+        this.tesourosEncontrados += pontosAdicionar;
     }
 
-    public int getNrPontos() {
-        return nrPontos;
+    public int getTesourosEncontrados() {
+        return tesourosEncontrados;
     }
 
     public int getIdEquipa() {
@@ -85,7 +85,43 @@ abstract public class Creature {
         treasures.add(t);
     }
 
+    public int numberTreasuresGold (){
+        int count = 0;
+        for(Treasure t: treasures){
+            if(t.getType().equals("Gold")){
+                count++;
+            }
+        }
+        return count;
+    }
 
+    public int numberTreasuresSilver (){
+        int count = 0;
+        for(Treasure t: treasures){
+            if(t.getType().equals("Silver")){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int numberTreasuresBronze (){
+        int count = 0;
+        for(Treasure t: treasures){
+            if(t.getType().equals("Bronze")){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int numberPoints(){
+        int count = 0;
+        for(Treasure t : treasures){
+            count += t.getPontos();
+        }
+        return count;
+    }
 }
 
 

@@ -14,7 +14,7 @@ public class Test_Creature {
         assertEquals("Norte", test.getOrientacao());
         assertEquals(1, test.getStepSize());
         assertEquals("Anão", test.getType());
-        assertEquals(0, test.getNrPontos());
+        assertEquals(0, test.getTesourosEncontrados());
         assertEquals(10, test.getIdEquipa());
         assertEquals(1, test.getCusto());
         assertEquals("1 | Anão | 10 | 0 @ (2, 3) Norte", test.toString());
@@ -26,7 +26,7 @@ public class Test_Creature {
         assertEquals("Este", test.getOrientacao());
         assertEquals(2, test.getStepSize());
         assertEquals("Elfo", test.getType());
-        assertEquals(0, test.getNrPontos());
+        assertEquals(0, test.getTesourosEncontrados());
         assertEquals(20, test.getIdEquipa());
         assertEquals(5, test.getCusto());
         assertEquals("2 | Elfo | 20 | 0 @ (1, 4) Este", test.toString());
@@ -38,7 +38,7 @@ public class Test_Creature {
         assertEquals("Sul", test.getOrientacao());
         assertEquals(3, test.getStepSize());
         assertEquals("Gigante", test.getType());
-        assertEquals(0, test.getNrPontos());
+        assertEquals(0, test.getTesourosEncontrados());
         assertEquals(10, test.getIdEquipa());
         assertEquals(5, test.getCusto());
         assertEquals("3 | Gigante | 10 | 0 @ (2, 5) Sul", test.toString());
@@ -51,7 +51,7 @@ public class Test_Creature {
         assertEquals("Oeste", test.getOrientacao());
         assertEquals(2, test.getStepSize());
         assertEquals("Humano", test.getType());
-        assertEquals(0, test.getNrPontos());
+        assertEquals(0, test.getTesourosEncontrados());
         assertEquals(20, test.getIdEquipa());
         assertEquals(3, test.getCusto());
         assertEquals("4 | Humano | 20 | 0 @ (3, 7) Oeste", test.toString());
@@ -63,7 +63,7 @@ public class Test_Creature {
         assertEquals("Norte", test.getOrientacao());
         assertEquals(3, test.getStepSize());
         assertEquals("Dragão", test.getType());
-        assertEquals(0, test.getNrPontos());
+        assertEquals(0, test.getTesourosEncontrados());
         assertEquals(10, test.getIdEquipa());
         assertEquals(9, test.getCusto());
         assertEquals("5 | Dragão | 10 | 0 @ (4, 8) Norte", test.toString());
@@ -304,19 +304,19 @@ public class Test_Creature {
     @Test
     public void test_addNrPontos() {
         Creature test = new Anao(1, "Anão", 10, 1, 2, "Norte", 11);
-        test.addNrPontos(2);
+        test.addTesourosEncontrados(2);
         assertEquals("1 | Anão | 10 | 13 @ (1, 2) Norte", test.toString());
         test = new Dragao(2, "Dragão", 20, 2, 3, "Sul", 12);
-        test.addNrPontos(5);
+        test.addTesourosEncontrados(5);
         assertEquals("2 | Dragão | 20 | 17 @ (2, 3) Sul", test.toString());
         test = new Elfo(3, "Elfo", 10, 3, 2, "Este", 13);
-        test.addNrPontos(2);
+        test.addTesourosEncontrados(2);
         assertEquals("3 | Elfo | 10 | 15 @ (3, 2) Este", test.toString());
         test = new Gigante(4, "Gigante", 10, 4, 4, "Oeste", 14);
-        test.addNrPontos(4);
+        test.addTesourosEncontrados(4);
         assertEquals("4 | Gigante | 10 | 18 @ (4, 4) Oeste", test.toString());
         test = new Humano(5, "Humano", 20, 5, 5, "Norte", 15);
-        test.addNrPontos(2);
+        test.addTesourosEncontrados(2);
         assertEquals("5 | Humano | 20 | 17 @ (5, 5) Norte", test.toString());
     }
 

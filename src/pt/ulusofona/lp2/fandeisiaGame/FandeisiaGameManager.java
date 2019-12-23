@@ -300,7 +300,7 @@ public class FandeisiaGameManager {
 
     public String whoIsLordEder() {
         /*Deve devolver o nome completo do ​Lord Éder.*/
-        return "Ederzito Antonio Macedo Lopes";
+        return "Ederzito António Macedo Lopes";
     }
 
     public int getNumberCreatures() {
@@ -712,7 +712,7 @@ public class FandeisiaGameManager {
                     if (c.getIdEquipa() == getCurrentTeamId()) {
                         teamAtualApanhouTreasure++;
                     }
-                    c.addNrPontos(1);
+                    c.addTesourosEncontrados(1);
                     c.addTreasure(t);
                 }
             }
@@ -806,7 +806,7 @@ public class FandeisiaGameManager {
         String[] creAll = new String[creatures.size()];
         int count = 0;
         for (Creature c : creatures) {
-            creAll[count] = c.getId() + " : " + c.getType() + " : " + c.getNrPontos();
+            creAll[count] = c.getId() + " : " + c.getType() + " : " + c.numberTreasuresGold() + " : " + c.numberTreasuresSilver() + " : " + c.numberTreasuresBronze() + " : " + c.numberPoints();
             count++;
         }
         if (ldr_10.getScore() == resistencia_20.getScore()) {
@@ -817,9 +817,6 @@ public class FandeisiaGameManager {
             results.add(resiPontos);
             results.add(turnos);
             results.add(hifen);
-            for (String s : creAll) {
-                results.add(s);
-            }
         }
 
         if (ldr_10.getScore() > resistencia_20.getScore()) {
@@ -830,9 +827,6 @@ public class FandeisiaGameManager {
             results.add(resiPontos);
             results.add(turnos);
             results.add(hifen);
-            for (String s : creAll) {
-                results.add(s);
-            }
         }
 
         if (ldr_10.getScore() < resistencia_20.getScore()) {
@@ -843,9 +837,9 @@ public class FandeisiaGameManager {
             results.add(ldrPontos);
             results.add(turnos);
             results.add(hifen);
-            for (String s : creAll) {
-                results.add(s);
-            }
+        }
+        for (String s : creAll) {
+            results.add(s);
         }
         return results;
     }
