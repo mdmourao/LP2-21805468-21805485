@@ -14,6 +14,8 @@ public class FandeisiaGameManager {
     private int columns;
     private int treasuresFound;
     private int numeroJogadas;
+    private int numeroJogadasZero;
+
 
     public FandeisiaGameManager() {
         creatures = new ArrayList<>();
@@ -22,6 +24,7 @@ public class FandeisiaGameManager {
         treasuresFound = 0;
         numeroJogadas = 0;
         currentTeamId = 10;
+        numeroJogadasZero = 0;
     }
 
     public String[][] getCreatureTypes() {
@@ -703,9 +706,11 @@ public class FandeisiaGameManager {
                     break;
             }
         }
+        numeroJogadasZero++;
         for (Creature c : creatures) {
             for (Treasure t : treasures) {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
+                    numeroJogadasZero = 0;
                     addScore(c.getIdEquipa(), t.getPontos());
                     treasuresFound++;
                     treasuresRemove.add(t);
@@ -765,6 +770,9 @@ public class FandeisiaGameManager {
             return true;
         }
         if (numeroJogadas == 15 && treasuresFound == 0) {
+            return true;
+        }
+        if(numeroJogadasZero == 15){
             return true;
         }
         int treasuresInGame = 0;
@@ -928,6 +936,7 @@ public class FandeisiaGameManager {
         numeroJogadas = 0;
         treasuresFound = 0;
         currentTeamId = 10;
+        numeroJogadasZero = 0;
     }
 }
 
