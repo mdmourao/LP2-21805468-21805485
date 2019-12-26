@@ -185,7 +185,7 @@ public class FandeisiaGameManager {
     //TODO
     public String getSpell(int x, int y) {
         /*Retorna null ou o nome do feitiço está a ser aplicado à criatura na posição x,y*/
-        return null;
+        return "";
     }
 
     public int getCoinTotal(int teamID) {
@@ -691,7 +691,8 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn() {
-        int teamAtualApanhouTreasure = 0;
+        int team10apanhouTreasure = 0;
+        int team20apanhouTreasure = 0;
         System.out.println("Estou a processar uma jogada");
         for (Creature c : creatures) {
             System.out.println(c);
@@ -767,26 +768,26 @@ public class FandeisiaGameManager {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
                     numeroJogadasZero = 0;
                     treasuresFound++;
-                    if (c.getIdEquipa() == getCurrentTeamId()) {
-                        teamAtualApanhouTreasure++;
-                    }
                     addScore(c.getIdEquipa(), t.getPontos());
                     c.addTreasurePoints(t);
                     treasuresRemove.add(t);
+                    if(c.getIdEquipa() == 10){
+                        team10apanhouTreasure++;
+                    }else {
+                        team20apanhouTreasure++;
+                    }
                 }
             }
         }
-        if (teamAtualApanhouTreasure > 0) {
-            if (getCurrentTeamId() == 10) {
-                ldr_10.addMoedas(2);
-                resistencia_20.addMoedas(1);
-            } else {
-                resistencia_20.addMoedas(2);
-                ldr_10.addMoedas(1);
-            }
+        if (team10apanhouTreasure > 0) {
+           ldr_10.addMoedas(2);
+        } else {
+            ldr_10.addMoedas(1);
+        }
+        if (team20apanhouTreasure > 0) {
+            resistencia_20.addMoedas(2);
         } else {
             resistencia_20.addMoedas(1);
-            ldr_10.addMoedas(1);
         }
         for (Treasure t : treasuresRemove) {
             treasures.remove(t);
