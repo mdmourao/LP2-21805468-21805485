@@ -576,4 +576,37 @@ public class Teste_FandeisiaGameManager {
         System.out.println("File:");
         tester.loadGame(file);
     }
+
+    @Test
+    public void test_StringApanharTreasures() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[17];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 8, orientation: Este";
+        content[2] = "id: 3, type: Dragão, teamId: 10, x: 0, y: 2, orientation: Este";
+        content[3] = "id: 4, type: Gigante, teamId: 10, x: 0, y: 3, orientation: Este";
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 0, y: 4, orientation: Este";
+
+        content[5] = "id: 6, type: Anão, teamId: 20, x: 1, y: 1, orientation: Norte";
+        content[6] = "id: 7, type: Humano, teamId: 20, x: 1, y: 2, orientation: Sul";
+        content[7] = "id: 8, type: Dragão, teamId: 20, x: 1, y: 3, orientation: Oeste";
+        content[8] = "id: 9, type: Gigante, teamId: 20, x: 1, y: 4, orientation: Norte";
+        content[9] = "id: 10, type: Elfo, teamId: 20, x: 1, y: 5, orientation: Sul";
+
+        content[10] = "id: -1, type: gold, x: 1, y: 0";
+        content[11] = "id: -2, type: bronze, x: 2, y: 0";
+        content[12] = "id: -3, type: gold, x: 2, y: 3";
+
+        content[13] = "id: -100, type: hole, x: 3, y: 1";
+        content[14] = "id: -101, type: hole, x: 3, y: 2";
+        content[15] = "id: -102, type: hole, x: 3, y: 3";
+        content[16] = "id: -103, type: hole, x: 3, y: 4";
+        tester.startGame(content, 10, 10);
+        tester.processTurn();
+        assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 3 + " @ (" + 1 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
+        tester.processTurn();
+        tester.processTurn();
+        assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 5 + " @ (" + 3 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
+
+    }
 }
