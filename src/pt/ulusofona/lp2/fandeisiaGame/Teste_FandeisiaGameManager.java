@@ -594,14 +594,77 @@ public class Teste_FandeisiaGameManager {
         content[8] = "id: -103, type: hole, x: 3, y: 4";
         tester.startGame(content, 10, 10);
         tester.processTurn();
-        assertEquals(1 + " | " + "Elfo" + " | " + 10 + " | " + 1 + " @ (" + 2 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
-        assertEquals(2 + " | " + "Elfo" + " | " + 20 + " | " + 0 + " @ (" + 2 + ", " + 1 + ") " + "Este",tester.getCreatures().get(1).toString());
+        assertEquals(1 + " | " + "Elfo" + " | " + 10 + " | " + 1 + " @ (" + 2 + ", " + 0 + ") " + "Este", tester.getCreatures().get(0).toString());
+        assertEquals(2 + " | " + "Elfo" + " | " + 20 + " | " + 0 + " @ (" + 2 + ", " + 1 + ") " + "Este", tester.getCreatures().get(1).toString());
         tester.processTurn();
-        assertEquals(1 + " | " + "Elfo" + " | " + 10 + " | " + 1 + " @ (" + 4 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
-        assertEquals(2 + " | " + "Elfo" + " | " + 20 + " | " + 1 + " @ (" + 4 + ", " + 1 + ") " + "Este",tester.getCreatures().get(1).toString());
+        assertEquals(1 + " | " + "Elfo" + " | " + 10 + " | " + 1 + " @ (" + 4 + ", " + 0 + ") " + "Este", tester.getCreatures().get(0).toString());
+        assertEquals(2 + " | " + "Elfo" + " | " + 20 + " | " + 1 + " @ (" + 4 + ", " + 1 + ") " + "Este", tester.getCreatures().get(1).toString());
         tester.processTurn();
-        assertEquals(1 + " | " + "Elfo" + " | " + 10 + " | " + 1 + " @ (" + 6 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
-        assertEquals(2 + " | " + "Elfo" + " | " + 20 + " | " + 2 + " @ (" + 6 + ", " + 1 + ") " + "Este",tester.getCreatures().get(1).toString());
+        assertEquals(1 + " | " + "Elfo" + " | " + 10 + " | " + 1 + " @ (" + 6 + ", " + 0 + ") " + "Este", tester.getCreatures().get(0).toString());
+        assertEquals(2 + " | " + "Elfo" + " | " + 20 + " | " + 2 + " @ (" + 6 + ", " + 1 + ") " + "Este", tester.getCreatures().get(1).toString());
+    }
+
+    @Test
+    public void test_gameisOver() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[4];
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
+
+        content[1] = "id: -1, type: gold, x: 2, y: 0";
+        content[2] = "id: -2, type: bronze, x: 5, y: 5";
+        content[3] = "id: -2, type: bronze, x: 6, y: 5";
+
+        tester.startGame(content, 10, 10);
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //1
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //2
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //3
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //4
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //5
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //6
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //7
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //8
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //9
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //10
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //11
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //12
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //13
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //14
+        tester.processTurn();
+        assertEquals(false, tester.gameIsOver());
+        //15
+        tester.processTurn();
+        assertEquals(true, tester.gameIsOver());
+
 
     }
+
 }
+

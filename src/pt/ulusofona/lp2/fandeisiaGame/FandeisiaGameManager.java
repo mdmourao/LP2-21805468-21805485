@@ -838,7 +838,7 @@ public class FandeisiaGameManager {
         }
         int treasuresInGame = 0;
         for (Treasure t : treasures) {
-            treasuresInGame++;
+            treasuresInGame+= t.getPontos();
         }
         if (ldr_10.getScore() + treasuresInGame < resistencia_20.getScore()) {
             return true;
