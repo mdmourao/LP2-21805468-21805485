@@ -966,10 +966,10 @@ public class FandeisiaGameManager {
 
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
-        if (teamId == 0) {
+        if (teamId == 10) {
             return ldr_10.getScore();
         }
-        if (teamId == 1) {
+        if (teamId == 20) {
             return resistencia_20.getScore();
         }
         return 0;
