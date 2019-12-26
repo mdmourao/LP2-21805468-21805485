@@ -301,24 +301,24 @@ public class Test_Creature {
         assertEquals("5 | Humano | 20 | 15 @ (5, 5) Norte", test.toString());
     }
 
-    @Test
-    public void test_addNrPontos() {
-        Creature test = new Anao(1, "Anão", 10, 1, 2, "Norte", 11);
-        test.addTesourosEncontrados();
-        assertEquals("1 | Anão | 10 | 12 @ (1, 2) Norte", test.toString());
-        test = new Dragao(2, "Dragão", 20, 2, 3, "Sul", 12);
-        test.addTesourosEncontrados();
-        assertEquals("2 | Dragão | 20 | 13 @ (2, 3) Sul", test.toString());
-        test = new Elfo(3, "Elfo", 10, 3, 2, "Este", 13);
-        test.addTesourosEncontrados();
-        assertEquals("3 | Elfo | 10 | 14 @ (3, 2) Este", test.toString());
-        test = new Gigante(4, "Gigante", 10, 4, 4, "Oeste", 14);
-        test.addTesourosEncontrados();
-        assertEquals("4 | Gigante | 10 | 15 @ (4, 4) Oeste", test.toString());
-        test = new Humano(5, "Humano", 20, 5, 5, "Norte", 15);
-        test.addTesourosEncontrados();
-        assertEquals("5 | Humano | 20 | 16 @ (5, 5) Norte", test.toString());
-    }
+//    @Test
+//    public void test_addNrPontos() {
+//        Creature test = new Anao(1, "Anão", 10, 1, 2, "Norte", 11);
+//        test.addTesourosEncontrados();
+//        assertEquals("1 | Anão | 10 | 12 @ (1, 2) Norte", test.toString());
+//        test = new Dragao(2, "Dragão", 20, 2, 3, "Sul", 12);
+//        test.addTesourosEncontrados();
+//        assertEquals("2 | Dragão | 20 | 13 @ (2, 3) Sul", test.toString());
+//        test = new Elfo(3, "Elfo", 10, 3, 2, "Este", 13);
+//        test.addTesourosEncontrados();
+//        assertEquals("3 | Elfo | 10 | 14 @ (3, 2) Este", test.toString());
+//        test = new Gigante(4, "Gigante", 10, 4, 4, "Oeste", 14);
+//        test.addTesourosEncontrados();
+//        assertEquals("4 | Gigante | 10 | 15 @ (4, 4) Oeste", test.toString());
+//        test = new Humano(5, "Humano", 20, 5, 5, "Norte", 15);
+//        test.addTesourosEncontrados();
+//        assertEquals("5 | Humano | 20 | 16 @ (5, 5) Norte", test.toString());
+//    }
 
 
 }
