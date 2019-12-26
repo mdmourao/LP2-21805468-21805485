@@ -766,13 +766,14 @@ public class FandeisiaGameManager {
             for (Treasure t : treasures) {
                 if (c.getX() == t.getX() && c.getY() == t.getY()) {
                     numeroJogadasZero = 0;
-                    addScore(c.getIdEquipa(), t.getPontos());
                     treasuresFound++;
-                    treasuresRemove.add(t);
                     if (c.getIdEquipa() == getCurrentTeamId()) {
                         teamAtualApanhouTreasure++;
                     }
-                    c.addTreasure(t);
+                    addScore(c.getIdEquipa(), t.getPontos());
+                    c.addTreasurePoints(t);
+                    c.addTesourosEncontrados();
+                    treasuresRemove.add(t);
                 }
             }
         }

@@ -605,8 +605,7 @@ public class Teste_FandeisiaGameManager {
         tester.processTurn();
         assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 1 + " @ (" + 1 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
         tester.processTurn();
-        tester.processTurn();
-        assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 2 + " @ (" + 3 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
+        assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 2 + " @ (" + 2 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
 
     }
 }

@@ -9,9 +9,11 @@ abstract public class Creature {
     protected int x;
     protected int y;
     protected int tesourosEncontrados;
-    protected ArrayList<Treasure> treasures;
+    protected int tesourosSilver;
+    protected int tesourosGold;
+    protected int tesourosBronze;
     protected int custo;
-    protected  String orientacao;
+    protected String orientacao;
     protected int stepSize;
     protected boolean congelado1Round = false;
     protected boolean congeladoForever = false;
@@ -24,13 +26,12 @@ abstract public class Creature {
         this.y = y;
         this.orientacao = orientacao;
         this.stepSize = stepSize;
-        treasures = new ArrayList<>();
     }
 
     public String toString() {
         /* “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>” */
 
-        return id + " | " + type + " | " + idEquipa + " | " + treasures.size() + " @ (" + x + ", " + y + ") " + orientacao;
+        return id + " | " + type + " | " + idEquipa + " | " + tesourosEncontrados + " @ (" + x + ", " + y + ") " + orientacao;
     }
 
     abstract public String getImagePNG();
@@ -69,10 +70,21 @@ abstract public class Creature {
         return this.type;
     }
 
+    public void addTreasurePoints(Treasure t) {
+        if(t.getType().equals("Silver")){
+            tesourosSilver++;
+        }
+        if(t.getType().equals("Gold")){
+            tesourosGold++;
+        }
+        if(t.getType().equals("Bronze")){
+            tesourosBronze++;
+        }
+    }
 
-    public void addTesourosEncontrados(int pontosAdicionar) {
+    public void addTesourosEncontrados() {
         //numero de pontos corresponde a quantidade de tesouros encontrados pela criatura
-        this.tesourosEncontrados += pontosAdicionar;
+        this.tesourosEncontrados++;
     }
 
     public int getTesourosEncontrados() {
@@ -83,77 +95,52 @@ abstract public class Creature {
         return idEquipa;
     }
 
-    public void addTreasure(Treasure t){
-        treasures.add(t);
+
+    public int numberTreasuresGold() {
+        return tesourosGold;
     }
 
-    public int numberTreasuresGold (){
-        int count = 0;
-        for(Treasure t: treasures){
-            if(t.getType().equals("Gold")){
-                count++;
-            }
-        }
-        return count;
+    public int numberTreasuresSilver() {
+        return tesourosSilver;
     }
 
-    public int numberTreasuresSilver (){
-        int count = 0;
-        for(Treasure t: treasures){
-            if(t.getType().equals("Silver")){
-                count++;
-            }
-        }
-        return count;
+    public int numberTreasuresBronze() {
+        return tesourosBronze;
     }
 
-    public int numberTreasuresBronze (){
-        int count = 0;
-        for(Treasure t: treasures){
-            if(t.getType().equals("Bronze")){
-                count++;
-            }
-        }
-        return count;
+    public int numberPoints() {
+        return numberTreasuresBronze() + numberTreasuresSilver() + numberTreasuresGold();
     }
 
-    public int numberPoints(){
-        int count = 0;
-        for(Treasure t : treasures){
-            count += t.getPontos();
-        }
-        return count;
-    }
-
-    public void stepX(int step){
+    public void stepX(int step) {
         x = x + step;
     }
 
-    public void stepY(int step){
+    public void stepY(int step) {
         y = y + step;
     }
 
-    public void alcanceDefault(){
+    public void alcanceDefault() {
         stepSize = 1;
     }
 
-    public void duplicaAlcance(){
-        stepSize = stepSize *2;
+    public void duplicaAlcance() {
+        stepSize = stepSize * 2;
     }
 
-    public void congela1Round(){
+    public void congela1Round() {
         congelado1Round = true;
     }
 
-    public void descongela1Round(){
+    public void descongela1Round() {
         congelado1Round = false;
     }
 
-    public void congelaForever(){
+    public void congelaForever() {
         congeladoForever = true;
     }
 
-    public void descongelaForever(){
+    public void descongelaForever() {
         congeladoForever = false;
     }
 
