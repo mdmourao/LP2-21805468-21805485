@@ -31,7 +31,8 @@ abstract public class Creature {
     public String toString() {
         /* “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>” */
 
-        return id + " | " + type + " | " + idEquipa + " | " + tesourosEncontrados + " @ (" + x + ", " + y + ") " + orientacao;
+        String a = numberTreasuresSilver() + numberTreasuresBronze() + numberTreasuresGold() + "";
+        return id + " | " + type + " | " + idEquipa + " | " + a + " @ (" + x + ", " + y + ") " + orientacao;
     }
 
     abstract public String getImagePNG();
