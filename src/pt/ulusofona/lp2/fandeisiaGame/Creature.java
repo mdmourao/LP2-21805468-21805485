@@ -13,6 +13,8 @@ abstract public class Creature {
     protected int custo;
     protected  String orientacao;
     protected int stepSize;
+    protected boolean congelado1Round = false;
+    protected boolean congeladoForever = false;
 
     public Creature(int id, String type, int idEquipa, int x, int y, String orientacao, int stepSize) {
         this.id = id;
@@ -121,6 +123,46 @@ abstract public class Creature {
             count += t.getPontos();
         }
         return count;
+    }
+
+    public void stepX(int step){
+        x = x + step;
+    }
+
+    public void stepY(int step){
+        y = y + step;
+    }
+
+    public void alcanceDefault(){
+        stepSize = 1;
+    }
+
+    public void duplicaAlcance(){
+        stepSize = stepSize *2;
+    }
+
+    public void congela1Round(){
+        congelado1Round = true;
+    }
+
+    public void descongela1Round(){
+        congelado1Round = false;
+    }
+
+    public void congelaForever(){
+        congeladoForever = true;
+    }
+
+    public void descongelaForever(){
+        congeladoForever = false;
+    }
+
+    public boolean isCongelado1Round() {
+        return congelado1Round;
+    }
+
+    public boolean isCongeladoForever() {
+        return congeladoForever;
     }
 }
 
