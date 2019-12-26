@@ -772,7 +772,6 @@ public class FandeisiaGameManager {
                     }
                     addScore(c.getIdEquipa(), t.getPontos());
                     c.addTreasurePoints(t);
-                    c.addTesourosEncontrados();
                     treasuresRemove.add(t);
                 }
             }

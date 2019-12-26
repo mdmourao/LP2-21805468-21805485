@@ -30,9 +30,7 @@ abstract public class Creature {
 
     public String toString() {
         /* “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>” */
-
-        String a = numberTreasuresSilver() + numberTreasuresBronze() + numberTreasuresGold() + "";
-        return id + " | " + type + " | " + idEquipa + " | " + a + " @ (" + x + ", " + y + ") " + orientacao;
+        return id + " | " + type + " | " + idEquipa + " | " + numberPoints() + " @ (" + x + ", " + y + ") " + orientacao;
     }
 
     abstract public String getImagePNG();
@@ -81,12 +79,9 @@ abstract public class Creature {
         if(t.getType().equals("Bronze")){
             tesourosBronze++;
         }
+        tesourosEncontrados++;
     }
 
-    public void addTesourosEncontrados() {
-        //numero de pontos corresponde a quantidade de tesouros encontrados pela criatura
-        this.tesourosEncontrados++;
-    }
 
     public int getTesourosEncontrados() {
         return tesourosEncontrados;
