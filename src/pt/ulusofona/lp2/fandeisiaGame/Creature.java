@@ -97,19 +97,19 @@ abstract public class Creature {
 
 
     public int numberTreasuresGold() {
-        return tesourosGold * 3;
+        return tesourosGold;
     }
 
     public int numberTreasuresSilver() {
-        return tesourosSilver * 1;
+        return tesourosSilver;
     }
 
     public int numberTreasuresBronze() {
-        return tesourosBronze * 2;
+        return tesourosBronze;
     }
 
     public int numberPoints() {
-        return numberTreasuresBronze() + numberTreasuresSilver() + numberTreasuresGold();
+        return numberTreasuresBronze() *2 + numberTreasuresSilver() + numberTreasuresGold()*3;
     }
 
     public void stepX(int step) {
