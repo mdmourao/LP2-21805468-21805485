@@ -810,6 +810,7 @@ public class FandeisiaGameManager {
 
     public List<Creature> getCreatures() {
         /*Devolve uma lista com todos os objectos Creature que existem no jogo.*/
+        
         return creatures;
     }
 
