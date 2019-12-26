@@ -30,7 +30,7 @@ abstract public class Creature {
     public String toString() {
         /* “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>” */
 
-        return id + " | " + type + " | " + idEquipa + " | " + tesourosEncontrados + " @ (" + x + ", " + y + ") " + orientacao;
+        return id + " | " + type + " | " + idEquipa + " | " + treasures.size() + " @ (" + x + ", " + y + ") " + orientacao;
     }
 
     abstract public String getImagePNG();

@@ -5,7 +5,7 @@ public class Dragao extends CreatureGira45 {
     public Dragao(int id, String tipo, int idEquipa, int x, int y, String orientacao) {
         super(id, tipo, idEquipa, x, y, orientacao, 3);
         custo = 9;
-        tesourosEncontrados = 0;
+
     }
 
     public Dragao(int id, String tipo, int idEquipa, int x, int y, String orientacao, int nrPontos) {

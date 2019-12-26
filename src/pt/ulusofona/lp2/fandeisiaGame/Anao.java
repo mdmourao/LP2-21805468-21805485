@@ -4,7 +4,6 @@ public class Anao extends CreatureGira90 {
     public Anao(int id, String tipo, int idEquipa, int x, int y, String orientacao) {
         super(id, tipo, idEquipa, x, y, orientacao, 1);
         custo = 1;
-        tesourosEncontrados = 0;
     }
 
     public Anao(int id, String tipo, int idEquipa, int x, int y, String orientacao, int nrPontos) {

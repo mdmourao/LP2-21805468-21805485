@@ -603,10 +603,10 @@ public class Teste_FandeisiaGameManager {
         content[16] = "id: -103, type: hole, x: 3, y: 4";
         tester.startGame(content, 10, 10);
         tester.processTurn();
-        assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 3 + " @ (" + 1 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
+        assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 1 + " @ (" + 1 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
         tester.processTurn();
         tester.processTurn();
-        assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 5 + " @ (" + 3 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
+        assertEquals(1 + " | " + "Anão" + " | " + 10 + " | " + 2 + " @ (" + 3 + ", " + 0 + ") " + "Este",tester.getCreatures().get(0).toString());
 
     }
 }

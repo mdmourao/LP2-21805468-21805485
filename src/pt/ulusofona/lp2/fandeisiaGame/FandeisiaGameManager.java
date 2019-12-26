@@ -772,7 +772,6 @@ public class FandeisiaGameManager {
                     if (c.getIdEquipa() == getCurrentTeamId()) {
                         teamAtualApanhouTreasure++;
                     }
-                    c.addTesourosEncontrados(1);
                     c.addTreasure(t);
                 }
             }
