@@ -121,63 +121,68 @@ public class FandeisiaGameManager {
         estiver nas coordenadas indicadas.
         Caso não seja possível aplicar o feitiço (por exemplo, nessas coordenadas não está uma criatura,
         ou esse feitiço iria levar a criatura para um buraco) deve retornar false.*/
-        Creature creature = getCreature(x,y);
-        if(creature == null){
+        Creature creature = getCreature(x, y);
+        if (creature == null) {
             return false;
         }
-        if(spellName.equals("EmpurraParaNorte")){
-            if(y - 1 >= 0 && getType(x,y) != null){
+        if (spellName.equals("EmpurraParaNorte")) {
+            if (y - 1 >= 0 && getType(x, y) != null) {
                 return false;
-            }else{
-                if(removeMoedas(getCurrentTeamId(),1))
+            } else {
+                if (removeMoedas(getCurrentTeamId(), 1))
                     creature.stepY(-1);
             }
         }
-        if(spellName.equals("EmpurraParaEste")){
-            if(x + 1 < columns && getType(x,y) != null){
+        if (spellName.equals("EmpurraParaEste")) {
+            if (x + 1 < columns && getType(x, y) != null) {
                 return false;
-            }else{
-                if(removeMoedas(getCurrentTeamId(),1))
+            } else {
+                if (removeMoedas(getCurrentTeamId(), 1))
                     creature.stepX(1);
             }
         }
-        if(spellName.equals("EmpurraParaSul")){
-            if(y + 1 < rows && getType(x,y) != null){
+        if (spellName.equals("EmpurraParaSul")) {
+            if (y + 1 < rows && getType(x, y) != null) {
                 return false;
-            }else{
-                if(removeMoedas(getCurrentTeamId(),1))
+            } else {
+                if (removeMoedas(getCurrentTeamId(), 1))
                     creature.stepY(1);
             }
         }
-        if(spellName.equals("EmpurraParaOeste")){
-            if(x - 1 >= 0 && getType(x,y) != null){
+        if (spellName.equals("EmpurraParaOeste")) {
+            if (x - 1 >= 0 && getType(x, y) != null) {
                 return false;
-            }else{
-                if(removeMoedas(getCurrentTeamId(),1))
+            } else {
+                if (removeMoedas(getCurrentTeamId(), 1)) {
                     creature.stepX(-1);
+                }
             }
         }
-        if(spellName.equals("ReduzAlcance")){
-            if(removeMoedas(getCurrentTeamId(),2))
+        if (spellName.equals("ReduzAlcance")) {
+            if (removeMoedas(getCurrentTeamId(), 2)) {
                 creature.alcanceDefault();
+            }
         }
-        if(spellName.equals("DuplicaAlcance")){
-            if(removeMoedas(getCurrentTeamId(),3))
+        if (spellName.equals("DuplicaAlcance")) {
+            if (removeMoedas(getCurrentTeamId(), 3)) {
                 creature.duplicaAlcance();
+            }
         }
-        if(spellName.equals("Congela")){
-            if(removeMoedas(getCurrentTeamId(),3))
+        if (spellName.equals("Congela")) {
+            if (removeMoedas(getCurrentTeamId(), 3)) {
                 creature.congela1Round();
+            }
 
         }
-        if(spellName.equals("Congela4Ever")){
-            if(removeMoedas(getCurrentTeamId(),10))
-                 creature.congelaForever();
-
+        if (spellName.equals("Congela4Ever")) {
+            if (removeMoedas(getCurrentTeamId(), 10)) {
+                creature.congelaForever();
+            }
         }
-        if(spellName.equals("Descongela")){
-            if(removeMoedas(getCurrentTeamId(),8))
+        if (spellName.equals("Descongela")) {
+            if (removeMoedas(getCurrentTeamId(), 8)) {
                 creature.descongelaForever();
+            }
         }
         return false;
     }
@@ -826,7 +831,7 @@ public class FandeisiaGameManager {
         if (numeroJogadas == 15 && treasuresFound == 0) {
             return true;
         }
-        if(numeroJogadasZero == 15){
+        if (numeroJogadasZero == 15) {
             return true;
         }
         int treasuresInGame = 0;
@@ -984,16 +989,16 @@ public class FandeisiaGameManager {
         }
     }
 
-    public boolean removeMoedas(int teamId, int valor){
+    public boolean removeMoedas(int teamId, int valor) {
         if (teamId == 20) {
-            if(resistencia_20.getMoedas() - valor < 0){
+            if (resistencia_20.getMoedas() - valor < 0) {
                 return false;
             }
             resistencia_20.removeMoedas(valor);
             return true;
         }
         if (teamId == 10) {
-            if(ldr_10.getMoedas() - valor < 0){
+            if (ldr_10.getMoedas() - valor < 0) {
                 return false;
             }
             ldr_10.removeMoedas(valor);
