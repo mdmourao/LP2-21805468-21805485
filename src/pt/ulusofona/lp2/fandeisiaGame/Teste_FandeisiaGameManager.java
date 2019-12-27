@@ -542,6 +542,7 @@ public class Teste_FandeisiaGameManager {
 
     }
 
+    //TODO
     @Test
     public void test_saveGameANDLoadGame() throws IOException {
         File file = new File("C:\\Users\\marti\\IdeaProjects\\LP2-21805468-21805485\\File\\test.txt");
@@ -604,6 +605,7 @@ public class Teste_FandeisiaGameManager {
         assertEquals(2 + " | " + "Elfo" + " | " + 20 + " | " + 2 + " @ (" + 6 + ", " + 1 + ") " + "Este", tester.getCreatures().get(1).toString());
     }
 
+    //TODO
     @Test
     public void test_gameisOver() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
@@ -664,6 +666,7 @@ public class Teste_FandeisiaGameManager {
         assertEquals(true, tester.gameIsOver());
     }
 
+    //TODO
     @Test
     public void test_enchant() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
@@ -680,14 +683,137 @@ public class Teste_FandeisiaGameManager {
         content[7] = "id: -102, type: hole, x: 3, y: 3";
         content[8] = "id: -103, type: hole, x: 3, y: 4";
         tester.startGame(content, 10, 10);
-        tester.enchant(0,0,"Congela4Ever");
-        assertEquals("Congela4Ever",tester.getSpell(0,0));
-        assertEquals(null,tester.getSpell(2,0));
+        tester.enchant(0, 0, "Congela4Ever");
+        assertEquals("Congela4Ever", tester.getSpell(0, 0));
+        assertEquals(null, tester.getSpell(2, 0));
         tester.processTurn();
-        assertEquals(36,tester.getCoinTotal(10));
+        assertEquals(36, tester.getCoinTotal(10));
 
 
     }
+
+    //TODO
+    @Test
+    public void test_getCreatureTypes() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getSpellTypes() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_aplicarFeitico() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_valorFeitico() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getSpell() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getCoinTotal() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getCustoTotalCreaures() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_whoIsLordEder() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getNumberCreatures() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getNumberTreasures() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getNumberHoles() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getResults() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getAuthors() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getElementId() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getCreature() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getType() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_getCurrentTeamId() {
+
+    }
+
+
+    //TODO
+    @Test
+    public void test_Scores() {
+
+    }
+
+
+    //TODO
+    @Test
+    public void test_removeMoedas() {
+
+    }
+
+    //TODO
+    @Test
+    public void test_clearAllData() {
+
+    }
+
 
 }
 

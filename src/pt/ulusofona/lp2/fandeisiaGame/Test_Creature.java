@@ -301,6 +301,7 @@ public class Test_Creature {
         assertEquals("5 | Humano | 20 | 15 @ (5, 5) Norte", test.toString());
     }
 
+    //TODO
 //    @Test
 //    public void test_addNrPontos() {
 //        Creature test = new Anao(1, "Anão", 10, 1, 2, "Norte", 11);

@@ -18,8 +18,6 @@ public class FandeisiaGameManager {
     private int numeroJogadas;
     private int numeroJogadasZero;
     private HashMap<Point, String> feiticos;
-    private int dinheiroProvisorioFeitios;
-
 
     public FandeisiaGameManager() {
         creatures = new ArrayList<>();
@@ -136,63 +134,72 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaNorte")) {
             if (y - 1 >= 0 && getType(x, y - 1) == null) {
-                feiticos.put(p, "EmpurraParaNorte");
-                removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaNorte"));
-                return true;
+                if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaNorte"))) {
+                    feiticos.put(p, "EmpurraParaNorte");
+                    return true;
+                }
             } else {
                 return false;
             }
         }
         if (spellName.equals("EmpurraParaEste")) {
             if (x + 1 < columns && getType(x + 1, y) == null) {
-                feiticos.put(p, "EmpurraParaEste");
-                removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaEste"));
-                return true;
+                if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaEste"))) {
+                    feiticos.put(p, "EmpurraParaEste");
+                    return true;
+                }
             } else {
                 return false;
             }
         }
         if (spellName.equals("EmpurraParaSul")) {
             if (y + 1 < rows && getType(x, y + 1) == null) {
-                feiticos.put(p, "EmpurraParaSul");
-                removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaSul"));
-                return true;
+                if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaSul"))) {
+                    feiticos.put(p, "EmpurraParaSul");
+                    return true;
+                }
             } else {
                 return false;
             }
         }
         if (spellName.equals("EmpurraParaOeste")) {
             if (x - 1 >= 0 && getType(x - 1, y) == null) {
-                feiticos.put(p, "EmpurraParaOeste");
-                removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaOeste"));
-                return true;
+                if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaOeste"))) {
+                    feiticos.put(p, "EmpurraParaOeste");
+                    return true;
+                }
             } else {
                 return false;
             }
         }
         if (spellName.equals("ReduzAlcance")) {
-            feiticos.put(p, "ReduzAlcance");
-            removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"));
+            if(removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"))){
+                feiticos.put(p, "ReduzAlcance");
+            }
             return true;
         }
         if (spellName.equals("DuplicaAlcance")) {
-            feiticos.put(p, "DuplicaAlcance");
-            removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance"));
+            if( removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance"))){
+                feiticos.put(p, "DuplicaAlcance");
+            }
             return true;
         }
         if (spellName.equals("Congela")) {
-            feiticos.put(p, "Congela");
-            removeMoedas(getCurrentTeamId(), valorFeitico("Congela"));
+            if(removeMoedas(getCurrentTeamId(), valorFeitico("Congela"))){
+                feiticos.put(p, "Congela");
+            }
             return true;
         }
         if (spellName.equals("Congela4Ever")) {
-            feiticos.put(p, "Congela4Ever");
-            removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"));
+            if(removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"))){
+                feiticos.put(p, "Congela4Ever");
+            }
             return true;
         }
         if (spellName.equals("Descongela")) {
-            feiticos.put(p, "Descongela");
-            removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"));
+            if(removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"))){
+                feiticos.put(p, "Descongela");
+            }
             return true;
         }
         return false;
@@ -306,7 +313,7 @@ public class FandeisiaGameManager {
 
     }
 
-    //TODO
+    //TODO number types tresure
     public boolean saveGame(File fich) {
         /*Deve gravar o jogo actual para o ficheiro
         indicado no argumento.*/
@@ -338,7 +345,7 @@ public class FandeisiaGameManager {
         return true;
     }
 
-    //TODO
+    //TODO number types tresure
     public boolean loadGame(File fich) {
         clearAllData();
         Scanner scanner;
@@ -1110,7 +1117,6 @@ public class FandeisiaGameManager {
         }
         return false;
     }
-
 
     private void ordenarCreaturesById(List<Creature> creatures) {
         Creature[] ordenado = Ordenacao.ordenarCreatureById(creatures.toArray(new Creature[0]));
