@@ -662,7 +662,27 @@ public class Teste_FandeisiaGameManager {
         //15
         tester.processTurn();
         assertEquals(true, tester.gameIsOver());
+    }
 
+    @Test
+    public void test_enchant() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[9];
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
+
+        content[2] = "id: -1, type: gold, x: 2, y: 0";
+        content[3] = "id: -2, type: bronze, x: 4, y: 1";
+        content[4] = "id: -3, type: gold, x: 6, y: 1";
+
+        content[5] = "id: -100, type: hole, x: 3, y: 1";
+        content[6] = "id: -101, type: hole, x: 3, y: 2";
+        content[7] = "id: -102, type: hole, x: 3, y: 3";
+        content[8] = "id: -103, type: hole, x: 3, y: 4";
+        tester.startGame(content, 10, 10);
+        tester.enchant(0,0,"EmpurraParaEste");
+        assertEquals("EmpurraParaEste",tester.getSpell(0,0));
+        assertEquals(null,tester.getSpell(2,0));
 
     }
 
