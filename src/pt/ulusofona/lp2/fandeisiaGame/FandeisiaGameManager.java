@@ -17,7 +17,7 @@ public class FandeisiaGameManager {
     private int treasuresFound;
     private int numeroJogadas;
     private int numeroJogadasZero;
-    private HashMap<Point,String> feitico;
+    private HashMap<Point,String> feiticos;
     private int dinheiroProvisorioFeitios;
 
 
@@ -29,7 +29,7 @@ public class FandeisiaGameManager {
         numeroJogadas = 0;
         currentTeamId = 10;
         numeroJogadasZero = 0;
-        feitico = new HashMap<>();
+        feiticos = new HashMap<>();
     }
 
     public String[][] getCreatureTypes() {
@@ -136,7 +136,7 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaNorte")) {
             if (y - 1 >= 0 && getType(x, y - 1) == null) {
-                feitico.put(p,"EmpurraParaNorte");
+                feiticos.put(p,"EmpurraParaNorte");
                 return true;
             } else {
                 return false;
@@ -144,7 +144,7 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaEste")) {
             if (x + 1 < columns && getType(x + 1, y) == null) {
-                feitico.put(p,"EmpurraParaEste");
+                feiticos.put(p,"EmpurraParaEste");
                 return true;
             } else {
                 return false;
@@ -152,7 +152,7 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaSul")) {
             if (y + 1 < rows && getType(x, y + 1) == null) {
-                feitico.put(p,"EmpurraParaSul");
+                feiticos.put(p,"EmpurraParaSul");
                 return true;
             } else {
                 return false;
@@ -160,30 +160,30 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaOeste")) {
             if (x - 1 >= 0 && getType(x - 1, y) == null) {
-                feitico.put(p,"EmpurraParaOeste");
+                feiticos.put(p,"EmpurraParaOeste");
                 return true;
             } else {
               return false;
             }
         }
         if (spellName.equals("ReduzAlcance")) {
-            feitico.put(p,"ReduzAlcance");
+            feiticos.put(p,"ReduzAlcance");
             return true;
         }
         if (spellName.equals("DuplicaAlcance")) {
-            feitico.put(p,"DuplicaAlcance");
+            feiticos.put(p,"DuplicaAlcance");
             return true;
         }
         if (spellName.equals("Congela")) {
-            feitico.put(p,"Congela");
+            feiticos.put(p,"Congela");
             return true;
         }
         if (spellName.equals("Congela4Ever")) {
-            feitico.put(p,"Congela4Ever");
+            feiticos.put(p,"Congela4Ever");
             return true;
         }
         if (spellName.equals("Descongela")) {
-            feitico.put(p,"Descongela");
+            feiticos.put(p,"Descongela");
             return true;
         }
         return false;
@@ -273,7 +273,7 @@ public class FandeisiaGameManager {
     public String getSpell(int x, int y) {
         /*Retorna null ou o nome do feitiço está a ser aplicado à criatura na posição x,y*/
         Point p = new Point(x,y);
-        return feitico.get(p);
+        return feiticos.get(p);
     }
 
     public int getCoinTotal(int teamID) {
@@ -785,9 +785,11 @@ public class FandeisiaGameManager {
         int team20apanhouTreasure = 0;
         System.out.println("Estou a processar uma jogada");
         for(Creature c: creatures){
-            if(getSpell(c.getX(),c.getY()) != null){
-                if(getCoinTotal(getCurrentTeamId()) - valorFeitico(getSpell(c.getX(),c.getY())) >= 0){
+            String spell = getSpell(c.getX(),c.getY());
+            if(spell != null){
+                if(getCoinTotal(getCurrentTeamId()) - valorFeitico(spell) >= 0){
                     aplicarFeitico(c.getX(),c.getY(),getSpell(c.getX(),c.getY()));
+                    removeMoedas(getCurrentTeamId(),valorFeitico(spell));
                 }
             }
         }
@@ -795,6 +797,13 @@ public class FandeisiaGameManager {
         numeroJogadas++;
         int step;
         for (Creature c : creatures) {
+            if(c.isCongelado1Round()){
+                c.descongela1Round();
+                continue;
+            }
+            if(c.isCongeladoForever()){
+                continue;
+            }
             String orientacao = c.getOrientacao();
             step = c.getStepSize();
             switch (orientacao) {
@@ -892,10 +901,7 @@ public class FandeisiaGameManager {
         } else {
             setCurrentTeamId(10);
         }
-        System.out.println("Sai assim");
-        for (Creature c : creatures) {
-            System.out.println(c);
-        }
+        feiticos = new HashMap<>();
     }
 
     public List<Creature> getCreatures() {
@@ -1111,7 +1117,7 @@ public class FandeisiaGameManager {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
         holes = new ArrayList<>();
-        feitico = new HashMap<>();
+        feiticos = new HashMap<>();
         ldr_10 = new LDR_10();
         resistencia_20 = new Resistencia_20();
         numeroJogadas = 0;

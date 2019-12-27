@@ -684,6 +684,7 @@ public class Teste_FandeisiaGameManager {
         assertEquals("EmpurraParaEste",tester.getSpell(0,0));
         assertEquals(null,tester.getSpell(2,0));
 
+
     }
 
 }
