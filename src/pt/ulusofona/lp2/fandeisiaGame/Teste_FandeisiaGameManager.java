@@ -680,9 +680,11 @@ public class Teste_FandeisiaGameManager {
         content[7] = "id: -102, type: hole, x: 3, y: 3";
         content[8] = "id: -103, type: hole, x: 3, y: 4";
         tester.startGame(content, 10, 10);
-        tester.enchant(0,0,"EmpurraParaEste");
-        assertEquals("EmpurraParaEste",tester.getSpell(0,0));
+        tester.enchant(0,0,"Congela4Ever");
+        assertEquals("Congela4Ever",tester.getSpell(0,0));
         assertEquals(null,tester.getSpell(2,0));
+        tester.processTurn();
+        assertEquals(36,tester.getCoinTotal(10));
 
 
     }

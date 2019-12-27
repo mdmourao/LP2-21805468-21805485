@@ -789,7 +789,7 @@ public class FandeisiaGameManager {
             if(spell != null){
                 if(getCoinTotal(getCurrentTeamId()) - valorFeitico(spell) >= 0){
                     aplicarFeitico(c.getX(),c.getY(),getSpell(c.getX(),c.getY()));
-                    removeMoedas(getCurrentTeamId(),valorFeitico(spell));
+                    removeMoedas(c.getIdEquipa(),valorFeitico(spell));
                 }
             }
         }
@@ -882,16 +882,16 @@ public class FandeisiaGameManager {
                 }
             }
         }
-        if (team10apanhouTreasure > 0) {
-           ldr_10.addMoedas(2);
-        } else {
-            ldr_10.addMoedas(1);
-        }
-        if (team20apanhouTreasure > 0) {
-            resistencia_20.addMoedas(2);
-        } else {
-            resistencia_20.addMoedas(1);
-        }
+//        if (team10apanhouTreasure > 0) {
+//           ldr_10.addMoedas(2);
+//        } else {
+//            ldr_10.addMoedas(1);
+//        }
+//        if (team20apanhouTreasure > 0) {
+//            resistencia_20.addMoedas(2);
+//        } else {
+//            resistencia_20.addMoedas(1);
+//        }
         for (Treasure t : treasuresRemove) {
             treasures.remove(t);
         }
