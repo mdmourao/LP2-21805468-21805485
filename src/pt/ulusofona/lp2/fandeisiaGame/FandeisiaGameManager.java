@@ -137,6 +137,7 @@ public class FandeisiaGameManager {
         if (spellName.equals("EmpurraParaNorte")) {
             if (y - 1 >= 0 && getType(x, y - 1) == null) {
                 feiticos.put(p, "EmpurraParaNorte");
+                removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaNorte"));
                 return true;
             } else {
                 return false;
@@ -145,6 +146,7 @@ public class FandeisiaGameManager {
         if (spellName.equals("EmpurraParaEste")) {
             if (x + 1 < columns && getType(x + 1, y) == null) {
                 feiticos.put(p, "EmpurraParaEste");
+                removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaEste"));
                 return true;
             } else {
                 return false;
@@ -153,6 +155,7 @@ public class FandeisiaGameManager {
         if (spellName.equals("EmpurraParaSul")) {
             if (y + 1 < rows && getType(x, y + 1) == null) {
                 feiticos.put(p, "EmpurraParaSul");
+                removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaSul"));
                 return true;
             } else {
                 return false;
@@ -161,6 +164,7 @@ public class FandeisiaGameManager {
         if (spellName.equals("EmpurraParaOeste")) {
             if (x - 1 >= 0 && getType(x - 1, y) == null) {
                 feiticos.put(p, "EmpurraParaOeste");
+                removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaOeste"));
                 return true;
             } else {
                 return false;
@@ -168,22 +172,27 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("ReduzAlcance")) {
             feiticos.put(p, "ReduzAlcance");
+            removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"));
             return true;
         }
         if (spellName.equals("DuplicaAlcance")) {
             feiticos.put(p, "DuplicaAlcance");
+            removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance"));
             return true;
         }
         if (spellName.equals("Congela")) {
             feiticos.put(p, "Congela");
+            removeMoedas(getCurrentTeamId(), valorFeitico("Congela"));
             return true;
         }
         if (spellName.equals("Congela4Ever")) {
             feiticos.put(p, "Congela4Ever");
+            removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"));
             return true;
         }
         if (spellName.equals("Descongela")) {
             feiticos.put(p, "Descongela");
+            removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"));
             return true;
         }
         return false;
@@ -788,7 +797,6 @@ public class FandeisiaGameManager {
             String spell = getSpell(c.getX(), c.getY());
             if (spell != null) {
                 aplicarFeitico(c.getX(), c.getY(), getSpell(c.getX(), c.getY()));
-                removeMoedas(getCurrentTeamId(), valorFeitico(spell));
             }
         }
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
@@ -1087,16 +1095,16 @@ public class FandeisiaGameManager {
 
     public boolean removeMoedas(int teamId, int valor) {
         if (teamId == 20) {
-//            if (resistencia_20.getMoedas() - valor < 0) {
-//                return false;
-//            }
+            if (resistencia_20.getMoedas() - valor < 0) {
+                return false;
+            }
             resistencia_20.removeMoedas(valor);
             return true;
         }
         if (teamId == 10) {
-//            if (ldr_10.getMoedas() - valor < 0) {
-//                return false;
-//            }
+            if (ldr_10.getMoedas() - valor < 0) {
+                return false;
+            }
             ldr_10.removeMoedas(valor);
             return true;
         }
