@@ -17,7 +17,7 @@ public class FandeisiaGameManager {
     private int treasuresFound;
     private int numeroJogadas;
     private int numeroJogadasZero;
-    private HashMap<Point,String> feiticos;
+    private HashMap<Point, String> feiticos;
     private int dinheiroProvisorioFeitios;
 
 
@@ -122,12 +122,12 @@ public class FandeisiaGameManager {
     }
 
     public boolean enchant(int x, int y, String spellName) {
-        Point p = new Point(x,y);
+        Point p = new Point(x, y);
         /*Aplica o feitiço indicado à criatura que
         estiver nas coordenadas indicadas.
         Caso não seja possível aplicar o feitiço (por exemplo, nessas coordenadas não está uma criatura,
         ou esse feitiço iria levar a criatura para um buraco) deve retornar false.*/
-        if(x >= columns || y >= rows || x < 0 || y < 0){
+        if (x >= columns || y >= rows || x < 0 || y < 0) {
             return false;
         }
         Creature creature = getCreature(x, y);
@@ -136,7 +136,7 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaNorte")) {
             if (y - 1 >= 0 && getType(x, y - 1) == null) {
-                feiticos.put(p,"EmpurraParaNorte");
+                feiticos.put(p, "EmpurraParaNorte");
                 return true;
             } else {
                 return false;
@@ -144,7 +144,7 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaEste")) {
             if (x + 1 < columns && getType(x + 1, y) == null) {
-                feiticos.put(p,"EmpurraParaEste");
+                feiticos.put(p, "EmpurraParaEste");
                 return true;
             } else {
                 return false;
@@ -152,7 +152,7 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaSul")) {
             if (y + 1 < rows && getType(x, y + 1) == null) {
-                feiticos.put(p,"EmpurraParaSul");
+                feiticos.put(p, "EmpurraParaSul");
                 return true;
             } else {
                 return false;
@@ -160,36 +160,36 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("EmpurraParaOeste")) {
             if (x - 1 >= 0 && getType(x - 1, y) == null) {
-                feiticos.put(p,"EmpurraParaOeste");
+                feiticos.put(p, "EmpurraParaOeste");
                 return true;
             } else {
-              return false;
+                return false;
             }
         }
         if (spellName.equals("ReduzAlcance")) {
-            feiticos.put(p,"ReduzAlcance");
+            feiticos.put(p, "ReduzAlcance");
             return true;
         }
         if (spellName.equals("DuplicaAlcance")) {
-            feiticos.put(p,"DuplicaAlcance");
+            feiticos.put(p, "DuplicaAlcance");
             return true;
         }
         if (spellName.equals("Congela")) {
-            feiticos.put(p,"Congela");
+            feiticos.put(p, "Congela");
             return true;
         }
         if (spellName.equals("Congela4Ever")) {
-            feiticos.put(p,"Congela4Ever");
+            feiticos.put(p, "Congela4Ever");
             return true;
         }
         if (spellName.equals("Descongela")) {
-            feiticos.put(p,"Descongela");
+            feiticos.put(p, "Descongela");
             return true;
         }
         return false;
     }
 
-    public void aplicarFeitico(int x, int y, String spellName){
+    public void aplicarFeitico(int x, int y, String spellName) {
         Creature creature = getCreature(x, y);
         if (creature == null) {
             return;
@@ -239,12 +239,12 @@ public class FandeisiaGameManager {
         }
     }
 
-    public int valorFeitico(String spellName){
+    public int valorFeitico(String spellName) {
         if (spellName.equals("EmpurraParaNorte")) {
-           return 1;
+            return 1;
         }
         if (spellName.equals("EmpurraParaEste")) {
-           return 1;
+            return 1;
         }
         if (spellName.equals("EmpurraParaSul")) {
             return 1;
@@ -253,7 +253,7 @@ public class FandeisiaGameManager {
             return 1;
         }
         if (spellName.equals("ReduzAlcance")) {
-           return 2;
+            return 2;
         }
         if (spellName.equals("DuplicaAlcance")) {
             return 3;
@@ -265,14 +265,14 @@ public class FandeisiaGameManager {
             return 10;
         }
         if (spellName.equals("Descongela")) {
-           return 8;
+            return 8;
         }
         return 0;
     }
 
     public String getSpell(int x, int y) {
         /*Retorna null ou o nome do feitiço está a ser aplicado à criatura na posição x,y*/
-        Point p = new Point(x,y);
+        Point p = new Point(x, y);
         return feiticos.get(p);
     }
 
@@ -784,24 +784,22 @@ public class FandeisiaGameManager {
         int team10apanhouTreasure = 0;
         int team20apanhouTreasure = 0;
         System.out.println("Estou a processar uma jogada");
-        for(Creature c: creatures){
-            String spell = getSpell(c.getX(),c.getY());
-            if(spell != null){
-                if(getCoinTotal(getCurrentTeamId()) - valorFeitico(spell) >= 0){
-                    aplicarFeitico(c.getX(),c.getY(),getSpell(c.getX(),c.getY()));
-                    removeMoedas(c.getIdEquipa(),valorFeitico(spell));
-                }
+        for (Creature c : creatures) {
+            String spell = getSpell(c.getX(), c.getY());
+            if (spell != null) {
+                aplicarFeitico(c.getX(), c.getY(), getSpell(c.getX(), c.getY()));
+                removeMoedas(getCurrentTeamId(), valorFeitico(spell));
             }
         }
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
         numeroJogadas++;
         int step;
         for (Creature c : creatures) {
-            if(c.isCongelado1Round()){
+            if (c.isCongelado1Round()) {
                 c.descongela1Round();
                 continue;
             }
-            if(c.isCongeladoForever()){
+            if (c.isCongeladoForever()) {
                 continue;
             }
             String orientacao = c.getOrientacao();
@@ -874,24 +872,25 @@ public class FandeisiaGameManager {
                     addScore(c.getIdEquipa(), t.getPontos());
                     c.addTreasurePoints(t);
                     treasuresRemove.add(t);
-                    if(c.getIdEquipa() == 10){
+                    if (c.getIdEquipa() == 10) {
                         team10apanhouTreasure++;
-                    }else {
+                    } else {
                         team20apanhouTreasure++;
                     }
                 }
             }
         }
-//        if (team10apanhouTreasure > 0) {
-//           ldr_10.addMoedas(2);
-//        } else {
-//            ldr_10.addMoedas(1);
-//        }
-//        if (team20apanhouTreasure > 0) {
-//            resistencia_20.addMoedas(2);
-//        } else {
-//            resistencia_20.addMoedas(1);
-//        }
+
+        if (team10apanhouTreasure > 0) {
+            ldr_10.addMoedas(2);
+        } else {
+            ldr_10.addMoedas(1);
+        }
+        if (team20apanhouTreasure > 0) {
+            resistencia_20.addMoedas(2);
+        } else {
+            resistencia_20.addMoedas(1);
+        }
         for (Treasure t : treasuresRemove) {
             treasures.remove(t);
         }
@@ -906,7 +905,7 @@ public class FandeisiaGameManager {
 
     public List<Creature> getCreatures() {
         /*Devolve uma lista com todos os objectos Creature que existem no jogo.*/
-        
+
         return creatures;
     }
 
@@ -933,7 +932,7 @@ public class FandeisiaGameManager {
         }
         int treasuresInGame = 0;
         for (Treasure t : treasures) {
-            treasuresInGame+= t.getPontos();
+            treasuresInGame += t.getPontos();
         }
         if (ldr_10.getScore() + treasuresInGame < resistencia_20.getScore()) {
             return true;
@@ -1088,16 +1087,16 @@ public class FandeisiaGameManager {
 
     public boolean removeMoedas(int teamId, int valor) {
         if (teamId == 20) {
-            if (resistencia_20.getMoedas() - valor < 0) {
-                return false;
-            }
+//            if (resistencia_20.getMoedas() - valor < 0) {
+//                return false;
+//            }
             resistencia_20.removeMoedas(valor);
             return true;
         }
         if (teamId == 10) {
-            if (ldr_10.getMoedas() - valor < 0) {
-                return false;
-            }
+//            if (ldr_10.getMoedas() - valor < 0) {
+//                return false;
+//            }
             ldr_10.removeMoedas(valor);
             return true;
         }
