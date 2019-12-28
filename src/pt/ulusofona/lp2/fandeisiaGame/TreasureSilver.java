@@ -3,7 +3,7 @@ package pt.ulusofona.lp2.fandeisiaGame;
 public class TreasureSilver extends Treasure {
     TreasureSilver(int id, int x, int y){
         super(id, x, y);
-        this.pontos = 1;
+        this.pontos = 2;
         type = "Silver";
     }
 
