@@ -1139,4 +1139,3 @@ public class FandeisiaGameManager {
         numeroJogadasZero = 0;
     }
 }
-

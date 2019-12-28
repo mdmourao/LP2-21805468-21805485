@@ -105,7 +105,7 @@ abstract public class Creature {
     }
 
     public int numberPoints() {
-        return numberTreasuresBronze() *2 + numberTreasuresSilver() + numberTreasuresGold()*3;
+        return numberTreasuresBronze() + numberTreasuresSilver()*2 + numberTreasuresGold()*3;
     }
 
     public void stepX(int step) {
