@@ -18,7 +18,7 @@ public class FandeisiaGameManager {
     private int numeroJogadas;
     private int numeroJogadasZero;
     private HashMap<Point, String> feiticos;
-    private HashMap<Point, String> posicoesOcupadas;
+    //private HashMap<Point, String> posicoesOcupadas;
 
     public FandeisiaGameManager() {
         creatures = new ArrayList<>();
@@ -29,7 +29,6 @@ public class FandeisiaGameManager {
         currentTeamId = 10;
         numeroJogadasZero = 0;
         feiticos = new HashMap<>();
-        posicoesOcupadas = new HashMap<>();
     }
 
     public String[][] getCreatureTypes() {
@@ -135,11 +134,10 @@ public class FandeisiaGameManager {
             return false;
         }
         if (spellName.equals("EmpurraParaNorte")) {
-            if (y - 1 >= 0 && getType(x, y - 1) == null && posicoesOcupadas.get(new Point(x,y-1)) == null) {
+            if (y - 1 >= 0 && getType(x, y - 1) == null ) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaNorte"))) {
                     feiticos.put(p, "EmpurraParaNorte");
                     Point p1 = new Point(x, y-1);
-                    posicoesOcupadas.put(p1,"");
                     return true;
                 }
             } else {
@@ -147,11 +145,10 @@ public class FandeisiaGameManager {
             }
         }
         if (spellName.equals("EmpurraParaEste")) {
-            if (x + 1 < columns && getType(x + 1, y) == null && posicoesOcupadas.get(new Point(x+1,y)) == null) {
+            if (x + 1 < columns && getType(x + 1, y) == null) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaEste"))) {
                     feiticos.put(p, "EmpurraParaEste");
                     Point p1 = new Point(x+1, y);
-                    posicoesOcupadas.put(p1,"");
                     return true;
                 }
             } else {
@@ -159,11 +156,10 @@ public class FandeisiaGameManager {
             }
         }
         if (spellName.equals("EmpurraParaSul")) {
-            if (y + 1 < rows && getType(x, y + 1) == null  && posicoesOcupadas.get(new Point(x,y+1)) == null) {
+            if (y + 1 < rows && getType(x, y + 1) == null   ) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaSul"))) {
                     feiticos.put(p, "EmpurraParaSul");
                     Point p1 = new Point(x, y+1);
-                    posicoesOcupadas.put(p1,"");
                     return true;
                 }
             } else {
@@ -171,11 +167,10 @@ public class FandeisiaGameManager {
             }
         }
         if (spellName.equals("EmpurraParaOeste")) {
-            if (x - 1 >= 0 && getType(x - 1, y) == null  && posicoesOcupadas.get(new Point(x - 1,y)) == null) {
+            if (x - 1 >= 0 && getType(x - 1, y) == null  ) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaOeste"))) {
                     feiticos.put(p, "EmpurraParaOeste");
                     Point p1 = new Point(x - 1, y);
-                    posicoesOcupadas.put(p1,"");
                     return true;
                 }
             } else {
@@ -817,6 +812,25 @@ public class FandeisiaGameManager {
             }
         }
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
+        for (Creature c : creatures) {
+            for (Treasure t : treasures) {
+                if (c.getX() == t.getX() && c.getY() == t.getY()) {
+                    numeroJogadasZero = 0;
+                    treasuresFound++;
+                    addScore(c.getIdEquipa(), t.getPontos());
+                    c.addTreasurePoints(t);
+                    treasuresRemove.add(t);
+                    if (c.getIdEquipa() == 10) {
+                        team10apanhouTreasure++;
+                    } else {
+                        team20apanhouTreasure++;
+                    }
+                }
+            }
+        }
+        for (Treasure t : treasuresRemove) {
+            treasures.remove(t);
+        }
         numeroJogadas++;
         int step;
         for (Creature c : creatures) {
@@ -926,7 +940,6 @@ public class FandeisiaGameManager {
             setCurrentTeamId(10);
         }
         feiticos = new HashMap<>();
-        posicoesOcupadas = new HashMap<>();
     }
 
     public List<Creature> getCreatures() {
@@ -1141,7 +1154,6 @@ public class FandeisiaGameManager {
         treasures = new ArrayList<>();
         holes = new ArrayList<>();
         feiticos = new HashMap<>();
-        posicoesOcupadas = new HashMap<>();
         ldr_10 = new LDR_10();
         resistencia_20 = new Resistencia_20();
         numeroJogadas = 0;
