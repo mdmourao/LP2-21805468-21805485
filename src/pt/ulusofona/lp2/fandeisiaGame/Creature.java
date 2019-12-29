@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 abstract public class Creature {
@@ -147,6 +148,8 @@ abstract public class Creature {
     public boolean isCongeladoForever() {
         return congeladoForever;
     }
+
+   abstract public Point simulaMovimentoDuplicado();
 }
 
 

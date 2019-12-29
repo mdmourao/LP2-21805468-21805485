@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
+import java.awt.*;
+
 abstract public class CreatureGira45 extends Creature {
 
     public CreatureGira45(int id, String tipo, int idEquipa, int x, int y, String orientacao, int stepSize) {
@@ -68,6 +70,42 @@ abstract public class CreatureGira45 extends Creature {
                 orientacao = "Norte";
                 break;
         }
+    }
+
+    public Point simulaMovimentoDuplicado() {
+        int x1 = x;
+        int y1 = y;
+        switch (orientacao) {
+            case "Este":
+                x1 += stepSize * 2;
+                break;
+            case "Oeste":
+                x1 -= stepSize * 2;
+                break;
+            case "Norte":
+                y1 -= stepSize * 2;
+                break;
+            case "Sul":
+                y1 += stepSize * 2;
+                break;
+            case "Nordeste":
+                x1 += stepSize * 2;
+                y1 -= stepSize * 2;
+                break;
+            case "Sudeste":
+                x1 += stepSize * 2;
+                y1 += stepSize * 2;
+                break;
+            case "Sudoeste":
+                x1 -= stepSize * 2;
+                y1 += stepSize * 2;
+                break;
+            case "Noroeste":
+                x1 -= stepSize * 2;
+                y1 -= stepSize * 2;
+                break;
+        }
+        return new Point(x1, y1);
     }
 
     abstract public boolean possoSaltarPorcima(int numberCreatures, int numberHoles);

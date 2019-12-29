@@ -120,15 +120,14 @@ public class FandeisiaGameManager {
         return army;
     }
 
+
+    //TODO fazer o check que se faz no duplica para o reduz
     public boolean enchant(int x, int y, String spellName) {
         Point p = new Point(x, y);
         /*Aplica o feitiço indicado à criatura que
         estiver nas coordenadas indicadas.
         Caso não seja possível aplicar o feitiço (por exemplo, nessas coordenadas não está uma criatura,
         ou esse feitiço iria levar a criatura para um buraco) deve retornar false.*/
-        if (x >= columns || y >= rows || x < 0 || y < 0) {
-            return false;
-        }
         Creature creature = getCreature(x, y);
         if (creature == null) {
             return false;
@@ -180,32 +179,40 @@ public class FandeisiaGameManager {
         if (spellName.equals("ReduzAlcance")) {
             if(removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"))){
                 feiticos.put(p, "ReduzAlcance");
+                return true;
             }
-            return true;
+            return false;
         }
         if (spellName.equals("DuplicaAlcance")) {
             if( removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance"))){
-                feiticos.put(p, "DuplicaAlcance");
+                Point p2 = creature.simulaMovimentoDuplicado();
+                if(getType(p2.x,p2.y) == null){
+                    feiticos.put(p, "DuplicaAlcance");
+                    return true;
+                }
             }
-            return true;
+            return false;
         }
         if (spellName.equals("Congela")) {
             if(removeMoedas(getCurrentTeamId(), valorFeitico("Congela"))){
                 feiticos.put(p, "Congela");
+                return true;
             }
-            return true;
+            return false;
         }
         if (spellName.equals("Congela4Ever")) {
             if(removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"))){
                 feiticos.put(p, "Congela4Ever");
+                return true;
             }
-            return true;
+            return false;
         }
         if (spellName.equals("Descongela")) {
             if(removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"))){
                 feiticos.put(p, "Descongela");
+                return true;
             }
-            return true;
+            return false;
         }
         return false;
     }
@@ -1148,6 +1155,7 @@ public class FandeisiaGameManager {
             this.creatures.add(c);
         }
     }
+
 
     private void clearAllData() {
         creatures = new ArrayList<>();
