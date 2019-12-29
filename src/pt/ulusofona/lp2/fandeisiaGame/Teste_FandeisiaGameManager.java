@@ -686,6 +686,7 @@ public class Teste_FandeisiaGameManager {
         tester.startGame(content, 10, 10);
         assertEquals(false,tester.enchant(0, 0, "DuplicaAlcance"));
         tester.processTurn();
+        assertEquals(1,tester.getElementId(1,0));
 
 
     }

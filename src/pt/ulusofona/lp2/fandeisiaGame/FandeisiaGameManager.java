@@ -133,10 +133,10 @@ public class FandeisiaGameManager {
             return false;
         }
         if (spellName.equals("EmpurraParaNorte")) {
-            if (y - 1 >= 0 && getType(x, y - 1) == null ) {
+            if (y - 1 >= 0 && getType(x, y - 1) == null) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaNorte"))) {
                     feiticos.put(p, "EmpurraParaNorte");
-                    Point p1 = new Point(x, y-1);
+                    Point p1 = new Point(x, y - 1);
                     return true;
                 }
             } else {
@@ -147,7 +147,7 @@ public class FandeisiaGameManager {
             if (x + 1 < columns && getType(x + 1, y) == null) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaEste"))) {
                     feiticos.put(p, "EmpurraParaEste");
-                    Point p1 = new Point(x+1, y);
+                    Point p1 = new Point(x + 1, y);
                     return true;
                 }
             } else {
@@ -155,10 +155,10 @@ public class FandeisiaGameManager {
             }
         }
         if (spellName.equals("EmpurraParaSul")) {
-            if (y + 1 < rows && getType(x, y + 1) == null   ) {
+            if (y + 1 < rows && getType(x, y + 1) == null) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaSul"))) {
                     feiticos.put(p, "EmpurraParaSul");
-                    Point p1 = new Point(x, y+1);
+                    Point p1 = new Point(x, y + 1);
                     return true;
                 }
             } else {
@@ -166,7 +166,7 @@ public class FandeisiaGameManager {
             }
         }
         if (spellName.equals("EmpurraParaOeste")) {
-            if (x - 1 >= 0 && getType(x - 1, y) == null  ) {
+            if (x - 1 >= 0 && getType(x - 1, y) == null) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaOeste"))) {
                     feiticos.put(p, "EmpurraParaOeste");
                     Point p1 = new Point(x - 1, y);
@@ -177,38 +177,36 @@ public class FandeisiaGameManager {
             }
         }
         if (spellName.equals("ReduzAlcance")) {
-            if(removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"))){
+            if (removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"))) {
                 feiticos.put(p, "ReduzAlcance");
                 return true;
             }
             return false;
         }
         if (spellName.equals("DuplicaAlcance")) {
-            if( removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance"))){
-                Point p2 = creature.simulaMovimentoDuplicado();
-                if(getType(p2.x,p2.y) == null){
-                    feiticos.put(p, "DuplicaAlcance");
-                    return true;
-                }
+            Point p2 = creature.simulaMovimentoDuplicado();
+            if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance"))){
+                feiticos.put(p, "DuplicaAlcance");
+                return true;
             }
             return false;
         }
         if (spellName.equals("Congela")) {
-            if(removeMoedas(getCurrentTeamId(), valorFeitico("Congela"))){
+            if (removeMoedas(getCurrentTeamId(), valorFeitico("Congela"))) {
                 feiticos.put(p, "Congela");
                 return true;
             }
             return false;
         }
         if (spellName.equals("Congela4Ever")) {
-            if(removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"))){
+            if (removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"))) {
                 feiticos.put(p, "Congela4Ever");
                 return true;
             }
             return false;
         }
         if (spellName.equals("Descongela")) {
-            if(removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"))){
+            if (removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"))) {
                 feiticos.put(p, "Descongela");
                 return true;
             }
@@ -292,7 +290,7 @@ public class FandeisiaGameManager {
         if (spellName.equals("Congela4Ever")) {
             return 10;
         }
-            if (spellName.equals("Descongela")) {
+        if (spellName.equals("Descongela")) {
             return 8;
         }
         return 0;
