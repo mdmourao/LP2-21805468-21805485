@@ -188,7 +188,7 @@ public class FandeisiaGameManager {
             Point p2 = creature.simulaMovimentoDuplicado();
             if (getType(p2.x, p2.y) == null && !creature.isJaEstouDuplicado() && removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance")) ) {
                 creature.setJaEstouDuplicado(true);
-                feiticos.put(p, "DuplicaAlcance ");
+                feiticos.put(p, "DuplicaAlcance");
                 return true;
             }
             return false;
