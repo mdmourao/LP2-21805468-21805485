@@ -135,6 +135,9 @@ public class FandeisiaGameManager {
         if(feiticos.get(p) != null){
             return false;
         }
+        if(spellName == null){
+            return false;
+        }
         if (spellName.equals("EmpurraParaNorte")) {
             if (y - 1 >= 0 && getType(x, y - 1) == null) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaNorte"))) {
