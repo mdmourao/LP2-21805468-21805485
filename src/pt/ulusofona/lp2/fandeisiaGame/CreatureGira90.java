@@ -64,6 +64,26 @@ abstract public class CreatureGira90 extends Creature {
         return new Point(x1, y1);
     }
 
+    public Point simulaMovimentoDefault(){
+        int x1 = x;
+        int y1 = y;
+        switch (orientacao) {
+            case "Este":
+                x1 += 1;
+                break;
+            case "Oeste":
+                x1 -= 1;
+                break;
+            case "Norte":
+                y1 -= 1;
+                break;
+            case "Sul":
+                y1 += 1;
+                break;
+        }
+        return new Point(x1, y1);
+    }
+
     abstract public boolean possoSaltarPorcima(int numberCreatures, int numberHoles);
 
 

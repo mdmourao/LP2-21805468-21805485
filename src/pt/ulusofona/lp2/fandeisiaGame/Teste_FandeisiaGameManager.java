@@ -670,21 +670,22 @@ public class Teste_FandeisiaGameManager {
     @Test
     public void test_enchant() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
-        String[] content = new String[9];
+        String[] content = new String[7];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
         // 00 10 20
-        content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 5, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 8, orientation: Este";
+        content[2] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
 
-        content[2] = "id: -1, type: gold, x: 6, y: 0";
-        content[3] = "id: -2, type: bronze, x: 4, y: 1";
-        content[4] = "id: -3, type: gold, x: 6, y: 1";
 
-        content[5] = "id: -100, type: hole, x: 2, y: 0";
-        content[6] = "id: -101, type: hole, x: 3, y: 2";
-        content[7] = "id: -102, type: hole, x: 3, y: 3";
-        content[8] = "id: -103, type: hole, x: 3, y: 4";
-        tester.startGame(content, 10, 10);
+        content[3] = "id: -100, type: hole, x: 2, y: 0";
+        content[4] = "id: -101, type: hole, x: 12, y: 0";
+        content[5] = "id: -102, type: hole, x: 3, y: 3";
+        content[6] = "id: -103, type: hole, x: 3, y: 4";
+        tester.startGame(content, 20, 20);
         assertEquals(false,tester.enchant(0, 0, "DuplicaAlcance"));
+        assertEquals(false,tester.enchant(8, 0, "DuplicaAlcance"));
+        assertEquals(true,tester.enchant(0, 1, "DuplicaAlcance"));
+        assertEquals(false,tester.enchant(0, 1, "DuplicaAlcance"));
         tester.processTurn();
         assertEquals(1,tester.getElementId(1,0));
 

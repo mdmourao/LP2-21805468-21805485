@@ -18,6 +18,7 @@ abstract public class Creature {
     protected int stepSize;
     protected boolean congelado1Round = false;
     protected boolean congeladoForever = false;
+    protected boolean jaEstouDuplicado = false;
 
     public Creature(int id, String type, int idEquipa, int x, int y, String orientacao, int stepSize) {
         this.id = id;
@@ -71,13 +72,13 @@ abstract public class Creature {
     }
 
     public void addTreasurePoints(Treasure t) {
-        if(t.getType().equals("Silver")){
+        if (t.getType().equals("Silver")) {
             tesourosSilver++;
         }
-        if(t.getType().equals("Gold")){
+        if (t.getType().equals("Gold")) {
             tesourosGold++;
         }
-        if(t.getType().equals("Bronze")){
+        if (t.getType().equals("Bronze")) {
             tesourosBronze++;
         }
         tesourosEncontrados++;
@@ -106,7 +107,7 @@ abstract public class Creature {
     }
 
     public int numberPoints() {
-        return numberTreasuresBronze() + numberTreasuresSilver()*2 + numberTreasuresGold()*3;
+        return numberTreasuresBronze() + numberTreasuresSilver() * 2 + numberTreasuresGold() * 3;
     }
 
     public void stepX(int step) {
@@ -123,6 +124,15 @@ abstract public class Creature {
 
     public void duplicaAlcance() {
         stepSize = stepSize * 2;
+        jaEstouDuplicado = true;
+    }
+
+    public boolean isJaEstouDuplicado() {
+        return jaEstouDuplicado;
+    }
+
+    public void setJaEstouDuplicado(boolean jaEstouDuplicado) {
+        this.jaEstouDuplicado = jaEstouDuplicado;
     }
 
     public void congela1Round() {
@@ -149,7 +159,9 @@ abstract public class Creature {
         return congeladoForever;
     }
 
-   abstract public Point simulaMovimentoDuplicado();
+    abstract public Point simulaMovimentoDuplicado();
+
+    abstract public Point simulaMovimentoDefault();
 }
 
 
