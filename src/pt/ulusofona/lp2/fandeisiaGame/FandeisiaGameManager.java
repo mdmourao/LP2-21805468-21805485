@@ -840,9 +840,6 @@ public class FandeisiaGameManager {
             }
             String orientacao = c.getOrientacao();
             step = c.getStepSize();
-            if(c.estouDuplicado  || c.estouReduzido){
-                c.stepToStepDefault();
-            }
             switch (orientacao) {
                 case "Este":
                     if (c.getX() + step < columns && (getType(c.getX() + step, c.getY()) == null) && checkSaltarPorCima(c)) {
@@ -900,6 +897,9 @@ public class FandeisiaGameManager {
                         c.gira();
                     }
                     break;
+            }
+            if(c.estouDuplicado  || c.estouReduzido){
+                c.stepToStepDefault();
             }
         }
         numeroJogadasZero++;
