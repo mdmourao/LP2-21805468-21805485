@@ -9,8 +9,8 @@ public class FandeisiaGameManager {
     private List<Creature> creatures;
     private List<Treasure> treasures;
     private List<Hole> holes;
-    private Team ldr_10 = new LDR_10();
-    private Team resistencia_20 = new Resistencia_20();
+    private Team ldr10 = new ldr10();
+    private Team resistencia20 = new Resistencia20();
     private int currentTeamId;
     private int rows;
     private int columns;
@@ -317,9 +317,9 @@ public class FandeisiaGameManager {
 
     public int getCoinTotal(int teamID) {
         if (teamID == 10) {
-            return ldr_10.getMoedas();
+            return ldr10.getMoedas();
         } else {
-            return resistencia_20.getMoedas();
+            return resistencia20.getMoedas();
         }
     }
 
@@ -350,14 +350,14 @@ public class FandeisiaGameManager {
                 writer.write(h.toString() + "\n");
             }
             writer.write("\n");
-            writer.write("Pontos10 " + ldr_10.getScore() + "\n");
-            writer.write("Pontos20 " + resistencia_20.getScore() + "\n");
+            writer.write("Pontos10 " + ldr10.getScore() + "\n");
+            writer.write("Pontos20 " + resistencia20.getScore() + "\n");
             writer.write("treasuresFound " + treasuresFound + "\n");
             writer.write("numeroJogadas " + numeroJogadas + "\n");
             writer.write("rows " + rows + "\n");
             writer.write("columns " + columns + "\n");
-            writer.write("Moedas10 " + ldr_10.getMoedas() + "\n");
-            writer.write("Moedas20 " + resistencia_20.getMoedas() + "\n");
+            writer.write("Moedas10 " + ldr10.getMoedas() + "\n");
+            writer.write("Moedas20 " + resistencia20.getMoedas() + "\n");
             writer.write("currentTeamId " + currentTeamId + "\n");
             writer.close();
         } catch (IOException e) {
@@ -449,10 +449,10 @@ public class FandeisiaGameManager {
                 try {
                     switch (splitConteudo1[0]) {
                         case "Pontos10":
-                            ldr_10.setScore(Integer.parseInt(splitConteudo1[1]));
+                            ldr10.setScore(Integer.parseInt(splitConteudo1[1]));
                             break;
                         case "Pontos20":
-                            resistencia_20.setScore(Integer.parseInt(splitConteudo1[1]));
+                            resistencia20.setScore(Integer.parseInt(splitConteudo1[1]));
                             break;
                         case "treasuresFound":
                             treasuresFound = Integer.parseInt(splitConteudo1[1]);
@@ -467,10 +467,10 @@ public class FandeisiaGameManager {
                             columns = Integer.parseInt(splitConteudo1[1]);
                             break;
                         case "Moedas10":
-                            ldr_10.setMoedas(Integer.parseInt(splitConteudo1[1]));
+                            ldr10.setMoedas(Integer.parseInt(splitConteudo1[1]));
                             break;
                         case "Moedas20":
-                            resistencia_20.setMoedas(Integer.parseInt(splitConteudo1[1]));
+                            resistencia20.setMoedas(Integer.parseInt(splitConteudo1[1]));
                             break;
                         case "currentTeamId":
                             currentTeamId = Integer.parseInt(splitConteudo1[1]);
@@ -642,8 +642,8 @@ public class FandeisiaGameManager {
         if (getCustoTotalCreaures(20) > 50) {
             return 3;
         }
-        ldr_10.removeMoedas(getCustoTotalCreaures(10));
-        resistencia_20.removeMoedas(getCustoTotalCreaures(20));
+        ldr10.removeMoedas(getCustoTotalCreaures(10));
+        resistencia20.removeMoedas(getCustoTotalCreaures(20));
         return 0;
     }
 
@@ -921,14 +921,14 @@ public class FandeisiaGameManager {
         }
 
         if (team10apanhouTreasure > 0) {
-            ldr_10.addMoedas(2);
+            ldr10.addMoedas(2);
         } else {
-            ldr_10.addMoedas(1);
+            ldr10.addMoedas(1);
         }
         if (team20apanhouTreasure > 0) {
-            resistencia_20.addMoedas(2);
+            resistencia20.addMoedas(2);
         } else {
-            resistencia_20.addMoedas(1);
+            resistencia20.addMoedas(1);
         }
         for (Treasure t : treasuresRemove) {
             treasures.remove(t);
@@ -972,10 +972,10 @@ public class FandeisiaGameManager {
         for (Treasure t : treasures) {
             treasuresInGame += t.getPontos();
         }
-        if (ldr_10.getScore() + treasuresInGame < resistencia_20.getScore()) {
+        if (ldr10.getScore() + treasuresInGame < resistencia20.getScore()) {
             return true;
         }
-        if (resistencia_20.getScore() + treasuresInGame < ldr_10.getScore()) {
+        if (resistencia20.getScore() + treasuresInGame < ldr10.getScore()) {
             return true;
         }
         return false;
@@ -1000,8 +1000,8 @@ public class FandeisiaGameManager {
         ArrayList<String> results = new ArrayList<>();
         String welcome = "Welcome to FANDEISIA";
         String res = "";
-        String ldrPontos = "LDR: " + ldr_10.getScore();
-        String resiPontos = "RESISTENCIA: " + resistencia_20.getScore();
+        String ldrPontos = "LDR: " + ldr10.getScore();
+        String resiPontos = "RESISTENCIA: " + resistencia20.getScore();
         String turnos = "Nr. de Turnos jogados: " + numeroJogadas;
         String hifen = "-----";
         String[] creAll = new String[creatures.size()];
@@ -1010,7 +1010,7 @@ public class FandeisiaGameManager {
             creAll[count] = c.getId() + " : " + c.getType() + " : " + c.numberTreasuresGold() + " : " + c.numberTreasuresSilver() + " : " + c.numberTreasuresBronze() + " : " + c.numberPoints();
             count++;
         }
-        if (ldr_10.getScore() == resistencia_20.getScore()) {
+        if (ldr10.getScore() == resistencia20.getScore()) {
             res = "Resultado: EMPATE";
             results.add(welcome);
             results.add(res);
@@ -1020,7 +1020,7 @@ public class FandeisiaGameManager {
             results.add(hifen);
         }
 
-        if (ldr_10.getScore() > resistencia_20.getScore()) {
+        if (ldr10.getScore() > resistencia20.getScore()) {
             res = "Resultado: Vitória da equipa LDR";
             results.add(welcome);
             results.add(res);
@@ -1030,7 +1030,7 @@ public class FandeisiaGameManager {
             results.add(hifen);
         }
 
-        if (ldr_10.getScore() < resistencia_20.getScore()) {
+        if (ldr10.getScore() < resistencia20.getScore()) {
             res = "Resultado: Vitória da equipa RESISTENCIA";
             results.add(welcome);
             results.add(res);
@@ -1106,36 +1106,36 @@ public class FandeisiaGameManager {
     public int getCurrentScore(int teamId) {
         /*Deve devolver o número actual de pontos da equipa que tem o ID teamID.*/
         if (teamId == 10) {
-            return ldr_10.getScore();
+            return ldr10.getScore();
         }
         if (teamId == 20) {
-            return resistencia_20.getScore();
+            return resistencia20.getScore();
         }
         return 0;
     }
 
     public void addScore(int teamId, int valor) {
         if (teamId == 20) {
-            resistencia_20.addScore(valor);
+            resistencia20.addScore(valor);
         }
         if (teamId == 10) {
-            ldr_10.addScore(valor);
+            ldr10.addScore(valor);
         }
     }
 
     public boolean removeMoedas(int teamId, int valor) {
         if (teamId == 20) {
-            if (resistencia_20.getMoedas() - valor < 0) {
+            if (resistencia20.getMoedas() - valor < 0) {
                 return false;
             }
-            resistencia_20.removeMoedas(valor);
+            resistencia20.removeMoedas(valor);
             return true;
         }
         if (teamId == 10) {
-            if (ldr_10.getMoedas() - valor < 0) {
+            if (ldr10.getMoedas() - valor < 0) {
                 return false;
             }
-            ldr_10.removeMoedas(valor);
+            ldr10.removeMoedas(valor);
             return true;
         }
         return false;
@@ -1156,8 +1156,8 @@ public class FandeisiaGameManager {
         treasures = new ArrayList<>();
         holes = new ArrayList<>();
         feiticos = new HashMap<>();
-        ldr_10 = new LDR_10();
-        resistencia_20 = new Resistencia_20();
+        ldr10 = new ldr10();
+        resistencia20 = new Resistencia20();
         numeroJogadas = 0;
         treasuresFound = 0;
         currentTeamId = 10;

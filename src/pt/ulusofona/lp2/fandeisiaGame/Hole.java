@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.fandeisiaGame;
 
 public class Hole {
     protected int id;
-    protected static final String type = "hole";
+    protected static final String TYPE = "hole";
     protected int x;
     protected int y;
 
@@ -17,7 +17,7 @@ public class Hole {
     }
 
     public String getType() {
-        return type;
+        return TYPE;
     }
 
     public int getX() {
@@ -34,6 +34,6 @@ public class Hole {
 
     @Override
     public String toString() {
-        return id +" | " + type + " @ (" + x + ", " + y + ")";
+        return id +" | " + TYPE + " @ (" + x + ", " + y + ")";
     }
 }
