@@ -324,8 +324,6 @@ public class FandeisiaGameManager {
     }
 
     public int getCustoTotalCreaures(int teamID) {
-        /*Deve devolver o número total de moedas
-        fantásticas da equipa que tem o ID teamID.*/
         int coinTotal = 0;
         for (Creature c : creatures) {
             if (c.getIdEquipa() == teamID) {
