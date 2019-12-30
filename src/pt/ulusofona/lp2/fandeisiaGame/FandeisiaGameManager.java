@@ -1150,6 +1150,7 @@ public class FandeisiaGameManager {
     }
 
 
+
     private void clearAllData() {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
