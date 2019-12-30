@@ -131,7 +131,6 @@ abstract public class Creature {
         return estouDuplicado;
     }
 
-
     public void congela1Round() {
         congelado1Round = true;
     }

@@ -184,6 +184,9 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("ReduzAlcance")) {
             Point p2 = creature.simulaMovimentoDefault();
+            if(p2.x >= rows || p2.y >= columns || p2.x < 0 || p2.y < 0){
+                return false;
+            }
             if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"))) {
                 feiticos.put(p, "ReduzAlcance");
                 return true;
@@ -192,6 +195,9 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("DuplicaAlcance")) {
             Point p2 = creature.simulaMovimentoDuplicado();
+            if(p2.x >= rows || p2.y >= columns || p2.x < 0 || p2.y < 0){
+                return false;
+            }
             if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance")) ) {
                 feiticos.put(p, "DuplicaAlcance");
                 return true;
