@@ -302,6 +302,7 @@ public class Test_Creature {
     }
 
     //TODO
+    //TODO check dos novos metodos
 //    @Test
 //    public void test_addNrPontos() {
 //        Creature test = new Anao(1, "Anão", 10, 1, 2, "Norte", 11);
