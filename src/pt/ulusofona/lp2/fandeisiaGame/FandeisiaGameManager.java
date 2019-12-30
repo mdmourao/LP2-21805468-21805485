@@ -206,14 +206,14 @@ public class FandeisiaGameManager {
             return false;
         }
         if (spellName.equals("Congela4Ever")) {
-            if (removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"))) {
+            if (!creature.isCongeladoForever() && removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever")) ) {
                 feiticos.put(p, "Congela4Ever");
                 return true;
             }
             return false;
         }
         if (spellName.equals("Descongela")) {
-            if (removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"))) {
+            if (creature.isCongeladoForever() && removeMoedas(getCurrentTeamId(), valorFeitico("Descongela")) ) {
                 feiticos.put(p, "Descongela");
                 return true;
             }
