@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 abstract public class Creature {
     protected int id;
@@ -16,9 +15,11 @@ abstract public class Creature {
     protected int custo;
     protected String orientacao;
     protected int stepSize;
+    protected int stepSizeDefault;
     protected boolean congelado1Round = false;
     protected boolean congeladoForever = false;
-    protected boolean jaEstouDuplicado = false;
+    protected boolean estouDuplicado = false;
+    protected boolean estouReduzido = false;
 
     public Creature(int id, String type, int idEquipa, int x, int y, String orientacao, int stepSize) {
         this.id = id;
@@ -84,7 +85,6 @@ abstract public class Creature {
         tesourosEncontrados++;
     }
 
-
     public int getTesourosEncontrados() {
         return tesourosEncontrados;
     }
@@ -92,7 +92,6 @@ abstract public class Creature {
     public int getIdEquipa() {
         return idEquipa;
     }
-
 
     public int numberTreasuresGold() {
         return tesourosGold;
@@ -119,21 +118,19 @@ abstract public class Creature {
     }
 
     public void alcanceDefault() {
+        estouReduzido = true;
         stepSize = 1;
     }
 
     public void duplicaAlcance() {
         stepSize = stepSize * 2;
-        jaEstouDuplicado = true;
+        estouDuplicado = true;
     }
 
-    public boolean isJaEstouDuplicado() {
-        return jaEstouDuplicado;
+    public boolean estouDuplicado() {
+        return estouDuplicado;
     }
 
-    public void setJaEstouDuplicado(boolean jaEstouDuplicado) {
-        this.jaEstouDuplicado = jaEstouDuplicado;
-    }
 
     public void congela1Round() {
         congelado1Round = true;
@@ -157,6 +154,12 @@ abstract public class Creature {
 
     public boolean isCongeladoForever() {
         return congeladoForever;
+    }
+
+    public void stepToStepDefault(){
+        estouDuplicado = false;
+        estouReduzido = false;
+        stepSize = stepSizeDefault;
     }
 
     abstract public Point simulaMovimentoDuplicado();

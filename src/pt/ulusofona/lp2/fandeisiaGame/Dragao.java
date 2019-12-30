@@ -9,6 +9,7 @@ public class Dragao extends CreatureGira45 {
         tesourosSilver = 0;
         tesourosGold = 0;
         tesourosBronze = 0;
+        stepSizeDefault = 3;
     }
 
     public Dragao(int id, String tipo, int idEquipa, int x, int y, String orientacao, int nrPontos) {
@@ -18,6 +19,7 @@ public class Dragao extends CreatureGira45 {
         tesourosSilver = 0;
         tesourosGold = 0;
         tesourosBronze = 0;
+        stepSizeDefault = 3;
     }
 
     public String getImagePNG() {

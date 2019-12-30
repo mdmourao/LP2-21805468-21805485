@@ -8,6 +8,7 @@ public class Elfo extends CreatureGira45 {
         tesourosSilver = 0;
         tesourosGold = 0;
         tesourosBronze = 0;
+        stepSizeDefault = 2;
     }
 
     public Elfo(int id, String tipo, int idEquipa, int x, int y, String orientacao, int nrPontos) {
@@ -17,6 +18,7 @@ public class Elfo extends CreatureGira45 {
         tesourosSilver = 0;
         tesourosGold = 0;
         tesourosBronze = 0;
+        stepSizeDefault = 2;
     }
 
 

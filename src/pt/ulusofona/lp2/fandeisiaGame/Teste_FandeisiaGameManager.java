@@ -686,6 +686,8 @@ public class Teste_FandeisiaGameManager {
         assertEquals(false,tester.enchant(8, 0, "DuplicaAlcance"));
         assertEquals(true,tester.enchant(0, 1, "DuplicaAlcance"));
         assertEquals(false,tester.enchant(0, 1, "DuplicaAlcance"));
+        assertEquals(true,tester.enchant(0, 8, "EmpurraParaEste"));
+        assertEquals(false,tester.enchant(0, 8, "EmpurraParaSul"));
         tester.processTurn();
         assertEquals(1,tester.getElementId(1,0));
 

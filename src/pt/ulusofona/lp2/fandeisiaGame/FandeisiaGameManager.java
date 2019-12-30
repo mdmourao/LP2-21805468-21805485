@@ -132,6 +132,9 @@ public class FandeisiaGameManager {
         if (creature == null) {
             return false;
         }
+        if(feiticos.get(p) != null){
+            return false;
+        }
         if (spellName.equals("EmpurraParaNorte")) {
             if (y - 1 >= 0 && getType(x, y - 1) == null) {
                 if (removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaNorte"))) {
@@ -186,8 +189,7 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("DuplicaAlcance")) {
             Point p2 = creature.simulaMovimentoDuplicado();
-            if (getType(p2.x, p2.y) == null && !creature.isJaEstouDuplicado() && removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance")) ) {
-                creature.setJaEstouDuplicado(true);
+            if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance")) ) {
                 feiticos.put(p, "DuplicaAlcance");
                 return true;
             }
@@ -819,25 +821,6 @@ public class FandeisiaGameManager {
             }
         }
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
-        for (Creature c : creatures) {
-            for (Treasure t : treasures) {
-                if (c.getX() == t.getX() && c.getY() == t.getY()) {
-                    numeroJogadasZero = 0;
-                    treasuresFound++;
-                    addScore(c.getIdEquipa(), t.getPontos());
-                    c.addTreasurePoints(t);
-                    treasuresRemove.add(t);
-                    if (c.getIdEquipa() == 10) {
-                        team10apanhouTreasure++;
-                    } else {
-                        team20apanhouTreasure++;
-                    }
-                }
-            }
-        }
-        for (Treasure t : treasuresRemove) {
-            treasures.remove(t);
-        }
         numeroJogadas++;
         int step;
         for (Creature c : creatures) {
@@ -850,6 +833,9 @@ public class FandeisiaGameManager {
             }
             String orientacao = c.getOrientacao();
             step = c.getStepSize();
+            if(c.estouDuplicado  || c.estouReduzido){
+                c.stepToStepDefault();
+            }
             switch (orientacao) {
                 case "Este":
                     if (c.getX() + step < columns && (getType(c.getX() + step, c.getY()) == null) && checkSaltarPorCima(c)) {

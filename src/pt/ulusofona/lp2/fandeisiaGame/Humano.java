@@ -10,6 +10,7 @@ public class Humano extends CreatureGira90 {
         tesourosSilver = 0;
         tesourosGold = 0;
         tesourosBronze = 0;
+        stepSizeDefault = 2;
     }
 
     public Humano(int id, String tipo, int idEquipa, int x, int y, String orientacao, int nrPontos) {
@@ -19,6 +20,7 @@ public class Humano extends CreatureGira90 {
         tesourosSilver = 0;
         tesourosGold = 0;
         tesourosBronze = 0;
+        stepSizeDefault = 2;
     }
 
 
