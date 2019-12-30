@@ -9,7 +9,7 @@ public class FandeisiaGameManager {
     private List<Creature> creatures;
     private List<Treasure> treasures;
     private List<Hole> holes;
-    private Team ldr10 = new ldr10();
+    private Team ldr10 = new Ldr10();
     private Team resistencia20 = new Resistencia20();
     private int currentTeamId;
     private int rows;
@@ -1156,7 +1156,7 @@ public class FandeisiaGameManager {
         treasures = new ArrayList<>();
         holes = new ArrayList<>();
         feiticos = new HashMap<>();
-        ldr10 = new ldr10();
+        ldr10 = new Ldr10();
         resistencia20 = new Resistencia20();
         numeroJogadas = 0;
         treasuresFound = 0;
