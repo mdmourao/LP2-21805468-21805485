@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
+import java.util.Random;
 
 public class FandeisiaGameManager {
     private List<Creature> creatures;
@@ -109,17 +110,27 @@ public class FandeisiaGameManager {
         return spellsString;
     }
 
-    //TODO (colocar mais inteligente)
-    public Map<String, Integer> createComputerArmy() {
-        Map<String, Integer> army = new HashMap<>();
-        army.put("Dragão", 1);
-        army.put("Anão", 1);
-        army.put("Elfo", 1);
-        army.put("Gigante", 1);
-        army.put("Humano", 1);
-        return army;
+    public void toggleAI(boolean active){
     }
 
+    public Map<String, Integer> createComputerArmy() {
+        Random gerador = new Random();
+        int qtdAnao = gerador.nextInt(10) + 1; // 1 a 10
+        int qtdDragao = 1;
+        int qtdElfo = gerador.nextInt(3) + 1; // 1 a 2
+        int qtdGigante = 1;
+        int qtdHumano = gerador.nextInt(4) + 1; // 1 a 3
+        if (qtdAnao < 5) {
+            qtdHumano += 2;
+        }
+        Map<String, Integer> army = new HashMap<>();
+        army.put("Dragão", qtdDragao);
+        army.put("Anão", qtdAnao);
+        army.put("Elfo", qtdElfo);
+        army.put("Gigante", qtdGigante);
+        army.put("Humano", qtdHumano);
+        return army;
+    }
 
     //TODO fazer o check que se faz no duplica para o reduz
     public boolean enchant(int x, int y, String spellName) {
@@ -132,10 +143,10 @@ public class FandeisiaGameManager {
         if (creature == null) {
             return false;
         }
-        if(feiticos.get(p) != null){
+        if (feiticos.get(p) != null) {
             return false;
         }
-        if(spellName == null){
+        if (spellName == null) {
             return false;
         }
         if (spellName.equals("EmpurraParaNorte")) {
@@ -184,7 +195,7 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("ReduzAlcance")) {
             Point p2 = creature.simulaMovimentoDefault();
-            if(p2.x >= rows || p2.y >= columns || p2.x < 0 || p2.y < 0){
+            if (p2.x >= rows || p2.y >= columns || p2.x < 0 || p2.y < 0) {
                 return false;
             }
             if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"))) {
@@ -195,10 +206,10 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("DuplicaAlcance")) {
             Point p2 = creature.simulaMovimentoDuplicado();
-            if(p2.x >= rows || p2.y >= columns || p2.x < 0 || p2.y < 0){
+            if (p2.x >= rows || p2.y >= columns || p2.x < 0 || p2.y < 0) {
                 return false;
             }
-            if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance")) ) {
+            if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance"))) {
                 feiticos.put(p, "DuplicaAlcance");
                 return true;
             }
@@ -212,14 +223,14 @@ public class FandeisiaGameManager {
             return false;
         }
         if (spellName.equals("Congela4Ever")) {
-            if (!creature.isCongeladoForever() && removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever")) ) {
+            if (!creature.isCongeladoForever() && removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"))) {
                 feiticos.put(p, "Congela4Ever");
                 return true;
             }
             return false;
         }
         if (spellName.equals("Descongela")) {
-            if (creature.isCongeladoForever() && removeMoedas(getCurrentTeamId(), valorFeitico("Descongela")) ) {
+            if (creature.isCongeladoForever() && removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"))) {
                 feiticos.put(p, "Descongela");
                 return true;
             }
@@ -828,6 +839,25 @@ public class FandeisiaGameManager {
             }
         }
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
+        for (Creature c : creatures) {
+            for (Treasure t : treasures) {
+                if (c.getX() == t.getX() && c.getY() == t.getY()) {
+                    numeroJogadasZero = 0;
+                    treasuresFound++;
+                    addScore(c.getIdEquipa(), t.getPontos());
+                    c.addTreasurePoints(t);
+                    treasuresRemove.add(t);
+                    if (c.getIdEquipa() == 10) {
+                        team10apanhouTreasure++;
+                    } else {
+                        team20apanhouTreasure++;
+                    }
+                }
+            }
+        }
+        for (Treasure t : treasuresRemove) {
+            treasures.remove(t);
+        }
         numeroJogadas++;
         int step;
         for (Creature c : creatures) {
@@ -898,7 +928,7 @@ public class FandeisiaGameManager {
                     }
                     break;
             }
-            if(c.estouDuplicado  || c.estouReduzido){
+            if (c.estouDuplicado || c.estouReduzido) {
                 c.stepToStepDefault();
             }
         }
@@ -1148,7 +1178,6 @@ public class FandeisiaGameManager {
             this.creatures.add(c);
         }
     }
-
 
 
     private void clearAllData() {

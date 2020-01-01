@@ -611,7 +611,6 @@ public class Teste_FandeisiaGameManager {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[5];
         content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
-
         content[1] = "id: -1, type: gold, x: 2, y: 0";
         content[2] = "id: -2, type: bronze, x: 5, y: 5";
         content[3] = "id: -3, type: bronze, x: 6, y: 5";
