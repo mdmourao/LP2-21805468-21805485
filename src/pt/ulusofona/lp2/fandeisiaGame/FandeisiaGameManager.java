@@ -110,6 +110,7 @@ public class FandeisiaGameManager {
         return spellsString;
     }
 
+    //TODO
     public void toggleAI(boolean active){
     }
 
@@ -194,7 +195,7 @@ public class FandeisiaGameManager {
             }
         }
         if (spellName.equals("ReduzAlcance")) {
-            Point p2 = creature.simulaMovimentoDefault();
+            Point p2 = creature.simulaMovimentoStepMinimo();
             if (p2.x >= rows || p2.y >= columns || p2.x < 0 || p2.y < 0) {
                 return false;
             }
@@ -273,7 +274,7 @@ public class FandeisiaGameManager {
             }
         }
         if (spellName.equals("ReduzAlcance")) {
-            creature.alcanceDefault();
+            creature.alcanceMinimo();
         }
         if (spellName.equals("DuplicaAlcance")) {
             creature.duplicaAlcance();
@@ -583,19 +584,24 @@ public class FandeisiaGameManager {
             try {
                 id = Integer.parseInt(s1[0]);
             } catch (NumberFormatException e) {
+                continue;
             }
+
             String tipo = s1[1];
             try {
                 teamId = Integer.parseInt(s1[2]);
             } catch (NumberFormatException e) {
+                continue;
             }
             try {
                 x = Integer.parseInt(s1[3]);
             } catch (NumberFormatException e) {
+                continue;
             }
             try {
                 y = Integer.parseInt(s1[4]);
             } catch (NumberFormatException e) {
+                continue;
             }
             String orientation = s1[5];
             addCreaure(id, tipo, teamId, x, y, orientation);
@@ -608,15 +614,18 @@ public class FandeisiaGameManager {
             try {
                 id = Integer.parseInt(s2[0]);
             } catch (NumberFormatException e) {
+                continue;
             }
             String type = s2[1];
             try {
                 x = Integer.parseInt(s2[2]);
             } catch (NumberFormatException e) {
+                continue;
             }
             try {
                 y = Integer.parseInt(s2[3]);
             } catch (NumberFormatException e) {
+                continue;
             }
             addTreasure(id, type, x, y);
         }
@@ -628,15 +637,17 @@ public class FandeisiaGameManager {
             try {
                 id = Integer.parseInt(s3[0]);
             } catch (NumberFormatException e) {
-                id = 2;
+                continue;
             }
             try {
                 x = Integer.parseInt(s3[2]);
             } catch (NumberFormatException e) {
+                continue;
             }
             try {
                 y = Integer.parseInt(s3[3]);
             } catch (NumberFormatException e) {
+                continue;
             }
             addHole(id, x, y);
         }
@@ -660,6 +671,10 @@ public class FandeisiaGameManager {
 
     public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
         Creature creature = null;
+        if(!(orientation.equals("Norte") || orientation.equals("Sul")  || orientation.equals("Este")  || orientation.equals("Oeste")  || orientation.equals("Nordeste")
+                || orientation.equals("Noroeste")  || orientation.equals("Sudoeste") || orientation.equals("Sudeste"))){
+            return;
+        }
         if (tipo.equals("Dragão")) {
             creature = new Dragao(id, tipo, teamId, x, y, orientation);
         }
@@ -845,7 +860,7 @@ public class FandeisiaGameManager {
                     numeroJogadasZero = 0;
                     treasuresFound++;
                     addScore(c.getIdEquipa(), t.getPontos());
-                    c.addTreasurePoints(t);
+                    c.addTreasure(t);
                     treasuresRemove.add(t);
                     if (c.getIdEquipa() == 10) {
                         team10apanhouTreasure++;
@@ -928,7 +943,7 @@ public class FandeisiaGameManager {
                     }
                     break;
             }
-            if (c.estouDuplicado || c.estouReduzido) {
+            if (c.duplicado || c.reduzido) {
                 c.stepToStepDefault();
             }
         }
@@ -939,7 +954,7 @@ public class FandeisiaGameManager {
                     numeroJogadasZero = 0;
                     treasuresFound++;
                     addScore(c.getIdEquipa(), t.getPontos());
-                    c.addTreasurePoints(t);
+                    c.addTreasure(t);
                     treasuresRemove.add(t);
                     if (c.getIdEquipa() == 10) {
                         team10apanhouTreasure++;

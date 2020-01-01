@@ -18,8 +18,8 @@ abstract public class Creature {
     protected int stepSizeDefault;
     protected boolean congelado1Round = false;
     protected boolean congeladoForever = false;
-    protected boolean estouDuplicado = false;
-    protected boolean estouReduzido = false;
+    protected boolean duplicado = false;
+    protected boolean reduzido = false;
 
     public Creature(int id, String type, int idEquipa, int x, int y, String orientacao, int stepSize) {
         this.id = id;
@@ -72,7 +72,7 @@ abstract public class Creature {
         return this.type;
     }
 
-    public void addTreasurePoints(Treasure t) {
+    public void addTreasure(Treasure t) {
         if (t.getType().equals("Silver")) {
             tesourosSilver++;
         }
@@ -83,6 +83,18 @@ abstract public class Creature {
             tesourosBronze++;
         }
         tesourosEncontrados++;
+    }
+
+    public int getTesourosSilver() {
+        return tesourosSilver;
+    }
+
+    public int getTesourosGold() {
+        return tesourosGold;
+    }
+
+    public int getTesourosBronze() {
+        return tesourosBronze;
     }
 
     public int getTesourosEncontrados() {
@@ -117,18 +129,22 @@ abstract public class Creature {
         y = y + step;
     }
 
-    public void alcanceDefault() {
-        estouReduzido = true;
+    public void alcanceMinimo() {
+        reduzido = true;
         stepSize = 1;
     }
 
     public void duplicaAlcance() {
         stepSize = stepSize * 2;
-        estouDuplicado = true;
+        duplicado = true;
     }
 
     public boolean estouDuplicado() {
-        return estouDuplicado;
+        return duplicado;
+    }
+
+    public boolean estouReduzido() {
+        return reduzido;
     }
 
     public void congela1Round() {
@@ -156,14 +172,14 @@ abstract public class Creature {
     }
 
     public void stepToStepDefault(){
-        estouDuplicado = false;
-        estouReduzido = false;
+        duplicado = false;
+        reduzido = false;
         stepSize = stepSizeDefault;
     }
 
     abstract public Point simulaMovimentoDuplicado();
 
-    abstract public Point simulaMovimentoDefault();
+    abstract public Point simulaMovimentoStepMinimo();
 }
 
 

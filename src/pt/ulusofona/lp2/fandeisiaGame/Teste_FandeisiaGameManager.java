@@ -76,6 +76,62 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
+    public void test_CriacaoDosObjetosContentComErros() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[21];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Dragão, teamId: 10, x: 0, y: 2, orientation: Este";
+        content[3] = "id: 4, type: Gigante, teamId: 10, x: 0, y: 3, orientation: Este";
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 0, y: 4, orientation: Este";
+
+        content[5] = "id: 6, type: Anão, teamId: 20, x: 1, y: 1, orientation: Norte";
+        content[6] = "id: 7, type: Humano, teamId: 20, x: 1, y: 2, orientation: Sul";
+        content[7] = "id: 8, type: Dragão, teamId: 20, x: 1, y: 3, orientation: Oeste";
+
+        //ERROS:
+        content[8] = "id: AA, type: Gigante, teamId: 20, x: 1, y: 4, orientation: Norte";
+        content[9] = "id: 10, type: 12, teamId: 20, x: 1, y: 5, orientation: Sul";
+        content[10] = "id: 11, type: Elfo, teamId: AA, x: 4, y: 1, orientation: Nordeste";
+        content[11] = "id: 12, type: Elfo, teamId: 20, x: A, y: 2, orientation: Noroeste";
+        content[12] = "id: 13, type: Elfo, teamId: 20, x: 4, y: B, orientation: Sudeste";
+        content[13] = "id: 14, type: Elfo, teamId: 20, x: 4, y: 4, orientation: 1";
+
+        //ERROS:
+        content[14] = "id: -1, type: silver, x: A, y: 1";
+        content[15] = "id: -2, type: ola, x: 2, y: 2";
+        content[16] = "id: -3, type: gold, x: 2, y: B";
+        content[19] = "id: -A, type: gold, x: 2, y: 3";
+
+        //ERROS:
+        content[17] = "id: -100, type: hole, x: 3, y: 1";
+        content[18] = "id: -101, type: hole, x: A, y: 2";
+        content[20] = "id: -103, type: hole, x: 3, y: B";
+
+        tester.startGame(content, 6, 6);
+
+        assertEquals("Tamanho Creatures", 8, tester.getNumberCreatures());
+        assertEquals("Tamanho Treasures", 0, tester.getNumberTreasures());
+        assertEquals("Tamanho Holes", 1, tester.getNumberHoles());
+
+        List<Creature> creatures = tester.getCreatures();
+        assertEquals("1 | Anão | 10 | 0 @ (0, 0) Este", creatures.get(0).toString());
+        assertEquals("2 | Humano | 10 | 0 @ (0, 1) Este", creatures.get(1).toString());
+        assertEquals("3 | Dragão | 10 | 0 @ (0, 2) Este", creatures.get(2).toString());
+        assertEquals("4 | Gigante | 10 | 0 @ (0, 3) Este", creatures.get(3).toString());
+        assertEquals("5 | Elfo | 10 | 0 @ (0, 4) Este", creatures.get(4).toString());
+        assertEquals("6 | Anão | 20 | 0 @ (1, 1) Norte", creatures.get(5).toString());
+        assertEquals("7 | Humano | 20 | 0 @ (1, 2) Sul", creatures.get(6).toString());
+        assertEquals("8 | Dragão | 20 | 0 @ (1, 3) Oeste", creatures.get(7).toString());
+
+
+        List<Hole> holes = tester.getHoles();
+        assertEquals("-100 | hole @ (3, 1)", holes.get(0).toString());
+
+
+    }
+
+    @Test
     public void test_Movimento90_Creature90() {
         //Caso Normal
         FandeisiaGameManager tester = new FandeisiaGameManager();
@@ -1239,6 +1295,14 @@ public class Teste_FandeisiaGameManager {
     public void test_clearAllData() {
 
     }
+
+    //TODO test testar coins do random criar army computer IMPORTANTE
+    //TODO feiticos nao podem ser aplicados testar
+    //TODO testar coverage por favor
+    //TODO test treasures
+    //TODO test holes
+    //TODO criatura a tentar ir para posição que ja tem creature nos feiticos
+    //TODO alterar o load and save game
 
 
 }

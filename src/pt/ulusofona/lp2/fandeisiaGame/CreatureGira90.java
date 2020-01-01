@@ -64,7 +64,7 @@ abstract public class CreatureGira90 extends Creature {
         return new Point(x1, y1);
     }
 
-    public Point simulaMovimentoDefault(){
+    public Point simulaMovimentoStepMinimo(){
         int x1 = x;
         int y1 = y;
         switch (orientacao) {
