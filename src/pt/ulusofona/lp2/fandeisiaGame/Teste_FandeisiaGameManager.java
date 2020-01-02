@@ -1533,10 +1533,6 @@ public class Teste_FandeisiaGameManager {
         assertEquals(0, tester.getHoles().size());
     }
 
-    //TODO test testar coins do random criar army computer IMPORTANTE
-
-
-    //TODO criatura a tentar ir para posição que ja tem creature nos feiticos
 
     //creature especial
     //video
