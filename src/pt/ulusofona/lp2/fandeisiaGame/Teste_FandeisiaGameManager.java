@@ -1522,7 +1522,7 @@ public class Teste_FandeisiaGameManager {
 
     //TODO test testar coins do random criar army computer IMPORTANTE
 
-    //TODO feiticos nao podem ser aplicados testar
+
     //TODO criatura a tentar ir para posição que ja tem creature nos feiticos
 
     //creature especial
