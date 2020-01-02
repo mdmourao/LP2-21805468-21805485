@@ -607,7 +607,7 @@ public class Teste_FandeisiaGameManager {
 
     @Test
     public void test_saveGameANDLoadGame() {
-        File file = new File("src/test-files/test.txt");
+        File file = new File("test-files/test.txt");
 
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[21];
