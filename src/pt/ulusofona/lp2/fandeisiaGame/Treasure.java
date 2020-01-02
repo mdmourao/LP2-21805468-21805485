@@ -5,7 +5,6 @@ abstract public class Treasure {
     protected int x;
     protected int y;
     protected int pontos;
-    protected String type;
 
     public Treasure(int id, int x, int y) {
         this.id = id;
@@ -32,7 +31,4 @@ abstract public class Treasure {
         return pontos;
     }
 
-    public String getType() {
-        return type;
-    }
 }

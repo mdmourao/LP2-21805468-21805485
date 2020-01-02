@@ -4,7 +4,7 @@ public class TreasureSilver extends Treasure {
     TreasureSilver(int id, int x, int y){
         super(id, x, y);
         this.pontos = 2;
-        type = "Silver";
+
     }
 
     public String getImagePNG(){

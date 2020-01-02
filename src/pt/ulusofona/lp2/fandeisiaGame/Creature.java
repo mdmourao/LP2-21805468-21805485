@@ -73,13 +73,13 @@ abstract public class Creature {
     }
 
     public void addTreasure(Treasure t) {
-        if (t.getType().equals("Silver")) {
+        if (t.getPontos() == 2) {
             tesourosSilver++;
         }
-        if (t.getType().equals("Gold")) {
+        if (t.getPontos() == 3) {
             tesourosGold++;
         }
-        if (t.getType().equals("Bronze")) {
+        if (t.getPontos() == 1) {
             tesourosBronze++;
         }
         tesourosEncontrados++;
