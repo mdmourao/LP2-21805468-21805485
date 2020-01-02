@@ -101,6 +101,22 @@ abstract public class Creature {
         return tesourosEncontrados;
     }
 
+    public void setTesourosEncontrados(int tesourosEncontrados) {
+        this.tesourosEncontrados = tesourosEncontrados;
+    }
+
+    public void setTesourosSilver(int tesourosSilver) {
+        this.tesourosSilver = tesourosSilver;
+    }
+
+    public void setTesourosGold(int tesourosGold) {
+        this.tesourosGold = tesourosGold;
+    }
+
+    public void setTesourosBronze(int tesourosBronze) {
+        this.tesourosBronze = tesourosBronze;
+    }
+
     public int getIdEquipa() {
         return idEquipa;
     }

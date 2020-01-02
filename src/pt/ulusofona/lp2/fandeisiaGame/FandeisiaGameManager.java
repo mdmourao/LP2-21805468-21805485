@@ -368,6 +368,10 @@ public class FandeisiaGameManager {
             writer.write("Moedas10 " + ldr10.getMoedas() + "\n");
             writer.write("Moedas20 " + resistencia20.getMoedas() + "\n");
             writer.write("currentTeamId " + currentTeamId + "\n");
+            for(Creature c: creatures){
+                writer.write("C " + c.getX()  + " " + c.getY() + " " + c.getTesourosGold() + " " + c.getTesourosSilver()+ " " + c.getTesourosBronze() + " " + c.getTesourosEncontrados() + "\n");
+            }
+
             writer.close();
         } catch (IOException e) {
             return false;
@@ -404,7 +408,7 @@ public class FandeisiaGameManager {
         for (String s : conteudo) {
             System.out.println(s);
             splitConteudo1 = s.split(" ", 7);
-            if (splitConteudo1.length == 7) {
+            if (splitConteudo1.length == 7 && !splitConteudo1[0].equals("C")) {
                 splitConteudo2 = splitConteudo1[6].split(" ", 6);
                 if (splitConteudo2[2].length() == 3) {
                     x1 = "" + splitConteudo2[2].charAt(1);
@@ -453,6 +457,30 @@ public class FandeisiaGameManager {
                 } else {
                     addTreasure(id, tipo, x, y);
                 }
+            }
+            if (splitConteudo1.length == 7 && splitConteudo1[0].equals("C")) {
+                int bronze = 0;
+                int silver = 0;
+                int gold = 0;
+                int encontrados = 0;
+                try{
+                    x = Integer.parseInt(splitConteudo1[1]);
+                    y = Integer.parseInt(splitConteudo1[2]);
+                    bronze = Integer.parseInt(splitConteudo1[5]);
+                     silver =Integer.parseInt(splitConteudo1[4]);
+                     gold = Integer.parseInt(splitConteudo1[3]);
+                     encontrados = Integer.parseInt(splitConteudo1[6]);
+                }catch (NumberFormatException e){
+                    continue;
+                }
+                Creature c = getCreature(x,y);
+                if(c == null){
+                    continue;
+                }
+                c.setTesourosBronze(bronze);
+                c.setTesourosGold(gold);
+                c.setTesourosSilver(silver);
+                c.setTesourosEncontrados(encontrados);
             }
             if (splitConteudo1.length == 2) {
                 try {
