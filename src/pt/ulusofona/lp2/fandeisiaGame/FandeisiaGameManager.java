@@ -122,8 +122,9 @@ public class FandeisiaGameManager {
         int qtdElfo = gerador.nextInt(3) + 1; // 1 a 2
         int qtdGigante = 1;
         int qtdHumano = gerador.nextInt(4) + 1; // 1 a 3
-        if (qtdAnao < 5) {
+        if (qtdAnao > 5) {
             qtdHumano += 2;
+            qtdDragao = 0;
         }
         Map<String, Integer> army = new HashMap<>();
         army.put("Dragão", qtdDragao);
