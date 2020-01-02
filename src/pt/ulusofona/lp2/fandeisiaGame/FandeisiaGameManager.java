@@ -196,9 +196,6 @@ public class FandeisiaGameManager {
         }
         if (spellName.equals("ReduzAlcance")) {
             Point p2 = creature.simulaMovimentoStepMinimo();
-            if (p2.x >= rows || p2.y >= columns || p2.x < 0 || p2.y < 0) {
-                return false;
-            }
             if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"))) {
                 feiticos.put(p, "ReduzAlcance");
                 return true;
@@ -1186,6 +1183,14 @@ public class FandeisiaGameManager {
         return false;
     }
 
+    public Team getLdr10(){
+        return ldr10;
+    }
+
+    public Team getResistencia20(){
+        return resistencia20;
+    }
+
     private void ordenarCreaturesById(List<Creature> creatures) {
         Creature[] ordenado = Ordenacao.ordenarCreatureById(creatures.toArray(new Creature[0]));
         this.creatures = new ArrayList<>();
@@ -1195,7 +1200,7 @@ public class FandeisiaGameManager {
     }
 
 
-    private void clearAllData() {
+    public void clearAllData() {
         creatures = new ArrayList<>();
         treasures = new ArrayList<>();
         holes = new ArrayList<>();

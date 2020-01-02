@@ -368,7 +368,9 @@ public class Teste_FandeisiaGameManager {
         assertEquals("Return Start Game, caso normal", 0, tester.startGame(content, 6, 6));
 
         assertEquals("Custo creatures Respeitado, normal (id:10)", 23, tester.getCustoTotalCreaures(10));
+        assertEquals("Team 10",27,tester.getLdr10().getMoedas());
         assertEquals("Custo creatures Respeitado, normal (id: 20)", 24, tester.getCustoTotalCreaures(20));
+        assertEquals("Team 10",26,tester.getResistencia20().getMoedas());
 
         tester = new FandeisiaGameManager();
         content = new String[23];
@@ -661,7 +663,6 @@ public class Teste_FandeisiaGameManager {
         assertEquals(2 + " | " + "Elfo" + " | " + 20 + " | " + 2 + " @ (" + 6 + ", " + 1 + ") " + "Este", tester.getCreatures().get(1).toString());
     }
 
-    //TODO
     @Test
     public void test_gameisOver() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
@@ -720,19 +721,68 @@ public class Teste_FandeisiaGameManager {
         //15
         tester.processTurn();
         assertEquals(true, tester.gameIsOver());
+
+        tester = new FandeisiaGameManager();
+        content = new String[12];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 1, type: Anão, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 1, type: Anão, teamId: 10, x: 0, y: 2, orientation: Este";
+        content[3] = "id: 1, type: Anão, teamId: 20, x: 0, y: 3, orientation: Este";
+        content[4] = "id: 1, type: Anão, teamId: 20, x: 0, y: 4, orientation: Este";
+        content[5] = "id: 1, type: Anão, teamId: 20, x: 0, y: 5, orientation: Este";
+        content[6] = "id: -1, type: silver, x: 1, y: 0";
+        content[7] = "id: -1, type: silver, x: 1, y: 1";
+        content[8] = "id: -1, type: silver, x: 1, y: 2";
+        content[9] = "id: -2, type: bronze, x: 2, y: 3";
+        content[10] = "id: -3, type: bronze, x: 2, y: 4";
+        content[11] = "id: -4, type: bronze, x: 2, y: 5";
+        tester.startGame(content, 10, 10);
+        tester.processTurn();
+        assertEquals(0,tester.getCurrentScore(20));
+        assertEquals(6,tester.getCurrentScore(10));
+        assertTrue(tester.gameIsOver());
+
+        tester = new FandeisiaGameManager();
+        content = new String[12];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 1, type: Anão, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 1, type: Anão, teamId: 10, x: 0, y: 2, orientation: Este";
+        content[3] = "id: 1, type: Anão, teamId: 20, x: 0, y: 3, orientation: Este";
+        content[4] = "id: 1, type: Anão, teamId: 20, x: 0, y: 4, orientation: Este";
+        content[5] = "id: 1, type: Anão, teamId: 20, x: 0, y: 5, orientation: Este";
+        content[6] = "id: -1, type: silver, x: 1, y: 3";
+        content[7] = "id: -1, type: silver, x: 1, y: 4";
+        content[8] = "id: -1, type: silver, x: 1, y: 5";
+        content[9] = "id: -2, type: bronze, x: 2, y: 2";
+        content[10] = "id: -3, type: bronze, x: 2, y: 1";
+        content[11] = "id: -4, type: bronze, x: 2, y: 0";
+        tester.startGame(content, 10, 10);
+        tester.processTurn();
+        assertEquals(6,tester.getCurrentScore(20));
+        assertEquals(0,tester.getCurrentScore(10));
+        assertTrue(tester.gameIsOver());
+
+        tester = new FandeisiaGameManager();
+        content = new String[3];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 1, type: Anão, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[2] = "id: -1, type: silver, x: 9, y: 9";
+        tester.startGame(content, 10, 10);
+        for(int i = 0; i < 15;i++){
+            tester.processTurn();
+        }
+        assertTrue(tester.gameIsOver());
+
+
     }
 
-    //TODO
     @Test
     public void test_enchant() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[7];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
-        // 00 10 20
         content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 8, orientation: Este";
-        content[2] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
-
-
+        content[2] = "id: 3, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
         content[3] = "id: -100, type: hole, x: 2, y: 0";
         content[4] = "id: -101, type: hole, x: 12, y: 0";
         content[5] = "id: -102, type: hole, x: 3, y: 3";
@@ -744,8 +794,79 @@ public class Teste_FandeisiaGameManager {
         assertEquals(false,tester.enchant(0, 1, "DuplicaAlcance"));
         assertEquals(true,tester.enchant(0, 8, "EmpurraParaEste"));
         assertEquals(false,tester.enchant(0, 8, "EmpurraParaSul"));
+
         tester.processTurn();
         assertEquals(1,tester.getElementId(1,0));
+
+        //sem dinheiro para feitiços
+        tester = new FandeisiaGameManager();
+        content = new String[20];
+        content[0] = "id: 1, type: Gigante, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Gigante, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Gigante, teamId: 10, x: 0, y: 2, orientation: Este";
+        content[3] = "id: 4, type: Gigante, teamId: 10, x: 0, y: 3, orientation: Este";
+        content[4] = "id: 5, type: Gigante, teamId: 10, x: 0, y: 4, orientation: Este";
+        content[5] = "id: 6, type: Gigante, teamId: 10, x: 0, y: 5, orientation: Este";
+        content[6] = "id: 7, type: Gigante, teamId: 10, x: 0, y: 6, orientation: Este";
+        content[7] = "id: 8, type: Gigante, teamId: 10, x: 0, y: 7, orientation: Este";
+        content[8] = "id: 9, type: Gigante, teamId: 10, x: 0, y: 8, orientation: Este";
+        content[9] = "id: 10, type: Gigante, teamId: 10, x: 0, y: 9, orientation: Este";
+
+        content[10] = "id: 11, type: Gigante, teamId: 20, x: 5, y: 0, orientation: Este";
+        content[11] = "id: 12, type: Gigante, teamId: 20, x: 5, y: 1, orientation: Este";
+        content[12] = "id: 13, type: Gigante, teamId: 20, x: 5, y: 2, orientation: Este";
+        content[13] = "id: 14, type: Gigante, teamId: 20, x: 5, y: 3, orientation: Este";
+        content[14] = "id: 15, type: Gigante, teamId: 20, x: 5, y: 4, orientation: Este";
+        content[15] = "id: 16, type: Gigante, teamId: 20, x: 5, y: 5, orientation: Este";
+        content[16] = "id: 17, type: Gigante, teamId: 20, x: 5, y: 6, orientation: Este";
+        content[17] = "id: 18, type: Gigante, teamId: 20, x: 5, y: 7, orientation: Este";
+        content[18] = "id: 19, type: Gigante, teamId: 20, x: 5, y: 8, orientation: Este";
+        content[19] = "id: 20, type: Gigante, teamId: 20, x: 9, y: 9, orientation: Este";
+        tester.startGame(content, 10, 10);
+        assertFalse(tester.enchant(0,0,"EmpurraParaNorte"));
+        assertFalse(tester.enchant(0,1,"EmpurraParaEste"));
+        assertFalse(tester.enchant(0,2,"EmpurraParaSul"));
+        assertFalse(tester.enchant(0,3,"EmpurraParaOeste"));
+        assertFalse(tester.enchant(0,4,"ReduzAlcance"));
+        assertFalse(tester.enchant(0,5,"DuplicaAlcance"));
+        assertFalse(tester.enchant(0,6,"Congela"));
+        assertFalse(tester.enchant(0,7,"Congela4Ever"));
+        assertFalse(tester.enchant(0,8,"Descongela"));
+
+        assertFalse(tester.enchant(5,0,"EmpurraParaNorte"));
+        assertFalse(tester.enchant(5,1,"EmpurraParaEste"));
+        assertFalse(tester.enchant(5,2,"EmpurraParaSul"));
+        assertFalse(tester.enchant(5,3,"EmpurraParaOeste"));
+        assertFalse(tester.enchant(5,4,"ReduzAlcance"));
+        assertFalse(tester.enchant(5,5,"DuplicaAlcance"));
+        assertFalse(tester.enchant(5,6,"Congela"));
+        assertFalse(tester.enchant(5,7,"Congela4Ever"));
+        assertFalse(tester.enchant(5,8,"Descongela"));
+        assertFalse(tester.enchant(9,9,"EmpurraParaEste"));
+
+        //casos diferentes
+        assertFalse(tester.enchant(5,7,"NAOEXISTE"));
+        assertFalse(tester.enchant(5,7,null));
+
+        //caso especial do Reduz e duplica
+        tester = new FandeisiaGameManager();
+        content = new String[8];
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Elfo, teamId: 10, x: 0, y: 2, orientation: Este";
+        content[3] = "id: 4, type: Elfo, teamId: 10, x: 0, y: 3, orientation: Este";
+
+        content[4] = "id: 5, type: Elfo, teamId: 20, x: 8, y: 0, orientation: Este";
+        content[5] = "id: 6, type: Elfo, teamId: 20, x: 5, y: 1, orientation: Este";
+        content[6] = "id: 7, type: Elfo, teamId: 20, x: 5, y: 2, orientation: Este";
+        content[7] = "id: 8, type: Elfo, teamId: 20, x: 5, y: 3, orientation: Este";
+
+        tester.startGame(content, 10, 10);
+        assertFalse(tester.enchant(8,0,"DuplicaAlcance"));
+        assertTrue(tester.enchant(8,0,"ReduzAlcance"));
+
+
+
 
 
     }
@@ -1278,31 +1399,53 @@ public class Teste_FandeisiaGameManager {
 
     }
 
-    //TODO
-    @Test
-    public void test_Scores() {
-        
-    }
-
-    //TODO
-    @Test
-    public void test_removeMoedas() {
-
-    }
-
-    //TODO
     @Test
     public void test_clearAllData() {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[21];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Dragão, teamId: 10, x: 0, y: 2, orientation: Este";
+        content[3] = "id: 4, type: Gigante, teamId: 10, x: 0, y: 3, orientation: Este";
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 0, y: 4, orientation: Este";
 
+        content[5] = "id: 6, type: Anão, teamId: 20, x: 1, y: 1, orientation: Norte";
+        content[6] = "id: 7, type: Humano, teamId: 20, x: 1, y: 2, orientation: Sul";
+        content[7] = "id: 8, type: Dragão, teamId: 20, x: 1, y: 3, orientation: Oeste";
+        content[8] = "id: 9, type: Gigante, teamId: 20, x: 1, y: 4, orientation: Norte";
+        content[9] = "id: 10, type: Elfo, teamId: 20, x: 1, y: 5, orientation: Sul";
+        content[10] = "id: 11, type: Elfo, teamId: 20, x: 4, y: 1, orientation: Nordeste";
+        content[11] = "id: 12, type: Elfo, teamId: 20, x: 4, y: 2, orientation: Noroeste";
+        content[12] = "id: 13, type: Elfo, teamId: 20, x: 4, y: 3, orientation: Sudeste";
+        content[13] = "id: 14, type: Elfo, teamId: 20, x: 4, y: 4, orientation: Sudoeste";
+
+        content[14] = "id: -1, type: silver, x: 2, y: 1";
+        content[15] = "id: -2, type: bronze, x: 2, y: 2";
+        content[16] = "id: -3, type: gold, x: 2, y: 3";
+
+        content[17] = "id: -100, type: hole, x: 3, y: 1";
+        content[18] = "id: -101, type: hole, x: 3, y: 2";
+        content[19] = "id: -102, type: hole, x: 3, y: 3";
+        content[20] = "id: -103, type: hole, x: 3, y: 4";
+
+        tester.startGame(content, 6, 6);
+        tester.clearAllData();
+        assertEquals(0,tester.getCreatures().size());
+        assertEquals(0,tester.getTreausres().size());
+        assertEquals(0,tester.getHoles().size());
     }
 
     //TODO test testar coins do random criar army computer IMPORTANTE
+    // TODO test treasures
+    // TODO test holes
+
     //TODO feiticos nao podem ser aplicados testar
-    //TODO testar coverage por favor
-    //TODO test treasures
-    //TODO test holes
     //TODO criatura a tentar ir para posição que ja tem creature nos feiticos
     //TODO alterar o load and save game
+
+    //creature especial
+    //video
+    //readme
 
 
 }
