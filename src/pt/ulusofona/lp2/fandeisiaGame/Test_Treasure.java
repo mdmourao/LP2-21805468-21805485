@@ -12,7 +12,6 @@ public class Test_Treasure {
         assertEquals(1, testBronze.getX());
         assertEquals(1, testBronze.getY());
         assertEquals(1, testBronze.getPontos());
-        assertEquals("Bronze", testBronze.getType());
         assertEquals("bronze-box.png", testBronze.getImagePNG());
 
         Treasure testSilver = new TreasureSilver(-2, 2, 2);
@@ -20,7 +19,6 @@ public class Test_Treasure {
         assertEquals(2, testSilver.getX());
         assertEquals(2, testSilver.getY());
         assertEquals(2, testSilver.getPontos());
-        assertEquals("Silver", testSilver.getType());
         assertEquals("silver-box.png", testSilver.getImagePNG());
 
         Treasure testGold = new TreasureGold(-3, 3, 3);
@@ -28,7 +26,6 @@ public class Test_Treasure {
         assertEquals(3, testGold.getX());
         assertEquals(3, testGold.getY());
         assertEquals(3, testGold.getPontos());
-        assertEquals("Gold", testGold.getType());
         assertEquals("gold-box.png", testGold.getImagePNG());
     }
 }
