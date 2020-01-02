@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static junit.framework.TestCase.*;
 
@@ -132,8 +133,23 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_CriarCoinsRandomPCArmy(){
-
+    public void test_CriarCoinsRandomPCArmy() {
+        for (int i = 0; i < 100; i++) {
+            FandeisiaGameManager tester = new FandeisiaGameManager();
+            Map<String, Integer> testeRandomPCArmy = tester.createComputerArmy();
+            int moedas = 50;
+            boolean maiorQue50 = false;
+            int sumMoedas = 0;
+            sumMoedas += testeRandomPCArmy.get("Anão");
+            sumMoedas += testeRandomPCArmy.get("Elfo") * 5;
+            sumMoedas += testeRandomPCArmy.get("Gigante") * 5;
+            sumMoedas += testeRandomPCArmy.get("Dragão") * 9;
+            sumMoedas += testeRandomPCArmy.get("Humano") * 3;
+            if (sumMoedas > moedas) {
+                maiorQue50 = true;
+            }
+            assertFalse(maiorQue50);
+        }
     }
 
     @Test
@@ -373,9 +389,9 @@ public class Teste_FandeisiaGameManager {
         assertEquals("Return Start Game, caso normal", 0, tester.startGame(content, 6, 6));
 
         assertEquals("Custo creatures Respeitado, normal (id:10)", 23, tester.getCustoTotalCreaures(10));
-        assertEquals("Team 10",27,tester.getLdr10().getMoedas());
+        assertEquals("Team 10", 27, tester.getLdr10().getMoedas());
         assertEquals("Custo creatures Respeitado, normal (id: 20)", 24, tester.getCustoTotalCreaures(20));
-        assertEquals("Team 10",26,tester.getResistencia20().getMoedas());
+        assertEquals("Team 10", 26, tester.getResistencia20().getMoedas());
 
         tester = new FandeisiaGameManager();
         content = new String[23];
@@ -672,7 +688,7 @@ public class Teste_FandeisiaGameManager {
         assertEquals("-102 | hole @ (3, 3)", holes.get(2).toString());
         assertEquals("-103 | hole @ (3, 4)", holes.get(3).toString());
 
-        tester = new  FandeisiaGameManager();
+        tester = new FandeisiaGameManager();
         content = new String[15];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 1, orientation: Este";
         content[1] = "id: 2, type: Humano, teamId: 10, x: 0, y: 2, orientation: Este";
@@ -696,28 +712,28 @@ public class Teste_FandeisiaGameManager {
 
         tester.startGame(content, 12, 12);
         tester.saveGame(file);
-        tester = new  FandeisiaGameManager();
+        tester = new FandeisiaGameManager();
         tester.loadGame(file);
-        assertEquals(10,tester.getCreatures().size());
-        assertEquals(3,tester.getTreausres().size());
-        assertEquals(2,tester.getHoles().size());
+        assertEquals(10, tester.getCreatures().size());
+        assertEquals(3, tester.getTreausres().size());
+        assertEquals(2, tester.getHoles().size());
 
 
         tester.startGame(content, 12, 12);
         tester.processTurn();
         tester.saveGame(file);
-        tester = new  FandeisiaGameManager();
+        tester = new FandeisiaGameManager();
         tester.loadGame(file);
         List<Creature> cs = tester.getCreatures();
-        assertEquals(1,cs.get(0).getTesourosGold());
-        assertEquals(0,cs.get(0).getTesourosSilver());
-        assertEquals(0,cs.get(0).getTesourosBronze());
-        assertEquals(1,cs.get(0).getTesourosEncontrados());
+        assertEquals(1, cs.get(0).getTesourosGold());
+        assertEquals(0, cs.get(0).getTesourosSilver());
+        assertEquals(0, cs.get(0).getTesourosBronze());
+        assertEquals(1, cs.get(0).getTesourosEncontrados());
 
-        assertEquals(0,cs.get(5).getTesourosGold());
-        assertEquals(1,cs.get(5).getTesourosSilver());
-        assertEquals(0,cs.get(5).getTesourosBronze());
-        assertEquals(1,cs.get(0).getTesourosEncontrados());
+        assertEquals(0, cs.get(5).getTesourosGold());
+        assertEquals(1, cs.get(5).getTesourosSilver());
+        assertEquals(0, cs.get(5).getTesourosBronze());
+        assertEquals(1, cs.get(0).getTesourosEncontrados());
 
     }
 
@@ -823,8 +839,8 @@ public class Teste_FandeisiaGameManager {
         content[11] = "id: -4, type: bronze, x: 2, y: 5";
         tester.startGame(content, 10, 10);
         tester.processTurn();
-        assertEquals(0,tester.getCurrentScore(20));
-        assertEquals(6,tester.getCurrentScore(10));
+        assertEquals(0, tester.getCurrentScore(20));
+        assertEquals(6, tester.getCurrentScore(10));
         assertTrue(tester.gameIsOver());
 
         tester = new FandeisiaGameManager();
@@ -843,8 +859,8 @@ public class Teste_FandeisiaGameManager {
         content[11] = "id: -4, type: bronze, x: 2, y: 0";
         tester.startGame(content, 10, 10);
         tester.processTurn();
-        assertEquals(6,tester.getCurrentScore(20));
-        assertEquals(0,tester.getCurrentScore(10));
+        assertEquals(6, tester.getCurrentScore(20));
+        assertEquals(0, tester.getCurrentScore(10));
         assertTrue(tester.gameIsOver());
 
         tester = new FandeisiaGameManager();
@@ -853,7 +869,7 @@ public class Teste_FandeisiaGameManager {
         content[1] = "id: 1, type: Anão, teamId: 10, x: 0, y: 1, orientation: Este";
         content[2] = "id: -1, type: silver, x: 9, y: 9";
         tester.startGame(content, 10, 10);
-        for(int i = 0; i < 15;i++){
+        for (int i = 0; i < 15; i++) {
             tester.processTurn();
         }
         assertTrue(tester.gameIsOver());
@@ -873,15 +889,15 @@ public class Teste_FandeisiaGameManager {
         content[5] = "id: -102, type: hole, x: 3, y: 3";
         content[6] = "id: -103, type: hole, x: 3, y: 4";
         tester.startGame(content, 20, 20);
-        assertEquals(false,tester.enchant(0, 0, "DuplicaAlcance"));
-        assertEquals(false,tester.enchant(8, 0, "DuplicaAlcance"));
-        assertEquals(true,tester.enchant(0, 1, "DuplicaAlcance"));
-        assertEquals(false,tester.enchant(0, 1, "DuplicaAlcance"));
-        assertEquals(true,tester.enchant(0, 8, "EmpurraParaEste"));
-        assertEquals(false,tester.enchant(0, 8, "EmpurraParaSul"));
+        assertEquals(false, tester.enchant(0, 0, "DuplicaAlcance"));
+        assertEquals(false, tester.enchant(8, 0, "DuplicaAlcance"));
+        assertEquals(true, tester.enchant(0, 1, "DuplicaAlcance"));
+        assertEquals(false, tester.enchant(0, 1, "DuplicaAlcance"));
+        assertEquals(true, tester.enchant(0, 8, "EmpurraParaEste"));
+        assertEquals(false, tester.enchant(0, 8, "EmpurraParaSul"));
 
         tester.processTurn();
-        assertEquals(1,tester.getElementId(1,0));
+        assertEquals(1, tester.getElementId(1, 0));
 
         //sem dinheiro para feitiços
         tester = new FandeisiaGameManager();
@@ -908,30 +924,30 @@ public class Teste_FandeisiaGameManager {
         content[18] = "id: 19, type: Gigante, teamId: 20, x: 5, y: 8, orientation: Este";
         content[19] = "id: 20, type: Gigante, teamId: 20, x: 9, y: 9, orientation: Este";
         tester.startGame(content, 10, 10);
-        assertFalse(tester.enchant(0,0,"EmpurraParaNorte"));
-        assertFalse(tester.enchant(0,1,"EmpurraParaEste"));
-        assertFalse(tester.enchant(0,2,"EmpurraParaSul"));
-        assertFalse(tester.enchant(0,3,"EmpurraParaOeste"));
-        assertFalse(tester.enchant(0,4,"ReduzAlcance"));
-        assertFalse(tester.enchant(0,5,"DuplicaAlcance"));
-        assertFalse(tester.enchant(0,6,"Congela"));
-        assertFalse(tester.enchant(0,7,"Congela4Ever"));
-        assertFalse(tester.enchant(0,8,"Descongela"));
+        assertFalse(tester.enchant(0, 0, "EmpurraParaNorte"));
+        assertFalse(tester.enchant(0, 1, "EmpurraParaEste"));
+        assertFalse(tester.enchant(0, 2, "EmpurraParaSul"));
+        assertFalse(tester.enchant(0, 3, "EmpurraParaOeste"));
+        assertFalse(tester.enchant(0, 4, "ReduzAlcance"));
+        assertFalse(tester.enchant(0, 5, "DuplicaAlcance"));
+        assertFalse(tester.enchant(0, 6, "Congela"));
+        assertFalse(tester.enchant(0, 7, "Congela4Ever"));
+        assertFalse(tester.enchant(0, 8, "Descongela"));
 
-        assertFalse(tester.enchant(5,0,"EmpurraParaNorte"));
-        assertFalse(tester.enchant(5,1,"EmpurraParaEste"));
-        assertFalse(tester.enchant(5,2,"EmpurraParaSul"));
-        assertFalse(tester.enchant(5,3,"EmpurraParaOeste"));
-        assertFalse(tester.enchant(5,4,"ReduzAlcance"));
-        assertFalse(tester.enchant(5,5,"DuplicaAlcance"));
-        assertFalse(tester.enchant(5,6,"Congela"));
-        assertFalse(tester.enchant(5,7,"Congela4Ever"));
-        assertFalse(tester.enchant(5,8,"Descongela"));
-        assertFalse(tester.enchant(9,9,"EmpurraParaEste"));
+        assertFalse(tester.enchant(5, 0, "EmpurraParaNorte"));
+        assertFalse(tester.enchant(5, 1, "EmpurraParaEste"));
+        assertFalse(tester.enchant(5, 2, "EmpurraParaSul"));
+        assertFalse(tester.enchant(5, 3, "EmpurraParaOeste"));
+        assertFalse(tester.enchant(5, 4, "ReduzAlcance"));
+        assertFalse(tester.enchant(5, 5, "DuplicaAlcance"));
+        assertFalse(tester.enchant(5, 6, "Congela"));
+        assertFalse(tester.enchant(5, 7, "Congela4Ever"));
+        assertFalse(tester.enchant(5, 8, "Descongela"));
+        assertFalse(tester.enchant(9, 9, "EmpurraParaEste"));
 
         //casos diferentes
-        assertFalse(tester.enchant(5,7,"NAOEXISTE"));
-        assertFalse(tester.enchant(5,7,null));
+        assertFalse(tester.enchant(5, 7, "NAOEXISTE"));
+        assertFalse(tester.enchant(5, 7, null));
 
         //caso especial do Reduz e duplica
         tester = new FandeisiaGameManager();
@@ -947,11 +963,8 @@ public class Teste_FandeisiaGameManager {
         content[7] = "id: 8, type: Elfo, teamId: 20, x: 5, y: 3, orientation: Este";
 
         tester.startGame(content, 10, 10);
-        assertFalse(tester.enchant(8,0,"DuplicaAlcance"));
-        assertTrue(tester.enchant(8,0,"ReduzAlcance"));
-
-
-
+        assertFalse(tester.enchant(8, 0, "DuplicaAlcance"));
+        assertTrue(tester.enchant(8, 0, "ReduzAlcance"));
 
 
     }
@@ -961,26 +974,26 @@ public class Teste_FandeisiaGameManager {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         int count = 0;
         String[][] creatures = tester.getCreatureTypes();
-        for(int i = 0;i < creatures.length; i++){
-            for(int i1 = 0; i1 < creatures[i].length; i1++){
-                if(creatures[i][i1].equals("Anão") ){
+        for (int i = 0; i < creatures.length; i++) {
+            for (int i1 = 0; i1 < creatures[i].length; i1++) {
+                if (creatures[i][i1].equals("Anão")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("Dragão") ){
+                if (creatures[i][i1].equals("Dragão")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("Elfo") ){
+                if (creatures[i][i1].equals("Elfo")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("Gigante") ){
+                if (creatures[i][i1].equals("Gigante")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("Humano") ){
+                if (creatures[i][i1].equals("Humano")) {
                     count++;
                 }
             }
         }
-        assertEquals(5,count);
+        assertEquals(5, count);
     }
 
     @Test
@@ -988,38 +1001,38 @@ public class Teste_FandeisiaGameManager {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         int count = 0;
         String[][] creatures = tester.getSpellTypes();
-        for(int i = 0;i < creatures.length; i++){
-            for(int i1 = 0; i1 < creatures[i].length; i1++){
-                if(creatures[i][i1].equals("EmpurraParaNorte") ){
+        for (int i = 0; i < creatures.length; i++) {
+            for (int i1 = 0; i1 < creatures[i].length; i1++) {
+                if (creatures[i][i1].equals("EmpurraParaNorte")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("EmpurraParaEste") ){
+                if (creatures[i][i1].equals("EmpurraParaEste")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("EmpurraParaSul") ){
+                if (creatures[i][i1].equals("EmpurraParaSul")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("EmpurraParaOeste") ){
+                if (creatures[i][i1].equals("EmpurraParaOeste")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("ReduzAlcance") ){
+                if (creatures[i][i1].equals("ReduzAlcance")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("DuplicaAlcance") ){
+                if (creatures[i][i1].equals("DuplicaAlcance")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("Congela") ){
+                if (creatures[i][i1].equals("Congela")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("Congela4Ever") ){
+                if (creatures[i][i1].equals("Congela4Ever")) {
                     count++;
                 }
-                if(creatures[i][i1].equals("Descongela") ){
+                if (creatures[i][i1].equals("Descongela")) {
                     count++;
                 }
             }
         }
-        assertEquals(9,count);
+        assertEquals(9, count);
     }
 
     @Test
@@ -1044,44 +1057,44 @@ public class Teste_FandeisiaGameManager {
         content[13] = "id: 14, type: Elfo, teamId: 20, x: 4, y: 6, orientation: Sudoeste";
         tester.startGame(content, 15, 15);
 
-        tester.aplicarFeitico(1,6,"EmpurraParaNorte");
-        tester.aplicarFeitico(5,0,"EmpurraParaEste");
-        tester.aplicarFeitico(4,6,"EmpurraParaSul");
-        tester.aplicarFeitico(3,3,"EmpurraParaOeste");
-        assertEquals(11,tester.getElementId(1,5));
-        assertEquals(5,tester.getElementId(6,0));
-        assertEquals(14,tester.getElementId(4,7));
-        assertEquals(3,tester.getElementId(2,3));
+        tester.aplicarFeitico(1, 6, "EmpurraParaNorte");
+        tester.aplicarFeitico(5, 0, "EmpurraParaEste");
+        tester.aplicarFeitico(4, 6, "EmpurraParaSul");
+        tester.aplicarFeitico(3, 3, "EmpurraParaOeste");
+        assertEquals(11, tester.getElementId(1, 5));
+        assertEquals(5, tester.getElementId(6, 0));
+        assertEquals(14, tester.getElementId(4, 7));
+        assertEquals(3, tester.getElementId(2, 3));
 
-        tester.aplicarFeitico(4,0,"ReduzAlcance");
-        assertEquals(1,tester.getCreatures().get(3).getStepSize());
+        tester.aplicarFeitico(4, 0, "ReduzAlcance");
+        assertEquals(1, tester.getCreatures().get(3).getStepSize());
 
-        tester.aplicarFeitico(3,6,"DuplicaAlcance");
-        assertEquals(4,tester.getCreatures().get(12).getStepSize());
+        tester.aplicarFeitico(3, 6, "DuplicaAlcance");
+        assertEquals(4, tester.getCreatures().get(12).getStepSize());
 
-        tester.aplicarFeitico(2,0,"Congela");
-        assertEquals(true,tester.getCreatures().get(1).isCongelado1Round());
+        tester.aplicarFeitico(2, 0, "Congela");
+        assertEquals(true, tester.getCreatures().get(1).isCongelado1Round());
 
-        tester.aplicarFeitico(2,6,"Congela4Ever");
-        assertEquals(true,tester.getCreatures().get(11).isCongeladoForever());
+        tester.aplicarFeitico(2, 6, "Congela4Ever");
+        assertEquals(true, tester.getCreatures().get(11).isCongeladoForever());
 
-        tester.aplicarFeitico(2,6,"Descongela");
-        assertEquals(false,tester.getCreatures().get(11).isCongeladoForever());
+        tester.aplicarFeitico(2, 6, "Descongela");
+        assertEquals(false, tester.getCreatures().get(11).isCongeladoForever());
     }
 
     @Test
     public void test_valorFeitico() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
-        assertEquals(1,tester.valorFeitico("EmpurraParaNorte"));
-        assertEquals(1,tester.valorFeitico("EmpurraParaEste"));
-        assertEquals(1,tester.valorFeitico("EmpurraParaSul"));
-        assertEquals(1,tester.valorFeitico("EmpurraParaOeste"));
+        assertEquals(1, tester.valorFeitico("EmpurraParaNorte"));
+        assertEquals(1, tester.valorFeitico("EmpurraParaEste"));
+        assertEquals(1, tester.valorFeitico("EmpurraParaSul"));
+        assertEquals(1, tester.valorFeitico("EmpurraParaOeste"));
 
-        assertEquals(2,tester.valorFeitico("ReduzAlcance"));
-        assertEquals(3,tester.valorFeitico("DuplicaAlcance"));
-        assertEquals(3,tester.valorFeitico("Congela"));
-        assertEquals(10,tester.valorFeitico("Congela4Ever"));
-        assertEquals(8,tester.valorFeitico("Descongela"));
+        assertEquals(2, tester.valorFeitico("ReduzAlcance"));
+        assertEquals(3, tester.valorFeitico("DuplicaAlcance"));
+        assertEquals(3, tester.valorFeitico("Congela"));
+        assertEquals(10, tester.valorFeitico("Congela4Ever"));
+        assertEquals(8, tester.valorFeitico("Descongela"));
 
     }
 
@@ -1108,23 +1121,23 @@ public class Teste_FandeisiaGameManager {
         tester.startGame(content, 15, 15);
 
         assertTrue(tester.enchant(1, 6, "EmpurraParaNorte"));
-        assertTrue(tester.enchant(5,0,"EmpurraParaEste"));
-        assertTrue(tester.enchant(4,6,"EmpurraParaSul"));
-        assertTrue(tester.enchant(3,3,"EmpurraParaOeste"));
-        assertTrue(tester.enchant(4,0,"DuplicaAlcance"));
-        assertTrue(tester.enchant(3,6,"ReduzAlcance"));
-        assertTrue(tester.enchant(2,0,"Congela"));
-        assertTrue(tester.enchant(2,6,"Congela4Ever"));
-        assertEquals("EmpurraParaNorte",tester.getSpell(1,6));
-        assertEquals("EmpurraParaEste",tester.getSpell(5,0));
-        assertEquals("EmpurraParaSul",tester.getSpell(4,6));
-        assertEquals("EmpurraParaOeste",tester.getSpell(3,3));
-        assertEquals("DuplicaAlcance",tester.getSpell(4,0));
-        assertEquals("ReduzAlcance",tester.getSpell(3,6));
-        assertEquals("Congela",tester.getSpell(2,0));
-        assertEquals("Congela4Ever",tester.getSpell(2,6));
+        assertTrue(tester.enchant(5, 0, "EmpurraParaEste"));
+        assertTrue(tester.enchant(4, 6, "EmpurraParaSul"));
+        assertTrue(tester.enchant(3, 3, "EmpurraParaOeste"));
+        assertTrue(tester.enchant(4, 0, "DuplicaAlcance"));
+        assertTrue(tester.enchant(3, 6, "ReduzAlcance"));
+        assertTrue(tester.enchant(2, 0, "Congela"));
+        assertTrue(tester.enchant(2, 6, "Congela4Ever"));
+        assertEquals("EmpurraParaNorte", tester.getSpell(1, 6));
+        assertEquals("EmpurraParaEste", tester.getSpell(5, 0));
+        assertEquals("EmpurraParaSul", tester.getSpell(4, 6));
+        assertEquals("EmpurraParaOeste", tester.getSpell(3, 3));
+        assertEquals("DuplicaAlcance", tester.getSpell(4, 0));
+        assertEquals("ReduzAlcance", tester.getSpell(3, 6));
+        assertEquals("Congela", tester.getSpell(2, 0));
+        assertEquals("Congela4Ever", tester.getSpell(2, 6));
         tester.processTurn();
-        assertTrue(tester.enchant(2,6,"Descongela"));
+        assertTrue(tester.enchant(2, 6, "Descongela"));
     }
 
     @Test
@@ -1132,9 +1145,9 @@ public class Teste_FandeisiaGameManager {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[1];
         content[0] = "id: 1, type: NAOEXISTE, teamId: 10, x: 0, y: 0, orientation: Este";
-        tester.startGame(content,1,1);
-        assertEquals(50,tester.getCoinTotal(10));
-        assertEquals(50,tester.getCoinTotal(20));
+        tester.startGame(content, 1, 1);
+        assertEquals(50, tester.getCoinTotal(10));
+        assertEquals(50, tester.getCoinTotal(20));
 
         content = new String[11];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este"; //1
@@ -1149,9 +1162,9 @@ public class Teste_FandeisiaGameManager {
         content[8] = "id: 4, type: Gigante, teamId: 20, x: 0, y: 3, orientation: Este"; //5
         content[9] = "id: 5, type: Elfo, teamId: 20, x: 0, y: 4, orientation: Este"; //5
         content[10] = "id: 5, type: Anão, teamId: 20, x: 0, y: 6, orientation: Este"; //1
-        tester.startGame(content,12,12);
-        assertEquals(27,tester.getCoinTotal(10));
-        assertEquals(26,tester.getCoinTotal(20));
+        tester.startGame(content, 12, 12);
+        assertEquals(27, tester.getCoinTotal(10));
+        assertEquals(26, tester.getCoinTotal(20));
 
         tester = new FandeisiaGameManager();
         content = new String[11];
@@ -1167,16 +1180,16 @@ public class Teste_FandeisiaGameManager {
         content[8] = "id: 4, type: Gigante, teamId: 20, x: 0, y: 3, orientation: Este"; //5
         content[9] = "id: 5, type: Elfo, teamId: 20, x: 0, y: 4, orientation: Este"; //5
         content[10] = "id: 5, type: Elfo, teamId: 20, x: 0, y: 6, orientation: Este"; //5
-        tester.startGame(content,12,12);
-        assertEquals(25,tester.getCoinTotal(10));
-        assertEquals(22,tester.getCoinTotal(20));
+        tester.startGame(content, 12, 12);
+        assertEquals(25, tester.getCoinTotal(10));
+        assertEquals(22, tester.getCoinTotal(20));
 
     }
 
     @Test
     public void test_whoIsLordEder() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
-        assertEquals("Ederzito António Macedo Lopes",tester.whoIsLordEder());
+        assertEquals("Ederzito António Macedo Lopes", tester.whoIsLordEder());
     }
 
     @Test
@@ -1198,23 +1211,23 @@ public class Teste_FandeisiaGameManager {
         content[10] = "id: -5, type: bronze, x: 8, y: 9";
         content[11] = "id: -6, type: gold, x: 10, y: 11";
 
-        tester.startGame(content,12,12);
+        tester.startGame(content, 12, 12);
         tester.processTurn();
-        assertEquals(0,tester.getTreausres().size());
+        assertEquals(0, tester.getTreausres().size());
         assertTrue(tester.gameIsOver());
         List<String> result = tester.getResults();
-        assertEquals("Resultado: EMPATE",result.get(1));
-        assertEquals("LDR: 6",result.get(2));
-        assertEquals("RESISTENCIA: 6",result.get(3));
-        assertEquals("Nr. de Turnos jogados: 1",result.get(4));
+        assertEquals("Resultado: EMPATE", result.get(1));
+        assertEquals("LDR: 6", result.get(2));
+        assertEquals("RESISTENCIA: 6", result.get(3));
+        assertEquals("Nr. de Turnos jogados: 1", result.get(4));
 
-        assertEquals("1 : Anão : 0 : 1 : 0 : 2",result.get(6));
-        assertEquals("2 : Anão : 0 : 0 : 1 : 1",result.get(7));
-        assertEquals("3 : Anão : 1 : 0 : 0 : 3",result.get(8));
+        assertEquals("1 : Anão : 0 : 1 : 0 : 2", result.get(6));
+        assertEquals("2 : Anão : 0 : 0 : 1 : 1", result.get(7));
+        assertEquals("3 : Anão : 1 : 0 : 0 : 3", result.get(8));
 
-        assertEquals("4 : Anão : 0 : 1 : 0 : 2",result.get(9));
-        assertEquals("5 : Anão : 0 : 0 : 1 : 1",result.get(10));
-        assertEquals("6 : Anão : 1 : 0 : 0 : 3",result.get(11));
+        assertEquals("4 : Anão : 0 : 1 : 0 : 2", result.get(9));
+        assertEquals("5 : Anão : 0 : 0 : 1 : 1", result.get(10));
+        assertEquals("6 : Anão : 1 : 0 : 0 : 3", result.get(11));
 
         tester = new FandeisiaGameManager();
         content = new String[12];
@@ -1233,23 +1246,23 @@ public class Teste_FandeisiaGameManager {
         content[10] = "id: -5, type: bronze, x: 8, y: 9";
         content[11] = "id: -6, type: gold, x: 10, y: 11";
 
-        tester.startGame(content,12,12);
+        tester.startGame(content, 12, 12);
         tester.processTurn();
-        assertEquals(0,tester.getTreausres().size());
+        assertEquals(0, tester.getTreausres().size());
         assertTrue(tester.gameIsOver());
         result = tester.getResults();
-        assertEquals("Resultado: Vitória da equipa LDR",result.get(1));
-        assertEquals("LDR: 8",result.get(2));
-        assertEquals("RESISTENCIA: 4",result.get(3));
-        assertEquals("Nr. de Turnos jogados: 1",result.get(4));
+        assertEquals("Resultado: Vitória da equipa LDR", result.get(1));
+        assertEquals("LDR: 8", result.get(2));
+        assertEquals("RESISTENCIA: 4", result.get(3));
+        assertEquals("Nr. de Turnos jogados: 1", result.get(4));
 
-        assertEquals("1 : Anão : 0 : 1 : 0 : 2",result.get(6));
-        assertEquals("2 : Anão : 0 : 0 : 1 : 1",result.get(7));
-        assertEquals("3 : Anão : 1 : 0 : 0 : 3",result.get(8));
+        assertEquals("1 : Anão : 0 : 1 : 0 : 2", result.get(6));
+        assertEquals("2 : Anão : 0 : 0 : 1 : 1", result.get(7));
+        assertEquals("3 : Anão : 1 : 0 : 0 : 3", result.get(8));
 
-        assertEquals("4 : Anão : 0 : 1 : 0 : 2",result.get(9));
-        assertEquals("5 : Anão : 0 : 0 : 1 : 1",result.get(10));
-        assertEquals("6 : Anão : 1 : 0 : 0 : 3",result.get(11));
+        assertEquals("4 : Anão : 0 : 1 : 0 : 2", result.get(9));
+        assertEquals("5 : Anão : 0 : 0 : 1 : 1", result.get(10));
+        assertEquals("6 : Anão : 1 : 0 : 0 : 3", result.get(11));
 
         tester = new FandeisiaGameManager();
         content = new String[12];
@@ -1268,23 +1281,23 @@ public class Teste_FandeisiaGameManager {
         content[10] = "id: -5, type: bronze, x: 8, y: 9";
         content[11] = "id: -6, type: gold, x: 10, y: 11";
 
-        tester.startGame(content,12,12);
+        tester.startGame(content, 12, 12);
         tester.processTurn();
-        assertEquals(0,tester.getTreausres().size());
+        assertEquals(0, tester.getTreausres().size());
         assertTrue(tester.gameIsOver());
         result = tester.getResults();
-        assertEquals("Resultado: Vitória da equipa RESISTENCIA",result.get(1));
-        assertEquals("LDR: 3",result.get(3));
-        assertEquals("RESISTENCIA: 9",result.get(2));
-        assertEquals("Nr. de Turnos jogados: 1",result.get(4));
+        assertEquals("Resultado: Vitória da equipa RESISTENCIA", result.get(1));
+        assertEquals("LDR: 3", result.get(3));
+        assertEquals("RESISTENCIA: 9", result.get(2));
+        assertEquals("Nr. de Turnos jogados: 1", result.get(4));
 
-        assertEquals("1 : Anão : 0 : 1 : 0 : 2",result.get(6));
-        assertEquals("2 : Anão : 0 : 0 : 1 : 1",result.get(7));
-        assertEquals("3 : Anão : 1 : 0 : 0 : 3",result.get(8));
+        assertEquals("1 : Anão : 0 : 1 : 0 : 2", result.get(6));
+        assertEquals("2 : Anão : 0 : 0 : 1 : 1", result.get(7));
+        assertEquals("3 : Anão : 1 : 0 : 0 : 3", result.get(8));
 
-        assertEquals("4 : Anão : 0 : 1 : 0 : 2",result.get(9));
-        assertEquals("5 : Anão : 0 : 0 : 1 : 1",result.get(10));
-        assertEquals("6 : Anão : 1 : 0 : 0 : 3",result.get(11));
+        assertEquals("4 : Anão : 0 : 1 : 0 : 2", result.get(9));
+        assertEquals("5 : Anão : 0 : 0 : 1 : 1", result.get(10));
+        assertEquals("6 : Anão : 1 : 0 : 0 : 3", result.get(11));
 
     }
 
@@ -1292,9 +1305,9 @@ public class Teste_FandeisiaGameManager {
     public void test_getAuthors() {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         List<String> authors = tester.getAuthors();
-        assertEquals(">Gonçalo Evora 21805468 Aka: RØKT",authors.get(0));
-        assertEquals(">Martim Mourão 21805485 Aka: Mike",authors.get(1));
-        assertEquals("LP2 Enunciado By: Bruno Cipriano, Rodrigo Correia, Pedro Alves",authors.get(2));
+        assertEquals(">Gonçalo Evora 21805468 Aka: RØKT", authors.get(0));
+        assertEquals(">Martim Mourão 21805485 Aka: Mike", authors.get(1));
+        assertEquals("LP2 Enunciado By: Bruno Cipriano, Rodrigo Correia, Pedro Alves", authors.get(2));
     }
 
     @Test
@@ -1327,49 +1340,49 @@ public class Teste_FandeisiaGameManager {
         content[20] = "id: -103, type: hole, x: 3, y: 4";
 
         tester.startGame(content, 6, 6);
-        assertEquals(1,tester.getElementId(0,0));
-        assertEquals(2,tester.getElementId(0,1));
-        assertEquals(3,tester.getElementId(0,2));
-        assertEquals(4,tester.getElementId(0,3));
-        assertEquals(5,tester.getElementId(0,4));
-        assertEquals(6,tester.getElementId(1,1));
-        assertEquals(7,tester.getElementId(1,2));
-        assertEquals(8,tester.getElementId(1,3));
-        assertEquals(9,tester.getElementId(1,4));
-        assertEquals(10,tester.getElementId(1,5));
-        assertEquals(11,tester.getElementId(4,1));
-        assertEquals(12,tester.getElementId(4,2));
-        assertEquals(13,tester.getElementId(4,3));
-        assertEquals(14,tester.getElementId(4,4));
+        assertEquals(1, tester.getElementId(0, 0));
+        assertEquals(2, tester.getElementId(0, 1));
+        assertEquals(3, tester.getElementId(0, 2));
+        assertEquals(4, tester.getElementId(0, 3));
+        assertEquals(5, tester.getElementId(0, 4));
+        assertEquals(6, tester.getElementId(1, 1));
+        assertEquals(7, tester.getElementId(1, 2));
+        assertEquals(8, tester.getElementId(1, 3));
+        assertEquals(9, tester.getElementId(1, 4));
+        assertEquals(10, tester.getElementId(1, 5));
+        assertEquals(11, tester.getElementId(4, 1));
+        assertEquals(12, tester.getElementId(4, 2));
+        assertEquals(13, tester.getElementId(4, 3));
+        assertEquals(14, tester.getElementId(4, 4));
 
-        assertEquals("Anão",tester.getType(0,0));
-        assertEquals("Humano",tester.getType(0,1));
-        assertEquals("Dragão",tester.getType(0,2));
-        assertEquals("Gigante",tester.getType(0,3));
-        assertEquals("Elfo",tester.getType(0,4));
-        assertEquals("Anão",tester.getType(1,1));
-        assertEquals("Humano",tester.getType(1,2));
-        assertEquals("Dragão",tester.getType(1,3));
-        assertEquals("Gigante",tester.getType(1,4));
-        assertEquals("Elfo",tester.getType(1,5));
-        assertEquals("Elfo",tester.getType(4,1));
-        assertEquals("Elfo",tester.getType(4,2));
-        assertEquals("Elfo",tester.getType(4,3));
-        assertEquals("Elfo",tester.getType(4,4));
+        assertEquals("Anão", tester.getType(0, 0));
+        assertEquals("Humano", tester.getType(0, 1));
+        assertEquals("Dragão", tester.getType(0, 2));
+        assertEquals("Gigante", tester.getType(0, 3));
+        assertEquals("Elfo", tester.getType(0, 4));
+        assertEquals("Anão", tester.getType(1, 1));
+        assertEquals("Humano", tester.getType(1, 2));
+        assertEquals("Dragão", tester.getType(1, 3));
+        assertEquals("Gigante", tester.getType(1, 4));
+        assertEquals("Elfo", tester.getType(1, 5));
+        assertEquals("Elfo", tester.getType(4, 1));
+        assertEquals("Elfo", tester.getType(4, 2));
+        assertEquals("Elfo", tester.getType(4, 3));
+        assertEquals("Elfo", tester.getType(4, 4));
 
-        assertEquals(-1,tester.getElementId(2,1));
-        assertEquals(-2,tester.getElementId(2,2));
-        assertEquals(-3,tester.getElementId(2,3));
+        assertEquals(-1, tester.getElementId(2, 1));
+        assertEquals(-2, tester.getElementId(2, 2));
+        assertEquals(-3, tester.getElementId(2, 3));
 
-        assertEquals(-100,tester.getElementId(3,1));
-        assertEquals(-101,tester.getElementId(3,2));
-        assertEquals(-102,tester.getElementId(3,3));
-        assertEquals(-103,tester.getElementId(3,4));
+        assertEquals(-100, tester.getElementId(3, 1));
+        assertEquals(-101, tester.getElementId(3, 2));
+        assertEquals(-102, tester.getElementId(3, 3));
+        assertEquals(-103, tester.getElementId(3, 4));
 
-        assertEquals("hole",tester.getType(3,1));
-        assertEquals("hole",tester.getType(3,2));
-        assertEquals("hole",tester.getType(3,3));
-        assertEquals("hole",tester.getType(3,4));
+        assertEquals("hole", tester.getType(3, 1));
+        assertEquals("hole", tester.getType(3, 2));
+        assertEquals("hole", tester.getType(3, 3));
+        assertEquals("hole", tester.getType(3, 4));
     }
 
     @Test
@@ -1402,20 +1415,20 @@ public class Teste_FandeisiaGameManager {
         content[20] = "id: -103, type: hole, x: 3, y: 4";
 
         tester.startGame(content, 6, 6);
-        assertEquals(1,tester.getCreature(0,0).getId());
-        assertEquals(2,tester.getCreature(0,1).getId());
-        assertEquals(3,tester.getCreature(0,2).getId());
-        assertEquals(4,tester.getCreature(0,3).getId());
-        assertEquals(5,tester.getCreature(0,4).getId());
-        assertEquals(6,tester.getCreature(1,1).getId());
-        assertEquals(7,tester.getCreature(1,2).getId());
-        assertEquals(8,tester.getCreature(1,3).getId());
-        assertEquals(9,tester.getCreature(1,4).getId());
-        assertEquals(10,tester.getCreature(1,5).getId());
-        assertEquals(11,tester.getCreature(4,1).getId());
-        assertEquals(12,tester.getCreature(4,2).getId());
-        assertEquals(13,tester.getCreature(4,3).getId());
-        assertEquals(14,tester.getCreature(4,4).getId());
+        assertEquals(1, tester.getCreature(0, 0).getId());
+        assertEquals(2, tester.getCreature(0, 1).getId());
+        assertEquals(3, tester.getCreature(0, 2).getId());
+        assertEquals(4, tester.getCreature(0, 3).getId());
+        assertEquals(5, tester.getCreature(0, 4).getId());
+        assertEquals(6, tester.getCreature(1, 1).getId());
+        assertEquals(7, tester.getCreature(1, 2).getId());
+        assertEquals(8, tester.getCreature(1, 3).getId());
+        assertEquals(9, tester.getCreature(1, 4).getId());
+        assertEquals(10, tester.getCreature(1, 5).getId());
+        assertEquals(11, tester.getCreature(4, 1).getId());
+        assertEquals(12, tester.getCreature(4, 2).getId());
+        assertEquals(13, tester.getCreature(4, 3).getId());
+        assertEquals(14, tester.getCreature(4, 4).getId());
     }
 
     @Test
@@ -1446,39 +1459,39 @@ public class Teste_FandeisiaGameManager {
         content[18] = "id: -101, type: hole, x: 3, y: 2";
         content[19] = "id: -102, type: hole, x: 3, y: 3";
         content[20] = "id: -103, type: hole, x: 3, y: 4";
-        tester.startGame(content,12,12);
-        assertEquals(10,tester.getCurrentTeamId());
+        tester.startGame(content, 12, 12);
+        assertEquals(10, tester.getCurrentTeamId());
         tester.processTurn();
         assertFalse(tester.gameIsOver());
-        assertEquals(20,tester.getCurrentTeamId());
+        assertEquals(20, tester.getCurrentTeamId());
         tester.processTurn();
         assertFalse(tester.gameIsOver());
-        assertEquals(10,tester.getCurrentTeamId());
+        assertEquals(10, tester.getCurrentTeamId());
         tester.processTurn();
         assertFalse(tester.gameIsOver());
-        assertEquals(20,tester.getCurrentTeamId());
+        assertEquals(20, tester.getCurrentTeamId());
         tester.processTurn();
         assertFalse(tester.gameIsOver());
-        assertEquals(10,tester.getCurrentTeamId());
+        assertEquals(10, tester.getCurrentTeamId());
         tester.processTurn();
         assertTrue(tester.gameIsOver());
 
         tester = new FandeisiaGameManager();
-        tester.startGame(content,12,12);
+        tester.startGame(content, 12, 12);
         tester.setCurrentTeamId(20);
-        assertEquals(20,tester.getCurrentTeamId());
+        assertEquals(20, tester.getCurrentTeamId());
         tester.processTurn();
         assertFalse(tester.gameIsOver());
-        assertEquals(10,tester.getCurrentTeamId());
+        assertEquals(10, tester.getCurrentTeamId());
         tester.processTurn();
         assertFalse(tester.gameIsOver());
-        assertEquals(20,tester.getCurrentTeamId());
+        assertEquals(20, tester.getCurrentTeamId());
         tester.processTurn();
         assertFalse(tester.gameIsOver());
-        assertEquals(10,tester.getCurrentTeamId());
+        assertEquals(10, tester.getCurrentTeamId());
         tester.processTurn();
         assertFalse(tester.gameIsOver());
-        assertEquals(20,tester.getCurrentTeamId());
+        assertEquals(20, tester.getCurrentTeamId());
         tester.processTurn();
         assertTrue(tester.gameIsOver());
 
@@ -1515,9 +1528,9 @@ public class Teste_FandeisiaGameManager {
 
         tester.startGame(content, 6, 6);
         tester.clearAllData();
-        assertEquals(0,tester.getCreatures().size());
-        assertEquals(0,tester.getTreausres().size());
-        assertEquals(0,tester.getHoles().size());
+        assertEquals(0, tester.getCreatures().size());
+        assertEquals(0, tester.getTreausres().size());
+        assertEquals(0, tester.getHoles().size());
     }
 
     //TODO test testar coins do random criar army computer IMPORTANTE
