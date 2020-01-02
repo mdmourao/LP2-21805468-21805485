@@ -132,6 +132,11 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
+    public void test_CriarCoinsRandomPCArmy(){
+
+    }
+
+    @Test
     public void test_Movimento90_Creature90() {
         //Caso Normal
         FandeisiaGameManager tester = new FandeisiaGameManager();
