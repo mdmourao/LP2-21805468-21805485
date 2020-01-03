@@ -73,6 +73,10 @@ public class Teste_FandeisiaGameManager {
         assertEquals("-102 | hole @ (3, 3)", holes.get(2).toString());
         assertEquals("-103 | hole @ (3, 4)", holes.get(3).toString());
 
+        tester.setInitialTeam(20);
+        assertEquals(20, tester.getCurrentTeamId());
+        assertEquals(0, tester.getCurrentScore(30));
+
 
     }
 
@@ -105,7 +109,7 @@ public class Teste_FandeisiaGameManager {
         content[19] = "id: -A, type: gold, x: 2, y: 3";
 
         //ERROS:
-        content[17] = "id: -100, type: hole, x: 3, y: 1";
+        content[17] = "id: -A, type: hole, x: 3, y: 1";
         content[18] = "id: -101, type: hole, x: A, y: 2";
         content[20] = "id: -103, type: hole, x: 3, y: B";
 
@@ -113,7 +117,7 @@ public class Teste_FandeisiaGameManager {
 
         assertEquals("Tamanho Creatures", 8, tester.getNumberCreatures());
         assertEquals("Tamanho Treasures", 0, tester.getNumberTreasures());
-        assertEquals("Tamanho Holes", 1, tester.getNumberHoles());
+        assertEquals("Tamanho Holes", 0, tester.getNumberHoles());
 
         List<Creature> creatures = tester.getCreatures();
         assertEquals("1 | Anão | 10 | 0 @ (0, 0) Este", creatures.get(0).toString());
@@ -125,9 +129,12 @@ public class Teste_FandeisiaGameManager {
         assertEquals("7 | Humano | 20 | 0 @ (1, 2) Sul", creatures.get(6).toString());
         assertEquals("8 | Dragão | 20 | 0 @ (1, 3) Oeste", creatures.get(7).toString());
 
-
-        List<Hole> holes = tester.getHoles();
-        assertEquals("-100 | hole @ (3, 1)", holes.get(0).toString());
+        tester.addCreaure(9, "NAOEXISTE", 20, 1, 2, "Sul");
+        tester.addCreaure(9, "NAOEXISTE", 20, 1, 2, "Sul", 12);
+        tester.addTreasure(2, "Diamante", 1, 2);
+        assertEquals("Tamanho Creatures", 8, tester.getNumberCreatures());
+        assertEquals("Tamanho Treasures", 0, tester.getNumberTreasures());
+        assertEquals("Tamanho Holes", 0, tester.getNumberHoles());
 
 
     }
@@ -138,16 +145,13 @@ public class Teste_FandeisiaGameManager {
             FandeisiaGameManager tester = new FandeisiaGameManager();
             Map<String, Integer> testeRandomPCArmy = tester.createComputerArmy();
             int moedas = 50;
-            boolean maiorQue50 = false;
             int sumMoedas = 0;
             sumMoedas += testeRandomPCArmy.get("Anão");
             sumMoedas += testeRandomPCArmy.get("Elfo") * 5;
             sumMoedas += testeRandomPCArmy.get("Gigante") * 5;
             sumMoedas += testeRandomPCArmy.get("Dragão") * 9;
             sumMoedas += testeRandomPCArmy.get("Humano") * 3;
-            if (sumMoedas > moedas) {
-                maiorQue50 = true;
-            }
+            boolean maiorQue50 = sumMoedas >= 50;
             assertFalse(maiorQue50);
         }
     }
@@ -624,7 +628,9 @@ public class Teste_FandeisiaGameManager {
     @Test
     public void test_saveGameANDLoadGame() {
         File file = new File("test-files/test.txt");
-
+        File file2 = new File("test-files2/test.txt");
+        File file3 = new File("test-files/test2.txt");
+        File file4 = new File("test-files/test3.txt");
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[21];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -638,28 +644,30 @@ public class Teste_FandeisiaGameManager {
         content[7] = "id: 8, type: Dragão, teamId: 20, x: 1, y: 3, orientation: Oeste";
         content[8] = "id: 9, type: Gigante, teamId: 20, x: 1, y: 4, orientation: Norte";
         content[9] = "id: 10, type: Elfo, teamId: 20, x: 1, y: 5, orientation: Sul";
-        content[10] = "id: 11, type: Elfo, teamId: 20, x: 4, y: 1, orientation: Nordeste";
+        content[10] = "id: 11, type: Elfo, teamId: 20, x: 4, y: 15, orientation: Nordeste";
         content[11] = "id: 12, type: Elfo, teamId: 20, x: 4, y: 2, orientation: Noroeste";
-        content[12] = "id: 13, type: Elfo, teamId: 20, x: 4, y: 3, orientation: Sudeste";
-        content[13] = "id: 14, type: Elfo, teamId: 20, x: 4, y: 4, orientation: Sudoeste";
+        content[12] = "id: 13, type: Elfo, teamId: 20, x: A4, y: 3, orientation: Sudeste";
+        content[13] = "id: 14, type: Elfo, teamId: 20, x: 14, y: 4, orientation: Sudoeste";
 
-        content[14] = "id: -1, type: silver, x: 2, y: 1";
+        content[14] = "id: -1, type: silver, x: 12, y: 1";
         content[15] = "id: -2, type: bronze, x: 2, y: 2";
-        content[16] = "id: -3, type: gold, x: 2, y: 3";
+        content[16] = "id: -3, type: gold, x: 2, y: 13";
 
-        content[17] = "id: -100, type: hole, x: 3, y: 1";
-        content[18] = "id: -101, type: hole, x: 3, y: 2";
+        content[17] = "id: -100, type: hole, x: 13, y: 1";
+        content[18] = "id: -101, type: hole, x: A3, y: 2";
         content[19] = "id: -102, type: hole, x: 3, y: 3";
-        content[20] = "id: -103, type: hole, x: 3, y: 4";
-        tester.startGame(content, 6, 6);
+        content[20] = "id: -103, type: hole, x: 3, y: 14";
+        tester.startGame(content, 20, 20);
         tester.saveGame(file);
+        assertFalse(tester.saveGame(file2));
+        assertFalse(tester.loadGame(file2));
 
         tester = new FandeisiaGameManager();
         tester.loadGame(file);
 
-        assertEquals("Tamanho Creatures", 14, tester.getNumberCreatures());
+        assertEquals("Tamanho Creatures", 13, tester.getNumberCreatures());
         assertEquals("Tamanho Treasures", 3, tester.getNumberTreasures());
-        assertEquals("Tamanho Holes", 4, tester.getNumberHoles());
+        assertEquals("Tamanho Holes", 3, tester.getNumberHoles());
 
         List<Creature> creatures = tester.getCreatures();
         assertEquals("1 | Anão | 10 | 0 @ (0, 0) Este", creatures.get(0).toString());
@@ -672,21 +680,19 @@ public class Teste_FandeisiaGameManager {
         assertEquals("8 | Dragão | 20 | 0 @ (1, 3) Oeste", creatures.get(7).toString());
         assertEquals("9 | Gigante | 20 | 0 @ (1, 4) Norte", creatures.get(8).toString());
         assertEquals("10 | Elfo | 20 | 0 @ (1, 5) Sul", creatures.get(9).toString());
-        assertEquals("11 | Elfo | 20 | 0 @ (4, 1) Nordeste", creatures.get(10).toString());
+        assertEquals("11 | Elfo | 20 | 0 @ (4, 15) Nordeste", creatures.get(10).toString());
         assertEquals("12 | Elfo | 20 | 0 @ (4, 2) Noroeste", creatures.get(11).toString());
-        assertEquals("13 | Elfo | 20 | 0 @ (4, 3) Sudeste", creatures.get(12).toString());
-        assertEquals("14 | Elfo | 20 | 0 @ (4, 4) Sudoeste", creatures.get(13).toString());
+        assertEquals("14 | Elfo | 20 | 0 @ (14, 4) Sudoeste", creatures.get(12).toString());
 
         List<Treasure> treasures = tester.getTreausres();
-        assertEquals("-1 | silver @ (2, 1)", treasures.get(0).toString());
+        assertEquals("-1 | silver @ (12, 1)", treasures.get(0).toString());
         assertEquals("-2 | bronze @ (2, 2)", treasures.get(1).toString());
-        assertEquals("-3 | gold @ (2, 3)", treasures.get(2).toString());
+        assertEquals("-3 | gold @ (2, 13)", treasures.get(2).toString());
 
         List<Hole> holes = tester.getHoles();
-        assertEquals("-100 | hole @ (3, 1)", holes.get(0).toString());
-        assertEquals("-101 | hole @ (3, 2)", holes.get(1).toString());
-        assertEquals("-102 | hole @ (3, 3)", holes.get(2).toString());
-        assertEquals("-103 | hole @ (3, 4)", holes.get(3).toString());
+        assertEquals("-100 | hole @ (13, 1)", holes.get(0).toString());
+        assertEquals("-102 | hole @ (3, 3)", holes.get(1).toString());
+        assertEquals("-103 | hole @ (3, 14)", holes.get(2).toString());
 
         tester = new FandeisiaGameManager();
         content = new String[15];
@@ -734,6 +740,17 @@ public class Teste_FandeisiaGameManager {
         assertEquals(1, cs.get(5).getTesourosSilver());
         assertEquals(0, cs.get(5).getTesourosBronze());
         assertEquals(1, cs.get(0).getTesourosEncontrados());
+
+        tester = new FandeisiaGameManager();
+        assertFalse(tester.loadGame(file3));
+
+
+        tester = new FandeisiaGameManager();
+        tester.loadGame(file4);
+
+        assertEquals("Tamanho Creatures", 8, tester.getNumberCreatures());
+        assertEquals("Tamanho Treasures", 0, tester.getNumberTreasures());
+        assertEquals("Tamanho Holes", 1, tester.getNumberHoles());
 
     }
 
@@ -898,6 +915,7 @@ public class Teste_FandeisiaGameManager {
 
         tester.processTurn();
         assertEquals(1, tester.getElementId(1, 0));
+        assertEquals(0, tester.getElementId(7, 7));
 
         //sem dinheiro para feitiços
         tester = new FandeisiaGameManager();
@@ -1056,11 +1074,14 @@ public class Teste_FandeisiaGameManager {
         content[12] = "id: 13, type: Elfo, teamId: 20, x: 3, y: 6, orientation: Sudeste";
         content[13] = "id: 14, type: Elfo, teamId: 20, x: 4, y: 6, orientation: Sudoeste";
         tester.startGame(content, 15, 15);
+        tester.toggleAI(true);
+        tester.toggleAI(false);
 
         tester.aplicarFeitico(1, 6, "EmpurraParaNorte");
         tester.aplicarFeitico(5, 0, "EmpurraParaEste");
         tester.aplicarFeitico(4, 6, "EmpurraParaSul");
         tester.aplicarFeitico(3, 3, "EmpurraParaOeste");
+        tester.aplicarFeitico(9, 9, "EmpurraParaOeste"); // null case
         assertEquals(11, tester.getElementId(1, 5));
         assertEquals(5, tester.getElementId(6, 0));
         assertEquals(14, tester.getElementId(4, 7));
@@ -1080,6 +1101,7 @@ public class Teste_FandeisiaGameManager {
 
         tester.aplicarFeitico(2, 6, "Descongela");
         assertEquals(false, tester.getCreatures().get(11).isCongeladoForever());
+
     }
 
     @Test
@@ -1095,6 +1117,7 @@ public class Teste_FandeisiaGameManager {
         assertEquals(3, tester.valorFeitico("Congela"));
         assertEquals(10, tester.valorFeitico("Congela4Ever"));
         assertEquals(8, tester.valorFeitico("Descongela"));
+        assertEquals(0, tester.valorFeitico("NAOEXISTE"));
 
     }
 
@@ -1183,6 +1206,70 @@ public class Teste_FandeisiaGameManager {
         tester.startGame(content, 12, 12);
         assertEquals(25, tester.getCoinTotal(10));
         assertEquals(22, tester.getCoinTotal(20));
+
+        tester = new FandeisiaGameManager();
+        content = new String[20];
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este"; //5
+        content[1] = "id: 2, type: Elfo, teamId: 10, x: 0, y: 1, orientation: Este"; //5
+        content[2] = "id: 3, type: Elfo, teamId: 10, x: 0, y: 2, orientation: Este"; //5
+        content[3] = "id: 4, type: Elfo, teamId: 10, x: 0, y: 3, orientation: Este"; //5
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 0, y: 4, orientation: Este"; //5
+        content[5] = "id: 6, type: Elfo, teamId: 10, x: 0, y: 5, orientation: Este"; //5
+        content[6] = "id: 7, type: Elfo, teamId: 10, x: 0, y: 6, orientation: Este"; //5
+        content[7] = "id: 8, type: Elfo, teamId: 10, x: 0, y: 7, orientation: Este"; //5
+        content[8] = "id: 9, type: Elfo, teamId: 10, x: 0, y: 8, orientation: Este"; //5
+        content[9] = "id: 10, type: Elfo, teamId: 10, x: 0, y: 9, orientation: Este"; //5
+
+        content[10] = "id: 11, type: Elfo, teamId: 20, x: 5, y: 0, orientation: Este"; //5
+        content[11] = "id: 12, type: Elfo, teamId: 20, x: 1, y: 1, orientation: Este"; //5
+        content[12] = "id: 13, type: Elfo, teamId: 20, x: 1, y: 2, orientation: Este"; //5
+        content[13] = "id: 14, type: Elfo, teamId: 20, x: 1, y: 3, orientation: Este"; //5
+        content[14] = "id: 15, type: Elfo, teamId: 20, x: 1, y: 4, orientation: Este"; //5
+        content[15] = "id: 16, type: Elfo, teamId: 20, x: 1, y: 5, orientation: Este"; //5
+        content[16] = "id: 17, type: Elfo, teamId: 20, x: 1, y: 6, orientation: Este"; //5
+        content[17] = "id: 18, type: Elfo, teamId: 20, x: 1, y: 7, orientation: Este"; //5
+        content[18] = "id: 19, type: Elfo, teamId: 20, x: 1, y: 8, orientation: Este"; //5
+        content[19] = "id: 20, type: Elfo, teamId: 20, x: 1, y: 9, orientation: Este"; //5
+        tester.startGame(content, 12, 12);
+        assertEquals(0, tester.getCoinTotal(10));
+        assertEquals(0, tester.getCoinTotal(20));
+        assertFalse(tester.enchant(0, 0, "EmpurraParaEste"));
+        tester.setCurrentTeamId(20);
+        assertFalse(tester.enchant(5, 0, "EmpurraParaEste"));
+        assertFalse(tester.removeMoedas(30, 10));
+
+
+        tester = new FandeisiaGameManager();
+        content = new String[22];
+        content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este"; //5
+        content[1] = "id: 2, type: Elfo, teamId: 10, x: 0, y: 1, orientation: Este"; //5
+        content[2] = "id: 3, type: Elfo, teamId: 10, x: 0, y: 2, orientation: Este"; //5
+        content[3] = "id: 4, type: Elfo, teamId: 10, x: 0, y: 3, orientation: Este"; //5
+        content[4] = "id: 5, type: Elfo, teamId: 10, x: 0, y: 4, orientation: Este"; //5
+        content[5] = "id: 6, type: Elfo, teamId: 10, x: 0, y: 5, orientation: Este"; //5
+        content[6] = "id: 7, type: Elfo, teamId: 10, x: 0, y: 6, orientation: Este"; //5
+        content[7] = "id: 8, type: Elfo, teamId: 10, x: 0, y: 7, orientation: Este"; //5
+        content[8] = "id: 9, type: Elfo, teamId: 10, x: 0, y: 8, orientation: Este"; //5
+        content[9] = "id: 10, type: Elfo, teamId: 10, x: 0, y: 9, orientation: Este"; //5
+
+
+        content[10] = "id: 11, type: Elfo, teamId: 20, x: 1, y: 0, orientation: Este"; //5
+        content[11] = "id: 12, type: Elfo, teamId: 20, x: 1, y: 1, orientation: Este"; //5
+        content[12] = "id: 13, type: Elfo, teamId: 20, x: 1, y: 2, orientation: Este"; //5
+        content[13] = "id: 14, type: Elfo, teamId: 20, x: 1, y: 3, orientation: Este"; //5
+        content[14] = "id: 15, type: Elfo, teamId: 20, x: 1, y: 4, orientation: Este"; //5
+        content[15] = "id: 16, type: Elfo, teamId: 20, x: 1, y: 5, orientation: Este"; //5
+        content[16] = "id: 17, type: Elfo, teamId: 20, x: 1, y: 6, orientation: Este"; //5
+        content[17] = "id: 18, type: Elfo, teamId: 20, x: 1, y: 7, orientation: Este"; //5
+        content[18] = "id: 19, type: Elfo, teamId: 20, x: 1, y: 8, orientation: Este"; //5
+        content[19] = "id: 20, type: Elfo, teamId: 20, x: 1, y: 9, orientation: Este"; //5
+
+        content[20] = "id: 21, type: Elfo, teamId: 10, x: 1, y: 10, orientation: Este"; //5
+        content[21] = "id: 22, type: Elfo, teamId: 20, x: 1, y: 10, orientation: Este"; //5
+        tester.startGame(content, 12, 12);
+        assertEquals(50, tester.getCoinTotal(10));
+        assertEquals(50, tester.getCoinTotal(20));
+
 
     }
 
@@ -1532,13 +1619,6 @@ public class Teste_FandeisiaGameManager {
         assertEquals(0, tester.getTreausres().size());
         assertEquals(0, tester.getHoles().size());
     }
-
-
-    //creature especial
-    //video
-    //readme
-    //UML
-
 
 }
 

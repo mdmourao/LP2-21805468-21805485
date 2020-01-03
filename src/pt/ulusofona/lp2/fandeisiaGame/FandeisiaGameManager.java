@@ -111,8 +111,8 @@ public class FandeisiaGameManager {
         return spellsString;
     }
 
-    //TODO
     public void toggleAI(boolean active) {
+
     }
 
     public Map<String, Integer> createComputerArmy() {
@@ -135,7 +135,6 @@ public class FandeisiaGameManager {
         return army;
     }
 
-    //TODO fazer o check que se faz no duplica para o reduz
     public boolean enchant(int x, int y, String spellName) {
         Point p = new Point(x, y);
         /*Aplica o feitiço indicado à criatura que
@@ -189,7 +188,7 @@ public class FandeisiaGameManager {
             if (x - 1 >= 0 && getType(x - 1, y) == null) {
                 if (posicoesOcupadas.get(new Point(x - 1, y)) == null && removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaOeste"))) {
                     feiticos.put(p, "EmpurraParaOeste");
-                    posicoesOcupadas.put( new Point(x - 1, y), "EmpurraParaOeste");
+                    posicoesOcupadas.put(new Point(x - 1, y), "EmpurraParaOeste");
                     return true;
                 }
             } else {
@@ -247,29 +246,21 @@ public class FandeisiaGameManager {
         if (spellName.equals("EmpurraParaNorte")) {
             if (getType(x, y - 1) == null) {
                 creature.stepY(-1);
-            } else {
-                return;
             }
         }
         if (spellName.equals("EmpurraParaEste")) {
             if (getType(x + 1, y) == null) {
                 creature.stepX(1);
-            } else {
-                return;
             }
         }
         if (spellName.equals("EmpurraParaSul")) {
             if (getType(x, y + 1) == null) {
                 creature.stepY(1);
-            } else {
-                return;
             }
         }
         if (spellName.equals("EmpurraParaOeste")) {
             if (getType(x - 1, y) == null) {
                 creature.stepX(-1);
-            } else {
-                return;
             }
         }
         if (spellName.equals("ReduzAlcance")) {
@@ -431,7 +422,7 @@ public class FandeisiaGameManager {
                     y = Integer.parseInt(y1);
                     rdv = splitConteudo2[4];
                 } catch (NumberFormatException e) {
-                    return false;
+                    continue;
                 }
                 addCreaure(id, tipo, idEquipa, x, y, rdv, pontos);
             }
@@ -452,7 +443,7 @@ public class FandeisiaGameManager {
                     x = Integer.parseInt(x1);
                     y = Integer.parseInt(y1);
                 } catch (NumberFormatException e) {
-                    return false;
+                    continue;
                 }
                 if (tipo.equals("hole")) {
                     addHole(id, x, y);
@@ -871,6 +862,7 @@ public class FandeisiaGameManager {
     }
 
     public void processTurn() {
+        Random gerador = new Random();
         int team10apanhouTreasure = 0;
         int team20apanhouTreasure = 0;
         System.out.println("Estou a processar uma jogada");
@@ -880,6 +872,8 @@ public class FandeisiaGameManager {
                 aplicarFeitico(c.getX(), c.getY(), getSpell(c.getX(), c.getY()));
             }
         }
+        feiticos = new HashMap<>();
+        posicoesOcupadas = new HashMap<>();
         ArrayList<Treasure> treasuresRemove = new ArrayList<>();
         for (Creature c : creatures) {
             for (Treasure t : treasures) {
@@ -1014,6 +1008,7 @@ public class FandeisiaGameManager {
         feiticos = new HashMap<>();
         posicoesOcupadas = new HashMap<>();
     }
+
 
     public List<Creature> getCreatures() {
         /*Devolve uma lista com todos os objectos Creature que existem no jogo.*/
