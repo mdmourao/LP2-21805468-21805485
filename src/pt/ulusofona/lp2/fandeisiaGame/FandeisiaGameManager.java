@@ -338,7 +338,6 @@ public class FandeisiaGameManager {
 
     }
 
-    //TODO number types tresure
     public boolean saveGame(File fich) {
         /*Deve gravar o jogo actual para o ficheiro
         indicado no argumento.*/
@@ -374,7 +373,6 @@ public class FandeisiaGameManager {
         return true;
     }
 
-    //TODO number types tresure
     public boolean loadGame(File fich) {
         clearAllData();
         Scanner scanner;
@@ -1011,7 +1009,6 @@ public class FandeisiaGameManager {
         posicoesOcupadas = new HashMap<>();
     }
 
-
     public List<Creature> getCreatures() {
         /*Devolve uma lista com todos os objectos Creature que existem no jogo.*/
         return creatures;
@@ -1226,7 +1223,6 @@ public class FandeisiaGameManager {
             this.creatures.add(c);
         }
     }
-
 
     public void clearAllData() {
         creatures = new ArrayList<>();
