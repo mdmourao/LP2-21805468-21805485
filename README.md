@@ -1,4 +1,15 @@
 # LP2-21805468-21805485
+
+![](diagrama.png?raw=true "Diagrama UML")
+
+Youtube Link: https://youtu.be/4DCFexV8FzA
+
+OBSERVACAO: Alguns metodos estão com o simbolo * para dizer que estão a italico, no entanto alguns nomes de classes
+estão logo a italico. Isso porque o programa que usamos colocava todos os metodos a italicos.
+
+Se a imagem perder alguma qualidade no upload esta um pdf e um link para o draw.io que pode ser consultado no folder
+UML(draw.io)
+
 Projeto De LP2 2019
 
 Introdução:
