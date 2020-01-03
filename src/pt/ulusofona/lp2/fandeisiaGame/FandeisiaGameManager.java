@@ -31,6 +31,8 @@ public class FandeisiaGameManager {
         numeroJogadasZero = 0;
         feiticos = new HashMap<>();
         posicoesOcupadas = new HashMap<>();
+
+
     }
 
     public String[][] getCreatureTypes() {
@@ -964,7 +966,7 @@ public class FandeisiaGameManager {
                     }
                     break;
             }
-            if (c.duplicado || c.reduzido) {
+            if (c.estouDuplicado() || c.estouReduzido()) {
                 c.stepToStepDefault();
             }
         }

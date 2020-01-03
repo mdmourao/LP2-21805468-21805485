@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.fandeisiaGame;
 import java.awt.*;
 
 abstract public class Creature {
+
     protected int id;
     protected String type;
     protected int idEquipa;
