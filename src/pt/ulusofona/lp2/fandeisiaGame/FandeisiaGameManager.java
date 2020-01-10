@@ -117,11 +117,29 @@ public class FandeisiaGameManager {
 
     }
 
-    public boolean teamRequiresMoreCoins(int teamId){
+    public boolean teamRequiresMoreCoins(int teamId) {
+        /*Este método deve devolver ​true​ caso o exército escolhido pela equipa passada como
+        argumento precise de mais do que 50 moedas para ser criado.*/
+        if (teamId == 10 && getCustoTotalCreaures(10) > 50) {
+            return true;
+        }
+
+        if (teamId == 20 && getCustoTotalCreaures(20) > 50) {
+            return true;
+        }
         return false;
     }
 
-    public int getRequiredCoinsForTeam(int teamId){
+    public int getRequiredCoinsForTeam(int teamId) {
+        /*Este método deve devolver a quantidade de moedas que é necessária para criar o exército da
+        equipa que lhe for passada como argumento*/
+        if (teamId == 10) {
+            return getCustoTotalCreaures(10) - ldr10.getMoedas();
+        }
+
+        if (teamId == 20) {
+            return getCustoTotalCreaures(10) - resistencia20.getMoedas();
+        }
         return 0;
     }
 
