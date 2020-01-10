@@ -117,6 +117,14 @@ public class FandeisiaGameManager {
 
     }
 
+    public boolean teamRequiresMoreCoins(int teamId){
+        return false;
+    }
+
+    public int getRequiredCoinsForTeam(int teamId){
+        return 0;
+    }
+
     public Map<String, Integer> createComputerArmy() {
         Random gerador = new Random();
         int qtdAnao = gerador.nextInt(10) + 1; // 1 a 10
@@ -531,7 +539,7 @@ public class FandeisiaGameManager {
         return holes.size();
     }
 
-    public int startGame(String[] content, int rows, int columns) {
+    public void startGame(String[] content, int rows, int columns) throws InsufficientCoinsException {
         clearAllData();
        /* Deve inicializar as estruturas de dados relevantes para processar um jogo
        O array content irá descrever o conteúdo inicial do mundo (criaturas e
@@ -674,17 +682,16 @@ public class FandeisiaGameManager {
         ordenarCreaturesById(this.creatures);
 
         if (getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20) > 50) {
-            return 1;
+            throw new InsufficientCoinsException("Ambas as equipas não respeitaram o plafond.");
         }
         if (getCustoTotalCreaures(10) > 50) {
-            return 2;
+            throw new InsufficientCoinsException("A equipa LDR não respeitou o plafond.");
         }
         if (getCustoTotalCreaures(20) > 50) {
-            return 3;
+            throw new InsufficientCoinsException("A equipa RESISTENCIA não respeitou o plafond.");
         }
         ldr10.removeMoedas(getCustoTotalCreaures(10));
         resistencia20.removeMoedas(getCustoTotalCreaures(20));
-        return 0;
     }
 
     public void addCreaure(int id, String tipo, int teamId, int x, int y, String orientation) {
