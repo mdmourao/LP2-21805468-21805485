@@ -31,8 +31,6 @@ public class FandeisiaGameManager {
         numeroJogadasZero = 0;
         feiticos = new HashMap<>();
         posicoesOcupadas = new HashMap<>();
-
-
     }
 
     public String[][] getCreatureTypes() {
@@ -134,13 +132,26 @@ public class FandeisiaGameManager {
         /*Este método deve devolver a quantidade de moedas que é necessária para criar o exército da
         equipa que lhe for passada como argumento*/
         if (teamId == 10) {
-            return getCustoTotalCreaures(10) - ldr10.getMoedas();
+            return getCustoTotalCreaures(10) - 50;
         }
 
         if (teamId == 20) {
-            return getCustoTotalCreaures(10) - resistencia20.getMoedas();
+            return getCustoTotalCreaures(10) - 50;
         }
         return 0;
+    }
+
+    public Map<String ,List<String>> getStatistics(){
+        //as3MaisCarregadas
+        creatures.stream()
+                .sorted((c1,c2) -> c1.getTesourosEncontrados() - c2.getTesourosEncontrados())
+                .limit(3)
+                .forEach((r) -> System.out.println(r.getId()));
+
+
+
+
+        return null;
     }
 
     public Map<String, Integer> createComputerArmy() {

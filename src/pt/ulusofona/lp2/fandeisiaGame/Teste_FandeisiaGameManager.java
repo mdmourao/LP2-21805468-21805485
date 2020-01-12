@@ -12,7 +12,7 @@ import static junit.framework.TestCase.*;
 public class Teste_FandeisiaGameManager {
 
     @Test
-    public void test_CriacaoDosObjetosContent() {
+    public void test_CriacaoDosObjetosContent() throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[21];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
