@@ -108,7 +108,7 @@ abstract public class Creature {
     }
 
     public int getPontos(){
-        return tesourosGold * 3 +tesourosBronze * 2 +tesourosSilver;
+        return tesourosGold * 3 +tesourosBronze * 1 +tesourosSilver * 2;
     }
 
     public void setTesourosEncontrados(int tesourosEncontrados) {
