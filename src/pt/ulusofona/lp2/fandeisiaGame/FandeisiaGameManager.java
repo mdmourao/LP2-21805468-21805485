@@ -5,6 +5,9 @@ import java.io.*;
 import java.util.*;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class FandeisiaGameManager {
     private List<Creature> creatures;
@@ -142,12 +145,50 @@ public class FandeisiaGameManager {
     }
 
     public Map<String ,List<String>> getStatistics(){
-        //as3MaisCarregadas
-        creatures.stream()
-                .sorted((c1,c2) -> c1.getTesourosEncontrados() - c2.getTesourosEncontrados())
-                .limit(3)
-                .forEach((r) -> System.out.println(r.getId()));
 
+        //as3MaisCarregadas
+        List<String> maisCarregadas3 = creatures.stream()
+                .filter((c) -> c.getTesourosEncontrados() > 0)
+                .sorted((c1,c2) -> c2.getTesourosEncontrados() - c1.getTesourosEncontrados())
+                .limit(3)
+                .map((c) -> c.getId() + ":" + c.getTesourosEncontrados())
+                .collect(Collectors.toList());
+
+        for(String s: maisCarregadas3){
+            System.out.println(s);
+        }
+        System.out.println();
+
+        //as5MaisRicas
+        List<String> as5MaisRicas = creatures.stream()
+                .sorted((c1,c2) -> c2.getTesourosEncontrados() - c1.getTesourosEncontrados())
+                .sorted((c1,c2) -> c2.getPontos() - c1.getPontos())
+                .limit(5)
+                .map((c) -> c.getId() + ":" + c.getPontos() + ":" + c.getTesourosEncontrados())
+                .collect(Collectors.toList());
+
+        for(String s: as5MaisRicas){
+            System.out.println(s);
+        }
+
+        //TODO
+        //osAlvosFavoritos
+
+
+        System.out.println();
+        //as3MaisViajadas
+        List<String> as3MaisViajadas = creatures.stream()
+                .sorted((c1,c2) -> c2.getKms() - c1.getKms())
+                .limit(3)
+                .map((c) -> c.getId() + ":" + c.getKms())
+                .collect(Collectors.toList());
+
+        for(String s: as3MaisViajadas){
+            System.out.println(s);
+        }
+
+        //TODO
+        //tiposDeCriaturaESeusTesouros
 
 
 

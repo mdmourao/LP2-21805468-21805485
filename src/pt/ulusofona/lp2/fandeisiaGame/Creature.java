@@ -21,6 +21,7 @@ abstract public class Creature {
     protected boolean congeladoForever = false;
     protected boolean duplicado = false;
     protected boolean reduzido = false;
+    protected int kms = 0;
 
     public Creature(int id, String type, int idEquipa, int x, int y, String orientacao, int stepSize) {
         this.id = id;
@@ -73,6 +74,10 @@ abstract public class Creature {
         return this.type;
     }
 
+    public int getKms(){
+        return kms;
+    }
+
     public void addTreasure(Treasure t) {
         if (t.getPontos() == 2) {
             tesourosSilver++;
@@ -100,6 +105,10 @@ abstract public class Creature {
 
     public int getTesourosEncontrados() {
         return tesourosEncontrados;
+    }
+
+    public int getPontos(){
+        return tesourosGold * 3 +tesourosBronze * 2 +tesourosSilver;
     }
 
     public void setTesourosEncontrados(int tesourosEncontrados) {

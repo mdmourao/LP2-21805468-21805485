@@ -25,6 +25,7 @@ abstract public class CreatureGira90 extends Creature {
                 y += stepSize;
                 break;
         }
+        kms += stepSize;
     }
 
     public void gira() {

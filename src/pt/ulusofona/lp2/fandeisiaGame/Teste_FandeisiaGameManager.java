@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.fandeisiaGame;
 
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,7 +82,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_CriacaoDosObjetosContentComErros() {
+    public void test_CriacaoDosObjetosContentComErros()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[21];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -113,7 +114,12 @@ public class Teste_FandeisiaGameManager {
         content[18] = "id: -101, type: hole, x: A, y: 2";
         content[20] = "id: -103, type: hole, x: 3, y: B";
 
-        tester.startGame(content, 6, 6);
+        try {
+            tester.startGame(content, 6, 6);
+        } catch (InsufficientCoinsException e) {
+
+        }
+
 
         assertEquals("Tamanho Creatures", 8, tester.getNumberCreatures());
         assertEquals("Tamanho Treasures", 0, tester.getNumberTreasures());
@@ -140,7 +146,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_CriarCoinsRandomPCArmy() {
+    public void test_CriarCoinsRandomPCArmy() throws InsufficientCoinsException{
         for (int i = 0; i < 100; i++) {
             FandeisiaGameManager tester = new FandeisiaGameManager();
             Map<String, Integer> testeRandomPCArmy = tester.createComputerArmy();
@@ -157,7 +163,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_Movimento90_Creature90() {
+    public void test_Movimento90_Creature90() throws InsufficientCoinsException{
         //Caso Normal
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[4];
@@ -167,7 +173,11 @@ public class Teste_FandeisiaGameManager {
         content[2] = "id: 3, type: Anão, teamId: 20, x: 3, y: 3, orientation: Este";
         content[3] = "id: 4, type: Anão, teamId: 20, x: 2, y: 1, orientation: Oeste";
 
-        tester.startGame(content, 6, 5);
+        try {
+            tester.startGame(content, 6, 5);
+        } catch (InsufficientCoinsException e) {
+
+        }
         tester.processTurn();
         List<Creature> creatures = tester.getCreatures();
 
@@ -193,7 +203,12 @@ public class Teste_FandeisiaGameManager {
         content[6] = "id: 7, type: Anão, teamId: 10, x: 2, y: 3, orientation: Oeste";
         content[7] = "id: 8, type: Anão, teamId: 10, x: 1, y: 3, orientation: Oeste";
 
-        tester.startGame(content, 6, 5);
+        try {
+            tester.startGame(content, 6, 5);
+        } catch (InsufficientCoinsException e) {
+
+        }
+
         tester.processTurn();
         creatures = tester.getCreatures();
 
@@ -219,7 +234,11 @@ public class Teste_FandeisiaGameManager {
         content[6] = "id: 4, type: Anão, teamId: 10, x: 2, y: 3, orientation: Oeste";
         content[7] = "id: -103, type: hole, x: 1, y: 3";
 
-        tester.startGame(content, 6, 5);
+        try {
+            tester.startGame(content, 6, 5);
+        } catch (InsufficientCoinsException e) {
+
+        }
         tester.processTurn();
         creatures = tester.getCreatures();
 
@@ -238,7 +257,12 @@ public class Teste_FandeisiaGameManager {
         content[2] = "id: 3, type: Anão, teamId: 10, x: 4, y: 2, orientation: Este";
         content[3] = "id: 4, type: Anão, teamId: 10, x: 0, y: 3, orientation: Oeste";
 
-        tester.startGame(content, 6, 5);
+        try {
+            tester.startGame(content, 6, 5);
+        } catch (InsufficientCoinsException e) {
+
+        }
+
         tester.processTurn();
         creatures = tester.getCreatures();
 
@@ -250,7 +274,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_Movimento45_Creature45() {
+    public void test_Movimento45_Creature45() throws InsufficientCoinsException {
         //Caso Normal
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[8];
@@ -265,8 +289,11 @@ public class Teste_FandeisiaGameManager {
         content[6] = "id: 7, type: Elfo, teamId: 10, x: 4, y: 5, orientation: Sudoeste";
         content[7] = "id: 8, type: Elfo, teamId: 10, x: 6, y: 5, orientation: Noroeste";
 
+        try {
+            tester.startGame(content, 8, 8);
+        } catch (InsufficientCoinsException e) {
 
-        tester.startGame(content, 8, 8);
+        }
         tester.processTurn();
         List<Creature> creatures = tester.getCreatures();
 
@@ -292,8 +319,13 @@ public class Teste_FandeisiaGameManager {
         content[6] = "id: 7, type: Elfo, teamId: 10, x: 1, y: 7, orientation: Sudoeste";
         content[7] = "id: 8, type: Elfo, teamId: 10, x: 1, y: 0, orientation: Noroeste";
 
+        try {
 
-        tester.startGame(content, 8, 8);
+            tester.startGame(content, 8, 8);
+        } catch (InsufficientCoinsException e) {
+
+        }
+
         tester.processTurn();
         creatures = tester.getCreatures();
 
@@ -319,8 +351,12 @@ public class Teste_FandeisiaGameManager {
         content[6] = "id: 7, type: Elfo, teamId: 10, x: 5, y: 4, orientation: Sudeste";
         content[7] = "id: 8, type: Elfo, teamId: 10, x: 7, y: 6, orientation: Noroeste";
 
+        try {
+            tester.startGame(content, 8, 8);
+        } catch (InsufficientCoinsException e) {
 
-        tester.startGame(content, 8, 8);
+        }
+
         tester.processTurn();
         creatures = tester.getCreatures();
 
@@ -373,8 +409,8 @@ public class Teste_FandeisiaGameManager {
 
     }
 
-    @Test
-    public void test_plafondCreatures() {
+    @Test(expected = InsufficientCoinsException.class)
+    public void test_plafondCreatures() throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[11];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este"; //1
@@ -390,7 +426,9 @@ public class Teste_FandeisiaGameManager {
         content[9] = "id: 5, type: Elfo, teamId: 20, x: 0, y: 4, orientation: Este"; //5
         content[10] = "id: 5, type: Anão, teamId: 20, x: 0, y: 6, orientation: Este"; //1
 
-        assertEquals("Return Start Game, caso normal", 0, tester.startGame(content, 6, 6));
+
+        tester.startGame(content, 6, 6);
+
 
         assertEquals("Custo creatures Respeitado, normal (id:10)", 23, tester.getCustoTotalCreaures(10));
         assertEquals("Team 10", 27, tester.getLdr10().getMoedas());
@@ -426,7 +464,7 @@ public class Teste_FandeisiaGameManager {
         content[22] = "id: 23, type: Gigante, teamId: 20, x: 3, y: 5, orientation: Este"; //5
 
 
-        assertEquals("Return Start Game, caso nenhum respeita", 1, tester.startGame(content, 6, 6));
+        tester.startGame(content, 6, 6);
 
         tester = new FandeisiaGameManager();
         content = new String[17];
@@ -451,7 +489,7 @@ public class Teste_FandeisiaGameManager {
         content[16] = "id: 17, type: Elfo, teamId: 20, x: 2, y: 4, orientation: Este"; //5
 
 
-        assertEquals("Return Start Game, caso id 10 não respeita", 2, tester.startGame(content, 6, 6));
+        tester.startGame(content, 6, 6);
 
         tester = new FandeisiaGameManager();
         content = new String[18];
@@ -476,12 +514,12 @@ public class Teste_FandeisiaGameManager {
         content[16] = "id: 22, type: Gigante, teamId: 20, x: 3, y: 4, orientation: Este"; //5
         content[17] = "id: 23, type: Gigante, teamId: 20, x: 3, y: 5, orientation: Este"; //5
 
-        assertEquals("Return Start Game, caso id 20 não respeita", 3, tester.startGame(content, 6, 6));
+        tester.startGame(content, 6, 6);
 
     }
 
     @Test
-    public void test_checkSaltarPorCimaGigante() {
+    public void test_checkSaltarPorCimaGigante()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[1];
         content[0] = "id: 1, type: Gigante, teamId: 10, x: 2, y: 3, orientation: Este";
@@ -524,7 +562,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_checkSaltarPorCimaHumano() {
+    public void test_checkSaltarPorCimaHumano() throws InsufficientCoinsException{
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[1];
         content[0] = "id: 1, type: Humano, teamId: 10, x: 2, y: 3, orientation: Este";
@@ -554,7 +592,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_checkSaltarPorCimaAnao() {
+    public void test_checkSaltarPorCimaAnao()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[1];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 2, y: 3, orientation: Este";
@@ -565,7 +603,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_checkSaltarPorCimaElfo() {
+    public void test_checkSaltarPorCimaElfo()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[1];
         content[0] = "id: 1, type: Elfo, teamId: 10, x: 2, y: 3, orientation: Este";
@@ -594,7 +632,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_checkSaltarPorCimaDragao() {
+    public void test_checkSaltarPorCimaDragao()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[1];
         content[0] = "id: 1, type: Dragão, teamId: 10, x: 2, y: 3, orientation: Este";
@@ -626,7 +664,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_saveGameANDLoadGame() {
+    public void test_saveGameANDLoadGame() throws InsufficientCoinsException{
         File file = new File("test-files/test.txt");
         File file2 = new File("test-files2/test.txt");
         File file3 = new File("test-files/test2.txt");
@@ -755,7 +793,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_StringApanharTreasures() {
+    public void test_StringApanharTreasures()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[9];
         content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -782,7 +820,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_gameisOver() {
+    public void test_gameisOver()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[5];
         content[0] = "id: 1, type: Elfo, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -895,7 +933,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_enchant() {
+    public void test_enchant()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[7];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -1054,7 +1092,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_aplicarFeitico() {
+    public void test_aplicarFeitico()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[14];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 1, y: 0, orientation: Este";
@@ -1122,7 +1160,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_getSpell() {
+    public void test_getSpell()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[14];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 1, y: 0, orientation: Este";
@@ -1163,8 +1201,8 @@ public class Teste_FandeisiaGameManager {
         assertTrue(tester.enchant(2, 6, "Descongela"));
     }
 
-    @Test
-    public void test_getCoinTotal() {
+    @Test(expected = InsufficientCoinsException.class)
+    public void test_getCoinTotal()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[1];
         content[0] = "id: 1, type: NAOEXISTE, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -1266,6 +1304,7 @@ public class Teste_FandeisiaGameManager {
 
         content[20] = "id: 21, type: Elfo, teamId: 10, x: 1, y: 10, orientation: Este"; //5
         content[21] = "id: 22, type: Elfo, teamId: 20, x: 1, y: 10, orientation: Este"; //5
+
         tester.startGame(content, 12, 12);
         assertEquals(50, tester.getCoinTotal(10));
         assertEquals(50, tester.getCoinTotal(20));
@@ -1280,7 +1319,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_getResults() {
+    public void test_getResults()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[12];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Sul";
@@ -1398,7 +1437,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_getElementId_getType() {
+    public void test_getElementId_getType()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[21];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -1473,7 +1512,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_getCreature() {
+    public void test_getCreature()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[21];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -1519,7 +1558,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_getCurrentTeamId() {
+    public void test_getCurrentTeamId()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[21];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -1585,7 +1624,7 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_clearAllData() {
+    public void test_clearAllData()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
         String[] content = new String[21];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
@@ -1618,6 +1657,43 @@ public class Teste_FandeisiaGameManager {
         assertEquals(0, tester.getCreatures().size());
         assertEquals(0, tester.getTreausres().size());
         assertEquals(0, tester.getHoles().size());
+    }
+
+    @Test
+    public void test_streams()throws InsufficientCoinsException {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[17];
+        content[0] = "id: 2, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 1, type: Anão, teamId: 10, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Anão, teamId: 10, x: 0, y: 2, orientation: Este";
+        content[3] = "id: 4, type: Anão, teamId: 10, x: 0, y: 3, orientation: Este";
+
+        content[4] = "id: 5, type: Anão, teamId: 20, x: 5, y: 1, orientation: Este";
+        content[5] = "id: 6, type: Humano, teamId: 20, x: 5, y: 2, orientation: Este";
+        content[6] = "id: 7, type: Dragão, teamId: 20, x: 5, y: 3, orientation: Este";
+        content[7] = "id: 8, type: Elfo, teamId: 20, x: 5, y: 5, orientation: Este";
+
+
+        content[8] = "id: -1, type: silver, x: 1, y: 0";
+        content[9] = "id: -2, type: bronze, x: 2, y: 0";
+        content[10] = "id: -3, type: gold, x: 3, y: 0";
+
+        content[11] = "id: -4, type: silver, x: 6, y: 1";
+        content[12] = "id: -5, type: bronze, x: 7, y: 1";
+
+        content[13] = "id: -6, type: gold, x: 1, y: 3";
+
+        content[14] = "id: -7, type: gold, x: 9, y: 9";
+        content[15] = "id: -8, type: gold, x: 10, y: 10";
+        content[16] = "id: -9, type: gold, x: 11, y: 11";
+
+
+        tester.startGame(content, 15, 15);
+        tester.processTurn();
+        tester.processTurn();
+        tester.processTurn();
+        tester.getStatistics();
+
     }
 
 }
