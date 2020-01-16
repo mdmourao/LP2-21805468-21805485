@@ -1662,34 +1662,16 @@ public class Teste_FandeisiaGameManager {
     @Test
     public void test_streams()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
-        String[] content = new String[17];
+        String[] content = new String[5];
         content[0] = "id: 2, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
-        content[1] = "id: 1, type: Anão, teamId: 10, x: 0, y: 1, orientation: Este";
-        content[2] = "id: 3, type: Anão, teamId: 10, x: 0, y: 2, orientation: Este";
-        content[3] = "id: 4, type: Anão, teamId: 10, x: 0, y: 3, orientation: Este";
+        content[1] = "id: 5, type: Elfo, teamId: 20, x: 5, y: 1, orientation: Este";
 
-        content[4] = "id: 5, type: Anão, teamId: 20, x: 5, y: 1, orientation: Este";
-        content[5] = "id: 6, type: Humano, teamId: 20, x: 5, y: 2, orientation: Este";
-        content[6] = "id: 7, type: Dragão, teamId: 20, x: 5, y: 3, orientation: Este";
-        content[7] = "id: 8, type: Elfo, teamId: 20, x: 5, y: 5, orientation: Este";
-
-
-        content[8] = "id: -1, type: silver, x: 1, y: 0";
-        content[9] = "id: -2, type: bronze, x: 2, y: 0";
-        content[10] = "id: -3, type: gold, x: 3, y: 0";
-
-        content[11] = "id: -4, type: silver, x: 6, y: 1";
-        content[12] = "id: -5, type: bronze, x: 7, y: 1";
-
-        content[13] = "id: -6, type: gold, x: 1, y: 3";
-
-        content[14] = "id: -7, type: gold, x: 9, y: 9";
-        content[15] = "id: -8, type: gold, x: 10, y: 10";
-        content[16] = "id: -9, type: gold, x: 11, y: 11";
+        content[2] = "id: -1, type: silver, x: 1, y: 0";
+        content[3] = "id: -2, type: silver, x: 2, y: 0";
+        content[4] = "id: -3, type: silver, x: 7, y: 1";
 
 
         tester.startGame(content, 15, 15);
-        tester.processTurn();
         tester.processTurn();
         tester.processTurn();
         tester.getStatistics();

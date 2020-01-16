@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 public class FandeisiaGameManager {
     private List<Creature> creatures;
@@ -119,53 +119,106 @@ public class FandeisiaGameManager {
     }
 
 
-    public Map<String ,List<String>> getStatistics(){
-        Map<String,List<String>> mapa = new HashMap<>();
+    public Map<String, List<String>> getStatistics() {
+        Map<String, List<String>> mapa = new HashMap<>();
         //as3MaisCarregadas
         List<String> maisCarregadas3 = creatures.stream()
                 .filter((c) -> c.getTesourosEncontrados() > 0)
-                .sorted((c1,c2) -> c2.getTesourosEncontrados() - c1.getTesourosEncontrados())
+                .sorted((c1, c2) -> c2.getTesourosEncontrados() - c1.getTesourosEncontrados())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getTesourosEncontrados())
                 .collect(Collectors.toList());
 
-        mapa.put("as3MaisCarregadas",maisCarregadas3);
+        mapa.put("as3MaisCarregadas", maisCarregadas3);
 
         //as5MaisRicas
         List<String> as5MaisRicas = creatures.stream()
-                .sorted((c1,c2) -> c2.getTesourosEncontrados() - c1.getTesourosEncontrados())
-                .sorted((c1,c2) -> c2.getPontos() - c1.getPontos())
+                .sorted((c1, c2) -> c2.getTesourosEncontrados() - c1.getTesourosEncontrados())
+                .sorted((c1, c2) -> c2.getPontos() - c1.getPontos())
                 .limit(5)
                 .map((c) -> c.getId() + ":" + c.getPontos() + ":" + c.getTesourosEncontrados())
                 .collect(Collectors.toList());
 
-        mapa.put("as5MaisRicas",as5MaisRicas);
+        mapa.put("as5MaisRicas", as5MaisRicas);
 
         //osAlvosFavoritos
         List<String> osAlvosFavoritos = creatures.stream()
-                .sorted((c1,c2) -> c2.getNrFeiticos() - c1.getNrFeiticos())
+                .sorted((c1, c2) -> c2.getNrFeiticos() - c1.getNrFeiticos())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getIdEquipa() + ":" + c.getNrFeiticos())
                 .collect(Collectors.toList());
 
-        mapa.put("osAlvosFavoritos",osAlvosFavoritos);
+        mapa.put("osAlvosFavoritos", osAlvosFavoritos);
 
-
-        System.out.println();
         //as3MaisViajadas
         List<String> as3MaisViajadas = creatures.stream()
-                .sorted((c1,c2) -> c2.getKms() - c1.getKms())
+                .sorted((c1, c2) -> c2.getKms() - c1.getKms())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getKms())
                 .collect(Collectors.toList());
 
-        mapa.put("as3MaisViajadas",as3MaisViajadas);
+        mapa.put("as3MaisViajadas", as3MaisViajadas);
 
         //TODO
         //tiposDeCriaturaESeusTesouros
-        List<String>  a = new ArrayList<>();
-        mapa.put("tiposDeCriaturaESeusTesouros",a);
 
+        List<String> tiposDeCriaturaESeusTesouros = new ArrayList<>();
+
+        float nrDragao;
+        float nrElfo;
+        float nrHumano;
+        float nrGigante;
+        float nrAnao;
+
+        nrAnao = creatures.stream()
+                .filter((c) -> c instanceof Anao)
+                .count();
+
+        nrDragao = creatures.stream()
+                .filter((c) -> c instanceof Dragao)
+                .count();
+
+        nrElfo = creatures.stream()
+                .filter((c) -> c instanceof Elfo)
+                .count();
+
+
+        nrHumano = creatures.stream()
+                .filter((c) -> c instanceof Humano)
+                .count();
+
+        nrGigante = creatures.stream()
+                .filter((c) -> c instanceof Gigante)
+                .count();
+
+
+        Map<String, Long> map = creatures.stream()
+                .collect(groupingBy(Creature::getType, counting()));
+
+        Map<String, Integer> map2 = creatures.stream()
+                .collect(groupingBy(Creature::getType, Collectors.summingInt(Creature::getPontos)));
+
+        map.entrySet().stream()
+                .sorted((e1, e2) -> (int) (e2.getValue() - e1.getValue()))
+                .sorted((e1, e2) -> map2.get(e2.getKey()) - map2.get(e1.getKey()))
+                .forEach((e) -> tiposDeCriaturaESeusTesouros.add(e.getKey() + ":" + e.getValue() + ":" + map2.get(e.getKey())));
+        if (nrDragao == 0) {
+            tiposDeCriaturaESeusTesouros.add("Dragão:-1:-1");
+        }
+        if (nrElfo == 0) {
+            tiposDeCriaturaESeusTesouros.add("Elfo:-1:-1");
+        }
+        if (nrHumano == 0) {
+            tiposDeCriaturaESeusTesouros.add("Humano:-1:-1");
+        }
+        if (nrGigante == 0) {
+            tiposDeCriaturaESeusTesouros.add("Gigante:-1:-1");
+        }
+        if (nrAnao == 0) {
+            tiposDeCriaturaESeusTesouros.add("Anão:-1:-1");
+        }
+
+        mapa.put("tiposDeCriaturaESeusTesouros", tiposDeCriaturaESeusTesouros);
         return mapa;
     }
 
