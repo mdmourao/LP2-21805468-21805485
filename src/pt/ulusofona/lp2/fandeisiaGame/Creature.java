@@ -22,6 +22,7 @@ abstract public class Creature {
     protected boolean duplicado = false;
     protected boolean reduzido = false;
     protected int kms = 0;
+    protected int nrFeiticos = 0;
 
     public Creature(int id, String type, int idEquipa, int x, int y, String orientacao, int stepSize) {
         this.id = id;
@@ -36,6 +37,14 @@ abstract public class Creature {
     public String toString() {
         /* “<ID> | <Tipo> | <ID Equipa> | <Nr Pontos> @ (<x>, <y>) <Orientacão>” */
         return id + " | " + type + " | " + idEquipa + " | " + tesourosEncontrados + " @ (" + x + ", " + y + ") " + orientacao;
+    }
+
+    public int getNrFeiticos(){
+        return nrFeiticos;
+    }
+
+    public void addnrFeiticos(){
+        nrFeiticos++;
     }
 
     abstract public String getImagePNG();

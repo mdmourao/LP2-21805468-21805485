@@ -120,7 +120,7 @@ public class FandeisiaGameManager {
 
 
     public Map<String ,List<String>> getStatistics(){
-
+        Map<String,List<String>> mapa = new HashMap<>();
         //as3MaisCarregadas
         List<String> maisCarregadas3 = creatures.stream()
                 .filter((c) -> c.getTesourosEncontrados() > 0)
@@ -129,10 +129,7 @@ public class FandeisiaGameManager {
                 .map((c) -> c.getId() + ":" + c.getTesourosEncontrados())
                 .collect(Collectors.toList());
 
-        for(String s: maisCarregadas3){
-            System.out.println(s);
-        }
-        System.out.println();
+        mapa.put("as3MaisCarregadas",maisCarregadas3);
 
         //as5MaisRicas
         List<String> as5MaisRicas = creatures.stream()
@@ -142,12 +139,16 @@ public class FandeisiaGameManager {
                 .map((c) -> c.getId() + ":" + c.getPontos() + ":" + c.getTesourosEncontrados())
                 .collect(Collectors.toList());
 
-        for(String s: as5MaisRicas){
-            System.out.println(s);
-        }
+        mapa.put("as5MaisRicas",as5MaisRicas);
 
-        //TODO
         //osAlvosFavoritos
+        List<String> osAlvosFavoritos = creatures.stream()
+                .sorted((c1,c2) -> c2.getNrFeiticos() - c1.getNrFeiticos())
+                .limit(3)
+                .map((c) -> c.getId() + ":" + c.getIdEquipa() + ":" + c.getNrFeiticos())
+                .collect(Collectors.toList());
+
+        mapa.put("osAlvosFavoritos",osAlvosFavoritos);
 
 
         System.out.println();
@@ -158,16 +159,14 @@ public class FandeisiaGameManager {
                 .map((c) -> c.getId() + ":" + c.getKms())
                 .collect(Collectors.toList());
 
-        for(String s: as3MaisViajadas){
-            System.out.println(s);
-        }
+        mapa.put("as3MaisViajadas",as3MaisViajadas);
 
         //TODO
         //tiposDeCriaturaESeusTesouros
+        List<String>  a = new ArrayList<>();
+        mapa.put("tiposDeCriaturaESeusTesouros",a);
 
-
-
-        return null;
+        return mapa;
     }
 
     public Map<String, Integer> createComputerArmy() {
@@ -934,6 +933,7 @@ public class FandeisiaGameManager {
             String spell = getSpell(c.getX(), c.getY());
             if (spell != null) {
                 aplicarFeitico(c.getX(), c.getY(), getSpell(c.getX(), c.getY()));
+                c.addnrFeiticos();
             }
         }
         feiticos = new HashMap<>();
