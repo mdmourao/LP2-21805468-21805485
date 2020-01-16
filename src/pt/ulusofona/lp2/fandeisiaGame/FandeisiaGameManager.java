@@ -118,31 +118,6 @@ public class FandeisiaGameManager {
 
     }
 
-    public boolean teamRequiresMoreCoins(int teamId) {
-        /*Este método deve devolver ​true​ caso o exército escolhido pela equipa passada como
-        argumento precise de mais do que 50 moedas para ser criado.*/
-        if (teamId == 10 && getCustoTotalCreaures(10) > 50) {
-            return true;
-        }
-
-        if (teamId == 20 && getCustoTotalCreaures(20) > 50) {
-            return true;
-        }
-        return false;
-    }
-
-    public int getRequiredCoinsForTeam(int teamId) {
-        /*Este método deve devolver a quantidade de moedas que é necessária para criar o exército da
-        equipa que lhe for passada como argumento*/
-        if (teamId == 10) {
-            return getCustoTotalCreaures(10) - 50;
-        }
-
-        if (teamId == 20) {
-            return getCustoTotalCreaures(10) - 50;
-        }
-        return 0;
-    }
 
     public Map<String ,List<String>> getStatistics(){
 
@@ -752,12 +727,24 @@ public class FandeisiaGameManager {
         ordenarCreaturesById(this.creatures);
 
         if (getCustoTotalCreaures(10) > 50 && getCustoTotalCreaures(20) > 50) {
+            InsufficientCoinsException.setMoedas10(getCustoTotalCreaures(10));
+            InsufficientCoinsException.setMoedas20(getCustoTotalCreaures(20));
+            InsufficientCoinsException.setTeam10Invalida(true);
+            InsufficientCoinsException.setTeam20Invalida(true);
             throw new InsufficientCoinsException("Ambas as equipas não respeitaram o plafond.");
         }
         if (getCustoTotalCreaures(10) > 50) {
+            InsufficientCoinsException.setMoedas10(getCustoTotalCreaures(10));
+            InsufficientCoinsException.setMoedas20(getCustoTotalCreaures(20));
+            InsufficientCoinsException.setTeam10Invalida(true);
+            InsufficientCoinsException.setTeam20Invalida(false);
             throw new InsufficientCoinsException("A equipa LDR não respeitou o plafond.");
         }
         if (getCustoTotalCreaures(20) > 50) {
+            InsufficientCoinsException.setMoedas10(getCustoTotalCreaures(10));
+            InsufficientCoinsException.setMoedas20(getCustoTotalCreaures(20));
+            InsufficientCoinsException.setTeam10Invalida(false);
+            InsufficientCoinsException.setTeam20Invalida(true);
             throw new InsufficientCoinsException("A equipa RESISTENCIA não respeitou o plafond.");
         }
         ldr10.removeMoedas(getCustoTotalCreaures(10));
