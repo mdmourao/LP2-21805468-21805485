@@ -18,7 +18,7 @@ public class InsufficientCoinsException extends Exception {
         }
     }
 
-     public int requiredCoinsForTeam(int teamId) {
+     public int getRequiredCoinsForTeam(int teamId) {
         if (teamId == 10) {
             return moedas10;
         } else {
