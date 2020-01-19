@@ -142,7 +142,7 @@ public class FandeisiaGameManager {
 
         //osAlvosFavoritos
         List<String> osAlvosFavoritos = creatures.stream()
-                .sorted((c1, c2) -> c1.getNrFeiticos() - c2.getNrFeiticos())
+                .sorted((c1, c2) -> c2.getNrFeiticos() - c1.getNrFeiticos())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getIdEquipa() + ":" + c.getNrFeiticos())
                 .collect(Collectors.toList());
@@ -151,7 +151,7 @@ public class FandeisiaGameManager {
 
         //as3MaisViajadas
         List<String> as3MaisViajadas = creatures.stream()
-                .sorted((c1, c2) -> c1.getKms() - c2.getKms())
+                .sorted((c1, c2) -> c2.getKms() - c1.getKms())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getKms())
                 .collect(Collectors.toList());
@@ -198,8 +198,8 @@ public class FandeisiaGameManager {
                 .collect(groupingBy(Creature::getType, Collectors.summingInt(Creature::getPontos)));
 
         map.entrySet().stream()
-                .sorted((e1, e2) -> (int) (e2.getValue() - e1.getValue()))
                 .sorted((e1, e2) -> map2.get(e2.getKey()) - map2.get(e1.getKey()))
+                .sorted((e1, e2) -> (int) (e2.getValue() - e1.getValue()))
                 .forEach((e) -> tiposDeCriaturaESeusTesouros.add(e.getKey() + ":" + e.getValue() + ":" + map2.get(e.getKey())));
         if (nrDragao == 0) {
             tiposDeCriaturaESeusTesouros.add("Dragão:-1:-1");
