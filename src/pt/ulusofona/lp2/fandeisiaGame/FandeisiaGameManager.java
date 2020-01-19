@@ -196,7 +196,7 @@ public class FandeisiaGameManager {
                 .collect(groupingBy(Creature::getType, Collectors.summingInt(Creature::getTesourosEncontrados)));
 
         map.entrySet().stream()
-                .sorted((e1, e2) -> (int) (e2.getValue() - e1.getValue()))
+                .sorted((e1, e2) -> (int) (e1.getValue() - e2.getValue()))
                 .sorted((e1, e2) -> map2.get(e2.getKey()) - map2.get(e1.getKey()))
                 .forEach((e) -> tiposDeCriaturaESeusTesouros.add(e.getKey() + ":" + e.getValue() + ":" + map2.get(e.getKey())));
         if (nrDragao == 0) {

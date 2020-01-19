@@ -1772,11 +1772,11 @@ public class Teste_FandeisiaGameManager {
     @Test
     public void test_streams_tiposDeCriaturaESeusTesouros ()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
-        String[] content = new String[9];
+        String[] content = new String[11];
         content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
         content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
         content[2] = "id: 3, type: Dragão, teamId: 20, x: 0, y: 2, orientation: Este";
-
+        content[9] = "id: 2, type: Elfo, teamId: 20, x: 10, y: 10, orientation: Este";
         content[3] = "id: -1, type: silver, x: 1, y: 0";
         content[4] = "id: -2, type: bronze, x: 2, y: 1";
         content[5] = "id: -3, type: gold, x: 3, y: 2";
@@ -1785,6 +1785,7 @@ public class Teste_FandeisiaGameManager {
         content[7] = "id: -2, type: bronze, x: 3, y: 0";
 
         content[8] = "id: -1, type: silver, x: 4, y: 1";
+        content[10] = "id: -1, type: silver, x: 6, y: 2";
 
 
         tester.startGame(content, 15, 15);
@@ -1796,8 +1797,8 @@ public class Teste_FandeisiaGameManager {
         List<String> tiposDeCriaturaESeusTesouros = test.get("tiposDeCriaturaESeusTesouros");
         assertEquals(5,tiposDeCriaturaESeusTesouros.size());
         assertEquals("Anão:1:3", tiposDeCriaturaESeusTesouros.get(0));
-        assertEquals("Elfo:1:2", tiposDeCriaturaESeusTesouros.get(1));
-        assertEquals("Dragão:1:1", tiposDeCriaturaESeusTesouros.get(2));
+        assertEquals("Dragão:1:2", tiposDeCriaturaESeusTesouros.get(1));
+        assertEquals("Elfo:2:2", tiposDeCriaturaESeusTesouros.get(2));
     }
 }
 
