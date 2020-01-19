@@ -199,21 +199,26 @@ public class FandeisiaGameManager {
                 .sorted((e1, e2) -> (int) (e1.getValue() - e2.getValue()))
                 .sorted((e1, e2) -> map2.get(e2.getKey()) - map2.get(e1.getKey()))
                 .forEach((e) -> tiposDeCriaturaESeusTesouros.add(e.getKey() + ":" + e.getValue() + ":" + map2.get(e.getKey())));
+        List<String> ordenar = new ArrayList<>();
         if (nrDragao == 0) {
-            tiposDeCriaturaESeusTesouros.add("Dragão:-1:-1");
+            ordenar.add("Dragão:0:-1");
         }
         if (nrElfo == 0) {
-            tiposDeCriaturaESeusTesouros.add("Elfo:-1:-1");
+            ordenar.add("Elfo:0:-1");
         }
         if (nrHumano == 0) {
-            tiposDeCriaturaESeusTesouros.add("Humano:-1:-1");
+            ordenar.add("Humano:0:-1");
         }
         if (nrGigante == 0) {
-            tiposDeCriaturaESeusTesouros.add("Gigante:-1:-1");
+            ordenar.add("Gigante:0:-1");
         }
         if (nrAnao == 0) {
-            tiposDeCriaturaESeusTesouros.add("Anão:-1:-1");
+            ordenar.add("Anão:0:-1");
         }
+        ordenar.stream()
+                .sorted(String::compareTo)
+                .forEach(tiposDeCriaturaESeusTesouros::add);
+
         mapa.put("tiposDeCriaturaESeusTesouros", tiposDeCriaturaESeusTesouros);
 
         return mapa;

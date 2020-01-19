@@ -1799,6 +1799,8 @@ public class Teste_FandeisiaGameManager {
         assertEquals("Anão:1:3", tiposDeCriaturaESeusTesouros.get(0));
         assertEquals("Dragão:1:2", tiposDeCriaturaESeusTesouros.get(1));
         assertEquals("Elfo:2:2", tiposDeCriaturaESeusTesouros.get(2));
+        assertEquals("Humano:0:-1", tiposDeCriaturaESeusTesouros.get(4));
+        assertEquals("Gigante:0:-1", tiposDeCriaturaESeusTesouros.get(3));
     }
 }
 
