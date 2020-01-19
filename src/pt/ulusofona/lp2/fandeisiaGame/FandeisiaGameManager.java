@@ -262,6 +262,7 @@ public class FandeisiaGameManager {
                 if (posicoesOcupadas.get(new Point(x, y - 1)) == null && removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaNorte"))) {
                     feiticos.put(p, "EmpurraParaNorte");
                     posicoesOcupadas.put(new Point(x, y - 1), "EmpurraParaNorte");
+                    creature.addnrFeiticos();
                     return true;
                 }
             } else {
@@ -273,6 +274,7 @@ public class FandeisiaGameManager {
                 if (posicoesOcupadas.get(new Point(x + 1, y)) == null && removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaEste"))) {
                     feiticos.put(p, "EmpurraParaEste");
                     posicoesOcupadas.put(new Point(x + 1, y), "EmpurraParaEste");
+                    creature.addnrFeiticos();
                     return true;
                 }
             } else {
@@ -284,6 +286,7 @@ public class FandeisiaGameManager {
                 if (posicoesOcupadas.get(new Point(x, y + 1)) == null && removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaSul"))) {
                     feiticos.put(p, "EmpurraParaSul");
                     posicoesOcupadas.put(new Point(x, y + 1), "EmpurraParaSul");
+                    creature.addnrFeiticos();
                     return true;
                 }
             } else {
@@ -295,6 +298,7 @@ public class FandeisiaGameManager {
                 if (posicoesOcupadas.get(new Point(x - 1, y)) == null && removeMoedas(getCurrentTeamId(), valorFeitico("EmpurraParaOeste"))) {
                     feiticos.put(p, "EmpurraParaOeste");
                     posicoesOcupadas.put(new Point(x - 1, y), "EmpurraParaOeste");
+                    creature.addnrFeiticos();
                     return true;
                 }
             } else {
@@ -305,6 +309,7 @@ public class FandeisiaGameManager {
             Point p2 = creature.simulaMovimentoStepMinimo();
             if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("ReduzAlcance"))) {
                 feiticos.put(p, "ReduzAlcance");
+                creature.addnrFeiticos();
                 return true;
             }
             return false;
@@ -316,6 +321,7 @@ public class FandeisiaGameManager {
             }
             if (getType(p2.x, p2.y) == null && removeMoedas(getCurrentTeamId(), valorFeitico("DuplicaAlcance"))) {
                 feiticos.put(p, "DuplicaAlcance");
+                creature.addnrFeiticos();
                 return true;
             }
             return false;
@@ -323,6 +329,7 @@ public class FandeisiaGameManager {
         if (spellName.equals("Congela")) {
             if (removeMoedas(getCurrentTeamId(), valorFeitico("Congela"))) {
                 feiticos.put(p, "Congela");
+                creature.addnrFeiticos();
                 return true;
             }
             return false;
@@ -330,6 +337,7 @@ public class FandeisiaGameManager {
         if (spellName.equals("Congela4Ever")) {
             if (!creature.isCongeladoForever() && removeMoedas(getCurrentTeamId(), valorFeitico("Congela4Ever"))) {
                 feiticos.put(p, "Congela4Ever");
+                creature.addnrFeiticos();
                 return true;
             }
             return false;
@@ -337,6 +345,7 @@ public class FandeisiaGameManager {
         if (spellName.equals("Descongela")) {
             if (creature.isCongeladoForever() && removeMoedas(getCurrentTeamId(), valorFeitico("Descongela"))) {
                 feiticos.put(p, "Descongela");
+                creature.addnrFeiticos();
                 return true;
             }
             return false;
@@ -985,7 +994,6 @@ public class FandeisiaGameManager {
             String spell = getSpell(c.getX(), c.getY());
             if (spell != null) {
                 aplicarFeitico(c.getX(), c.getY(), getSpell(c.getX(), c.getY()));
-                c.addnrFeiticos();
             }
         }
         feiticos = new HashMap<>();
