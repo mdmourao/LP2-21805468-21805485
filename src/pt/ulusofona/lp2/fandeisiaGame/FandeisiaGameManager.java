@@ -123,7 +123,7 @@ public class FandeisiaGameManager {
         //as3MaisCarregadas
         List<String> maisCarregadas3 = creatures.stream()
                 .filter((c) -> c.getTesourosEncontrados() > 0)
-                .sorted((c1, c2) -> c1.getTesourosEncontrados() - c2.getTesourosEncontrados())
+                .sorted((c1, c2) -> c2.getTesourosEncontrados() - c1.getTesourosEncontrados())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getTesourosEncontrados())
                 .collect(Collectors.toList());
@@ -142,7 +142,7 @@ public class FandeisiaGameManager {
 
         //osAlvosFavoritos
         List<String> osAlvosFavoritos = creatures.stream()
-                .sorted((c1, c2) -> c1.getNrFeiticos() - c2.getNrFeiticos())
+                .sorted((c1, c2) -> c2.getNrFeiticos() - c1.getNrFeiticos())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getIdEquipa() + ":" + c.getNrFeiticos())
                 .collect(Collectors.toList());
@@ -193,11 +193,11 @@ public class FandeisiaGameManager {
                 .collect(groupingBy(Creature::getType, counting()));
 
         Map<String, Integer> map2 = creatures.stream()
-                .collect(groupingBy(Creature::getType, Collectors.summingInt(Creature::getPontos)));
+                .collect(groupingBy(Creature::getType, Collectors.summingInt(Creature::getTesourosEncontrados)));
 
         map.entrySet().stream()
-                .sorted((e1, e2) -> map2.get(e2.getKey()) - map2.get(e1.getKey()))
                 .sorted((e1, e2) -> (int) (e2.getValue() - e1.getValue()))
+                .sorted((e1, e2) -> map2.get(e2.getKey()) - map2.get(e1.getKey()))
                 .forEach((e) -> tiposDeCriaturaESeusTesouros.add(e.getKey() + ":" + e.getValue() + ":" + map2.get(e.getKey())));
         if (nrDragao == 0) {
             tiposDeCriaturaESeusTesouros.add("Dragão:-1:-1");

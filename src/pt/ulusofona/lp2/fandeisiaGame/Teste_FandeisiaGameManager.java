@@ -1680,8 +1680,8 @@ public class Teste_FandeisiaGameManager {
         Map<String, List<String>> test = tester.getStatistics();
         List<String> as3MaisCarregadas = test.get("as3MaisCarregadas");
         assertEquals(2,as3MaisCarregadas.size());
-        assertEquals("1:2", as3MaisCarregadas.get(1));
-        assertEquals("3:1", as3MaisCarregadas.get(0));
+        assertEquals("1:2", as3MaisCarregadas.get(0));
+        assertEquals("3:1", as3MaisCarregadas.get(1));
     }
 
     @Test
@@ -1705,9 +1705,9 @@ public class Teste_FandeisiaGameManager {
         Map<String, List<String>> test = tester.getStatistics();
         List<String> as5MaisRicas = test.get("as5MaisRicas");
         assertEquals(3,as5MaisRicas.size());
-        assertEquals("3:3:1", as5MaisRicas.get(2));
+        assertEquals("3:3:1", as5MaisRicas.get(0));
         assertEquals("1:2:1", as5MaisRicas.get(1));
-        assertEquals("2:1:1", as5MaisRicas.get(0));
+        assertEquals("2:1:1", as5MaisRicas.get(2));
     }
 
     @Test
@@ -1734,9 +1734,9 @@ public class Teste_FandeisiaGameManager {
         Map<String, List<String>> test = tester.getStatistics();
         List<String> osAlvosFavoritos = test.get("osAlvosFavoritos");
         assertEquals(3,osAlvosFavoritos.size());
-        assertEquals("1:10:2", osAlvosFavoritos.get(2));
+        assertEquals("1:10:2", osAlvosFavoritos.get(0));
         assertEquals("3:20:1", osAlvosFavoritos.get(1));
-        assertEquals("2:20:0", osAlvosFavoritos.get(0));
+        assertEquals("2:20:0", osAlvosFavoritos.get(2));
     }
 
     @Test
@@ -1767,6 +1767,37 @@ public class Teste_FandeisiaGameManager {
         assertEquals("3:7", as3MaisViajadas.get(2));
         assertEquals("2:5", as3MaisViajadas.get(1));
         assertEquals("1:4", as3MaisViajadas.get(0));
+    }
+
+    @Test
+    public void test_streams_tiposDeCriaturaESeusTesouros ()throws InsufficientCoinsException {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[9];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Dragão, teamId: 20, x: 0, y: 2, orientation: Este";
+
+        content[3] = "id: -1, type: silver, x: 1, y: 0";
+        content[4] = "id: -2, type: bronze, x: 2, y: 1";
+        content[5] = "id: -3, type: gold, x: 3, y: 2";
+
+        content[6] = "id: -1, type: silver, x: 2, y: 0";
+        content[7] = "id: -2, type: bronze, x: 3, y: 0";
+
+        content[8] = "id: -1, type: silver, x: 4, y: 1";
+
+
+        tester.startGame(content, 15, 15);
+        tester.processTurn();
+        tester.processTurn();
+        tester.processTurn();
+
+        Map<String, List<String>> test = tester.getStatistics();
+        List<String> tiposDeCriaturaESeusTesouros = test.get("tiposDeCriaturaESeusTesouros");
+        assertEquals(5,tiposDeCriaturaESeusTesouros.size());
+        assertEquals("Anão:1:3", tiposDeCriaturaESeusTesouros.get(0));
+        assertEquals("Elfo:1:2", tiposDeCriaturaESeusTesouros.get(1));
+        assertEquals("Dragão:1:1", tiposDeCriaturaESeusTesouros.get(2));
     }
 }
 
