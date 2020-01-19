@@ -150,7 +150,6 @@ public class FandeisiaGameManager {
         mapa.put("osAlvosFavoritos", osAlvosFavoritos);
 
         //as3MaisViajadas
-        //TODO feiticos contam?
         List<String> as3MaisViajadas = creatures.stream()
                 .sorted((c1, c2) -> c1.getKms() - c2.getKms())
                 .limit(3)
