@@ -158,10 +158,12 @@ abstract public class Creature {
 
     public void stepX(int step) {
         x = x + step;
+        kms += step;
     }
 
     public void stepY(int step) {
         y = y + step;
+        kms += step;
     }
 
     public void alcanceMinimo() {

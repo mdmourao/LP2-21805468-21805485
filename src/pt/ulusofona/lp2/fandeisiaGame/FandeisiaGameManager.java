@@ -123,7 +123,7 @@ public class FandeisiaGameManager {
         //as3MaisCarregadas
         List<String> maisCarregadas3 = creatures.stream()
                 .filter((c) -> c.getTesourosEncontrados() > 0)
-                .sorted((c1, c2) -> c2.getTesourosEncontrados() - c1.getTesourosEncontrados())
+                .sorted((c1, c2) -> c1.getTesourosEncontrados() - c2.getTesourosEncontrados())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getTesourosEncontrados())
                 .collect(Collectors.toList());
@@ -142,7 +142,7 @@ public class FandeisiaGameManager {
 
         //osAlvosFavoritos
         List<String> osAlvosFavoritos = creatures.stream()
-                .sorted((c1, c2) -> c2.getNrFeiticos() - c1.getNrFeiticos())
+                .sorted((c1, c2) -> c1.getNrFeiticos() - c2.getNrFeiticos())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getIdEquipa() + ":" + c.getNrFeiticos())
                 .collect(Collectors.toList());
@@ -150,19 +150,17 @@ public class FandeisiaGameManager {
         mapa.put("osAlvosFavoritos", osAlvosFavoritos);
 
         //as3MaisViajadas
+        //TODO feiticos contam?
         List<String> as3MaisViajadas = creatures.stream()
-                .sorted((c1, c2) -> c2.getKms() - c1.getKms())
+                .sorted((c1, c2) -> c1.getKms() - c2.getKms())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getKms())
                 .collect(Collectors.toList());
 
         mapa.put("as3MaisViajadas", as3MaisViajadas);
 
-        //TODO
         //tiposDeCriaturaESeusTesouros
-
         List<String> tiposDeCriaturaESeusTesouros = new ArrayList<>();
-
         float nrDragao;
         float nrElfo;
         float nrHumano;
@@ -216,8 +214,8 @@ public class FandeisiaGameManager {
         if (nrAnao == 0) {
             tiposDeCriaturaESeusTesouros.add("Anão:-1:-1");
         }
-
         mapa.put("tiposDeCriaturaESeusTesouros", tiposDeCriaturaESeusTesouros);
+
         return mapa;
     }
 

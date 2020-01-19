@@ -1660,23 +1660,113 @@ public class Teste_FandeisiaGameManager {
     }
 
     @Test
-    public void test_streams()throws InsufficientCoinsException {
+    public void test_streams_as3MaisCarregadas ()throws InsufficientCoinsException {
         FandeisiaGameManager tester = new FandeisiaGameManager();
-        String[] content = new String[5];
-        content[0] = "id: 2, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
-        content[1] = "id: 5, type: Elfo, teamId: 20, x: 5, y: 1, orientation: Este";
+        String[] content = new String[6];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Dragão, teamId: 20, x: 0, y: 2, orientation: Este";
 
-        content[2] = "id: -1, type: silver, x: 1, y: 0";
-        content[3] = "id: -2, type: silver, x: 2, y: 0";
-        content[4] = "id: -3, type: silver, x: 7, y: 1";
+        content[3] = "id: -1, type: silver, x: 1, y: 0";
+        content[4] = "id: -2, type: silver, x: 2, y: 0";
+        content[5] = "id: -3, type: silver, x: 3, y: 2";
 
 
         tester.startGame(content, 15, 15);
-        tester.processTurn();
-        tester.processTurn();
-        tester.getStatistics();
 
+        tester.processTurn();
+        tester.processTurn();
+
+        Map<String, List<String>> test = tester.getStatistics();
+        List<String> as3MaisCarregadas = test.get("as3MaisCarregadas");
+        assertEquals(2,as3MaisCarregadas.size());
+        assertEquals("1:2", as3MaisCarregadas.get(1));
+        assertEquals("3:1", as3MaisCarregadas.get(0));
     }
 
+    @Test
+    public void test_streams_as5MaisRicas ()throws InsufficientCoinsException {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[6];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Dragão, teamId: 20, x: 0, y: 2, orientation: Este";
+
+        content[3] = "id: -1, type: silver, x: 1, y: 0";
+        content[4] = "id: -2, type: bronze, x: 2, y: 1";
+        content[5] = "id: -3, type: gold, x: 3, y: 2";
+
+
+        tester.startGame(content, 15, 15);
+
+        tester.processTurn();
+        tester.processTurn();
+
+        Map<String, List<String>> test = tester.getStatistics();
+        List<String> as5MaisRicas = test.get("as5MaisRicas");
+        assertEquals(3,as5MaisRicas.size());
+        assertEquals("3:3:1", as5MaisRicas.get(2));
+        assertEquals("1:2:1", as5MaisRicas.get(1));
+        assertEquals("2:1:1", as5MaisRicas.get(0));
+    }
+
+    @Test
+    public void test_streams_osAlvosFavoritos ()throws InsufficientCoinsException {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[6];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Dragão, teamId: 20, x: 0, y: 2, orientation: Este";
+
+        content[3] = "id: -1, type: silver, x: 1, y: 0";
+        content[4] = "id: -2, type: bronze, x: 2, y: 1";
+        content[5] = "id: -3, type: gold, x: 3, y: 2";
+
+
+        tester.startGame(content, 15, 15);
+        tester.enchant(0,0,"EmpurraParaNorte");
+        tester.enchant(0,0,"EmpurraParaEste");
+        tester.enchant(0,2,"EmpurraParaSul");
+        tester.processTurn();
+        tester.enchant(2,0,"EmpurraParaEste");
+        tester.processTurn();
+
+        Map<String, List<String>> test = tester.getStatistics();
+        List<String> osAlvosFavoritos = test.get("osAlvosFavoritos");
+        assertEquals(3,osAlvosFavoritos.size());
+        assertEquals("1:10:2", osAlvosFavoritos.get(2));
+        assertEquals("3:20:1", osAlvosFavoritos.get(1));
+        assertEquals("2:20:0", osAlvosFavoritos.get(0));
+    }
+
+    @Test
+    public void test_streams_as3MaisViajadas ()throws InsufficientCoinsException {
+        FandeisiaGameManager tester = new FandeisiaGameManager();
+        String[] content = new String[6];
+        content[0] = "id: 1, type: Anão, teamId: 10, x: 0, y: 0, orientation: Este";
+        content[1] = "id: 2, type: Elfo, teamId: 20, x: 0, y: 1, orientation: Este";
+        content[2] = "id: 3, type: Dragão, teamId: 20, x: 0, y: 2, orientation: Este";
+
+        content[3] = "id: -1, type: silver, x: 1, y: 0";
+        content[4] = "id: -2, type: bronze, x: 2, y: 1";
+        content[5] = "id: -3, type: gold, x: 3, y: 2";
+
+
+        tester.startGame(content, 15, 15);
+        tester.enchant(0,0,"EmpurraParaNorte");
+        tester.enchant(0,0,"EmpurraParaEste");
+        tester.enchant(0,2,"EmpurraParaSul");
+        tester.processTurn();
+        tester.enchant(2,0,"EmpurraParaEste");
+        tester.enchant(2,1,"EmpurraParaEste");
+        tester.processTurn();
+
+        Map<String, List<String>> test = tester.getStatistics();
+        List<String> as3MaisViajadas = test.get("as3MaisViajadas");
+        assertEquals(3,as3MaisViajadas.size());
+        assertEquals("3:7", as3MaisViajadas.get(2));
+        assertEquals("2:5", as3MaisViajadas.get(1));
+        assertEquals("1:4", as3MaisViajadas.get(0));
+    }
 }
 
