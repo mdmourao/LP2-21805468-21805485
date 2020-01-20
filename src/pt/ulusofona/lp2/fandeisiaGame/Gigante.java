@@ -38,4 +38,8 @@ public class Gigante extends CreatureGira90 {
     public boolean possoSaltarPorcima(int numberCreatures, int numberHoles) {
         return true;
     }
+
+    public String getType(){
+        return "Gigante";
+    }
 }

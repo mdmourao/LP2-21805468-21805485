@@ -79,9 +79,7 @@ abstract public class Creature {
         return this.custo;
     }
 
-    public String getType() {
-        return this.type;
-    }
+    abstract public String getType();
 
     public int getKms(){
         return kms;

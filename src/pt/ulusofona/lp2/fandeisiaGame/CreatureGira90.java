@@ -87,5 +87,7 @@ abstract public class CreatureGira90 extends Creature {
 
     abstract public boolean possoSaltarPorcima(int numberCreatures, int numberHoles);
 
+    abstract public String getType();
+
 
 }

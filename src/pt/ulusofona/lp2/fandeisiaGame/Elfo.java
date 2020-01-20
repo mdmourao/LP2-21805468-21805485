@@ -50,4 +50,8 @@ public class Elfo extends CreatureGira45 {
         }
         return true;
     }
+
+    public String getType(){
+        return "Elfo";
+    }
 }

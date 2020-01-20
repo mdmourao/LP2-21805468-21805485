@@ -48,5 +48,9 @@ public class Dragao extends CreatureGira45 {
         return true;
     }
 
+    public String getType(){
+        return "Dragão";
+    }
+
 
 }

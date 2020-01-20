@@ -45,4 +45,8 @@ public class Humano extends CreatureGira90 {
         return true;
     }
 
+    public String getType(){
+        return "Humano";
+    }
+
 }

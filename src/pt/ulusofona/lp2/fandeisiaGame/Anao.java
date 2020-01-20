@@ -38,4 +38,8 @@ public class Anao extends CreatureGira90 {
     public boolean possoSaltarPorcima(int numberCreatures, int numberHoles) {
         return true;
     }
+
+    public String getType(){
+        return "Anão";
+    }
 }
