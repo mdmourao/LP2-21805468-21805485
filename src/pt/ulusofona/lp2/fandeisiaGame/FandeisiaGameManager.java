@@ -151,7 +151,7 @@ public class FandeisiaGameManager {
 
         //as3MaisViajadas
         List<String> as3MaisViajadas = creatures.stream()
-                .sorted((c1, c2) -> c1.getKms() - c2.getKms())
+                .sorted((c1, c2) -> c2.getKms() - c1.getKms())
                 .limit(3)
                 .map((c) -> c.getId() + ":" + c.getKms())
                 .collect(Collectors.toList());

@@ -22,15 +22,28 @@ public class Gigante extends CreatureGira90 {
     }
 
     public String getImagePNG() {
-        switch (orientacao) {
-            case "Este":
-                return "giant-este.png";
-            case "Oeste":
-                return "giant-oeste.png";
-            case "Norte":
-                return "giant-norte.png";
-            case "Sul":
-                return "giant-sul.png";
+        if(idEquipa == 10) {
+            switch (orientacao) {
+                case "Este":
+                    return "giant-este-L.png";
+                case "Oeste":
+                    return "giant-oeste-L.png";
+                case "Norte":
+                    return "giant-norte-L.png";
+                case "Sul":
+                    return "giant-sul-L.png";
+            }
+        }else{
+            switch (orientacao) {
+                case "Este":
+                    return "giant-este-R.png";
+                case "Oeste":
+                    return "giant-oeste-R.png";
+                case "Norte":
+                    return "giant-norte-R.png";
+                case "Sul":
+                    return "giant-sul-R.png";
+            }
         }
         return "giant.png";
     }

@@ -25,15 +25,28 @@ public class Humano extends CreatureGira90 {
 
 
     public String getImagePNG(){
-        switch (orientacao) {
-            case "Este":
-                return "human-este.png";
-            case "Oeste":
-                return "human-oeste.png";
-            case "Norte":
-                return "human-norte.png";
-            case "Sul":
-                return "human-sul.png";
+        if(idEquipa == 10) {
+            switch (orientacao) {
+                case "Este":
+                    return "human-este-L.png";
+                case "Oeste":
+                    return "human-oeste-L.png";
+                case "Norte":
+                    return "human-norte-L.png";
+                case "Sul":
+                    return "human-sul-L.png";
+            }
+        }else{
+            switch (orientacao) {
+                case "Este":
+                    return "human-este-R.png";
+                case "Oeste":
+                    return "human-oeste-R.png";
+                case "Norte":
+                    return "human-norte-R.png";
+                case "Sul":
+                    return "human-sul-R.png";
+            }
         }
         return "human.png";
     }

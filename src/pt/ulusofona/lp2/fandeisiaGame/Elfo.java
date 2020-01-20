@@ -23,23 +23,44 @@ public class Elfo extends CreatureGira45 {
 
 
     public String getImagePNG() {
-        switch (orientacao) {
-            case "Este":
-                return "elf-este.png";
-            case "Oeste":
-                return "elf-oeste.png";
-            case "Norte":
-                return "elf-norte.png";
-            case "Sul":
-                return "elf-sul.png";
-            case "Nordeste":
-                return "elf-ne.png";
-            case "Sudeste":
-                return "elf-se.png";
-            case "Sudoeste":
-                return "elf-so.png";
-            case "Noroeste":
-                return "elf-no.png";
+        if(idEquipa == 10) {
+            switch (orientacao) {
+                case "Este":
+                    return "elf-este-L.png";
+                case "Oeste":
+                    return "elf-oeste-L.png";
+                case "Norte":
+                    return "elf-norte-L.png";
+                case "Sul":
+                    return "elf-sul-L.png";
+                case "Nordeste":
+                    return "elf-ne-L.png";
+                case "Sudeste":
+                    return "elf-se-L.png";
+                case "Sudoeste":
+                    return "elf-so-L.png";
+                case "Noroeste":
+                    return "elf-no-L.png";
+            }
+        }else{
+            switch (orientacao) {
+                case "Este":
+                    return "elf-este-R.png";
+                case "Oeste":
+                    return "elf-oeste-R.png";
+                case "Norte":
+                    return "elf-norte-R.png";
+                case "Sul":
+                    return "elf-sul-R.png";
+                case "Nordeste":
+                    return "elf-ne-R.png";
+                case "Sudeste":
+                    return "elf-se-R.png";
+                case "Sudoeste":
+                    return "elf-so-R.png";
+                case "Noroeste":
+                    return "elf-no-R.png";
+            }
         }
         return "elf.png";
     }

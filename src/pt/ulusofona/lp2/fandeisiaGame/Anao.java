@@ -22,15 +22,28 @@ public class Anao extends CreatureGira90 {
     }
 
     public String getImagePNG() {
-        switch (orientacao){
-            case "Este":
-                return "anao-este.png";
-            case "Oeste":
-                return "anao-oeste.png";
-            case "Norte":
-               return "anao-norte.png";
-            case "Sul":
-                return "anao-sul.png";
+        if(idEquipa == 10) {
+            switch (orientacao) {
+                case "Este":
+                    return "anao-este-L.png";
+                case "Oeste":
+                    return "anao-oeste-L.png";
+                case "Norte":
+                    return "anao-norte-L.png";
+                case "Sul":
+                    return "anao-sul-L.png";
+            }
+        }else{
+            switch (orientacao) {
+                case "Este":
+                    return "anao-este-R.png";
+                case "Oeste":
+                    return "anao-oeste-R.png";
+                case "Norte":
+                    return "anao-norte-R.png";
+                case "Sul":
+                    return "anao-sul-R.png";
+            }
         }
         return "anao.png";
     }

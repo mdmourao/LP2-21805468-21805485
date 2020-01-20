@@ -23,23 +23,44 @@ public class Dragao extends CreatureGira45 {
     }
 
     public String getImagePNG() {
-        switch (orientacao) {
-            case "Este":
-              return "dragon-este.png";
-            case "Oeste":
-                return "dragon-oeste.png";
-            case "Norte":
-                return "dragon-norte.png";
-            case "Sul":
-                return "dragon-sul.png";
-            case "Nordeste":
-                return "dragon-ne.png";
-            case "Sudeste":
-                return "dragon-se.png";
-            case "Sudoeste":
-                return "dragon-so.png";
-            case "Noroeste":
-                return "dragon-no.png";
+        if(idEquipa == 10) {
+            switch (orientacao) {
+                case "Este":
+                    return "dragon-este-L.png";
+                case "Oeste":
+                    return "dragon-oeste-L.png";
+                case "Norte":
+                    return "dragon-norte-L.png";
+                case "Sul":
+                    return "dragon-sul-L.png";
+                case "Nordeste":
+                    return "dragon-ne-L.png";
+                case "Sudeste":
+                    return "dragon-se-L.png";
+                case "Sudoeste":
+                    return "dragon-so-L.png";
+                case "Noroeste":
+                    return "dragon-no-L.png";
+            }
+        }else{
+            switch (orientacao) {
+                case "Este":
+                    return "dragon-este-R.png";
+                case "Oeste":
+                    return "dragon-oeste-R.png";
+                case "Norte":
+                    return "dragon-norte-R.png";
+                case "Sul":
+                    return "dragon-sul-R.png";
+                case "Nordeste":
+                    return "dragon-ne-R.png";
+                case "Sudeste":
+                    return "dragon-se-R.png";
+                case "Sudoeste":
+                    return "dragon-so-R.png";
+                case "Noroeste":
+                    return "dragon-no-R.png";
+            }
         }
         return "dragon.png";
     }
