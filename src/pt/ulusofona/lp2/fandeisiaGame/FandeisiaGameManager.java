@@ -490,6 +490,8 @@ public class FandeisiaGameManager {
 
     public boolean loadGame(File fich) {
         clearAllData();
+        InsufficientCoinsException.setTeam10Invalida(true);
+        InsufficientCoinsException.setTeam20Invalida(true);
         Scanner scanner;
         ArrayList<String> conteudo = new ArrayList<>();
         String[] splitConteudo1;
@@ -613,9 +615,11 @@ public class FandeisiaGameManager {
                             break;
                         case "Moedas10":
                             ldr10.setMoedas(Integer.parseInt(splitConteudo1[1]));
+                            InsufficientCoinsException.setMoedas10(getCustoTotalCreaures(10));
                             break;
                         case "Moedas20":
                             resistencia20.setMoedas(Integer.parseInt(splitConteudo1[1]));
+                            InsufficientCoinsException.setMoedas20(getCustoTotalCreaures(20));
                             break;
                         case "currentTeamId":
                             currentTeamId = Integer.parseInt(splitConteudo1[1]);
@@ -1363,5 +1367,7 @@ public class FandeisiaGameManager {
         numeroJogadasZero = 0;
         feiticos = new HashMap<>();
         posicoesOcupadas = new HashMap<>();
+        InsufficientCoinsException.setTeam10Invalida(false);
+        InsufficientCoinsException.setTeam20Invalida(false);
     }
 }
