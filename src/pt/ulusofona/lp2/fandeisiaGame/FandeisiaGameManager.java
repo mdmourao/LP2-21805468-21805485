@@ -153,6 +153,7 @@ public class FandeisiaGameManager {
         List<String> as3MaisViajadas = creatures.stream()
                 .sorted((c1, c2) -> c2.getKms() - c1.getKms())
                 .limit(3)
+                .sorted((c1,c2)->c1.getKms() - c2.getKms())
                 .map((c) -> c.getId() + ":" + c.getKms())
                 .collect(Collectors.toList());
 
@@ -198,7 +199,9 @@ public class FandeisiaGameManager {
                 .sorted((e1, e2) -> (int) (e1.getValue() - e2.getValue()))
                 .sorted((e1, e2) -> map2.get(e2.getKey()) - map2.get(e1.getKey()))
                 .forEach((e) -> tiposDeCriaturaESeusTesouros.add(e.getKey() + ":" + e.getValue() + ":" + map2.get(e.getKey())));
+
         List<String> ordenar = new ArrayList<>();
+
         if (nrDragao == 0) {
             ordenar.add("Dragão:0:-1");
         }
