@@ -493,8 +493,8 @@ public class FandeisiaGameManager {
 
     public boolean loadGame(File fich) {
         clearAllData();
-        InsufficientCoinsException.setTeam10Invalida(true);
-        InsufficientCoinsException.setTeam20Invalida(true);
+        InsufficientCoinsException.setTeam10Invalida(false);
+        InsufficientCoinsException.setTeam20Invalida(false);
         Scanner scanner;
         ArrayList<String> conteudo = new ArrayList<>();
         String[] splitConteudo1;
